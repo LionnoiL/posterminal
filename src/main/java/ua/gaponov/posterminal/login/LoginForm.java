@@ -4,6 +4,8 @@
  */
 package ua.gaponov.posterminal.login;
 
+import java.util.List;
+import javax.swing.JComboBox;
 import ua.gaponov.posterminal.mainform.MainForm;
 
 /**
@@ -43,7 +45,11 @@ public class LoginForm extends javax.swing.JFrame {
 
         jPasswordField2.setText("jPasswordField2");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("ОК");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,6 +108,10 @@ public class LoginForm extends javax.swing.JFrame {
         MainForm.main(null);
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -132,11 +142,22 @@ public class LoginForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 LoginForm frame = new LoginForm();
+                
+                fillUsersCombo(frame.jComboBox1);
+                
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
+    }
+    
+    private static void fillUsersCombo(JComboBox<String> combo){
+       List<User> users = UserService.getAll();
+        for (User user : users) {
+            combo.addItem(user.getName());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
