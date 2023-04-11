@@ -17,7 +17,7 @@ public class ExchangeUpload {
     }
     
     private static void uploadOrders(){
-        List<Order> items = OrderService.getAll();
+        List<Order> items = OrderService.getAllNoUpload();
         OrdersUpload list = new OrdersUpload();
         list.setItems(items);
         

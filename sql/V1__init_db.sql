@@ -75,3 +75,19 @@ CREATE TABLE orders (
     fiscal_print BOOLEAN      DEFAULT (0),
     CONSTRAINT orders_fk_cards FOREIGN KEY (card_guid) REFERENCES cards(card_guid)
 );
+
+
+CREATE TABLE orders_detail (
+    orders_detail_guid     VARCHAR (36) PRIMARY KEY,
+    order_guid             VARCHAR (36) NOT NULL,
+    line_number            INT,
+    product_guid           VARCHAR (36) NOT NULL,
+    qty                    DOUBLE,
+    price                  DOUBLE,
+    summa_without_discount DOUBLE       DEFAULT (0),
+    summa_discount         DOUBLE       DEFAULT (0),
+    summa                  DOUBLE       DEFAULT (0),
+    CONSTRAINT orders_detail_fk_orders FOREIGN KEY (order_guid) REFERENCES orders(order_guid),
+    CONSTRAINT orders_detail_fk_productss FOREIGN KEY (product_guid) REFERENCES products(product_guid)
+);
+
