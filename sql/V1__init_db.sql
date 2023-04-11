@@ -1,19 +1,45 @@
 CREATE TABLE client (
-	client_guid VARCHAR (36) NOT NULL,
-	client_name CHARACTER VARYING NOT NULL,
-        PRIMARY KEY (
-                client_guid
-        )
+	client_guid VARCHAR (36) NOT NULL PRIMARY KEY,
+	client_name CHARACTER VARYING NOT NULL
 );
 
-
 CREATE TABLE users (
-    user_guid       VARCHAR (36) NOT NULL,
-    user_name     VARCHAR (50) DEFAULT NULL,
-    user_password VARCHAR (60),
-    active        boolean,
-    interface_id  integer,
+    user_guid     VARCHAR (36) NOT NULL PRIMARY KEY,
+    user_name     VARCHAR (50) NOT NULL UNIQUE,
+    user_password VARCHAR (60) DEFAULT ('d41d8cd98f00b204e9800998ecf8427e'),
+    active        boolean DEFAULT 1,
+    user_role     VARCHAR (20),
     PRIMARY KEY (
         user_guid
     )
+);
+
+CREATE TABLE organization (
+    org_guid VARCHAR (36) NOT NULL PRIMARY KEY,
+    org_name VARCHAR (150),
+    code     VARCHAR (9) 
+);
+
+CREATE TABLE products (
+    product_guid   VARCHAR (36) NOT NULL PRIMARY KEY,
+    product_name   VARCHAR (150) NOT NULL,
+    product_code   VARCHAR (11),
+    price          DOUBLE NOT NULL,
+    org_guid       VARCHAR (36),
+    sku            VARCHAR (9),
+    no_discount    BOOLEAN       DEFAULT (1),
+    uktved         VARCHAR (20)  DEFAULT (''),
+    tax_group        VARCHAR       DEFAULT (1),
+    tax_rate       VARCHAR       DEFAULT (0),
+    weight         BOOLEAN       DEFAULT (0),
+    CONSTRAINT products_fk_organization FOREIGN KEY (org_guid) REFERENCES organization(org_guid)
+);
+
+CREATE TABLE eans (
+    ean_code   VARCHAR (40) NOT NULL,
+    product_guid VARCHAR (36) NOT NULL,
+    CONSTRAINT eans_fk_products FOREIGN KEY (product_guid) REFERENCES products(product_guid),
+    PRIMARY KEY (
+        ean_code, product_guid
+    )   
 );

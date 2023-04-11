@@ -1,0 +1,33 @@
+package ua.gaponov.posterminal.dataexchange;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import java.util.List;
+import ua.gaponov.posterminal.organization.Organization;
+import ua.gaponov.posterminal.organization.OrganizationService;
+
+/**
+ *
+ * @author wmcon
+ */
+public class ExchangeUpload {
+    
+    public static void upload(){
+        uploadOrders();
+    }
+    
+    private static void uploadOrders(){
+        List<Organization> items = OrganizationService.getAll();
+        OrdersUpload list = new OrdersUpload();
+        //list.setItems(items);
+        
+        XmlMapper xmlMapper = new XmlMapper();
+ 
+        try {
+            String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            System.out.println(employeeXml);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } 
+    }
+}

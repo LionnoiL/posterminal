@@ -40,8 +40,20 @@
             <artifactId>h2</artifactId>
             <version>2.1.214</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
 
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+       
     </dependencies>
     <build>
         <finalName>pos</finalName>
@@ -51,7 +63,7 @@
               <artifactId>maven-compiler-plugin</artifactId>
               <version>3.8.0</version>
               <configuration>
-                <release>11</release>  <!--or <release>10</release>-->
+                <release>17</release>  <!--or <release>10</release>-->
               </configuration>
             </plugin>
 
@@ -153,4 +165,15 @@
           </plugins>
         </pluginManagement>
   </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>config/sun_checks.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

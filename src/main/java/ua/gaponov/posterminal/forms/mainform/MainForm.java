@@ -1,16 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package ua.gaponov.posterminal.mainform;
+package ua.gaponov.posterminal.forms.mainform;
 
 import java.awt.Frame;
-
+import java.awt.event.KeyEvent;
+import ua.gaponov.posterminal.Posterminal;
+import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.products.ProductService;
+import ua.gaponov.posterminal.utils.DialogUtils;
 /**
  *
  * @author wmcon
  */
 public class MainForm extends javax.swing.JFrame {
+
+    private static MainForm frame;
+    private static StringBuilder barBufer = new StringBuilder();
 
     /**
      * Creates new form mainForm
@@ -58,7 +61,7 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProducts = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("POS");
         setAlwaysOnTop(true);
         setExtendedState(3);
@@ -365,11 +368,15 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void eixitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eixitButtonActionPerformed
-        // TODO add your handling code here:
+       if (DialogUtils.okcancel(frame, "Вихід з програми", "Вийти з програми?") == 0) {
+            dispose();
+            Posterminal.closeApp();
+        }
     }//GEN-LAST:event_eixitButtonActionPerformed
 
     private void jTextFieldBarCodeInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBarCodeInputKeyPressed
-        System.out.println("press");        // TODO add your handling code here:
+        frame.jTextFieldBarCodeInput.setText(null);
+        getBarcode(evt); 
     }//GEN-LAST:event_jTextFieldBarCodeInputKeyPressed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -388,39 +395,40 @@ public class MainForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                MainForm form = new MainForm();
-                form.setExtendedState(Frame.MAXIMIZED_BOTH);   
-                form.setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(
+                () -> {
+                    frame = new MainForm();
+                    frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+                    frame.setVisible(true);
+                    frame.refresh();
+                }
+        );
     }
+
+    private void refresh() {
+        jTextFieldBarCodeInput.setText(null);
+        java.awt.EventQueue.invokeLater(()->jTextFieldBarCodeInput.requestFocus());
+    }
+
+    private void getBarcode(KeyEvent evt) {
+        if (evt.getKeyCode() == 10) {
+            barcodeHandle(barBufer.toString());
+            barBufer.setLength(0); 
+        } else {
+            barBufer.append(evt.getKeyChar());
+        }
+        refresh();
+    }
+    
+    private void barcodeHandle(String barcode){
+        Product product = ProductService.getBybarcode(barcode);
+        if (product!=null){
+            System.out.println(barcode + " " + product.getName());
+        }      
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barcodeButoon;

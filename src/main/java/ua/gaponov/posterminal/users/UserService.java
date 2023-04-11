@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package ua.gaponov.posterminal.login;
+package ua.gaponov.posterminal.users;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import ua.gaponov.posterminal.database.SqlHelper;
+import ua.gaponov.posterminal.database.StatementParameters;
 
 /**
  *
@@ -16,22 +13,53 @@ import ua.gaponov.posterminal.database.SqlHelper;
 public class UserService {
     
     public static List<User> getAll(){
-        List<User> result = new ArrayList<>();
-        String sql = "select * from users";
-
-        SqlHelper.executeQuery(sql, rs -> {
-            try {
-                while (rs.next()) {
-                    User user = new User();
-                    user.setGuid(rs.getString("user_guid"));
-                    user.setName(rs.getString("user_name"));
-                    result.add(user);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-
-        return result;
+       return new SqlHelper<User>().getAll("SELECT * FROM users", new UserMapper());
     }
+    
+    public static List<User> getAllActive(){
+       StatementParameters<Boolean, String> parameters = new StatementParameters<>(true);
+       return new SqlHelper<User>().getAll("SELECT * FROM users where active = ?",
+               parameters,
+               new UserMapper());
+    }
+    
+    public static User getByName(String userName){
+        
+        StatementParameters<String, String> parameters = new StatementParameters<>(userName);
+        return new SqlHelper<User>().getOne("select * from users where user_name = ?",
+                parameters,
+                new UserMapper());
+    }
+    
+    public static boolean login(String userName, String password){
+        User user = UserService.getByName(userName);
+        if (user.getPassword().isEmpty() && password.isEmpty()){
+           return true;
+        }
+        String encryptPassword = UserService.encryptPassword(password);
+        return encryptPassword.equals(user.getPassword());
+    }
+    
+    
+   public static String encryptPassword(String password){
+        String encryptedpassword = null;  
+        try   
+        {  
+            MessageDigest m = MessageDigest.getInstance("MD5");    
+            m.update(password.getBytes());  
+            byte[] bytes = m.digest();  
+            StringBuilder s = new StringBuilder();  
+            for(int i=0; i< bytes.length ;i++)  
+            {  
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));  
+            }  
+            encryptedpassword = s.toString();  
+        }   
+        catch (NoSuchAlgorithmException e)   
+        {  
+            e.printStackTrace();  
+        }  
+        
+        return encryptedpassword;
+   }
 }
