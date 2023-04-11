@@ -1,4 +1,4 @@
-CREATE TABLE client (
+CREATE TABLE clients (
 	client_guid VARCHAR (36) NOT NULL PRIMARY KEY,
 	client_name CHARACTER VARYING NOT NULL
 );
@@ -42,4 +42,36 @@ CREATE TABLE eans (
     PRIMARY KEY (
         ean_code, product_guid
     )   
+);
+
+CREATE TABLE cards (
+    card_guid    VARCHAR (36)  NOT NULL PRIMARY KEY,
+    code         VARCHAR (50)  NOT NULL,
+    active       BOOLEAN,
+    card_type    VARCHAR (20) DEFAULT('DISCOUNT'),
+    client_guid  VARCHAR (36),
+    client_name  VARCHAR (150),
+    client_phone VARCHAR (50),
+    client_email VARCHAR (50),
+    discount     DOUBLE        DEFAULT (0),
+    debt         DOUBLE        DEFAULT (0),
+    debt_allowed BOOLEAN       DEFAULT (0),
+    max_debt     DOUBLE        DEFAULT (0),
+    max_debt_day INTEGER       DEFAULT (0),
+    CONSTRAINT cards_fk_clients FOREIGN KEY (client_guid) REFERENCES clients(client_guid)
+);
+
+CREATE TABLE orders (
+    order_guid   VARCHAR (36) PRIMARY KEY,
+    order_date   TIMESTAMP    DEFAULT (CURRENT_TIMESTAMP),
+    card_guid    VARCHAR (36),
+    summa_doc    DOUBLE,
+    summa_pay    DOUBLE,
+    doc_type     VARCHAR(20)  DEFAULT ('ORDER'),
+    pay_type     VARCHAR (20) DEFAULT ('CASH'),
+    upload       BOOLEAN      DEFAULT (0),
+    fiscal       BOOLEAN      DEFAULT (0),
+    internet     BOOLEAN      DEFAULT (0),
+    fiscal_print BOOLEAN      DEFAULT (0),
+    CONSTRAINT orders_fk_cards FOREIGN KEY (card_guid) REFERENCES cards(card_guid)
 );
