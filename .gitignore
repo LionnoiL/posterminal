@@ -8,6 +8,8 @@ build/
 target/
 config/
 pos.mv.db
+pos.trace.db
+pos.trace.db.old
 
 ### STS ###
 .apt_generated
