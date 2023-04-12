@@ -1,8 +1,12 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.stream.XMLStreamException;
 import ua.gaponov.posterminal.AppProperties;
 
 /**
@@ -21,8 +25,15 @@ public class ExchangeScheduler {
             @Override
             public void run() {
                 if (AppProperties.exchangeEnable){
-                    ExchangeUpload.upload();
                     //TODO exchange
+                    ExchangeUpload.upload();
+                    
+                    try {
+                        ExchangeDownloader.download();
+                    }
+                    catch (Exception ex) {
+                        Logger.getLogger(ExchangeScheduler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         };

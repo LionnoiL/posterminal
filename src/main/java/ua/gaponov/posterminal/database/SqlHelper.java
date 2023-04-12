@@ -78,7 +78,7 @@ public class SqlHelper<T> {
         return list.get(0);
     }
     
-    public void execSql(String sql, StatementParameters parametrs) {
+    public void execSql(String sql, StatementParameters parametrs) throws SQLException {
         PreparedStatement statement = null;
 
         try (Connection connection = Database.getConnection()) {
@@ -86,8 +86,6 @@ public class SqlHelper<T> {
             parametrs.fillStatement(statement);
             statement.executeUpdate();
             statement.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
     

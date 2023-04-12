@@ -2,7 +2,12 @@ package ua.gaponov.posterminal.forms.mainform;
 
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import ua.gaponov.posterminal.Posterminal;
+import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;
@@ -14,6 +19,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private static MainForm frame;
     private static StringBuilder barBufer = new StringBuilder();
+    private static Order order = new Order();
 
     /**
      * Creates new form mainForm
@@ -299,18 +305,18 @@ public class MainForm extends javax.swing.JFrame {
         jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Катопля", "кг",  new Double(0.587),  new Double(11.0),  new Double(6.46), null}
+
             },
             new String [] {
                 "Товар", "Одиниці", "Кількість", "Ціна", "Сума", "Акцизна марка"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTableProducts.setColumnSelectionAllowed(true);
@@ -403,6 +409,7 @@ public class MainForm extends javax.swing.JFrame {
                     frame.setExtendedState(Frame.MAXIMIZED_BOTH);
                     frame.setVisible(true);
                     frame.refresh();
+                    frame.updateTable();
                 }
         );
     }
@@ -425,8 +432,37 @@ public class MainForm extends javax.swing.JFrame {
     private void barcodeHandle(String barcode){
         Product product = ProductService.getBybarcode(barcode);
         if (product!=null){
-            System.out.println(barcode + " " + product.getName());
+            order.addDetailRow(product, 1);
+            updateTable();
         }      
+    }
+    
+    private void updateTable(){
+        
+        DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
+        model.setRowCount(0);
+        List<OrderDetail> details = order.getDetails();
+        Object[] rowData = new Object[5];
+        
+        for (int i = 0; i < details.size(); i++) {
+            
+            rowData[0] = details.get(i).getProduct().getName();  
+            rowData[1] = "шт"; //TODO unit
+            rowData[2] = details.get(i).getQty();
+            rowData[3] = details.get(i).getPrice();
+            rowData[4] = details.get(i).getSumma();
+            model.addRow(rowData);
+        }
+        
+        
+        
+        //DefaultTableModel newModel = new DefaultTableModel(dataRows, columnNames);
+        //model.fireTableDataChanged();
+       // jTableProducts.setModel(newModel);
+        
+        //TableColumn col = jTableProducts.getColumnModel().getColumn( 0 );
+        //col.setMinWidth(500);
+        //col.setMaxWidth(1000);
     }
     
 

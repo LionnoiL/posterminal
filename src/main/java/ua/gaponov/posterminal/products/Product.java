@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.products;
 
+import java.util.Objects;
 import ua.gaponov.posterminal.organization.Organization;
 
 /**
@@ -97,5 +98,35 @@ public class Product {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.guid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        return Objects.equals(this.guid, other.guid);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "guid=" + guid + ", name=" + name + ", code=" + 
+                code + ", price=" + price + ", sku=" + sku + ", banDisckount=" + 
+                banDisckount + ", taxCode=" + taxCode + ", taxGroup=" + 
+                taxGroup + ", weight=" + weight + '}';
     }
 }

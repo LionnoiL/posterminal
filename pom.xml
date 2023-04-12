@@ -53,7 +53,12 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.14.0</version>
         </dependency>
-       
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <finalName>pos</finalName>

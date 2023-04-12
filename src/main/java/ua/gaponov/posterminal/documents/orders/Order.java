@@ -1,7 +1,11 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import ua.gaponov.posterminal.documents.PayTypes;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.products.Product;
 
 /**
  *
@@ -18,7 +22,43 @@ public class Order {
     private boolean internet;
     private boolean fiscalPrint;
     private Card card;
+    private List<OrderDetail> details = new ArrayList<>();
 
+    public void addDetailRow(Product product, double qty){
+        int findLine = findItemByProduct(product);
+        OrderDetail orderDetail = new OrderDetail();
+        if (findLine == -1){ 
+            orderDetail.setQty(qty);
+        } else {
+            orderDetail = details.get(findLine);
+            orderDetail.setQty(qty + orderDetail.getQty());
+        }
+        
+        orderDetail.setProduct(product);
+        orderDetail.setPrice(product.getPrice());
+        orderDetail.setSumma(orderDetail.getPrice() * orderDetail.getQty());
+        
+        if (findLine == -1){ 
+            details.add(orderDetail);
+//        } else {
+//            orderDetail = details.get(findLine);
+//            orderDetail.setQty(qty + orderDetail.getQty());
+        }
+        
+        
+    }
+    
+    private int findItemByProduct(Product product){
+        int result = -1;
+        for (int i = 0; i < details.size(); i++) {
+           if (details.get(i).getProduct().equals(product)){
+               result = i;
+               break;
+           } 
+        }
+        return result;
+    }
+    
     public String getGuid() {
         return guid;
     }
@@ -97,5 +137,13 @@ public class Order {
 
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    public List<OrderDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderDetail> details) {
+        this.details = details;
     }
 }

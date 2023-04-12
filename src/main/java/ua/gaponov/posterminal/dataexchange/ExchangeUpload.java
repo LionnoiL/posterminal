@@ -22,7 +22,6 @@ public class ExchangeUpload {
         list.setItems(items);
         
         XmlMapper xmlMapper = new XmlMapper();
- 
         try {
             String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
             //TODO save to file if no empty;

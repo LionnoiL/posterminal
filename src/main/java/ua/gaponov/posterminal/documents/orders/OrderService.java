@@ -9,6 +9,13 @@ import ua.gaponov.posterminal.database.StatementParameters;
  * @author gaponov
  */
 public class OrderService {
+    
+    public static Order getByGuid(String guid){
+        StatementParameters<String, String> parameters = new StatementParameters<>(guid);
+        return new SqlHelper<Order>().getOne("select * from orders where order_guid = ?",
+                parameters,
+                new OrderMapper());
+    }
 
     public static List<Order> getAll() {
         return new SqlHelper<Order>().getAll("SELECT * FROM orders", new OrderMapper());
