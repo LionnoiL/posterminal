@@ -4,7 +4,7 @@ import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
@@ -69,7 +69,6 @@ public class MainForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("POS");
-        setAlwaysOnTop(true);
         setExtendedState(3);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -430,39 +429,39 @@ public class MainForm extends javax.swing.JFrame {
     }
     
     private void barcodeHandle(String barcode){
-        Product product = ProductService.getBybarcode(barcode);
+        barcode = barcode.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
+        Product product = ProductService.getByBarcode(barcode);
         if (product!=null){
-            order.addDetailRow(product, 1);
+            int lineNumber = order.addDetailRow(product, 1);
             updateTable();
-        }      
+            selectTableRow(lineNumber);
+        } else {
+            //TODO поиск по карте
+
+        }
+    }
+
+    private void selectTableRow(int lineNumber){
+        jTableProducts.changeSelection(lineNumber, 0, false, false);
     }
     
     private void updateTable(){
-        
         DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
         model.setRowCount(0);
         List<OrderDetail> details = order.getDetails();
-        Object[] rowData = new Object[5];
-        
         for (int i = 0; i < details.size(); i++) {
-            
-            rowData[0] = details.get(i).getProduct().getName();  
-            rowData[1] = "шт"; //TODO unit
-            rowData[2] = details.get(i).getQty();
-            rowData[3] = details.get(i).getPrice();
-            rowData[4] = details.get(i).getSumma();
-            model.addRow(rowData);
+            model.addRow(createRowTable(details.get(i)));
         }
-        
-        
-        
-        //DefaultTableModel newModel = new DefaultTableModel(dataRows, columnNames);
-        //model.fireTableDataChanged();
-       // jTableProducts.setModel(newModel);
-        
-        //TableColumn col = jTableProducts.getColumnModel().getColumn( 0 );
-        //col.setMinWidth(500);
-        //col.setMaxWidth(1000);
+    }
+
+    private Object[] createRowTable(OrderDetail orderDetail){
+        Object[] rowData = new Object[5];
+        rowData[0] = orderDetail.getProduct().getName();
+        rowData[1] = "шт"; //TODO unit
+        rowData[2] = orderDetail.getQty();
+        rowData[3] = orderDetail.getPrice();
+        rowData[4] = orderDetail.getSumma();
+        return rowData;
     }
     
 

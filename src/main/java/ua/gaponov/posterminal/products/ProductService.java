@@ -2,6 +2,8 @@ package ua.gaponov.posterminal.products;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.barcodes.BarcodeService;
 import ua.gaponov.posterminal.database.Parametr;
 import ua.gaponov.posterminal.database.SqlHelper;
@@ -24,16 +26,52 @@ public class ProductService {
                 new ProductMapper());
     }
 
-    public static Product getBybarcode(String barcode) {
+    public static Product getByBarcode(String barcode) {
+        if (barcode==null || barcode.isEmpty() || barcode.length()<8){
+            return null;
+        }
+        Product product = null;
+        if (isWeightBarcode(barcode)){
+           product = getProductFromWeightBarcode(barcode);
+        } else {
+           product = getProductFromOrdinaryBarcode(barcode);
+        }
+        System.out.println("sku = "+product);
+        return product;
+    }
+
+    private static boolean isWeightBarcode(String barcode){
+        String weightItemPrefix = AppProperties.weightItemPrefix;
+        return weightItemPrefix.equals(barcode.substring(0, 2));
+    }
+
+    private static Product getProductFromWeightBarcode(String barcode){
+        int codeLength = 5;
+        String sku = barcode.substring(2, codeLength);
+        String qty = barcode.substring(3 + codeLength, 10 - codeLength);
+        Product product = getProductFromSku(sku);
+        product.setQty(Double.valueOf(qty)/1000);
+        return product;
+    }
+
+    private static Product getProductFromOrdinaryBarcode(String barcode){
         StatementParameters<String, String> parameters = new StatementParameters<>(barcode);
         String sql = """
                      select * from eans 
                      left join products on products.product_guid = eans.product_guid
                      where eans.ean_code = ?
                      """;
-        return new SqlHelper<Product>().getOne(sql,
+        Product product = new SqlHelper<Product>().getOne(sql,
                 parameters,
                 new ProductMapper());
+        if (product!=null){
+            product.setQty(1);
+        }
+        return product;
+    }
+
+    public static Product getProductFromSku(String sku){
+        return null;
     }
 
     public static void deleteAll() {

@@ -24,11 +24,14 @@ public class Order {
     private Card card;
     private List<OrderDetail> details = new ArrayList<>();
 
-    public void addDetailRow(Product product, double qty){
+    public int addDetailRow(Product product, double qty){
         int findLine = findItemByProduct(product);
         OrderDetail orderDetail = new OrderDetail();
-        if (findLine == -1){ 
+
+        if (findLine == -1){
+            details.add(orderDetail);
             orderDetail.setQty(qty);
+            findLine = details.size() - 1;
         } else {
             orderDetail = details.get(findLine);
             orderDetail.setQty(qty + orderDetail.getQty());
@@ -37,15 +40,8 @@ public class Order {
         orderDetail.setProduct(product);
         orderDetail.setPrice(product.getPrice());
         orderDetail.setSumma(orderDetail.getPrice() * orderDetail.getQty());
-        
-        if (findLine == -1){ 
-            details.add(orderDetail);
-//        } else {
-//            orderDetail = details.get(findLine);
-//            orderDetail.setQty(qty + orderDetail.getQty());
-        }
-        
-        
+
+        return findLine;
     }
     
     private int findItemByProduct(Product product){

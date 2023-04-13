@@ -19,6 +19,7 @@ public class Product {
     private int taxGroup;
     private boolean weight;
     private Organization organization;
+    private double qty;
 
     public String getGuid() {
         return guid;
@@ -98,6 +99,14 @@ public class Product {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public double getQty() {
+        return qty;
+    }
+
+    public void setQty(double qty) {
+        this.qty = qty;
     }
 
     @Override

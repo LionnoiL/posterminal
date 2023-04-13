@@ -57,5 +57,7 @@ public class PropertiesUtils {
         AppProperties.serverIpAdress = getApplicationProperties("server_ip");
         AppProperties.exchangeInterval = Integer.parseInt(getApplicationProperties("exchange_interval_min"))*60*1000;
         AppProperties.exchangeEnable = Boolean.parseBoolean(getApplicationProperties("exchange_enable"));
+        AppProperties.weightItemPrefix = getApplicationProperties("weight_item_prefix");
+        AppProperties.currency = getApplicationProperties("currency");
     }
 }
