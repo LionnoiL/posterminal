@@ -7,7 +7,9 @@ import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
  * @author wmcon
  */
 public class AppProperties {
-    public static String lastUserName;
+    private AppProperties(){
+    }
+
     public static int exchangeInterval = 120000;
     public static boolean exchangeEnable = true;
     

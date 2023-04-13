@@ -51,11 +51,7 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         cancelButton.setText("Відмова");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+        cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +98,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void okButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_okButtonMouseClicked
         if (UserService.login(userCombo.getSelectedItem().toString(), passwordField.getText())) {
-            PropertiesUtils.saveApplicationProperties("last_user",
+            PropertiesUtils.saveApplicationTempValue("last_user",
                 userCombo.getSelectedItem().toString());
             dispose();
             MainForm.main(null);
@@ -120,15 +116,11 @@ public class LoginForm extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                LoginForm frame = new LoginForm();
-                
-                fillUsersCombo(frame.userCombo);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            LoginForm frame = new LoginForm();
+            fillUsersCombo(frame.userCombo);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         });
     }
 
@@ -137,7 +129,7 @@ public class LoginForm extends javax.swing.JFrame {
         for (User user : users) {
             combo.addItem(user.getName());
         }
-        combo.setSelectedItem(AppProperties.lastUserName);
+        combo.setSelectedItem(PropertiesUtils.getApplicationProperties("last_user"));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
