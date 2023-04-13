@@ -9,7 +9,7 @@ import ua.gaponov.posterminal.organization.OrganizationService;
  *
  * @author wmcon
  */
-public class ProductMapper implements Mapper<Product>{
+public class ProductDatabaseMapper implements Mapper<Product>{
     
     @Override
     public Product map(ResultSet rs) {

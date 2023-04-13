@@ -14,18 +14,18 @@ public class OrderService {
         StatementParameters<String, String> parameters = new StatementParameters<>(guid);
         return new SqlHelper<Order>().getOne("select * from orders where order_guid = ?",
                 parameters,
-                new OrderMapper());
+                new OrderDatabaseMapper());
     }
 
     public static List<Order> getAll() {
-        return new SqlHelper<Order>().getAll("SELECT * FROM orders", new OrderMapper());
+        return new SqlHelper<Order>().getAll("SELECT * FROM orders", new OrderDatabaseMapper());
     }
 
     public static List<Order> getAllNoUpload() {
         StatementParameters<Boolean, String> parameters = new StatementParameters<>(false);
         return new SqlHelper<Order>().getAll("SELECT * FROM orders where upload = ?",
                 parameters,
-                new OrderMapper());
+                new OrderDatabaseMapper());
     }
     
     public static void deleteAll(){

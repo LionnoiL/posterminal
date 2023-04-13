@@ -11,7 +11,7 @@ import ua.gaponov.posterminal.database.Mapper;
  *
  * @author gaponov
  */
-public class OrderMapper implements Mapper<Order>{
+public class OrderDatabaseMapper implements Mapper<Order>{
 
     @Override
     public Order map(ResultSet rs) {

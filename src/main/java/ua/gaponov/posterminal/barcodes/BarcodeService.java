@@ -2,8 +2,6 @@ package ua.gaponov.posterminal.barcodes;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -14,14 +12,14 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class BarcodeService {
 
     public static List<Barcode> getAll() {
-        return new SqlHelper<Barcode>().getAll("SELECT * FROM eans", new BarcodeMapper());
+        return new SqlHelper<Barcode>().getAll("SELECT * FROM eans", new BarcodeDatabaseMapper());
     }
 
     public static Barcode getByBarcode(String barcode) {
         StatementParameters<String, String> parameters = new StatementParameters<>(barcode);
         return new SqlHelper<Barcode>().getOne("select * from eans where ean_code = ?",
                 parameters,
-                new BarcodeMapper());
+                new BarcodeDatabaseMapper());
     }
 
     public static void deleteAll() {

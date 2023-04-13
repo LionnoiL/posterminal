@@ -16,14 +16,14 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class ProductService {
 
     public static List<Product> getAll() {
-        return new SqlHelper<Product>().getAll("SELECT * FROM products", new ProductMapper());
+        return new SqlHelper<Product>().getAll("SELECT * FROM products", new ProductDatabaseMapper());
     }
 
     public static Product getByGuid(String guid) {
         StatementParameters<String, String> parameters = new StatementParameters<>(guid);
         return new SqlHelper<Product>().getOne("select * from products where product_guid = ?",
                 parameters,
-                new ProductMapper());
+                new ProductDatabaseMapper());
     }
 
     public static Product getByBarcode(String barcode) {
@@ -63,7 +63,7 @@ public class ProductService {
                      """;
         Product product = new SqlHelper<Product>().getOne(sql,
                 parameters,
-                new ProductMapper());
+                new ProductDatabaseMapper());
         if (product!=null){
             product.setQty(1);
         }

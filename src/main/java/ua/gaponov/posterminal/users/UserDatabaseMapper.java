@@ -8,7 +8,7 @@ import ua.gaponov.posterminal.database.Mapper;
  *
  * @author wmcon
  */
-public class UserMapper implements Mapper<User> {
+public class UserDatabaseMapper implements Mapper<User> {
 
     @Override
     public User map(ResultSet rs) {

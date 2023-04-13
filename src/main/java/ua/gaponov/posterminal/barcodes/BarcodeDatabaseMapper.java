@@ -9,7 +9,7 @@ import ua.gaponov.posterminal.products.ProductService;
  *
  * @author wmcon
  */
-public class BarcodeMapper implements Mapper<Barcode> {
+public class BarcodeDatabaseMapper implements Mapper<Barcode> {
 
     @Override
     public Barcode map(ResultSet rs) {

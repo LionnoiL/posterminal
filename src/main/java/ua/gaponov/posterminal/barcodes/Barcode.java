@@ -26,5 +26,4 @@ public class Barcode {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
 }

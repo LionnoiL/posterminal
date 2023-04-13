@@ -14,7 +14,7 @@ public class OrderDetailService {
         StatementParameters<String, String> parameters = new StatementParameters<>(orderGuid);
         return new SqlHelper<OrderDetail>().getAll("select * from orders_detail where order_guid = ?",
                 parameters,
-                new OrderDetailMapper());
+                new OrderDetailDatabaseMapper());
     }
     public static void deleteAll(){
         SqlHelper.execSql("delete from orders_detail");

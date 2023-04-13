@@ -13,14 +13,14 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class OrganizationService {
 
     public static List<Organization> getAll() {
-        return new SqlHelper<Organization>().getAll("SELECT * FROM organization", new OrganizationMapper());
+        return new SqlHelper<Organization>().getAll("SELECT * FROM organization", new OrganizationDatabaseMapper());
     }
 
     public static Organization getByGuid(String guid) {
         StatementParameters<String, String> parameters = new StatementParameters<>(guid);
         return new SqlHelper<Organization>().getOne("select * from organization where org_guid = ?",
                 parameters,
-                new OrganizationMapper());
+                new OrganizationDatabaseMapper());
     }
 
     public static void deleteAll() {

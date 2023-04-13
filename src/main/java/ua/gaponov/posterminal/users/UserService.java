@@ -13,14 +13,14 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class UserService {
     
     public static List<User> getAll(){
-       return new SqlHelper<User>().getAll("SELECT * FROM users", new UserMapper());
+       return new SqlHelper<User>().getAll("SELECT * FROM users", new UserDatabaseMapper());
     }
     
     public static List<User> getAllActive(){
        StatementParameters<Boolean, String> parameters = new StatementParameters<>(true);
        return new SqlHelper<User>().getAll("SELECT * FROM users where active = ?",
                parameters,
-               new UserMapper());
+               new UserDatabaseMapper());
     }
     
     public static User getByName(String userName){
@@ -28,7 +28,7 @@ public class UserService {
         StatementParameters<String, String> parameters = new StatementParameters<>(userName);
         return new SqlHelper<User>().getOne("select * from users where user_name = ?",
                 parameters,
-                new UserMapper());
+                new UserDatabaseMapper());
     }
     
     public static boolean login(String userName, String password){

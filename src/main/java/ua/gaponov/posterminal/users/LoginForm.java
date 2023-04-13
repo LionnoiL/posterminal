@@ -129,7 +129,7 @@ public class LoginForm extends javax.swing.JFrame {
         for (User user : users) {
             combo.addItem(user.getName());
         }
-        combo.setSelectedItem(PropertiesUtils.getApplicationProperties("last_user"));
+        combo.setSelectedItem(PropertiesUtils.getApplicationTempValue("last_user"));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

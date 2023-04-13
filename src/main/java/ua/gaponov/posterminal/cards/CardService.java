@@ -11,14 +11,14 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class CardService {
     
     public static List<Card> getAll(){
-       return new SqlHelper<Card>().getAll("SELECT * FROM cards", new CardMapper());
+       return new SqlHelper<Card>().getAll("SELECT * FROM cards", new CardDatabaseMapper());
     }
     
     public static Card getByGuid(String guid){
         StatementParameters<String, String> parameters = new StatementParameters<>(guid);
         return new SqlHelper<Card>().getOne("select * from cards where card_guid = ?",
                 parameters,
-                new CardMapper());
+                new CardDatabaseMapper());
     }
     
     public static void deleteAll(){

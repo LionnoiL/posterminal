@@ -8,7 +8,7 @@ import ua.gaponov.posterminal.database.Mapper;
  *
  * @author wmcon
  */
-public class OrganizationMapper implements Mapper<Organization>{
+public class OrganizationDatabaseMapper implements Mapper<Organization>{
 
     @Override
     public Organization map(ResultSet rs) {
