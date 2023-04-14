@@ -4,12 +4,12 @@ import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
+import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -582,9 +582,12 @@ public class MainForm extends javax.swing.JFrame {
 
     private void barcodeButoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeButoonActionPerformed
         refresh();
-        NumberDialog dialog = new NumberDialog(this, true);
-        dialog.setVisible(true);
-        String res = dialog.returnNumber();
+        NumberDialog inputBurcode = NumberDialog.getNumber(frame);
+        inputBurcode.setVisible(true);
+        if (inputBurcode.isOK()) {
+            barcodeHandle(inputBurcode.getNumber());
+        }
+
     }//GEN-LAST:event_barcodeButoonActionPerformed
 
     private void skuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skuButtonActionPerformed

@@ -1,10 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
-package ua.gaponov.posterminal.forms.mainform;
+package ua.gaponov.posterminal.forms.inputnumbers;
 
-import java.util.function.Consumer;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -12,13 +12,17 @@ import java.util.function.Consumer;
  */
 public class NumberDialog extends javax.swing.JDialog {
 
-    private String number = "4046234767476";
+    private String number;
+    private boolean ok;
     /**
      * Creates new form NumberDialog
      */
     public NumberDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+    }
+
+    private NumberDialog(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
     }
 
     /**
@@ -85,55 +89,40 @@ public class NumberDialog extends javax.swing.JDialog {
 
     private void cnclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnclButtonActionPerformed
         dispose();
-        returnNumber();
     }//GEN-LAST:event_cnclButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+        ok = true;
+        number = jTextField1.getText();
+        dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        }
-        catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NumberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NumberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NumberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NumberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    public static NumberDialog getNumber(Component parent) {
+        Window window = SwingUtilities.windowForComponent(parent);
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NumberDialog dialog = new NumberDialog(new javax.swing.JFrame(), true);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
+        NumberDialog myMsg;
+        if (window instanceof Frame) {
+            myMsg = new NumberDialog((Frame) window, true);
+        } else {
+            myMsg = new NumberDialog((Dialog) window, true);
+        }
+        myMsg.init();
+        myMsg.applyComponentOrientation(parent.getComponentOrientation());
+        return myMsg;
     }
 
-    public String returnNumber(){
+    private void init() {
+        initComponents();
+        getRootPane().setDefaultButton(okButton);
+        ok = false;
+        number = null;
+    }
+
+    public boolean isOK() {
+        return ok;
+    }
+
+    public String getNumber() {
         return number;
     }
 
