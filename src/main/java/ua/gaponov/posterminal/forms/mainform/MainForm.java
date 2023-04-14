@@ -625,7 +625,7 @@ public class MainForm extends javax.swing.JFrame {
         barcode = barcode.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
         Product product = ProductService.getByBarcode(barcode);
         if (product != null) {
-            int lineNumber = order.addDetailRow(product, 1);
+            int lineNumber = order.addDetailRow(product, product.getQty());
             updateTable();
             selectTableRow(lineNumber);
             updateSumLabel();
