@@ -99,12 +99,27 @@ public class MainForm extends javax.swing.JFrame {
 
         quickProductsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quickProductsButton.setText("Швидкі товари");
+        quickProductsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quickProductsButtonActionPerformed(evt);
+            }
+        });
 
         barcodeButoon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         barcodeButoon.setText("Штрихкод");
+        barcodeButoon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcodeButoonActionPerformed(evt);
+            }
+        });
 
         skuButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         skuButton.setText("СКЮ");
+        skuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skuButtonActionPerformed(evt);
+            }
+        });
 
         btnEnterQty.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnEnterQty.setText("Ввести");
@@ -364,7 +379,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(eixitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -508,7 +523,6 @@ public class MainForm extends javax.swing.JFrame {
         updateSumLabel();
         updateTable();
         selectTableRow(order.getDetails().size()-1);
-
     }//GEN-LAST:event_btnDeleteProductRowActionPerformed
 
     private void btnNumpad8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumpad8ActionPerformed
@@ -566,6 +580,21 @@ public class MainForm extends javax.swing.JFrame {
         deleteLastDigitInQtyField();
     }//GEN-LAST:event_btnNumpadCancelActionPerformed
 
+    private void barcodeButoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeButoonActionPerformed
+        refresh();
+        NumberDialog dialog = new NumberDialog(this, true);
+        dialog.setVisible(true);
+        String res = dialog.returnNumber();
+    }//GEN-LAST:event_barcodeButoonActionPerformed
+
+    private void skuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skuButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_skuButtonActionPerformed
+
+    private void quickProductsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickProductsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quickProductsButtonActionPerformed
+
     private void addDigitToQtyField(String digit){
         inputQty.setText(inputQty.getText()+digit);
     }
@@ -596,14 +625,18 @@ public class MainForm extends javax.swing.JFrame {
 
         try {
             double newQty = Double.valueOf(inputQty.getText());
-            order.changeQtyInRow(jTableProducts.getSelectedRow(), newQty);
-            inputQty.setText(null);
-            updateSumLabel();
-            updateTable();
-            selectTableRow(selectedRow);
+            setQtyInRow(selectedRow, newQty);
         } catch (NumberFormatException e) {
             //NOP
         }
+    }
+
+    private void setQtyInRow(int row, double qty){
+        order.changeQtyInRow(jTableProducts.getSelectedRow(), qty);
+        inputQty.setText(null);
+        updateSumLabel();
+        updateTable();
+        selectTableRow(row);
     }
 
     private void refresh() {
@@ -625,7 +658,7 @@ public class MainForm extends javax.swing.JFrame {
         barcode = barcode.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
         Product product = ProductService.getByBarcode(barcode);
         if (product != null) {
-            int lineNumber = order.addDetailRow(product, 1);
+            int lineNumber = order.addDetailRow(product, product.getQty());
             updateTable();
             selectTableRow(lineNumber);
             updateSumLabel();

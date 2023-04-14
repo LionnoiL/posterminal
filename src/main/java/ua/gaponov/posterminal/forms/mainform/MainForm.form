@@ -113,6 +113,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x428;&#x432;&#x438;&#x434;&#x43a;&#x456; &#x442;&#x43e;&#x432;&#x430;&#x440;&#x438;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quickProductsButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="barcodeButoon">
           <Properties>
@@ -121,6 +124,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x428;&#x442;&#x440;&#x438;&#x445;&#x43a;&#x43e;&#x434;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="barcodeButoonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="skuButton">
           <Properties>
@@ -129,6 +135,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x421;&#x41a;&#x42e;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skuButtonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel5">
 
@@ -426,7 +435,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="eixitButton" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextFieldBarCodeInput" min="-2" pref="208" max="-2" attributes="0"/>
+                  <Component id="jTextFieldBarCodeInput" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
