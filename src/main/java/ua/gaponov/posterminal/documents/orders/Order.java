@@ -25,7 +25,7 @@ public class Order {
     private List<OrderDetail> details = new ArrayList<>();
 
     public int addDetailRow(Product product, double qty){
-        int findLine = findItemByProduct(product);
+        int findLine = findRowByProduct(product);
         OrderDetail orderDetail = new OrderDetail();
 
         if (findLine == -1){
@@ -44,7 +44,7 @@ public class Order {
         return findLine;
     }
     
-    private int findItemByProduct(Product product){
+    public int findRowByProduct(Product product){
         int result = -1;
         for (int i = 0; i < details.size(); i++) {
            if (details.get(i).getProduct().equals(product)){
@@ -53,6 +53,28 @@ public class Order {
            } 
         }
         return result;
+    }
+
+    public void changeQtyInRow(int row, double newQty){
+        OrderDetail orderDetail = details.get(row);
+        orderDetail.setQty(newQty);
+        orderDetail.recalculateSumma();
+        recalculateDocumentSum();
+    }
+
+    public void deleteRow(int row){
+        if (row<0 || row>details.size()){
+            return;
+        }
+        details.remove(row);
+    }
+
+    public void recalculateDocumentSum(){
+        double sum = 0;
+        for (OrderDetail detail : details) {
+            sum = sum + detail.getSumma();
+        }
+        documentSum = sum;
     }
     
     public String getGuid() {

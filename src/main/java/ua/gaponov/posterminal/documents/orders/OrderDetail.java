@@ -17,6 +17,10 @@ public class OrderDetail {
     private double summaWithoutDiscount;
     private double summaDiscount;
 
+    public void recalculateSumma(){
+        setSumma(getQty() * getPrice());
+    }
+
     public String getGuid() {
         return guid;
     }

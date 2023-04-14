@@ -14,8 +14,8 @@ public class AppProperties {
     public static boolean exchangeEnable = true;
     
     public static String serverIpAdress;
-    public static String weightItemPrefix = "9";
-    public static String currency = "29";
+    public static String weightItemPrefix = "29";
+    public static String currency = "грн";
 
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
 }
