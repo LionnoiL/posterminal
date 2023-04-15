@@ -69,4 +69,8 @@ public class XmlUtils implements AutoCloseable {
     public double getDoubleAttribute(String name) throws XMLStreamException{          
         return Double.parseDouble(getStringAttribute(name));
     }
+
+    public int getIntegerAttribute(String name) throws XMLStreamException{
+        return Integer.parseInt(getStringAttribute(name));
+    }
 }

@@ -309,15 +309,16 @@ public class NumberDialog extends javax.swing.JDialog {
     public static NumberDialog getNumber(Component parent) {
         Window window = SwingUtilities.windowForComponent(parent);
 
-        NumberDialog myMsg;
+        NumberDialog dialog;
         if (window instanceof Frame) {
-            myMsg = new NumberDialog((Frame) window, true);
+            dialog = new NumberDialog((Frame) window, true);
         } else {
-            myMsg = new NumberDialog((Dialog) window, true);
+            dialog = new NumberDialog((Dialog) window, true);
         }
-        myMsg.init();
-        myMsg.applyComponentOrientation(parent.getComponentOrientation());
-        return myMsg;
+        dialog.init();
+        dialog.setLocationRelativeTo(null);
+        dialog.applyComponentOrientation(parent.getComponentOrientation());
+        return dialog;
     }
 
     private void init() {

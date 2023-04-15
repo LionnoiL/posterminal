@@ -16,7 +16,7 @@ public class Posterminal {
 
 
     public static void main(String[] args) {
-        setTheme();
+       // setTheme();
         PropertiesUtils.loadProperties();
         
         LoginForm.main(null);

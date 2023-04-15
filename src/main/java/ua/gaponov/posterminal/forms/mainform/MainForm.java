@@ -5,6 +5,7 @@ import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
+import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;
@@ -582,20 +583,29 @@ public class MainForm extends javax.swing.JFrame {
 
     private void barcodeButoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeButoonActionPerformed
         refresh();
-        NumberDialog inputBurcode = NumberDialog.getNumber(frame);
-        inputBurcode.setVisible(true);
-        if (inputBurcode.isOK()) {
-            barcodeHandle(inputBurcode.getNumber());
+        NumberDialog inputBarcode = NumberDialog.getNumber(frame);
+        inputBarcode.setVisible(true);
+        if (inputBarcode.isOK()) {
+            barcodeHandle(inputBarcode.getNumber());
         }
-
     }//GEN-LAST:event_barcodeButoonActionPerformed
 
     private void skuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skuButtonActionPerformed
-        // TODO add your handling code here:
+        refresh();
+        NumberDialog inputSku = NumberDialog.getNumber(frame);
+        inputSku.setVisible(true);
+        if (inputSku.isOK()) {
+            skuHandle(inputSku.getNumber());
+        }
     }//GEN-LAST:event_skuButtonActionPerformed
 
     private void quickProductsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickProductsButtonActionPerformed
-        // TODO add your handling code here:
+        refresh();
+        QuickProductDialog quickProduct = QuickProductDialog.getQuickProduct(frame);
+        quickProduct.setVisible(true);
+        if (quickProduct.isOK()) {
+            System.out.println(quickProduct.getProduct());//TODO
+        }
     }//GEN-LAST:event_quickProductsButtonActionPerformed
 
     private void addDigitToQtyField(String digit){
@@ -660,6 +670,20 @@ public class MainForm extends javax.swing.JFrame {
     private void barcodeHandle(String barcode) {
         barcode = barcode.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
         Product product = ProductService.getByBarcode(barcode);
+        if (product != null) {
+            int lineNumber = order.addDetailRow(product, product.getQty());
+            updateTable();
+            selectTableRow(lineNumber);
+            updateSumLabel();
+        } else {
+            //TODO поиск по карте
+
+        }
+    }
+
+    private void skuHandle(String sku) {
+        sku = sku.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
+        Product product = ProductService.getProductFromSku(sku);
         if (product != null) {
             int lineNumber = order.addDetailRow(product, product.getQty());
             updateTable();
