@@ -159,28 +159,28 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnNumpadComa" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad05" pref="120" max="32767" attributes="0"/>
+                              <Component id="btnNumpad05" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnNumpad1" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnNumpad2" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad3" pref="120" max="32767" attributes="0"/>
+                              <Component id="btnNumpad3" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnNumpad4" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnNumpad5" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad6" pref="120" max="32767" attributes="0"/>
+                              <Component id="btnNumpad6" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnNumpad7" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnNumpad8" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad9" pref="120" max="32767" attributes="0"/>
+                              <Component id="btnNumpad9" max="32767" attributes="0"/>
                           </Group>
                           <Component id="inputQty" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -257,7 +257,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x412;&#x456;&#x434;&#x43c;&#x43e;&#x432;&#x430;"/>
+                <Property name="text" type="java.lang.String" value="&lt;-"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpadCancelActionPerformed"/>
