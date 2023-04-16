@@ -16,7 +16,7 @@ public class Posterminal {
 
 
     public static void main(String[] args) {
-       // setTheme();
+        //setTheme();
         PropertiesUtils.loadProperties();
         
         LoginForm.main(null);
@@ -26,15 +26,10 @@ public class Posterminal {
     
     private static void setTheme(){
         try {
-            javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Posterminal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Posterminal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Posterminal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Posterminal.class.getName()).log(Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     
