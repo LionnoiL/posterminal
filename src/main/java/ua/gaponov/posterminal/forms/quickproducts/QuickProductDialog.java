@@ -6,6 +6,8 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -21,7 +23,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
     private Product product;
     private boolean ok;
     private int pageIndex = 0;
-    private List<JButton> buttons;
+    private List<QuickButton> buttons;
 
     public QuickProductDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -128,47 +130,132 @@ public class QuickProductDialog extends javax.swing.JDialog {
             }
         });
 
-        btnProduct2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct2ActionPerformed(evt);
-            }
-        });
+        btnProduct2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct2.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct3ActionPerformed(evt);
-            }
-        });
+        btnProduct3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct3.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct1ActionPerformed(evt);
-            }
-        });
+        btnProduct1.setToolTipText("");
+        btnProduct1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct1.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct4ActionPerformed(evt);
-            }
-        });
+        btnProduct4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct4.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct5ActionPerformed(evt);
-            }
-        });
+        btnProduct5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct5.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct6ActionPerformed(evt);
-            }
-        });
+        btnProduct6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct6.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        btnProduct7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProduct7ActionPerformed(evt);
-            }
-        });
+        btnProduct7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct7.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct8.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct9.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct10.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct11.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct12.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct13.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct14.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct15.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct16.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct17.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct18.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct19.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct20.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct21.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct22.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct23.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct24.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct25.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct26.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct27.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct28.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct29.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct29.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct30.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct31.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct31.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct32.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct33.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct34.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct34.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct35.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct35.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct36.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct36.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct37.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct37.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct38.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct39.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct39.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct40.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct41.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct41.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        btnProduct42.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProduct42.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,7 +362,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
                                 .addComponent(btnProduct41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnProduct42, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(btnProduct42, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
@@ -354,20 +441,48 @@ public class QuickProductDialog extends javax.swing.JDialog {
         List<QuickProduct> productsByPage = QuickProductService.getByPage(pageIndex);
         int index = 0;
         for (QuickProduct quickProduct : productsByPage) {
-            JButton jButton = buttons.get(index);
+            Product prod = quickProduct.getProduct();
+            prod.setQty(1);
+            buttons.get(index).setProduct(prod);
+            JButton jButton = buttons.get(index).getButton();
             jButton.setBackground(Color.decode("#"+quickProduct.getColor()));
-            jButton.setText(quickProduct.getProduct().getName());
+            jButton.setText(getButtonStringWithWrap(quickProduct.getProduct().getName()));
+            jButton.setActionCommand(String.valueOf(index));
+            jButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    product = buttons.get(Integer.parseInt(e.getActionCommand())).getProduct();
+                    ok = true;
+                    dispose();
+                }
+            } );
             index ++;
         }
     }
 
     private void clearButtons(){
         for (int i = 0; i < 42; i++) {
-            JButton jButton = buttons.get(i);
+            buttons.get(i).setProduct(null);
+            JButton jButton = buttons.get(i).getButton();
             jButton.setBackground(null);
             jButton.setText(null);
         }
+    }
 
+    private String getButtonStringWithWrap(String textButton){
+        StringBuilder result = new StringBuilder("<html>");
+        if (textButton.length()<=18){
+            result.append(textButton);
+            result.append("</html>");
+            return result.toString();
+        }
+        String newStr  = textButton.replaceAll("(.{18})", "$1|");
+        String[] newStrings = newStr.split("\\|");
+        for (String newString : newStrings) {
+           result.append(newString);
+           result.append("<p>");
+        }
+        result.append("</html>");
+        return result.toString();
     }
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
@@ -390,36 +505,6 @@ public class QuickProductDialog extends javax.swing.JDialog {
         fillButtons();
     }//GEN-LAST:event_btnNextActionPerformed
 
-    private void btnProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct1ActionPerformed
-        ok = true;
-        product = new Product();
-        dispose();
-    }//GEN-LAST:event_btnProduct1ActionPerformed
-
-    private void btnProduct2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct2ActionPerformed
-
-    private void btnProduct3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct3ActionPerformed
-
-    private void btnProduct4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct4ActionPerformed
-
-    private void btnProduct5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct5ActionPerformed
-
-    private void btnProduct6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct6ActionPerformed
-
-    private void btnProduct7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProduct7ActionPerformed
-
 
     private void init() {
         initComponents();
@@ -439,7 +524,9 @@ public class QuickProductDialog extends javax.swing.JDialog {
             btnProduct26, btnProduct27, btnProduct28, btnProduct29, btnProduct30,
             btnProduct31, btnProduct32, btnProduct33, btnProduct34, btnProduct35,
             btnProduct36, btnProduct37, btnProduct38, btnProduct39, btnProduct40,
-            btnProduct41, btnProduct42);
+            btnProduct41, btnProduct42).stream()
+            .map(el -> new QuickButton(el))
+            .toList();
     }
 
     public boolean isOK() {
@@ -450,6 +537,30 @@ public class QuickProductDialog extends javax.swing.JDialog {
         return product;
     }
 
+    public class QuickButton{
+        private Product product;
+        private JButton button;
+
+        public QuickButton(JButton button) {
+            this.button = button;
+        }
+
+        public Product getProduct() {
+            return product;
+        }
+
+        public void setProduct(Product product) {
+            this.product = product;
+        }
+
+        public JButton getButton() {
+            return button;
+        }
+
+        public void setButton(JButton button) {
+            this.button = button;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnNext;

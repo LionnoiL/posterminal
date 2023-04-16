@@ -604,7 +604,13 @@ public class MainForm extends javax.swing.JFrame {
         QuickProductDialog quickProduct = QuickProductDialog.getQuickProduct(frame);
         quickProduct.setVisible(true);
         if (quickProduct.isOK()) {
-            System.out.println(quickProduct.getProduct());//TODO
+            Product product = quickProduct.getProduct();
+            if (product != null) {
+                int lineNumber = order.addDetailRow(product, product.getQty());
+                updateTable();
+                selectTableRow(lineNumber);
+                updateSumLabel();
+            }
         }
     }//GEN-LAST:event_quickProductsButtonActionPerformed
 
