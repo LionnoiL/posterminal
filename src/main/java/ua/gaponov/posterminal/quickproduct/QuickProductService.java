@@ -1,12 +1,27 @@
 package ua.gaponov.posterminal.quickproduct;
 
 import java.sql.SQLException;
+import java.util.List;
 import ua.gaponov.posterminal.database.Parametr;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.products.Product;
 
 public class QuickProductService {
+
+    public static final int buttonsCountOnPage = 42;
+
+    public static List<QuickProduct> getByPage(int pageIndex) {
+        StatementParameters<Integer, Integer> parameters =
+            new StatementParameters<>(buttonsCountOnPage, pageIndex * buttonsCountOnPage);
+
+        String sql = """
+            SELECT * FROM quick_products Order by QUICK_PRODUCTS.POS_ID  limit ? offset ?
+            """;
+        return new SqlHelper<QuickProduct>().getAll(sql,
+            parameters,
+            new QuickProductDatabaseMapper());
+    }
 
     public static QuickProduct getByProduct(String guid) {
         StatementParameters<String, String> parameters = new StatementParameters<>(guid);
@@ -60,5 +75,9 @@ public class QuickProductService {
             where product_id = ?
             """;
         new SqlHelper<Product>().execSql(sql, parameters);
+    }
+
+    public static void deleteAll() {
+        SqlHelper.execSql("delete from quick_products");
     }
 }

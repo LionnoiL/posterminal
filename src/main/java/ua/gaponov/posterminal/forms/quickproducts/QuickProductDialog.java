@@ -6,8 +6,12 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Window;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.quickproduct.QuickProduct;
+import ua.gaponov.posterminal.quickproduct.QuickProductService;
 
 /**
  * @author gaponov
@@ -16,6 +20,8 @@ public class QuickProductDialog extends javax.swing.JDialog {
 
     private Product product;
     private boolean ok;
+    private int pageIndex = 0;
+    private List<JButton> buttons;
 
     public QuickProductDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -343,23 +349,45 @@ public class QuickProductDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void fillButtons(){
-        btnProduct1.setBackground(Color.decode("#00FFFF"));
+    private void fillButtons(){
+        clearButtons();
+        List<QuickProduct> productsByPage = QuickProductService.getByPage(pageIndex);
+        int index = 0;
+        for (QuickProduct quickProduct : productsByPage) {
+            JButton jButton = buttons.get(index);
+            jButton.setBackground(Color.decode("#"+quickProduct.getColor()));
+            jButton.setText(quickProduct.getProduct().getName());
+            index ++;
+        }
+    }
+
+    private void clearButtons(){
+        for (int i = 0; i < 42; i++) {
+            JButton jButton = buttons.get(i);
+            jButton.setBackground(null);
+            jButton.setText(null);
+        }
+
     }
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        // TODO add your handling code here:
+        pageIndex = 0;
+        fillButtons();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-        // TODO add your handling code here:
+        if (pageIndex>=1) {
+            pageIndex = pageIndex - 1;
+            fillButtons();
+        }
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+        pageIndex = pageIndex + 1;
+        fillButtons();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProduct1ActionPerformed
@@ -395,10 +423,23 @@ public class QuickProductDialog extends javax.swing.JDialog {
 
     private void init() {
         initComponents();
+        fillButtonsList();
         getRootPane().setDefaultButton(btnClose);
         ok = false;
         product = null;
-        //fillButtons();
+        fillButtons();
+    }
+
+    private void fillButtonsList(){
+        buttons = List.of(btnProduct1, btnProduct2, btnProduct3, btnProduct4, btnProduct5,
+            btnProduct6, btnProduct7, btnProduct8, btnProduct9, btnProduct10,
+            btnProduct11, btnProduct12, btnProduct13, btnProduct14, btnProduct15,
+            btnProduct16, btnProduct17, btnProduct18, btnProduct19, btnProduct20,
+            btnProduct21, btnProduct22, btnProduct23, btnProduct24, btnProduct25,
+            btnProduct26, btnProduct27, btnProduct28, btnProduct29, btnProduct30,
+            btnProduct31, btnProduct32, btnProduct33, btnProduct34, btnProduct35,
+            btnProduct36, btnProduct37, btnProduct38, btnProduct39, btnProduct40,
+            btnProduct41, btnProduct42);
     }
 
     public boolean isOK() {

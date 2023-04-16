@@ -602,7 +602,6 @@ public class MainForm extends javax.swing.JFrame {
     private void quickProductsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickProductsButtonActionPerformed
         refresh();
         QuickProductDialog quickProduct = QuickProductDialog.getQuickProduct(frame);
-        quickProduct.fillButtons();
         quickProduct.setVisible(true);
         if (quickProduct.isOK()) {
             System.out.println(quickProduct.getProduct());//TODO
