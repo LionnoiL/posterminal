@@ -91,3 +91,9 @@ CREATE TABLE orders_detail (
     CONSTRAINT orders_detail_fk_productss FOREIGN KEY (product_guid) REFERENCES products(product_guid)
 );
 
+CREATE TABLE quick_products (
+    product_id VARCHAR (36),
+    pos_id     INTEGER,
+    color      VARCHAR      DEFAULT 'F0F0F0'
+);
+

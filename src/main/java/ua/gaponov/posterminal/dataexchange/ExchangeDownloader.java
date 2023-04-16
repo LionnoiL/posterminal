@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import ua.gaponov.posterminal.quickproduct.QuickProduct;
+import ua.gaponov.posterminal.quickproduct.QuickProductService;
+import ua.gaponov.posterminal.quickproduct.QuickProductXmlBuilder;
 import ua.gaponov.posterminal.utils.XmlUtils;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,6 +39,11 @@ public class ExchangeDownloader {
             while (processor.startElement("ean", "eans")) {
                 Barcode barcode = BarcodeXmlBuilder.create(processor);
                 BarcodeService.save(barcode);     
+            }
+
+            while (processor.startElement("quick_product", "quick_products")) {
+                QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
+                QuickProductService.save(quickProduct);
             }
             
             System.out.println("Finish download products");
