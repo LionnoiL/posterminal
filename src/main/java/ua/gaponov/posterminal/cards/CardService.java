@@ -24,4 +24,8 @@ public class CardService {
     public static void deleteAll(){
         SqlHelper.execSql("delete from cards");
     }
+
+    public static void save(Card card) {
+
+    }
 }

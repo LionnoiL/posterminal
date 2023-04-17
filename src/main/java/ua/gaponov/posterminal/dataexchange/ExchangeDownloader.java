@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.cards.CardService;
+import ua.gaponov.posterminal.cards.CardXmlBuilder;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.quickproduct.QuickProductXmlBuilder;
@@ -44,6 +47,11 @@ public class ExchangeDownloader {
             while (processor.startElement("quick_product", "quick_products")) {
                 QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
                 QuickProductService.save(quickProduct);
+            }
+
+            while (processor.startElement("card", "discounts_cards")) {
+                Card card = CardXmlBuilder.create(processor);
+                CardService.save(card);
             }
             
             System.out.println("Finish download products");

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 /**
  * @author wmcon
@@ -402,7 +403,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -703,7 +704,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void updateSumLabel(){
         order.recalculateDocumentSum();
-        sumLabel.setText(String.valueOf(order.getDocumentSum()) + " " + AppProperties.currency
+        sumLabel.setText(String.valueOf(RoundUtils.round(order.getDocumentSum())) + " " + AppProperties.currency
         );
     }
 
@@ -726,7 +727,7 @@ public class MainForm extends javax.swing.JFrame {
         rowData[1] = "шт"; //TODO unit
         rowData[2] = orderDetail.getQty();
         rowData[3] = orderDetail.getPrice();
-        rowData[4] = orderDetail.getSumma();
+        rowData[4] = RoundUtils.round(orderDetail.getSumma());
         return rowData;
     }
 

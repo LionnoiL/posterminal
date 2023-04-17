@@ -49,7 +49,6 @@ CREATE TABLE cards (
     code         VARCHAR (50)  NOT NULL,
     active       BOOLEAN,
     card_type    VARCHAR (20) DEFAULT('DISCOUNT'),
-    client_guid  VARCHAR (36),
     client_name  VARCHAR (150),
     client_phone VARCHAR (50),
     client_email VARCHAR (50),
@@ -96,4 +95,3 @@ CREATE TABLE quick_products (
     pos_id     INTEGER,
     color      VARCHAR      DEFAULT 'F0F0F0'
 );
-
