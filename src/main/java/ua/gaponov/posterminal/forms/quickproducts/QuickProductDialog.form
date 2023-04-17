@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
@@ -146,73 +149,71 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct3" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct2" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct1" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct4" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct5" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct6" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct7" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct1" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct2" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct3" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct4" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct5" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct6" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct7" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct10" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct9" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct8" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct11" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct12" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct13" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct14" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct8" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct9" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct10" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct11" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct12" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct13" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct14" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct17" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct16" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct15" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct18" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct19" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct20" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct21" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct15" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct16" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct17" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct18" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct19" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct20" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct21" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct24" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct23" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct22" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct25" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct26" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct27" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct28" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct22" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct23" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct24" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct25" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct26" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct27" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct28" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct31" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct30" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct29" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct32" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct33" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct34" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct35" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct29" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct30" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct31" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct32" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct33" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct34" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct35" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProduct38" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct37" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct36" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct39" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct40" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct41" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="btnProduct42" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProduct36" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct37" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct38" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct39" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct40" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct41" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnProduct42" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnPrev" alignment="3" pref="74" max="32767" attributes="0"/>
-                      <Component id="btnNext" alignment="3" pref="74" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="btnClose" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnStart" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnPrev" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnNext" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                  <Component id="btnClose" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
