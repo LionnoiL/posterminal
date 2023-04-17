@@ -474,7 +474,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
         if (textButton.length()<=18){
             result.append(textButton);
             result.append("</html>");
-            return result.toString();
+            return textButton;
         }
         String newStr  = textButton.replaceAll("(.{18})", "$1|");
         String[] newStrings = newStr.split("\\|");

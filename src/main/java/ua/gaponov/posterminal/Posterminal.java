@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
 import ua.gaponov.posterminal.users.LoginForm;
+import ua.gaponov.posterminal.utils.CommStream;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 /**
@@ -22,6 +23,8 @@ public class Posterminal {
         LoginForm.main(null);
         
         AppProperties.scheduler.setTimeReceived();
+
+        CommStream.listCommPorts();
     }
     
     private static void setTheme(){
