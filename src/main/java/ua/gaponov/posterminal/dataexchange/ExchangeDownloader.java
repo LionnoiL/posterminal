@@ -31,27 +31,27 @@ public class ExchangeDownloader {
             
             while (processor.startElement("organization", "organizations")) {
                 Organization organization = OrganizationXmlBuilder.create(processor);
-                OrganizationService.save(organization);     
+                OrganizationService.save(organization);
             }
-            
+
             while (processor.startElement("product", "products")) {
                 Product product = ProductXmlBuilder.create(processor);
-                ProductService.save(product);     
+                ProductService.save(product);
             }
-            
+
             while (processor.startElement("ean", "eans")) {
                 Barcode barcode = BarcodeXmlBuilder.create(processor);
-                BarcodeService.save(barcode);     
+                BarcodeService.save(barcode);
+            }
+
+            while (processor.startElement("discounts_card", "discounts_cards")) {
+                Card card = CardXmlBuilder.create(processor);
+                CardService.save(card);
             }
 
             while (processor.startElement("quick_product", "quick_products")) {
                 QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
                 QuickProductService.save(quickProduct);
-            }
-
-            while (processor.startElement("card", "discounts_cards")) {
-                Card card = CardXmlBuilder.create(processor);
-                CardService.save(card);
             }
             
             System.out.println("Finish download products");
