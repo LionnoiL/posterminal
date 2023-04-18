@@ -56,8 +56,7 @@ CREATE TABLE cards (
     debt         DOUBLE        DEFAULT (0),
     debt_allowed BOOLEAN       DEFAULT (0),
     max_debt     DOUBLE        DEFAULT (0),
-    max_debt_day INTEGER       DEFAULT (0),
-    CONSTRAINT cards_fk_clients FOREIGN KEY (client_guid) REFERENCES clients(client_guid)
+    max_debt_day INTEGER       DEFAULT (0)
 );
 
 CREATE TABLE orders (
