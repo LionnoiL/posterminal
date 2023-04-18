@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.users;
 
+import java.util.Objects;
+
 /**
  *
  * @author gaponov
@@ -51,5 +53,8 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public boolean isAdmin(){
+        return Objects.equals(UserRole.ADMIN, role);
+    }
 }

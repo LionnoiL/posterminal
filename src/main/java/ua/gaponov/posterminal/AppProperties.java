@@ -1,6 +1,7 @@
 package ua.gaponov.posterminal;
 
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
+import ua.gaponov.posterminal.users.User;
 
 /**
  *
@@ -18,4 +19,5 @@ public class AppProperties {
     public static String currency = "грн";
 
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
+    public static User currentUser;
 }

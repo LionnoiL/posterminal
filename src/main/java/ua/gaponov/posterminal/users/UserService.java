@@ -6,6 +6,8 @@ import java.util.List;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
+import static ua.gaponov.posterminal.AppProperties.currentUser;
+
 /**
  *
  * @author gaponov
@@ -34,10 +36,17 @@ public class UserService {
     public static boolean login(String userName, String password){
         User user = UserService.getByName(userName);
         if (user.getPassword().isEmpty() && password.isEmpty()){
+            currentUser = user;
            return true;
         }
         String encryptPassword = UserService.encryptPassword(password);
-        return encryptPassword.equals(user.getPassword());
+        boolean passwordEquals = encryptPassword.equals(user.getPassword());
+        if (passwordEquals){
+            currentUser = user;
+        } else {
+            currentUser = null;
+        }
+        return passwordEquals;
     }
     
     

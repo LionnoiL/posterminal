@@ -72,7 +72,7 @@ public class PropertiesUtils {
         return propertyValue;
     }
 
-    public static void saveApplicationProperties(String propertyName, String propertyValue) {
+    private static void saveApplicationProperties(String propertyName, String propertyValue) {
         try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
@@ -88,6 +88,12 @@ public class PropertiesUtils {
         }
     }
 
+    public static void saveAllApplicationProperties(){
+        saveApplicationProperties("currency", AppProperties.currency);
+        saveApplicationProperties("weight_item_prefix", AppProperties.weightItemPrefix);
+        saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.exchangeEnable));
+        saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.exchangeInterval / 60000));
+    }
 
     public static void loadProperties() {
         AppProperties.serverIpAdress = getApplicationProperties("server_ip");
