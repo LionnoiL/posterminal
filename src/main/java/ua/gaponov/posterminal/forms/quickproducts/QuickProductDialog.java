@@ -9,8 +9,8 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
@@ -45,6 +45,13 @@ public class QuickProductDialog extends javax.swing.JDialog {
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());
         return dialog;
+    }
+
+    private void setImages(){
+        btnPrev.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1leftarrow.png")));
+        btnNext.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1rightarrow.png")));
+        btnStart.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/gohome.png")));
+        btnClose.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
     }
 
     /**
@@ -104,28 +111,24 @@ public class QuickProductDialog extends javax.swing.JDialog {
 
         setResizable(false);
 
-        btnStart.setText("Початок");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartActionPerformed(evt);
             }
         });
 
-        btnPrev.setText("Попередня");
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrevActionPerformed(evt);
             }
         });
 
-        btnNext.setText("Наступна");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
             }
         });
 
-        btnClose.setText("Закрити");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -509,6 +512,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
 
     private void init() {
         initComponents();
+        setImages();
         fillButtonsList();
         getRootPane().setDefaultButton(btnClose);
         ok = false;

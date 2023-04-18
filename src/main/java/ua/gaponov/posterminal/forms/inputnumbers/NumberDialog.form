@@ -93,7 +93,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnNumpad0" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnNumpadCancel" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="btnNumpadC" pref="56" max="32767" attributes="0"/>
+                  <Component id="btnNumpadC" pref="59" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -107,17 +107,11 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="okButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cnclButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x412;&#x456;&#x434;&#x43c;&#x43e;&#x432;&#x430;"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cnclButtonActionPerformed"/>
       </Events>
@@ -135,7 +129,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="7"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad7ActionPerformed"/>
@@ -146,7 +139,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="8"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad8ActionPerformed"/>
@@ -157,7 +149,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="9"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad9ActionPerformed"/>
@@ -168,7 +159,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="4"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad4ActionPerformed"/>
@@ -179,7 +169,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="5"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad5ActionPerformed"/>
@@ -190,7 +179,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="6"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad6ActionPerformed"/>
@@ -201,7 +189,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad1ActionPerformed"/>
@@ -212,7 +199,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad2ActionPerformed"/>
@@ -223,7 +209,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad3ActionPerformed"/>
@@ -234,7 +219,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpad0ActionPerformed"/>
@@ -245,16 +229,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;-"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpadCancelActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNumpadC">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNumpadCActionPerformed"/>
       </Events>

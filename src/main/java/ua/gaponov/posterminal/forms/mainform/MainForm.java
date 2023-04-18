@@ -11,9 +11,11 @@ import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.nio.file.Paths;
 import java.util.List;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
@@ -31,6 +33,27 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        setImages();
+    }
+
+    private void setImages(){
+        btnNumpadC.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnce.png")));
+        btnNumpadCancel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnback.png")));
+        btnDeleteProductRow.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnminus.png")));
+        btnNumpad0.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn0.png")));
+        btnNumpadComa.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btndot.png")));
+        btnNumpad05.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btndiv.png")));
+        btnNumpad1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn1.png")));
+        btnNumpad2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn2.png")));
+        btnNumpad3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn3.png")));
+        btnNumpad4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn4.png")));
+        btnNumpad5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn5.png")));
+        btnNumpad6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn6.png")));
+        btnNumpad7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn7.png")));
+        btnNumpad9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn9.png")));
+        btnNumpad8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn8.png")));
+        btnEnterQty.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/apply.png")));
+        eixitButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/exit.png")));
     }
 
     /**
@@ -124,7 +147,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnEnterQty.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnEnterQty.setText("Ввести");
         btnEnterQty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnterQtyActionPerformed(evt);
@@ -132,7 +154,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpadC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpadC.setText("С");
         btnNumpadC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpadCActionPerformed(evt);
@@ -140,7 +161,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpadCancel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpadCancel.setText("<-");
         btnNumpadCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpadCancelActionPerformed(evt);
@@ -148,7 +168,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnDeleteProductRow.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnDeleteProductRow.setText("Видалити");
         btnDeleteProductRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteProductRowActionPerformed(evt);
@@ -156,7 +175,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad0.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad0.setText("0");
         btnNumpad0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad0ActionPerformed(evt);
@@ -164,7 +182,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpadComa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpadComa.setText(",");
+        btnNumpadComa.setToolTipText("");
         btnNumpadComa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpadComaActionPerformed(evt);
@@ -172,7 +190,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad05.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad05.setText("0,5");
         btnNumpad05.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad05ActionPerformed(evt);
@@ -180,7 +197,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad1.setText("1");
         btnNumpad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad1ActionPerformed(evt);
@@ -188,7 +204,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad2.setText("2");
         btnNumpad2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad2ActionPerformed(evt);
@@ -196,7 +211,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad3.setText("3");
+        btnNumpad3.setToolTipText("");
         btnNumpad3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad3ActionPerformed(evt);
@@ -204,7 +219,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad4.setText("4");
+        btnNumpad4.setToolTipText("");
         btnNumpad4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad4ActionPerformed(evt);
@@ -212,7 +227,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad5.setText("5");
         btnNumpad5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad5ActionPerformed(evt);
@@ -220,7 +234,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad6.setText("6");
         btnNumpad6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad6ActionPerformed(evt);
@@ -228,7 +241,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad7.setText("7");
+        btnNumpad7.setToolTipText("");
         btnNumpad7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad7ActionPerformed(evt);
@@ -236,7 +249,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad8.setText("8");
         btnNumpad8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad8ActionPerformed(evt);
@@ -244,7 +256,6 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnNumpad9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad9.setText("9");
         btnNumpad9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad9ActionPerformed(evt);
@@ -360,7 +371,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         eixitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        eixitButton.setText("Вихід");
+        eixitButton.setToolTipText("");
         eixitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eixitButtonActionPerformed(evt);
@@ -436,6 +447,11 @@ public class MainForm extends javax.swing.JFrame {
         jTableProducts.setRowHeight(40);
         jTableProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableProducts.setUpdateSelectionOnSort(false);
+        jTableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProductsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProducts);
         jTableProducts.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -448,7 +464,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -614,6 +630,10 @@ public class MainForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_quickProductsButtonActionPerformed
+
+    private void jTableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductsMouseClicked
+        refresh();
+    }//GEN-LAST:event_jTableProductsMouseClicked
 
     private void addDigitToQtyField(String digit){
         inputQty.setText(inputQty.getText()+digit);

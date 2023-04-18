@@ -4,7 +4,7 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Window;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  *
@@ -23,6 +23,23 @@ public class NumberDialog extends javax.swing.JDialog {
 
     private NumberDialog(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+    }
+
+    private void setImages(){
+        btnNumpadC.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnce.png")));
+        btnNumpadCancel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnback.png")));
+        btnNumpad0.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn0.png")));
+        btnNumpad1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn1.png")));
+        btnNumpad2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn2.png")));
+        btnNumpad3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn3.png")));
+        btnNumpad4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn4.png")));
+        btnNumpad5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn5.png")));
+        btnNumpad6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn6.png")));
+        btnNumpad7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn7.png")));
+        btnNumpad9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn9.png")));
+        btnNumpad8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn8.png")));
+        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
+        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
     }
 
     /**
@@ -52,14 +69,12 @@ public class NumberDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }
         });
 
-        cnclButton.setText("Відмова");
         cnclButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cnclButtonActionPerformed(evt);
@@ -70,7 +85,6 @@ public class NumberDialog extends javax.swing.JDialog {
         jTextField1.setToolTipText("");
 
         btnNumpad7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad7.setText("7");
         btnNumpad7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad7ActionPerformed(evt);
@@ -78,7 +92,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad8.setText("8");
         btnNumpad8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad8ActionPerformed(evt);
@@ -86,7 +99,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad9.setText("9");
         btnNumpad9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad9ActionPerformed(evt);
@@ -94,7 +106,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad4.setText("4");
         btnNumpad4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad4ActionPerformed(evt);
@@ -102,7 +113,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad5.setText("5");
         btnNumpad5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad5ActionPerformed(evt);
@@ -110,7 +120,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad6.setText("6");
         btnNumpad6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad6ActionPerformed(evt);
@@ -118,7 +127,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad1.setText("1");
         btnNumpad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad1ActionPerformed(evt);
@@ -126,7 +134,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad2.setText("2");
         btnNumpad2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad2ActionPerformed(evt);
@@ -134,7 +141,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad3.setText("3");
         btnNumpad3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad3ActionPerformed(evt);
@@ -142,7 +148,6 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpad0.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpad0.setText("0");
         btnNumpad0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpad0ActionPerformed(evt);
@@ -150,14 +155,12 @@ public class NumberDialog extends javax.swing.JDialog {
         });
 
         btnNumpadCancel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNumpadCancel.setText("<-");
         btnNumpadCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpadCancelActionPerformed(evt);
             }
         });
 
-        btnNumpadC.setText("C");
         btnNumpadC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNumpadCActionPerformed(evt);
@@ -227,7 +230,7 @@ public class NumberDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNumpad0, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNumpadCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNumpadC, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                    .addComponent(btnNumpadC, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,6 +326,7 @@ public class NumberDialog extends javax.swing.JDialog {
 
     private void init() {
         initComponents();
+        setImages();
         getRootPane().setDefaultButton(okButton);
         ok = false;
         number = null;
