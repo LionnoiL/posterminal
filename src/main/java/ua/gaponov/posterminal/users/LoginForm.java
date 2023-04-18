@@ -1,7 +1,8 @@
 package ua.gaponov.posterminal.users;
 
 import java.util.List;
-import javax.swing.JComboBox;
+import javax.swing.*;
+
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.forms.mainform.MainForm;
@@ -18,6 +19,13 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        setImages();
+    }
+
+    private void setImages(){
+        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
+        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
+        cancelButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
     }
 
     /**
@@ -43,15 +51,17 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel2.setText("Пароль");
 
-        okButton.setText("ОК");
         okButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 okButtonMouseClicked(evt);
             }
         });
 
-        cancelButton.setText("Відмова");
-        cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

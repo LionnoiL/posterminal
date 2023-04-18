@@ -48,6 +48,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
     }
 
     private void setImages(){
+        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
         btnPrev.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1leftarrow.png")));
         btnNext.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1rightarrow.png")));
         btnStart.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/gohome.png")));
