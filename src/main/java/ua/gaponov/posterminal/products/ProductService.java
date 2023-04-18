@@ -35,7 +35,6 @@ public class ProductService {
         } else {
             product = getProductFromOrdinaryBarcode(barcode);
         }
-        System.out.println("sku = " + product);
         return product;
     }
 

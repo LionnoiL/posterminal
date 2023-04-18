@@ -24,6 +24,13 @@ public class CardService {
                 parameters,
                 new CardDatabaseMapper());
     }
+
+    public static Card getByCode(String code){
+        StatementParameters<String, String> parameters = new StatementParameters<>(code);
+        return new SqlHelper<Card>().getOne("select * from cards where code = ?",
+                parameters,
+                new CardDatabaseMapper());
+    }
     
     public static void deleteAll(){
         SqlHelper.execSql("delete from cards");
