@@ -136,7 +136,11 @@ public class PrintReceipt implements Printable {
     }
 
     private void printTotals(Graphics2D g2d) {
-
+        printString(g2d, 10, false, Align.LEFT, false, "ПІДСУМОК");
+        currentLine = currentLine - FONT_MARGIN;
+        printString(g2d, 10, false, Align.RIGHT, false,
+                String.valueOf(RoundUtils.round(order.getDocumentSum())) +
+                " " + AppProperties.currency);
     }
 
     private void printPays(Graphics2D g2d) {
