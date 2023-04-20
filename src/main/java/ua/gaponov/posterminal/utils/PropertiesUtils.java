@@ -93,6 +93,8 @@ public class PropertiesUtils {
         saveApplicationProperties("weight_item_prefix", AppProperties.weightItemPrefix);
         saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.exchangeEnable));
         saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.exchangeInterval / 60000));
+        saveApplicationProperties("shop_name", AppProperties.shopName);
+        saveApplicationProperties("shop_address", AppProperties.shopAddress);
     }
 
     public static void loadProperties() {
@@ -103,5 +105,7 @@ public class PropertiesUtils {
             getApplicationProperties("exchange_enable"));
         AppProperties.weightItemPrefix = getApplicationProperties("weight_item_prefix");
         AppProperties.currency = getApplicationProperties("currency");
+        AppProperties.shopName = getApplicationProperties("shop_name");
+        AppProperties.shopAddress = getApplicationProperties("shop_address");
     }
 }

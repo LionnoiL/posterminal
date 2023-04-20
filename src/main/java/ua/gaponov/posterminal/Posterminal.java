@@ -1,13 +1,10 @@
 package ua.gaponov.posterminal;
 
-import net.sf.jasperreports.engine.JRException;
 import ua.gaponov.posterminal.forms.login.LoginForm;
-import ua.gaponov.posterminal.reports.JReport;
 import ua.gaponov.posterminal.utils.CommStream;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import javax.swing.*;
-import java.io.IOException;
 
 /**
  * @author wmcon
@@ -16,13 +13,6 @@ public class Posterminal {
 
 
     public static void main(String[] args) {
-//        try {
-//            JReport.printReport();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } catch (JRException e) {
-//            throw new RuntimeException(e);
-//        }
         setTheme();
         PropertiesUtils.loadProperties();
 

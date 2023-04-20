@@ -18,6 +18,9 @@ public class AppProperties {
     public static String weightItemPrefix = "29";
     public static String currency = "грн";
 
+    public static String shopName = "Shop";
+    public static String shopAddress = "";
+
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
     public static User currentUser;
 }

@@ -14,6 +14,7 @@ import javax.swing.*;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
+import ua.gaponov.posterminal.utils.StringUtils;
 
 /**
  * @author gaponov
@@ -480,8 +481,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
             result.append("</html>");
             return textButton;
         }
-        String newStr  = textButton.replaceAll("(.{18})", "$1|");
-        String[] newStrings = newStr.split("\\|");
+        String[] newStrings = StringUtils.splitStringByCharCount(textButton, 18);
         for (String newString : newStrings) {
            result.append(newString);
            result.append("<p>");

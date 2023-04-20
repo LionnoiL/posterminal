@@ -27,4 +27,9 @@ public class FilesUtils {
             Logger.getLogger(FilesUtils.class.getName()).log(Level.SEVERE, "Error create dir = {}", dir.getAbsolutePath());
         }
     }
+
+    public static void deleteFile(String fileName){
+        File file = new File(fileName);
+        file.delete();
+    }
 }

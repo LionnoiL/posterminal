@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.cards.CardXmlBuilder;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.quickproduct.QuickProductXmlBuilder;
+import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,10 +25,11 @@ import ua.gaponov.posterminal.products.ProductXmlBuilder;
  * @author wmcon
  */
 public class ExchangeDownloader {
-    
+
+    public static final String IMPORT_FILE = "files/import.xml";
     public static void download() throws Exception {
 
-        try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get("files/import.xml")))) {     
+        try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE)))) {
             
             while (processor.startElement("organization", "organizations")) {
                 Organization organization = OrganizationXmlBuilder.create(processor);
@@ -44,16 +46,17 @@ public class ExchangeDownloader {
                 BarcodeService.save(barcode);
             }
 
+            while (processor.startElement("quick_product", "quick_products")) {
+                QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
+                QuickProductService.save(quickProduct);
+            }
+
             while (processor.startElement("discounts_card", "discounts_cards")) {
                 Card card = CardXmlBuilder.create(processor);
                 CardService.save(card);
             }
 
-            while (processor.startElement("quick_product", "quick_products")) {
-                QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
-                QuickProductService.save(quickProduct);
-            }
-            
+            FilesUtils.deleteFile(IMPORT_FILE);
             System.out.println("Finish download products");
         }
     }
