@@ -11,14 +11,13 @@ import ua.gaponov.posterminal.utils.StringUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.print.*;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 public class PrintReceipt implements Printable {
 
     private final int MARGIN = 1;
-    private final int PAPER_WIDTH = 140;
+    private final int PAPER_WIDTH = 150;
     private final int PAPER_HEIGHT = 1000;
     private final int FONT_MARGIN = 10;
     private final Order order;
@@ -26,8 +25,6 @@ public class PrintReceipt implements Printable {
     private PageFormat pageFormat;
     private Paper paper;
     private int currentLine = -50;
-
-
 
     public PrintReceipt(Order order) {
 
@@ -72,16 +69,23 @@ public class PrintReceipt implements Printable {
         return PAGE_EXISTS;
     }
 
-    private void printString(Graphics2D g2d, int fontSize, boolean bold, Align align, boolean wrap, String text) {
+    private void printString(Graphics2D g2d,
+                             int fontSize,
+                             boolean bold,
+                             Align align,
+                             boolean wrap,
+                             String text,
+                             boolean addLine
+    ) {
         int fontStyle = bold ? Font.BOLD : Font.PLAIN;
         g2d.setFont(new Font("Consolas", fontStyle, fontSize));
 
         int textWidth = g2d.getFontMetrics().stringWidth(text);
         int x = 0;
 
-        switch (align){
+        switch (align) {
             case CENTER:
-                x = (PAPER_WIDTH - textWidth)/2;
+                x = (PAPER_WIDTH - textWidth) / 2;
                 break;
             case RIGHT:
                 x = PAPER_WIDTH - textWidth;
@@ -89,7 +93,7 @@ public class PrintReceipt implements Printable {
             default:
                 x = 0;
         }
-        if (wrap){
+        if (wrap) {
             int fontWidth = textWidth / text.length();
             int blockWidth = PAPER_WIDTH - x;
             int fontCount = blockWidth / fontWidth;
@@ -97,16 +101,20 @@ public class PrintReceipt implements Printable {
             String[] lineStrings = StringUtils.splitStringByCharCount(text, fontCount);
             for (String lineString : lineStrings) {
                 drawString(g2d, x, currentLine, lineString);
-                currentLine = currentLine + FONT_MARGIN;
+                if (addLine) {
+                    currentLine = currentLine + FONT_MARGIN;
+                }
             }
         } else {
             drawString(g2d, x, currentLine, text);
-            currentLine = currentLine + FONT_MARGIN;
+            if (addLine) {
+                currentLine = currentLine + FONT_MARGIN;
+            }
         }
 
     }
 
-    private void drawString(Graphics2D g2d, int x, int y, String text){
+    private void drawString(Graphics2D g2d, int x, int y, String text) {
         g2d.drawString(text, x, y);
     }
 
@@ -116,65 +124,63 @@ public class PrintReceipt implements Printable {
     }
 
     private void printTitle(Graphics2D g2d) {
-        printString(g2d, 10, true, Align.CENTER, false, AppProperties.shopName);
-        printString(g2d, 8, false, Align.CENTER, true,AppProperties.shopAddress);
-        printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow());
-        currentLine = currentLine - FONT_MARGIN;
-        printString(g2d, 6, false, Align.RIGHT, false, "Продаж");
-        printString(g2d, 8, false, Align.LEFT, false,"Товарний чек №1002154"); //TODO номер чека
+        printString(g2d, 10, true, Align.CENTER, false, AppProperties.shopName, true);
+        printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
+        printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
+        printString(g2d, 6, false, Align.RIGHT, false, "Продаж", true);
+        printString(g2d, 8, false, Align.LEFT, false, "Товарний чек №1002154", true); //TODO номер чека
         printHorizontalLine(g2d);
     }
 
     private void printOrganizations(Graphics2D g2d) {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
-            printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName());
-            currentLine = currentLine - FONT_MARGIN;
-            printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())));
+            printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName(), false);
+            printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())), true);
         }
         printHorizontalLine(g2d);
     }
 
     private void printTotals(Graphics2D g2d) {
-        printString(g2d, 10, false, Align.LEFT, false, "ПІДСУМОК");
-        currentLine = currentLine - FONT_MARGIN;
+        printString(g2d, 10, false, Align.LEFT, false, "ПІДСУМОК", false);
         printString(g2d, 10, false, Align.RIGHT, false,
                 String.valueOf(RoundUtils.round(order.getDocumentSum())) +
-                " " + AppProperties.currency);
+                        " " + AppProperties.currency, true);
     }
 
     private void printPays(Graphics2D g2d) {
-
+        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", false);
+        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
     }
 
     private void printCardInfo(Graphics2D g2d) {
-        if (order.getCard()!=null){
+        if (order.getCard() != null) {
             printString(g2d, 8, true, Align.CENTER, false,
-                    "Поточна знижка по картці "+order.getCard().getDiscount()+"%"
+                    "Поточна знижка по картці " + order.getCard().getDiscount() + "%", true
             );
         }
     }
 
     private void printFooter(Graphics2D g2d) {
-        printString(g2d, 10, true, Align.CENTER, false,"Дякуємо за покупку");
+        printString(g2d, 10, true, Align.CENTER, false, "Дякуємо за покупку", true);
     }
 
     private void printProducts(Graphics2D g2d) {
         List<OrderDetail> details = order.getDetails();
         for (OrderDetail detail : details) {
-            printString(g2d, 8, false, Align.LEFT, true,detail.getProduct().getName().toUpperCase());
-            printString(g2d, 8, false, Align.RIGHT,false,
+            printString(g2d, 8, false, Align.LEFT, true, detail.getProduct().getName().toUpperCase(), true);
+            printString(g2d, 8, false, Align.RIGHT, false,
                     detail.getQty() +
-                    "(шт)x" +
-                    detail.getPrice() +
-                    "= " +
-                    RoundUtils.round(detail.getSumma())
+                            "(шт)x" +
+                            detail.getPrice() +
+                            "= " +
+                            RoundUtils.round(detail.getSumma()), true
             );
         }
         printHorizontalLine(g2d);
     }
 
-    public enum Align{
+    public enum Align {
         LEFT, CENTER, RIGHT
     }
 }

@@ -30,11 +30,6 @@ public class OrderService {
                 parameters,
                 new OrderDatabaseMapper());
     }
-
-//    public static List<Map<Organization, Double>> getTotalsByOrganizations(Order order) {
-//
-//        return new SqlHelper<Order>().getAll("SELECT * FROM orders", new OrderDatabaseMapper());
-//    }
     
     public static void deleteAll(){
         SqlHelper.execSql("delete from orders");
