@@ -3,8 +3,12 @@ package ua.gaponov.posterminal.documents.orders;
 import ua.gaponov.posterminal.documents.PayTypes;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.products.Product;
 
 /**
@@ -75,6 +79,20 @@ public class Order {
             sum = sum + detail.getSumma();
         }
         documentSum = sum;
+    }
+
+    public Map<Organization, Double> getTotalsByOrganizations(){
+        Map<Organization, Double> result = new HashMap<>();
+        List<OrderDetail> orderDetails = getDetails();
+        for (OrderDetail orderDetail : orderDetails) {
+            Organization organization = orderDetail.getProduct().getOrganization();
+            if (result.containsKey(organization)){
+                result.put(organization, result.get(organization) + orderDetail.getSumma());
+            } else {
+                result.put(organization, orderDetail.getSumma());
+            }
+        }
+        return result;
     }
     
     public String getGuid() {

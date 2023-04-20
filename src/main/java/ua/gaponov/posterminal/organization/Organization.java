@@ -36,4 +36,19 @@ public class Organization {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Organization that = (Organization) o;
+
+        return guid.equals(that.guid);
+    }
+
+    @Override
+    public int hashCode() {
+        return guid.hashCode();
+    }
 }

@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.printer;
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
+import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
 import ua.gaponov.posterminal.utils.StringUtils;
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.print.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class PrintReceipt implements Printable {
 
@@ -124,7 +126,12 @@ public class PrintReceipt implements Printable {
     }
 
     private void printOrganizations(Graphics2D g2d) {
-
+        Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
+        for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
+            printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName());
+            currentLine = currentLine - FONT_MARGIN;
+            printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())));
+        }
     }
 
     private void printTotals(Graphics2D g2d) {

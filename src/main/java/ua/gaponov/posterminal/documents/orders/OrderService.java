@@ -1,8 +1,11 @@
 package ua.gaponov.posterminal.documents.orders;
 
 import java.util.List;
+import java.util.Map;
+
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
+import ua.gaponov.posterminal.organization.Organization;
 
 /**
  *
@@ -27,6 +30,11 @@ public class OrderService {
                 parameters,
                 new OrderDatabaseMapper());
     }
+
+//    public static List<Map<Organization, Double>> getTotalsByOrganizations(Order order) {
+//
+//        return new SqlHelper<Order>().getAll("SELECT * FROM orders", new OrderDatabaseMapper());
+//    }
     
     public static void deleteAll(){
         SqlHelper.execSql("delete from orders");
