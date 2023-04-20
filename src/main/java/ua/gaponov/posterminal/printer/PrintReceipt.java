@@ -135,7 +135,11 @@ public class PrintReceipt implements Printable {
     private void printOrganizations(Graphics2D g2d) {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
-            printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName(), false);
+            if (organizationDoubleEntry.getKey()==null){
+                printString(g2d, 6, false, Align.LEFT, false, "", false);
+            } else {
+                printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName(), false);
+            }
             printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())), true);
         }
         printHorizontalLine(g2d);
