@@ -132,6 +132,7 @@ public class PrintReceipt implements Printable {
             currentLine = currentLine - FONT_MARGIN;
             printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())));
         }
+        printHorizontalLine(g2d);
     }
 
     private void printTotals(Graphics2D g2d) {
