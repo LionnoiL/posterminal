@@ -153,8 +153,8 @@ public class PrintReceipt implements Printable {
     }
 
     private void printPays(Graphics2D g2d) {
-        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", false);
-        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
+        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", true);
+        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", true);
     }
 
     private void printCardInfo(Graphics2D g2d) {
