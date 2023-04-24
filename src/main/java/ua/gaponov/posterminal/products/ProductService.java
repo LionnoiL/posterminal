@@ -125,12 +125,14 @@ public class ProductService {
             parameters.add(new Parametr(null));
         }
 
+        parameters.add(new Parametr(product.isNeedExcise()));
+
         String sql = """
             insert into products (product_guid, product_name, price,
-            no_discount, product_code, sku, weight, org_guid
+            no_discount, product_code, sku, weight, org_guid, need_excise
             ) 
             values
-            (?, ?, ?, ?, ?, ?, ?, ?)
+            (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
         new SqlHelper<Product>().execSql(sql, parameters);
     }
@@ -145,6 +147,7 @@ public class ProductService {
         parameters.add(new Parametr(product.getCode()));
         parameters.add(new Parametr(product.getSku()));
         parameters.add(new Parametr(product.isWeight()));
+        parameters.add(new Parametr(product.isNeedExcise()));
 
         if (product.getOrganization() != null && !product.getOrganization().getGuid().isEmpty()) {
             parameters.add(new Parametr(product.getOrganization().getGuid()));
@@ -160,6 +163,7 @@ public class ProductService {
             product_code = ?,
             sku = ?,
             weight = ?,
+            need_excise = ?,
             org_guid = ?
             where product_guid = ?
             """;

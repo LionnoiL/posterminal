@@ -20,6 +20,15 @@ public class Product {
     private boolean weight;
     private Organization organization;
     private double qty;
+    private boolean needExcise;
+
+    public boolean isNeedExcise() {
+        return needExcise;
+    }
+
+    public void setNeedExcise(boolean needExcise) {
+        this.needExcise = needExcise;
+    }
 
     public String getGuid() {
         return guid;
