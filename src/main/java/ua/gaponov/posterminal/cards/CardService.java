@@ -82,23 +82,41 @@ public class CardService {
     }
 
     private static void update(Card card) throws SQLException {
-        StatementParameters<Boolean, String> parameters
-                = new StatementParameters<>(
-                card.isActive(),
-                card.getCardType().toString()
+//        StatementParameters<Boolean, String> parameters
+//                = new StatementParameters<>(
+//                card.isActive(),
+//                card.getCardType().toString()
+//        );
+//        parameters.add(new Parametr(card.getClientEmail()));
+//        parameters.add(new Parametr(card.getClientName()));
+//        parameters.add(new Parametr(card.getClientPhone()));
+//        parameters.add(new Parametr(card.getCode()));
+//        parameters.add(new Parametr(card.getDebt()));
+//        parameters.add(new Parametr(card.isDebtAllowed()));
+//        parameters.add(new Parametr(card.getDiscount()));
+//        parameters.add(new Parametr(card.getMaxDebt()));
+//        parameters.add(new Parametr(card.getMaxDebtDay()));
+
+
+//        parameters.add(new Parametr(card.getGuid()));
+
+        StatementParameters sp = new StatementParameters<>();
+        sp.addAll(
+            card.isActive(),
+            card.getCardType().toString(),
+            card.getClientEmail(),
+            card.getClientName(),
+            card.getClientPhone(),
+            card.getCode(),
+            card.getDebt(),
+            card.isDebtAllowed(),
+            card.getDiscount(),
+            card.getMaxDebt(),
+            card.getMaxDebtDay(),
+            card.getGuid()
         );
-        parameters.add(new Parametr(card.getClientEmail()));
-        parameters.add(new Parametr(card.getClientName()));
-        parameters.add(new Parametr(card.getClientPhone()));
-        parameters.add(new Parametr(card.getCode()));
-        parameters.add(new Parametr(card.getDebt()));
-        parameters.add(new Parametr(card.isDebtAllowed()));
-        parameters.add(new Parametr(card.getDiscount()));
-        parameters.add(new Parametr(card.getMaxDebt()));
-        parameters.add(new Parametr(card.getMaxDebtDay()));
 
 
-        parameters.add(new Parametr(card.getGuid()));
         String sql = """
             update CARDS set 
                 ACTIVE = ?,
@@ -114,6 +132,6 @@ public class CardService {
                 MAX_DEBT_DAY = ?                 
             where CARD_GUID = ?
             """;
-        new SqlHelper<Product>().execSql(sql, parameters);
+        new SqlHelper<Product>().execSql(sql, sp);
     }
 }

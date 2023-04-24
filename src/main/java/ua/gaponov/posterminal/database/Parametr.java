@@ -11,6 +11,10 @@ public class Parametr<T> {
         this.value = value;
     }
 
+    public static Parametr getParametr (Object value){
+        return new Parametr(value);
+    }
+
     public T getValue() {
         return value;
     }

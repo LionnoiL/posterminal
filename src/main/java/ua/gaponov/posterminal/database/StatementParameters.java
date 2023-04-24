@@ -29,10 +29,6 @@ public class StatementParameters<T, E> {
         items.add(parametr);
     }
 
-    public void add(T value) {
-        items.add(new Parametr<T>(value));
-    }
-
     public List<Parametr> getItems() {
         return items;
     }
@@ -43,6 +39,22 @@ public class StatementParameters<T, E> {
         for (Parametr p : params) {
             statement.setObject(index++, p.getValue());
         }
+    }
+
+    public <E> void addAll(E... elements){
+        for (E element : elements) {
+            add(new Parametr(element));
+        }
+    }
+
+    public void addNull(){
+        add(new Parametr(null));
+    }
+
+    public static<T, E> StatementParameters<T, E> buildParametrs(E... elements){
+        StatementParameters<T, E> result = new StatementParameters<T, E>();
+        result.addAll(elements);
+        return result;
     }
 
 }

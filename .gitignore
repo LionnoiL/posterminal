@@ -10,6 +10,7 @@ target/
 pos.mv.db
 pos.trace.db
 pos.trace.db.old
+files/import.xml
 
 ### STS ###
 .apt_generated

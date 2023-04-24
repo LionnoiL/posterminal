@@ -56,7 +56,7 @@ public class ExchangeDownloader {
                 CardService.save(card);
             }
 
-            FilesUtils.deleteFile(IMPORT_FILE);
+            //FilesUtils.deleteFile(IMPORT_FILE);
             System.out.println("Finish download products");
         }
     }
