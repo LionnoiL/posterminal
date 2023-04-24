@@ -2,10 +2,8 @@ package ua.gaponov.posterminal.products;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.barcodes.BarcodeService;
-import ua.gaponov.posterminal.database.Parametr;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -15,7 +13,7 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class ProductService {
 
     private static final ProductDatabaseMapper mapper = new ProductDatabaseMapper();
-    private static final SqlHelper<Product> helper = new SqlHelper<Product>();
+    private static final SqlHelper<Product> helper = new SqlHelper<>();
 
     public static List<Product> getAll() {
         return helper.getAll(
@@ -54,14 +52,15 @@ public class ProductService {
         String sku = removeStartZero(barcode.substring(2, 2 + codeLength));
         String qty = removeStartZero(barcode.substring(2 + codeLength, 12));
         Product product = getProductFromSku(sku);
-        if (product!=null)
+        if (product != null) {
             product.setQty(Double.valueOf(qty) / 1000);
+        }
         return product;
     }
 
-    private static String removeStartZero(String inputString){
+    private static String removeStartZero(String inputString) {
         for (int i = 0; i < inputString.length() - 1; i++) {
-            if (!"0".equals(inputString.substring(i, i + 1))){
+            if (!"0".equals(inputString.substring(i, i + 1))) {
                 return inputString.substring(i, inputString.length());
             }
         }
