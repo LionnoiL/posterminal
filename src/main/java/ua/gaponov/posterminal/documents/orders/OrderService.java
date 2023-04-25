@@ -14,7 +14,7 @@ import ua.gaponov.posterminal.organization.Organization;
 public class OrderService {
     
     public static Order getByGuid(String guid){
-        StatementParameters<String, String> parameters = new StatementParameters<>(guid);
+        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
         return new SqlHelper<Order>().getOne("select * from orders where order_guid = ?",
                 parameters,
                 new OrderDatabaseMapper());
@@ -25,7 +25,7 @@ public class OrderService {
     }
 
     public static List<Order> getAllNoUpload() {
-        StatementParameters<Boolean, String> parameters = new StatementParameters<>(false);
+        StatementParameters<Boolean> parameters = StatementParameters.buildParameters(false);
         return new SqlHelper<Order>().getAll("SELECT * FROM orders where upload = ?",
                 parameters,
                 new OrderDatabaseMapper());

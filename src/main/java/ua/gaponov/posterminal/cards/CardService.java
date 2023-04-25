@@ -1,38 +1,39 @@
 package ua.gaponov.posterminal.cards;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import ua.gaponov.posterminal.database.Parametr;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.products.Product;
 
+import java.sql.SQLException;
+import java.util.List;
+
 /**
- *
  * @author gaponov
  */
 public class CardService {
-    
-    public static List<Card> getAll(){
-       return new SqlHelper<Card>().getAll("SELECT * FROM cards", new CardDatabaseMapper());
+
+    private CardService() {
     }
-    
-    public static Card getByGuid(String guid){
-        StatementParameters<String, String> parameters = new StatementParameters<>(guid);
+
+    public static List<Card> getAll() {
+        return new SqlHelper<Card>().getAll("SELECT * FROM cards", new CardDatabaseMapper());
+    }
+
+    public static Card getByGuid(String guid) {
+        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
         return new SqlHelper<Card>().getOne("select * from cards where card_guid = ?",
                 parameters,
                 new CardDatabaseMapper());
     }
 
-    public static Card getByCode(String code){
-        StatementParameters<String, String> parameters = new StatementParameters<>(code);
+    public static Card getByCode(String code) {
+        StatementParameters<String> parameters = StatementParameters.buildParameters(code);
         return new SqlHelper<Card>().getOne("select * from cards where code = ?",
                 parameters,
                 new CardDatabaseMapper());
     }
-    
-    public static void deleteAll(){
+
+    public static void deleteAll() {
         SqlHelper.execSql("delete from cards");
     }
 
@@ -46,7 +47,7 @@ public class CardService {
     }
 
     private static void insert(Card card) throws SQLException {
-        StatementParameters parameters = StatementParameters.buildParametrs(
+        StatementParameters<Object> parameters = StatementParameters.buildParameters(
                 card.getGuid(),
                 card.isActive(),
                 card.getCardType().toString(),
@@ -81,7 +82,7 @@ public class CardService {
     }
 
     private static void update(Card card) throws SQLException {
-        StatementParameters parameters = StatementParameters.buildParametrs(
+        StatementParameters<Object> parameters = StatementParameters.buildParameters(
                 card.isActive(),
                 card.getCardType().toString(),
                 card.getClientEmail(),
@@ -96,20 +97,20 @@ public class CardService {
                 card.getGuid());
 
         String sql = """
-            update CARDS set
-                ACTIVE = ?,
-                CARD_TYPE = ?,
-                CLIENT_EMAIL = ?,
-                CLIENT_NAME = ?,
-                CLIENT_PHONE = ?,
-                CODE = ?,
-                DEBT = ?,
-                DEBT_ALLOWED = ?,
-                DISCOUNT = ?,
-                MAX_DEBT = ?,
-                MAX_DEBT_DAY = ?               
-            where CARD_GUID = ?
-            """;
+                update CARDS set
+                    ACTIVE = ?,
+                    CARD_TYPE = ?,
+                    CLIENT_EMAIL = ?,
+                    CLIENT_NAME = ?,
+                    CLIENT_PHONE = ?,
+                    CODE = ?,
+                    DEBT = ?,
+                    DEBT_ALLOWED = ?,
+                    DISCOUNT = ?,
+                    MAX_DEBT = ?,
+                    MAX_DEBT_DAY = ?               
+                where CARD_GUID = ?
+                """;
         new SqlHelper<Product>().execSql(sql, parameters);
     }
 }

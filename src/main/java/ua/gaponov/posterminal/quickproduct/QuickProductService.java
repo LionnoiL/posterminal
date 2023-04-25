@@ -2,7 +2,7 @@ package ua.gaponov.posterminal.quickproduct;
 
 import java.sql.SQLException;
 import java.util.List;
-import ua.gaponov.posterminal.database.Parametr;
+
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.products.Product;
@@ -12,8 +12,10 @@ public class QuickProductService {
     public static final int buttonsCountOnPage = 42;
 
     public static List<QuickProduct> getByPage(int pageIndex) {
-        StatementParameters<Integer, Integer> parameters =
-            new StatementParameters<>(buttonsCountOnPage, pageIndex * buttonsCountOnPage);
+        StatementParameters<Integer> parameters = StatementParameters.buildParameters(
+                buttonsCountOnPage,
+                pageIndex * buttonsCountOnPage
+        );
 
         String sql = """
             SELECT * FROM quick_products Order by QUICK_PRODUCTS.POS_ID  limit ? offset ?
@@ -24,7 +26,7 @@ public class QuickProductService {
     }
 
     public static QuickProduct getByProduct(String guid) {
-        StatementParameters<String, String> parameters = new StatementParameters<>(guid);
+        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
         return new SqlHelper<QuickProduct>().getOne(
             "select * from quick_products where product_id = ?",
             parameters,
@@ -44,7 +46,7 @@ public class QuickProductService {
         if (quickProduct.getProduct() == null) {
             return;
         }
-        StatementParameters parameters = StatementParameters.buildParametrs(
+        StatementParameters parameters = StatementParameters.buildParameters(
                 quickProduct.getProduct().getGuid(),
                 quickProduct.getPosition(),
                 quickProduct.getColor()
@@ -62,7 +64,7 @@ public class QuickProductService {
             return;
         }
         StatementParameters parameters
-            = StatementParameters.buildParametrs(
+            = StatementParameters.buildParameters(
                 quickProduct.getPosition(),
                 quickProduct.getColor(),
                 quickProduct.getProduct().getGuid()

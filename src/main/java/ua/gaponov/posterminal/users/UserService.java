@@ -19,7 +19,7 @@ public class UserService {
     }
     
     public static List<User> getAllActive(){
-       StatementParameters<Boolean, String> parameters = new StatementParameters<>(true);
+       StatementParameters<Boolean> parameters = StatementParameters.buildParameters(true);
        return new SqlHelper<User>().getAll("SELECT * FROM users where active = ?",
                parameters,
                new UserDatabaseMapper());
@@ -27,7 +27,7 @@ public class UserService {
     
     public static User getByName(String userName){
         
-        StatementParameters<String, String> parameters = new StatementParameters<>(userName);
+        StatementParameters<String> parameters = StatementParameters.buildParameters(userName);
         return new SqlHelper<User>().getOne("select * from users where user_name = ?",
                 parameters,
                 new UserDatabaseMapper());

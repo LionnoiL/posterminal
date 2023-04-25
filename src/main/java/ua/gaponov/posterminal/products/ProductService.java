@@ -22,7 +22,7 @@ public class ProductService {
     }
 
     public static Product getByGuid(String guid) {
-        StatementParameters parameters = StatementParameters.buildParametrs(guid);
+        StatementParameters parameters = StatementParameters.buildParameters(guid);
         return helper.getOne(
             "select * from products where product_guid = ?",
             parameters,
@@ -68,7 +68,7 @@ public class ProductService {
     }
 
     private static Product getProductFromOrdinaryBarcode(String barcode) {
-        StatementParameters parameters = StatementParameters.buildParametrs(barcode);
+        StatementParameters parameters = StatementParameters.buildParameters(barcode);
         String sql = """
             select * from eans
             left join products on products.product_guid = eans.product_guid
@@ -85,7 +85,7 @@ public class ProductService {
     }
 
     public static Product getProductFromSku(String sku) {
-        StatementParameters parameters = StatementParameters.buildParametrs(sku);
+        StatementParameters parameters = StatementParameters.buildParameters(sku);
         String sql = """
             select * from products 
             where sku = ?
@@ -115,7 +115,7 @@ public class ProductService {
     }
 
     private static void insert(Product product) throws SQLException {
-        StatementParameters parameters = StatementParameters.buildParametrs(
+        StatementParameters parameters = StatementParameters.buildParameters(
             product.getGuid(),
             product.getName(),
             product.getPrice(),
@@ -144,7 +144,7 @@ public class ProductService {
     }
 
     private static void update(Product product) throws SQLException {
-        StatementParameters parameters = StatementParameters.buildParametrs(
+        StatementParameters parameters = StatementParameters.buildParameters(
             product.getName(),
             product.getPrice(),
             product.isBanDisckount(),

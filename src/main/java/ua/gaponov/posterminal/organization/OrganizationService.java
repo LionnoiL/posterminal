@@ -2,7 +2,7 @@ package ua.gaponov.posterminal.organization;
 
 import java.sql.SQLException;
 import java.util.List;
-import ua.gaponov.posterminal.database.Parametr;
+
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -17,7 +17,7 @@ public class OrganizationService {
     }
 
     public static Organization getByGuid(String guid) {
-        StatementParameters<String, String> parameters = new StatementParameters<>(guid);
+        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
         return new SqlHelper<Organization>().getOne("select * from organization where org_guid = ?",
                 parameters,
                 new OrganizationDatabaseMapper());
@@ -38,7 +38,7 @@ public class OrganizationService {
 
     private static void insert(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters parameters = StatementParameters.buildParametrs(
+            StatementParameters parameters = StatementParameters.buildParameters(
                     organization.getCode(),
                     organization.getName(),
                     organization.getGuid()
@@ -55,7 +55,7 @@ public class OrganizationService {
 
     private static void update(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters parameters = StatementParameters.buildParametrs(
+            StatementParameters parameters = StatementParameters.buildParameters(
                     organization.getCode(),
                     organization.getName(),
                     organization.getGuid()

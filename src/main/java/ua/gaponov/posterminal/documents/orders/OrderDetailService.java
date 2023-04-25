@@ -11,7 +11,7 @@ import ua.gaponov.posterminal.database.StatementParameters;
 public class OrderDetailService {
     
     public static List<OrderDetail> getByOrder(String orderGuid){
-        StatementParameters<String, String> parameters = new StatementParameters<>(orderGuid);
+        StatementParameters<String> parameters = StatementParameters.buildParameters(orderGuid);
         return new SqlHelper<OrderDetail>().getAll("select * from orders_detail where order_guid = ?",
                 parameters,
                 new OrderDetailDatabaseMapper());

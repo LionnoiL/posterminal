@@ -9,16 +9,11 @@ import java.util.List;
  *
  * @author wmcon
  */
-public class StatementParameters<T, E> {
+public class StatementParameters<T> {
     
-    private final List<Parametr> items = new ArrayList<Parametr>();
+    private final List<Parametr> items = new ArrayList<>();
 
     public StatementParameters() {
-    }
-
-    public StatementParameters(T value, E value2) {
-        items.add(new Parametr<T>(value));
-        items.add(new Parametr<E>(value2));
     }
 
     public StatementParameters(T value) {
@@ -41,8 +36,8 @@ public class StatementParameters<T, E> {
         }
     }
 
-    public <E> void addAll(E... elements){
-        for (E element : elements) {
+    public <T> void addAll(T... elements){
+        for (T element : elements) {
             add(new Parametr(element));
         }
     }
@@ -51,8 +46,8 @@ public class StatementParameters<T, E> {
         add(new Parametr(null));
     }
 
-    public static<T, E> StatementParameters<T, E> buildParametrs(E... elements){
-        StatementParameters<T, E> result = new StatementParameters<T, E>();
+    public static<T> StatementParameters<T> buildParameters(T... elements){
+        StatementParameters<T> result = new StatementParameters<T>();
         result.addAll(elements);
         return result;
     }
