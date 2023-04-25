@@ -81,6 +81,7 @@ public class MainForm extends javax.swing.JFrame {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+
                 if (AppProperties.exchangeRunning){
                     lblInfo.setText("Триває оновлення довідників");
                 } else {
@@ -703,6 +704,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void eixitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eixitButtonActionPerformed
         if (DialogUtils.okcancel(frame, "Вихід з програми", "Вийти з програми?") == 0) {
+            infoTimer.cancel();
             saveColumnsWidth();
             saveAllApplicationProperties();
             dispose();
