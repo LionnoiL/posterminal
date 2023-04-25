@@ -1,8 +1,3 @@
-CREATE TABLE clients (
-	client_guid VARCHAR (36) NOT NULL PRIMARY KEY,
-	client_name CHARACTER VARYING NOT NULL
-);
-
 CREATE TABLE users (
     user_guid     VARCHAR (36) NOT NULL PRIMARY KEY,
     user_name     VARCHAR (50) NOT NULL UNIQUE,

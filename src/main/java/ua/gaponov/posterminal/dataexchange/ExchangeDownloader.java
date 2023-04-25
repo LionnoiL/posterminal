@@ -46,15 +46,17 @@ public class ExchangeDownloader {
                 BarcodeService.save(barcode);
             }
 
+            while (processor.startElement("discounts_card", "discounts_cards")) {
+                Card card = CardXmlBuilder.create(processor);
+                CardService.save(card);
+            }
+
             while (processor.startElement("quick_product", "quick_products")) {
                 QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
                 QuickProductService.save(quickProduct);
             }
 
-            while (processor.startElement("discounts_card", "discounts_cards")) {
-                Card card = CardXmlBuilder.create(processor);
-                CardService.save(card);
-            }
+
 
             //FilesUtils.deleteFile(IMPORT_FILE);
             System.out.println("Finish download products");

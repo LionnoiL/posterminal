@@ -38,12 +38,14 @@ public class OrganizationService {
 
     private static void insert(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters<String, String> parameters
-                    = new StatementParameters<>(organization.getCode(), organization.getName());
-            parameters.add(new Parametr(organization.getGuid()));
+            StatementParameters parameters = StatementParameters.buildParametrs(
+                    organization.getCode(),
+                    organization.getName(),
+                    organization.getGuid()
+            );
             String sql = """
                      insert into organization (code, org_name, org_guid
-                     ) 
+                     )
                      values
                      (?, ?, ?)
                      """;
@@ -53,9 +55,11 @@ public class OrganizationService {
 
     private static void update(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters<String, String> parameters
-                    = new StatementParameters<>(organization.getCode(), organization.getName());
-            parameters.add(new Parametr(organization.getGuid()));
+            StatementParameters parameters = StatementParameters.buildParametrs(
+                    organization.getCode(),
+                    organization.getName(),
+                    organization.getGuid()
+            );
             String sql = """
                      update organization set code= ?, org_name = ?
                      where org_guid = ?

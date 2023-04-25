@@ -44,15 +44,13 @@ public class QuickProductService {
         if (quickProduct.getProduct() == null) {
             return;
         }
-        StatementParameters<String, Integer> parameters
-            = new StatementParameters<>(
-            quickProduct.getProduct().getGuid(),
-            quickProduct.getPosition()
+        StatementParameters parameters = StatementParameters.buildParametrs(
+                quickProduct.getProduct().getGuid(),
+                quickProduct.getPosition(),
+                quickProduct.getColor()
         );
-        parameters.add(new Parametr(quickProduct.getColor()));
-
         String sql = """
-            insert into quick_products (product_id, pos_id, color) 
+            insert into quick_products (product_id, pos_id, color)
             values
             (?, ?, ?)
             """;
@@ -63,12 +61,12 @@ public class QuickProductService {
         if (quickProduct.getProduct() == null) {
             return;
         }
-        StatementParameters<Integer, String> parameters
-            = new StatementParameters<>(
-            quickProduct.getPosition(),
-            quickProduct.getColor()
+        StatementParameters parameters
+            = StatementParameters.buildParametrs(
+                quickProduct.getPosition(),
+                quickProduct.getColor(),
+                quickProduct.getProduct().getGuid()
         );
-        parameters.add(new Parametr(quickProduct.getProduct().getGuid()));
         String sql = """
             update quick_products set pos_id= ?,
             color= ?

@@ -25,7 +25,7 @@ public class StatementParameters<T, E> {
         items.add(new Parametr<T>(value));
     }
 
-    public void add(Parametr parametr) {
+    private void add(Parametr parametr) {
         items.add(parametr);
     }
 

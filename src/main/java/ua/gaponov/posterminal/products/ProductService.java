@@ -70,7 +70,7 @@ public class ProductService {
     private static Product getProductFromOrdinaryBarcode(String barcode) {
         StatementParameters parameters = StatementParameters.buildParametrs(barcode);
         String sql = """
-            select * from eans 
+            select * from eans
             left join products on products.product_guid = eans.product_guid
             where eans.ean_code = ?
             """;
@@ -136,7 +136,7 @@ public class ProductService {
         String sql = """
             insert into products (product_guid, product_name, price,
             no_discount, product_code, sku, weight, org_guid, need_excise
-            ) 
+            )
             values
             (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
