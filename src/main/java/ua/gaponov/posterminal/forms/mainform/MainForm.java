@@ -4,6 +4,9 @@ import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
+import ua.gaponov.posterminal.dataexchange.ExchangeDownloader;
+import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
+import ua.gaponov.posterminal.dataexchange.ExchangeUpload;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
@@ -21,7 +24,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationProperties;
 
@@ -33,6 +39,9 @@ public class MainForm extends javax.swing.JFrame {
     private static MainForm frame;
     private static StringBuilder barBufer = new StringBuilder();
     private static Order order = new Order();
+    private String infoMessage = "";
+
+    public Timer infoTimer = new Timer();
 
 
     /**
@@ -42,6 +51,8 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         setImages();
         updateVisibleButtons();
+
+        setInfoTimer();
     }
 
     /**
@@ -64,6 +75,28 @@ public class MainForm extends javax.swing.JFrame {
                 }
         );
     }
+
+    public void setInfoTimer() {
+        Calendar calendar = Calendar.getInstance();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (AppProperties.exchangeRunning){
+                    lblInfo.setText("Триває оновлення довідників");
+                } else {
+                    lblInfo.setText(infoMessage);
+                }
+            }
+        };
+
+        infoTimer.schedule(
+                timerTask,
+                calendar.getTime(),
+                2000
+        );
+    }
+
+
 
     private void updateVisibleButtons() {
         btnOptions.setVisible(AppProperties.currentUser.isAdmin());
@@ -145,6 +178,7 @@ public class MainForm extends javax.swing.JFrame {
         eixitButton = new javax.swing.JButton();
         jTextFieldBarCodeInput = new javax.swing.JTextField();
         btnOptions = new javax.swing.JButton();
+        lblInfo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         sumLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -494,6 +528,8 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        lblInfo.setToolTipText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -502,8 +538,10 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(eixitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOptions)
                 .addContainerGap())
         );
@@ -514,7 +552,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eixitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOptions))
+                    .addComponent(btnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1004,6 +1043,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblCardCode;
     private javax.swing.JLabel lblClientName;
     private javax.swing.JLabel lblDebt;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JButton quickProductsButton;
     private javax.swing.JButton skuButton;
     private javax.swing.JLabel sumLabel;

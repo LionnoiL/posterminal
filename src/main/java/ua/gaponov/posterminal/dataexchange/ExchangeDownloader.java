@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.cards.CardXmlBuilder;
@@ -30,7 +31,8 @@ public class ExchangeDownloader {
     public static void download() throws Exception {
 
         try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE)))) {
-            
+            AppProperties.exchangeRunning = true;
+
             while (processor.startElement("organization", "organizations")) {
                 Organization organization = OrganizationXmlBuilder.create(processor);
                 OrganizationService.save(organization);
@@ -60,6 +62,7 @@ public class ExchangeDownloader {
 
             //FilesUtils.deleteFile(IMPORT_FILE);
             System.out.println("Finish download products");
+            AppProperties.exchangeRunning = false;
         }
     }
 }

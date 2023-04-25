@@ -23,4 +23,5 @@ public class AppProperties {
 
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
     public static User currentUser;
+    public static boolean exchangeRunning;
 }
