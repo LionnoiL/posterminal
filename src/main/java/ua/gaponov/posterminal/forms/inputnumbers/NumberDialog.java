@@ -14,9 +14,7 @@ public class NumberDialog extends javax.swing.JDialog {
 
     private String number;
     private boolean ok;
-    /**
-     * Creates new form NumberDialog
-     */
+
     public NumberDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
     }

@@ -10,6 +10,7 @@ import ua.gaponov.posterminal.documents.orders.OrderService;
 import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.forms.options.OptionsForm;
+import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
 import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
 import ua.gaponov.posterminal.printer.PrintReceipt;
@@ -728,14 +729,23 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         refresh();
-        try {
-            OrderService.save(order);
+
+        //Pay
+        PayForm payForm = PayForm.getPay(frame, order);
+        payForm.setVisible(true);
+        if (payForm.isOK()) {
+            try {
+                OrderService.save(order);
+            } catch (Exception e){
+                System.out.println("Помилка зберігання замовлення " + e);
+                return;
+            }
             PrintReceipt printReceipt = new PrintReceipt(order);
             order = new Order();
             loadOrder();
-        } catch (Exception e){
-            System.out.println("Помилка зберігання замовлення " + e);
         }
+
+
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoneyActionPerformed
