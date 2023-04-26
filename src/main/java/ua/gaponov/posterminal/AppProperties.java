@@ -19,6 +19,8 @@ public class AppProperties {
 
     public static String shopName = "Shop";
     public static String shopAddress = "";
+    public static int shopId;
+    public static String shopGuid;
 
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
     public static User currentUser;

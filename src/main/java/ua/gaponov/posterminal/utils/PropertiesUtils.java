@@ -95,6 +95,8 @@ public class PropertiesUtils {
         saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.exchangeInterval / 60000));
         saveApplicationProperties("shop_name", AppProperties.shopName);
         saveApplicationProperties("shop_address", AppProperties.shopAddress);
+        saveApplicationProperties("shop_id", String.valueOf(AppProperties.shopId));
+        saveApplicationProperties("shop_guid", AppProperties.shopGuid);
     }
 
     public static void loadProperties() {
@@ -107,5 +109,7 @@ public class PropertiesUtils {
         AppProperties.currency = getApplicationProperties("currency");
         AppProperties.shopName = getApplicationProperties("shop_name");
         AppProperties.shopAddress = getApplicationProperties("shop_address");
+        AppProperties.shopId = Integer.parseInt(getApplicationProperties("shop_id"));
+        AppProperties.shopGuid = getApplicationProperties("shop_guid");
     }
 }

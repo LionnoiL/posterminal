@@ -17,6 +17,25 @@ public class OrdersUpload {
     @JacksonXmlProperty(localName = "order")
     private List<Order> items; 
 
+    private String shopGuid;
+    private int shopId;
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopGuid() {
+        return shopGuid;
+    }
+
+    public void setShopGuid(String shopGuid) {
+        this.shopGuid = shopGuid;
+    }
+
     public List<Order> getItems() {
         return items;
     }

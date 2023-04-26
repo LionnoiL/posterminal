@@ -59,6 +59,8 @@ public class OptionsForm extends javax.swing.JFrame {
         chkExchangeEnable.setSelected(AppProperties.exchangeEnable);
         fieldShopName.setText(AppProperties.shopName);
         fieldShopAddress.setText(AppProperties.shopAddress);
+        fieldShopGuid.setText(AppProperties.shopGuid);
+        fieldShopId.setText(String.valueOf(AppProperties.shopId));
     }
 
     /**
@@ -85,6 +87,10 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         fieldShopAddress = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        fieldShopId = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        fieldShopGuid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -120,6 +126,14 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jLabel6.setText("Адреса магазину");
 
+        jLabel7.setText("ID магазину");
+
+        fieldShopId.setToolTipText("");
+
+        jLabel8.setText("GUID магазину");
+
+        fieldShopGuid.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,12 +168,18 @@ public class OptionsForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldShopAddress)
                             .addComponent(fieldShopName)
-                            .addComponent(jTextField1))))
+                            .addComponent(jTextField1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(fieldShopGuid))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -188,6 +208,14 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(fieldShopAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(fieldShopGuid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -210,6 +238,8 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.exchangeEnable = chkExchangeEnable.isSelected();
             AppProperties.shopName = fieldShopName.getText();
             AppProperties.shopAddress = fieldShopAddress.getText();
+            AppProperties.shopGuid = fieldShopGuid.getText();
+            AppProperties.shopId = Integer.parseInt(fieldShopId.getText());
             dispose();
         } catch (Exception e){
             DialogUtils.error(this, "Помилка збереження налаштувань!");
@@ -224,6 +254,8 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldIntervalExchange;
     private javax.swing.JTextField fieldPrifixWegthBarcode;
     private javax.swing.JTextField fieldShopAddress;
+    private javax.swing.JTextField fieldShopGuid;
+    private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -231,6 +263,8 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables

@@ -16,7 +16,6 @@ public class Posterminal {
         PropertiesUtils.loadProperties();
 
         LoginForm.main(null);
-
         AppProperties.scheduler.setTimeReceived();
 
         //CommStream.listCommPorts();
