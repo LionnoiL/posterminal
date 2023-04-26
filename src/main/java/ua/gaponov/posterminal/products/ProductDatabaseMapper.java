@@ -25,6 +25,7 @@ public class ProductDatabaseMapper implements Mapper<Product>{
             product.setTaxGroup(rs.getInt("tax_group"));
             product.setWeight(rs.getBoolean("weight"));
             product.setNeedExcise(rs.getBoolean("need_excise"));
+            product.setUnitName(rs.getString("unit_name"));
             product.setOrganization(
                 OrganizationService.getByGuid(rs.getString("org_guid"))
             );

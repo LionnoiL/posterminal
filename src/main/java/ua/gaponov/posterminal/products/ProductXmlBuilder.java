@@ -24,6 +24,7 @@ public class ProductXmlBuilder {
             product.setNeedExcise(processor.getBooleanAttribute("need_excise"));
             product.setSku(processor.getStringAttribute("sku"));
             product.setOrganization(OrganizationService.getByGuid(processor.getStringAttribute("guid_org")));
+            product.setUnitName(processor.getStringAttribute("unit_name"));
         } catch (XMLStreamException ex) {
             Logger.getLogger(ProductXmlBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,12 +22,13 @@ CREATE TABLE products (
     price           DOUBLE NOT NULL,
     org_guid        VARCHAR (36),
     sku             VARCHAR (9),
-    no_discount     BOOLEAN       DEFAULT (1),
-    uktved          VARCHAR (20)  DEFAULT (''),
-    tax_group       VARCHAR       DEFAULT (1),
-    tax_rate        VARCHAR       DEFAULT (0),
-    weight          BOOLEAN       DEFAULT (0),
-    need_excise     BOOLEAN       DEFAULT (0),
+    no_discount     BOOLEAN         DEFAULT (1),
+    uktved          VARCHAR (20)    DEFAULT (''),
+    tax_group       VARCHAR         DEFAULT (1),
+    tax_rate        VARCHAR         DEFAULT (0),
+    weight          BOOLEAN         DEFAULT (0),
+    need_excise     BOOLEAN         DEFAULT (0),
+    unit_name       VARCHAR(10)     DEFAULT ('шт'),
     CONSTRAINT products_fk_organization FOREIGN KEY (org_guid) REFERENCES organization(org_guid)
 );
 

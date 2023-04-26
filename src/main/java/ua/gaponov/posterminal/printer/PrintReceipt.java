@@ -175,7 +175,7 @@ public class PrintReceipt implements Printable {
             printString(g2d, 8, false, Align.LEFT, true, detail.getProduct().getName().toUpperCase(), true);
             printString(g2d, 8, false, Align.RIGHT, false,
                     detail.getQty() +
-                            "(шт)x" +
+                            "("+detail.getProduct().getUnitName()+")x" +
                             detail.getPrice() +
                             "= " +
                             RoundUtils.round(detail.getSumma()), true

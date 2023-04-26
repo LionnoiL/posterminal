@@ -21,6 +21,15 @@ public class Product {
     private Organization organization;
     private double qty;
     private boolean needExcise;
+    private String unitName;
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
 
     public boolean isNeedExcise() {
         return needExcise;

@@ -107,6 +107,7 @@ public class ProductService {
 
     private static void insert(Product product) throws SQLException {
         StatementParameters<Object> parameters = StatementParameters.buildParameters(
+                product.getUnitName(),
                 product.isNeedExcise(),
                 product.getGuid(),
                 product.getName(),
@@ -124,11 +125,11 @@ public class ProductService {
         }
 
         String sql = """
-                insert into products (need_excise, product_guid, product_name, price,
+                insert into products (unit_name, need_excise, product_guid, product_name, price,
                 no_discount, product_code, sku, weight, org_guid
                 )
                 values
-                (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
         helper.execSql(sql, parameters);
     }
@@ -136,6 +137,7 @@ public class ProductService {
     private static void update(Product product) throws SQLException {
         StatementParameters<Object> parameters = StatementParameters.buildParameters(
                 product.getName(),
+                product.getUnitName(),
                 product.getPrice(),
                 product.isBanDisckount(),
                 product.getCode(),
@@ -152,6 +154,7 @@ public class ProductService {
         parameters.addAll(product.getGuid());
         String sql = """
                 update products set product_name= ?,
+                unit_name = ?,
                 price= ?,
                 no_discount = ?,
                 product_code = ?,

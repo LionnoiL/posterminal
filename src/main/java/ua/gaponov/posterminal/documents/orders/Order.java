@@ -29,7 +29,10 @@ public class Order {
     private List<OrderDetail> details = new ArrayList<>();
 
     public int addDetailRow(Product product, double qty){
-        int findLine = findRowByProduct(product);
+        int findLine = -1;
+        if (!product.isNeedExcise()){
+            findLine = findRowByProduct(product);
+        }
         OrderDetail orderDetail = new OrderDetail();
 
         if (findLine == -1){

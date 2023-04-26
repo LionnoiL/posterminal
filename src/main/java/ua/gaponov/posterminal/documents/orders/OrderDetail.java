@@ -16,6 +16,15 @@ public class OrderDetail {
     private double summa;
     private double summaWithoutDiscount;
     private double summaDiscount;
+    private String excise;
+
+    public String getExcise() {
+        return excise;
+    }
+
+    public void setExcise(String excise) {
+        this.excise = excise;
+    }
 
     public void recalculateSumma(){
         setSumma(getQty() * getPrice());

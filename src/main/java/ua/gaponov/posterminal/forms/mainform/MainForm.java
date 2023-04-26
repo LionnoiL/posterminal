@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
+import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.forms.options.OptionsForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
@@ -923,12 +924,24 @@ public class MainForm extends javax.swing.JFrame {
         Product product = ProductService.getByBarcode(barcode);
         if (product != null) {
             int lineNumber = order.addDetailRow(product, product.getQty());
+            addExcise(product, lineNumber);
             updateTable();
             selectTableRow(lineNumber);
             updateSumLabel();
         } else {
             Card findCard = CardService.getByCode(barcode);
             updateByCard(findCard);
+        }
+    }
+
+    private void addExcise(Product product, int line){
+        if (product.isNeedExcise()){
+            ExciseScanForm inputExcise = ExciseScanForm.getBarcode(frame);
+            inputExcise.setVisible(true);
+            if (inputExcise.isOK()) {
+                List<OrderDetail> details = order.getDetails();
+                details.get(line).setExcise(inputExcise.getExcise());
+            }
         }
     }
 
@@ -962,12 +975,13 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private Object[] createRowTable(OrderDetail orderDetail) {
-        Object[] rowData = new Object[5];
+        Object[] rowData = new Object[6];
         rowData[0] = orderDetail.getProduct().getName();
-        rowData[1] = "шт"; //TODO unit
+        rowData[1] = orderDetail.getProduct().getUnitName();
         rowData[2] = orderDetail.getQty();
         rowData[3] = orderDetail.getPrice();
         rowData[4] = RoundUtils.round(orderDetail.getSumma());
+        rowData[5] = orderDetail.getExcise();
         return rowData;
     }
 
