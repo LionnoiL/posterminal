@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import java.util.ArrayList;
+import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.documents.DocumentTypes;
@@ -39,12 +41,10 @@ public class OrderService {
 
     public static void deleteUploaded() {
         String sql = """
-                    SET REFERENTIAL_INTEGRITY FALSE;
                     BEGIN TRANSACTION;
                     DELETE FROM orders_detail WHERE order_guid IN (SELECT order_guid FROM orders WHERE upload = true);
                     DELETE FROM orders WHERE upload = true;
                     COMMIT;
-                    SET REFERENTIAL_INTEGRITY TRUE;
                 """;
         SqlHelper.execSql(sql);
     }
@@ -54,6 +54,19 @@ public class OrderService {
     }
 
     private static void insert(Order order) throws SQLException {
+        List<DatabaseRequest> requestList = new ArrayList<>();
+        requestList.add(getInsertRequest(order));
+        List<OrderDetail> details = order.getDetails();
+        int line = 1;
+        for (OrderDetail detail : details) {
+            requestList.add(OrderDetailService.getInsertRequest(order, detail,line));
+            line = line + 1;
+        }
+
+        helper.execSql(requestList);
+    }
+
+    public static DatabaseRequest getInsertRequest(Order order){
         String sql = """
                     insert into orders
                     (order_guid, summa_doc, summa_pay, doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid)
@@ -61,29 +74,23 @@ public class OrderService {
                     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
         StatementParameters<Object> parameters = StatementParameters.buildParameters(
-                order.getGuid(),
-                order.getDocumentSum(),
-                order.getPaySum(),
-                DocumentTypes.ORDER.toString(),
-                order.getPayType().toString(),
-                false,
-                false,
-                false,
-                false
+            order.getGuid(),
+            order.getDocumentSum(),
+            order.getPaySum(),
+            DocumentTypes.ORDER.toString(),
+            order.getPayType().toString(),
+            false,
+            false,
+            false,
+            false
         );//TODO fiscal_print and fiscal fix
 
         if (Objects.nonNull(order.getCard())){
             parameters.addAll(order.getCard().getGuid());
         } else {
-          parameters.addNull();
+            parameters.addNull();
         }
-        helper.execSql(sql, parameters);
 
-        List<OrderDetail> details = order.getDetails();
-        int line = 1;
-        for (OrderDetail detail : details) {
-            OrderDetailService.save(order, detail, line);
-            line = line + 1;
-        }
+        return new DatabaseRequest(sql, parameters);
     }
 }

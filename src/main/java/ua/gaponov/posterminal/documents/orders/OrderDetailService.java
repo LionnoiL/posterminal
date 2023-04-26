@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import java.util.ArrayList;
+import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -24,15 +26,15 @@ public class OrderDetailService {
         SqlHelper.execSql("delete from orders_detail");
     }
 
-    public static void save(Order order, OrderDetail orderDetail, int line) throws SQLException {
-        String sql = """                  
+    public static DatabaseRequest getInsertRequest(Order order, OrderDetail orderDetail, int line) throws SQLException {
+        String sqlInsertOrderDetail = """                  
                     insert into orders_detail
                     (orders_detail_guid, order_guid, line_number, product_guid, qty,
                     price, summa_without_discount, summa_discount, summa, excise)
                     values
                     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
                 """;
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> sqlInsertParameters = StatementParameters.buildParameters(
                 orderDetail.getGuid(),
                 order.getGuid(),
                 line,
@@ -44,6 +46,7 @@ public class OrderDetailService {
                 orderDetail.getSumma(),
                 orderDetail.getExcise()
         );
-        helper.execSql(sql, parameters);
+
+        return new DatabaseRequest(sqlInsertOrderDetail, sqlInsertParameters);
     }
 }
