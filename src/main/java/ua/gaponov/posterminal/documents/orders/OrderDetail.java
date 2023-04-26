@@ -2,13 +2,15 @@ package ua.gaponov.posterminal.documents.orders;
 
 import ua.gaponov.posterminal.products.Product;
 
+import java.util.UUID;
+
 /**
  *
  * @author wmcon
  */
 public class OrderDetail {
     
-    private String guid;
+    private String guid = UUID.randomUUID().toString();
     private int lineNumber;
     private Product product;
     private double qty;

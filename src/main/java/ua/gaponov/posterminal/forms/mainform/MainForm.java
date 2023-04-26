@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
+import ua.gaponov.posterminal.documents.orders.OrderService;
 import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.forms.options.OptionsForm;
@@ -22,10 +23,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
+import java.util.*;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationProperties;
 
@@ -49,8 +49,13 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         setImages();
         updateVisibleButtons();
-
+        loadOrder();
         setInfoTimer();
+    }
+
+    private void loadOrder() {
+        updateTable();
+        updateLabelByOrderCard();
     }
 
     /**
@@ -95,25 +100,27 @@ public class MainForm extends javax.swing.JFrame {
         );
     }
 
-
-
     private void updateVisibleButtons() {
         btnOptions.setVisible(AppProperties.currentUser.isAdmin());
     }
 
     private void updateByCard(Card card){
         order.setCard(card);
+        updateLabelByOrderCard();
+        //TODO пересчет скидки по карте
+    }
 
+    private void updateLabelByOrderCard(){
+        Card card = order.getCard();
         lblCardCode.setText(null);
         lblClientName.setText(null);
         lblDebt.setText(null);
 
-        if (card!=null){
+        if (Objects.nonNull(card)){
             lblCardCode.setText(card.getCode());
             lblClientName.setText(card.getClientName());
             lblDebt.setText(String.valueOf(card.getDebt()));
         }
-        //TODO пересчет скидки по карте
     }
 
     private void setImages() {
@@ -721,9 +728,14 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         refresh();
-
-        PrintReceipt printReceipt = new PrintReceipt(order);
-
+        try {
+            OrderService.save(order);
+            PrintReceipt printReceipt = new PrintReceipt(order);
+            order = new Order();
+            loadOrder();
+        } catch (Exception e){
+            System.out.println("Помилка зберігання замовлення " + e);
+        }
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoneyActionPerformed

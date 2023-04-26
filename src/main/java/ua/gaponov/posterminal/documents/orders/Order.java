@@ -1,11 +1,12 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import ua.gaponov.posterminal.documents.PayTypes;
+
+import java.beans.Transient;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.organization.Organization;
@@ -16,16 +17,18 @@ import ua.gaponov.posterminal.products.Product;
  * @author wmcon
  */
 public class Order {
-    private String guid;
+    private String guid = UUID.randomUUID().toString();
     private LocalDateTime date;
-    private boolean upload;
+    private transient boolean upload;
     private double documentSum;
     private double paySum;
-    private PayTypes payType; 
+    private PayTypes payType = PayTypes.CASH;
     private boolean fiscal;
     private boolean internet;
     private boolean fiscalPrint;
     private Card card;
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "detail")
     private List<OrderDetail> details = new ArrayList<>();
 
     public int addDetailRow(Product product, double qty){
@@ -84,6 +87,7 @@ public class Order {
         documentSum = sum;
     }
 
+    @Transient
     public Map<Organization, Double> getTotalsByOrganizations(){
         Map<Organization, Double> result = new HashMap<>();
         List<OrderDetail> orderDetails = getDetails();

@@ -11,6 +11,7 @@ pos.mv.db
 pos.trace.db
 pos.trace.db.old
 files/import.xml
+files/export.xml
 
 ### STS ###
 .apt_generated

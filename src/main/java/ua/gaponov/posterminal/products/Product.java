@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.products;
 
+import java.beans.Transient;
 import java.util.Objects;
 import ua.gaponov.posterminal.organization.Organization;
 
@@ -23,6 +24,7 @@ public class Product {
     private boolean needExcise;
     private String unitName;
 
+    @Transient
     public String getUnitName() {
         return unitName;
     }
@@ -31,6 +33,7 @@ public class Product {
         this.unitName = unitName;
     }
 
+    @Transient
     public boolean isNeedExcise() {
         return needExcise;
     }
@@ -63,6 +66,7 @@ public class Product {
         this.code = code;
     }
 
+    @Transient
     public double getPrice() {
         return price;
     }
@@ -71,6 +75,7 @@ public class Product {
         this.price = price;
     }
 
+    @Transient
     public String getSku() {
         return sku;
     }
@@ -79,6 +84,7 @@ public class Product {
         this.sku = sku;
     }
 
+    @Transient
     public boolean isBanDisckount() {
         return banDisckount;
     }
@@ -87,6 +93,7 @@ public class Product {
         this.banDisckount = banDisckount;
     }
 
+    @Transient
     public String getTaxCode() {
         return taxCode;
     }
@@ -95,6 +102,7 @@ public class Product {
         this.taxCode = taxCode;
     }
 
+    @Transient
     public int getTaxGroup() {
         return taxGroup;
     }
@@ -103,6 +111,7 @@ public class Product {
         this.taxGroup = taxGroup;
     }
 
+    @Transient
     public boolean isWeight() {
         return weight;
     }
@@ -111,6 +120,7 @@ public class Product {
         this.weight = weight;
     }
 
+    @Transient
     public Organization getOrganization() {
         return organization;
     }
@@ -119,6 +129,7 @@ public class Product {
         this.organization = organization;
     }
 
+    @Transient
     public double getQty() {
         return qty;
     }

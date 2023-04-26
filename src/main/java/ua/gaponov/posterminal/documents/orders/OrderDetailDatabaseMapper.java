@@ -23,6 +23,7 @@ public class OrderDetailDatabaseMapper implements Mapper<OrderDetail>{
             orderDetail.setSumma(rs.getDouble("summa"));
             orderDetail.setSummaWithoutDiscount(rs.getDouble("summa_without_discount"));
             orderDetail.setSummaDiscount(rs.getDouble("summa_discount"));
+            orderDetail.setExcise(rs.getString("excise"));
             return orderDetail;
         } catch (SQLException e) {
             new RuntimeException();

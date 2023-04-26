@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.cards;
 
+import java.beans.Transient;
+
 /**
  *
  * @author gaponov
@@ -34,6 +36,7 @@ public class Card {
         this.code = code;
     }
 
+    @Transient
     public boolean isActive() {
         return active;
     }
@@ -42,6 +45,7 @@ public class Card {
         this.active = active;
     }
 
+    @Transient
     public CardType getCardType() {
         return cardType;
     }
@@ -50,6 +54,7 @@ public class Card {
         this.cardType = cardType;
     }
 
+    @Transient
     public String getClientName() {
         return clientName;
     }
@@ -58,6 +63,7 @@ public class Card {
         this.clientName = clientName;
     }
 
+    @Transient
     public String getClientPhone() {
         return clientPhone;
     }
@@ -66,6 +72,7 @@ public class Card {
         this.clientPhone = clientPhone;
     }
 
+    @Transient
     public String getClientEmail() {
         return clientEmail;
     }
@@ -74,6 +81,7 @@ public class Card {
         this.clientEmail = clientEmail;
     }
 
+    @Transient
     public double getDiscount() {
         return discount;
     }
@@ -82,6 +90,7 @@ public class Card {
         this.discount = discount;
     }
 
+    @Transient
     public double getDebt() {
         return debt;
     }
@@ -90,6 +99,7 @@ public class Card {
         this.debt = debt;
     }
 
+    @Transient
     public boolean isDebtAllowed() {
         return debtAllowed;
     }
@@ -98,6 +108,7 @@ public class Card {
         this.debtAllowed = debtAllowed;
     }
 
+    @Transient
     public double getMaxDebt() {
         return maxDebt;
     }
@@ -106,6 +117,7 @@ public class Card {
         this.maxDebt = maxDebt;
     }
 
+    @Transient
     public int getMaxDebtDay() {
         return maxDebtDay;
     }
