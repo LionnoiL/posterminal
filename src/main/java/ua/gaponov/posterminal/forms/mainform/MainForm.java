@@ -731,21 +731,24 @@ public class MainForm extends javax.swing.JFrame {
         refresh();
 
         //Pay
-        PayForm payForm = PayForm.getPay(frame, order);
-        payForm.setVisible(true);
-        if (payForm.isOK()) {
-            try {
-                OrderService.save(order);
-            } catch (Exception e){
-                System.out.println("Помилка зберігання замовлення " + e);
-                return;
+        if (order.getDetails().size()>0){
+            PayForm payForm = PayForm.getPay(frame, order);
+            payForm.setVisible(true);
+            if (payForm.isOK()) {
+                //перевірка достатності оплати
+                try {
+                    OrderService.save(order);
+                } catch (Exception e){
+                    DialogUtils.error(this, "Помилка збереження замовлення");
+                    System.out.println(e);
+                    return;
+                }
+                PrintReceipt printReceipt = new PrintReceipt(order);
+                order = new Order();
+                loadOrder();
+                sumLabel.setText(payForm.getRemainder() + " " + AppProperties.currency);
             }
-            PrintReceipt printReceipt = new PrintReceipt(order);
-            order = new Order();
-            loadOrder();
         }
-
-
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoneyActionPerformed

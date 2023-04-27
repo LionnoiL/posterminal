@@ -664,6 +664,9 @@ public class PayForm extends javax.swing.JDialog {
         return summaPay;
     }
 
+    public String getRemainder() {
+        return lblRemainder.getText();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNumpad0;
