@@ -31,6 +31,21 @@ public class Order {
     @JacksonXmlProperty(localName = "detail")
     private List<OrderDetail> details = new ArrayList<>();
 
+    public boolean canBePrinted(){
+        double maxDebt = 0;
+        if (Objects.nonNull(getCard())){
+            if (getCard().isDebtAllowed()){
+                maxDebt = getCard().getMaxDebt();
+            }
+        }
+
+        if ((getDocumentSum() - getPaySum()) > maxDebt){
+            return false;
+        }
+
+        return true;
+    }
+
     public int addDetailRow(Product product, double qty){
         int findLine = -1;
         if (!product.isNeedExcise()){

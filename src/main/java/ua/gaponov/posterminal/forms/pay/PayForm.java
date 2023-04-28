@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.forms.pay;
 
+import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
 
 import javax.swing.*;
@@ -13,14 +14,12 @@ import java.util.Objects;
 public class PayForm extends javax.swing.JDialog {
 
     private double summaPay;
+    private PayTypes payType = PayTypes.CASH;
+
     private boolean ok;
 
     private Order order;
     private boolean edit = false;
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public PayForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,6 +27,18 @@ public class PayForm extends javax.swing.JDialog {
 
     private PayForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public PayTypes getPayType() {
+        return payType;
+    }
+
+    public void setPayType(PayTypes payType) {
+        this.payType = payType;
     }
 
     private void setImages(){
@@ -95,6 +106,7 @@ public class PayForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        cashButton.setBackground(new java.awt.Color(255, 204, 204));
         cashButton.setText("ГОТІВКА");
         cashButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +264,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad10.setText("5");
         btnNumpad10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +272,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad11.setText("50");
         btnNumpad11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +280,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad12.setText("500");
         btnNumpad12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +288,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad13.setText("10");
         btnNumpad13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +296,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad14.setText("100");
         btnNumpad14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +304,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNumpad15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNumpad15.setText("1000");
         btnNumpad15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,9 +475,9 @@ public class PayForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
-        ok = true;
-        summaPay = Double.parseDouble(lblPay.getText());
-        dispose();
+        setPayType(PayTypes.CASH);
+        clearPayTypesButtonsColor();
+        cashButton.setBackground(new java.awt.Color(255, 204, 204));
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cnclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnclButtonActionPerformed
@@ -478,12 +490,30 @@ public class PayForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
+    private void clearPayTypesButtonsColor(){
+        cashButton.setBackground(null);
+        cardButton.setBackground(null);
+        onlineButton.setBackground(null);
+    }
+
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
-        // TODO add your handling code here:
+        setPayType(PayTypes.CARD);
+        clearPayTypesButtonsColor();
+        cardButton.setBackground(new java.awt.Color(255, 204, 204));
+
+        ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this);
+        payCard.setVisible(true);
+        if (payCard.isOK()) {
+            ok = true;
+            summaPay = Double.parseDouble(lblTotal.getText());
+            dispose();
+        }
     }//GEN-LAST:event_cardButtonActionPerformed
 
     private void onlineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onlineButtonActionPerformed
-        // TODO add your handling code here:
+        setPayType(PayTypes.ONLINE);
+        clearPayTypesButtonsColor();
+        onlineButton.setBackground(new java.awt.Color(255, 204, 204));
     }//GEN-LAST:event_onlineButtonActionPerformed
 
     private void fiscalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiscalButtonActionPerformed

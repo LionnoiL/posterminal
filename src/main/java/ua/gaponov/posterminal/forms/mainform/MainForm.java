@@ -735,11 +735,19 @@ public class MainForm extends javax.swing.JFrame {
             PayForm payForm = PayForm.getPay(frame, order);
             payForm.setVisible(true);
             if (payForm.isOK()) {
+
                 //перевірка достатності оплати
+                order.setPaySum(payForm.getPay());
+                order.setPayType(payForm.getPayType());
+                if (!order.canBePrinted()){
+                    DialogUtils.error(this, "Помилка оплати чеку");
+                    return;
+                }
+
                 try {
                     OrderService.save(order);
                 } catch (Exception e){
-                    DialogUtils.error(this, "Помилка збереження замовлення");
+                    DialogUtils.error(this, "Помилка збереження чеку");
                     System.out.println(e);
                     return;
                 }
