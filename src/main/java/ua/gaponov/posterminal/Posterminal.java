@@ -1,6 +1,7 @@
 package ua.gaponov.posterminal;
 
 import ua.gaponov.posterminal.forms.login.LoginForm;
+import ua.gaponov.posterminal.utils.CommStream;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class Posterminal {
         LoginForm.main(null);
         AppProperties.scheduler.setTimeReceived();
 
-        //CommStream.listCommPorts();
+        CommStream.listCommPorts();
     }
 
     private static void setTheme() {

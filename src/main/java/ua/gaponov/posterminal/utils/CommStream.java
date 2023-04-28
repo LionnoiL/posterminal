@@ -15,7 +15,9 @@ public class CommStream {
         //https://fazecast.github.io/jSerialComm/
         SerialPort[] ports = SerialPort.getCommPorts();
 
+
         for (SerialPort port: ports) {
+
             System.out.println(port.getSystemPortName());
         }
     }
