@@ -1,12 +1,13 @@
 package ua.gaponov.posterminal.cards;
 
 import java.beans.Transient;
+import java.io.Serializable;
 
 /**
  *
  * @author gaponov
  */
-public class Card {
+public class Card implements Serializable {
     private String guid;
     private String code;
     private boolean active;

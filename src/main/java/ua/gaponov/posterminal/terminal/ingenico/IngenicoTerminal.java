@@ -24,6 +24,9 @@ public class IngenicoTerminal implements Terminal {
         try {
             createDevice();
             open();
+            if (!isOpen()){
+                return false;
+            }
             sendSignal("ENQ");
 
             close();

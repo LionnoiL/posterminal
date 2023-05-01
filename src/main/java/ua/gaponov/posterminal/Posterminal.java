@@ -17,9 +17,10 @@ public class Posterminal {
         PropertiesUtils.loadProperties();
 
         LoginForm.main(null);
+
         AppProperties.scheduler.setTimeReceived();
 
-        CommStream.listCommPorts();
+        //CommStream.listCommPorts();
     }
 
     private static void setTheme() {
@@ -32,5 +33,6 @@ public class Posterminal {
 
     public static void closeApp() {
         AppProperties.scheduler.getExchangeTimer().cancel();
+        AppProperties.autoSaveScheduler.getTimer().cancel();
     }
 }

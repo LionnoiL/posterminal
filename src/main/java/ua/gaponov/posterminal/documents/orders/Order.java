@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import ua.gaponov.posterminal.documents.PayTypes;
 
 import java.beans.Transient;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -16,7 +17,7 @@ import ua.gaponov.posterminal.products.Product;
  *
  * @author wmcon
  */
-public class Order {
+public class Order implements Serializable {
     private String guid = UUID.randomUUID().toString();
     private LocalDateTime date;
     private transient boolean upload;

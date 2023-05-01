@@ -32,4 +32,9 @@ public class FilesUtils {
         File file = new File(fileName);
         file.delete();
     }
+
+    public static boolean fileExist(String fileName){
+        File file = new File(fileName);
+        return file.exists();
+    }
 }

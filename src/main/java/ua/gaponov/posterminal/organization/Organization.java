@@ -2,12 +2,14 @@ package ua.gaponov.posterminal.organization;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import java.io.Serializable;
+
 /**
  *
  * @author wmcon
  */
 @JacksonXmlRootElement(localName = "organizations_detail")
-public class Organization {
+public class Organization implements Serializable {
     
     private String guid;
     private String name;

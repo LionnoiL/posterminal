@@ -50,6 +50,11 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         setImages();
         updateVisibleButtons();
+
+        order = OrderService.loadOrderFromBackupDir();
+
+        AppProperties.autoSaveScheduler.setTimeReceived(order);
+
         loadOrder();
         setInfoTimer();
     }
@@ -71,6 +76,8 @@ public class MainForm extends javax.swing.JFrame {
                     frame.setExtendedState(Frame.MAXIMIZED_BOTH);
                     frame.setVisible(true);
                     frame.refresh();
+
+
                     frame.updateTable();
 
                     frame.loadColumnsWidth();
@@ -752,7 +759,12 @@ public class MainForm extends javax.swing.JFrame {
                     return;
                 }
                 PrintReceipt printReceipt = new PrintReceipt(order);
+
                 order = new Order();
+
+                AppProperties.autoSaveScheduler.setOrder(order);
+                OrderService.saveOrderToBackupDir(order);
+
                 loadOrder();
                 sumLabel.setText(payForm.getRemainder() + " " + AppProperties.currency);
             }

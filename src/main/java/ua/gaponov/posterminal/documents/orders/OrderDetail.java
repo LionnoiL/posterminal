@@ -2,13 +2,14 @@ package ua.gaponov.posterminal.documents.orders;
 
 import ua.gaponov.posterminal.products.Product;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author wmcon
  */
-public class OrderDetail {
+public class OrderDetail implements Serializable {
     
     private String guid = UUID.randomUUID().toString();
     private int lineNumber;

@@ -1,6 +1,7 @@
 package ua.gaponov.posterminal.products;
 
 import java.beans.Transient;
+import java.io.Serializable;
 import java.util.Objects;
 import ua.gaponov.posterminal.organization.Organization;
 
@@ -8,7 +9,7 @@ import ua.gaponov.posterminal.organization.Organization;
  *
  * @author wmcon
  */
-public class Product {
+public class Product implements Serializable {
    
     private String guid;
     private String name;
