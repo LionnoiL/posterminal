@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Objects;
 import java.util.Properties;
 import ua.gaponov.posterminal.AppProperties;
 
@@ -79,6 +80,9 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
+            if (Objects.isNull(propertyValue)){
+                propertyValue = "";
+            }
             properties.setProperty(propertyName, propertyValue);
 
             try (OutputStream output = new FileOutputStream(CONFIG_FILE_NAME)) {
