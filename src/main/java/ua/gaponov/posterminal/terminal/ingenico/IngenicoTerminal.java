@@ -1,14 +1,14 @@
 package ua.gaponov.posterminal.terminal.ingenico;
 
 import com.fazecast.jSerialComm.SerialPort;
+import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.terminal.Terminal;
 
-import java.io.OutputStream;
 import java.util.List;
 
-public class IngenicoTerminal implements Terminal {
+import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
 
-    private SerialPort device;
+public class IngenicoTerminal implements Terminal {
 
     private final List<String> CONTROL_NAMES = List.of(
             "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
@@ -17,40 +17,44 @@ public class IngenicoTerminal implements Terminal {
             "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US",
             "SP"
     );
-
+    private SerialPort device;
 
     @Override
     public boolean pay(double summa) {
         try {
-           createDevice();
-           open();
+            createDevice();
+            open();
             sendSignal("ENQ");
 
-           close();
-           return true;
-        } catch (Exception e){
+            close();
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
 
-    private void createDevice(){
-        device = SerialPort.getCommPort("COM1");
+    private void createDevice() {
+        device = SerialPort.getCommPort(AppProperties.terminalPort);
+        device.setBaudRate(9600);
+        device.setNumDataBits(8);
+        device.setParity(NO_PARITY);
+        device.setNumStopBits(1);
     }
 
-    private boolean open(){
+    private boolean open() {
         return device.openPort();
     }
 
-    private boolean close(){
+    private boolean close() {
         return device.closePort();
     }
 
-    private boolean isOpen(){
+    private boolean isOpen() {
         return device.isOpen();
     }
 
-    private void sendSignal(String signal){
-        if (!CONTROL_NAMES.contains(signal)){
+    private void sendSignal(String signal) {
+        if (!CONTROL_NAMES.contains(signal)) {
             //exception
         }
 

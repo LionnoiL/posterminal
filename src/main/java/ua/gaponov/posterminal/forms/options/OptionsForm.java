@@ -61,6 +61,7 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopAddress.setText(AppProperties.shopAddress);
         fieldShopGuid.setText(AppProperties.shopGuid);
         fieldShopId.setText(String.valueOf(AppProperties.shopId));
+        fieldTerminalPort.setText(AppProperties.terminalPort);
     }
 
     /**
@@ -91,6 +92,8 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopId = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         fieldShopGuid = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        fieldTerminalPort = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -134,6 +137,11 @@ public class OptionsForm extends javax.swing.JFrame {
 
         fieldShopGuid.setToolTipText("");
 
+        jLabel9.setText("Порт терміналу");
+
+        fieldTerminalPort.setText("COM1");
+        fieldTerminalPort.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,13 +160,10 @@ public class OptionsForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fieldPrifixWegthBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(fieldIntervalExchange, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))))
+                            .addComponent(fieldIntervalExchange)
+                            .addComponent(fieldPrifixWegthBarcode)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,16 +175,18 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldShopAddress)
                             .addComponent(fieldShopName)
                             .addComponent(jTextField1)
+                            .addComponent(fieldShopGuid)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(fieldShopGuid))))
+                                .addGap(0, 223, Short.MAX_VALUE))
+                            .addComponent(fieldTerminalPort))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,7 +223,11 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(fieldShopGuid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldTerminalPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -240,6 +251,7 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.shopAddress = fieldShopAddress.getText();
             AppProperties.shopGuid = fieldShopGuid.getText();
             AppProperties.shopId = Integer.parseInt(fieldShopId.getText());
+            AppProperties.terminalPort = fieldTerminalPort.getText();
             dispose();
         } catch (Exception e){
             DialogUtils.error(this, "Помилка збереження налаштувань!");
@@ -257,6 +269,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopGuid;
     private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
+    private javax.swing.JTextField fieldTerminalPort;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -265,6 +278,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables

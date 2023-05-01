@@ -1,13 +1,10 @@
 package ua.gaponov.posterminal.forms.pay;
 
-import com.fazecast.jSerialComm.SerialPort;
-import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.terminal.ingenico.IngenicoTerminal;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
 
 /**
  *
@@ -176,11 +173,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         boolean pay = terminal.pay(100);
         System.out.println(pay);
 
-//        SerialPort com = SerialPort.getCommPort("COM1");
-//        com.setBaudRate(9600);
-//        com.setNumDataBits(8);
-//        com.setParity(NO_PARITY);
-//        com.setNumStopBits(1);
+
 //
 //        boolean openPort = com.openPort();
 //
