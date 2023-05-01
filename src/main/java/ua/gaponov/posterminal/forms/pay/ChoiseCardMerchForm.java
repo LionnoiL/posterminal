@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.forms.pay;
 
+import ua.gaponov.posterminal.terminal.Terminal;
 import ua.gaponov.posterminal.terminal.ingenico.IngenicoTerminal;
 
 import javax.swing.*;
@@ -169,18 +170,8 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     private void payOnTerminal(){
 
-        IngenicoTerminal terminal = new IngenicoTerminal();
-        boolean pay = terminal.pay(100);
-        System.out.println(pay);
-
-
-//
-//        boolean openPort = com.openPort();
-//
-//        byte[] readBytes = new byte[1];
-//        com.readBytes(readBytes, 1);
-
-        ok = false;
+        Terminal terminal = new IngenicoTerminal();
+        ok = terminal.pay(merchId, 100);
         dispose();
     }
 
