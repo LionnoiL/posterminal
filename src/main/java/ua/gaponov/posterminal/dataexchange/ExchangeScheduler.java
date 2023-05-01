@@ -25,9 +25,7 @@ public class ExchangeScheduler {
             @Override
             public void run() {
                 if (AppProperties.exchangeEnable){
-                    //TODO exchange
                     ExchangeUpload.upload();
-                    
                     try {
                         ExchangeDownloader.download();
                     }

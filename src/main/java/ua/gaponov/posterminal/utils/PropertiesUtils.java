@@ -34,6 +34,9 @@ public class PropertiesUtils {
         throws IOException {
         Properties properties = new Properties();
         properties.load(fileInputStream);
+        if (!properties.containsKey(propertyName)){
+            properties.put(propertyName, "");
+        }
         return properties.getProperty(propertyName);
     }
 
@@ -98,6 +101,7 @@ public class PropertiesUtils {
         saveApplicationProperties("shop_id", String.valueOf(AppProperties.shopId));
         saveApplicationProperties("shop_guid", AppProperties.shopGuid);
         saveApplicationProperties("terminal_port", AppProperties.terminalPort);
+        saveApplicationProperties("cash_register_name", AppProperties.cashRegisterName);
     }
 
     public static void loadProperties() {
@@ -113,5 +117,6 @@ public class PropertiesUtils {
         AppProperties.shopId = Integer.parseInt(getApplicationProperties("shop_id"));
         AppProperties.shopGuid = getApplicationProperties("shop_guid");
         AppProperties.terminalPort = getApplicationProperties("terminal_port");
+        AppProperties.cashRegisterName = getApplicationProperties("cash_register_name");
     }
 }

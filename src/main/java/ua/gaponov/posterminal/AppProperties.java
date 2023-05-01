@@ -21,6 +21,7 @@ public class AppProperties {
 
     public static String shopName = "Shop";
     public static String shopAddress = "";
+    public static String cashRegisterName = "";
     public static int shopId;
     public static String shopGuid;
 

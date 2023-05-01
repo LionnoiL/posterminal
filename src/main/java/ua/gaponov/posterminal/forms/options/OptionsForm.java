@@ -62,6 +62,7 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopGuid.setText(AppProperties.shopGuid);
         fieldShopId.setText(String.valueOf(AppProperties.shopId));
         fieldTerminalPort.setText(AppProperties.terminalPort);
+        fieldCashRegister.setText(AppProperties.cashRegisterName);
     }
 
     /**
@@ -94,6 +95,8 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopGuid = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         fieldTerminalPort = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        fieldCashRegister = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -142,6 +145,8 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldTerminalPort.setText("COM1");
         fieldTerminalPort.setToolTipText("");
 
+        jLabel10.setText("Назва каси");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,7 +167,7 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldIntervalExchange)
+                            .addComponent(fieldIntervalExchange, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                             .addComponent(fieldPrifixWegthBarcode)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -185,7 +190,10 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(fieldShopGuid)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 223, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fieldCashRegister))
                             .addComponent(fieldTerminalPort))))
                 .addContainerGap())
         );
@@ -218,7 +226,9 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(fieldCashRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -252,6 +262,7 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.shopGuid = fieldShopGuid.getText();
             AppProperties.shopId = Integer.parseInt(fieldShopId.getText());
             AppProperties.terminalPort = fieldTerminalPort.getText();
+            AppProperties.cashRegisterName = fieldCashRegister.getText();
             dispose();
         } catch (Exception e){
             DialogUtils.error(this, "Помилка збереження налаштувань!");
@@ -262,6 +273,7 @@ public class OptionsForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox chkExchangeEnable;
+    private javax.swing.JTextField fieldCashRegister;
     private javax.swing.JTextField fieldCurrency;
     private javax.swing.JTextField fieldIntervalExchange;
     private javax.swing.JTextField fieldPrifixWegthBarcode;
@@ -271,6 +283,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopName;
     private javax.swing.JTextField fieldTerminalPort;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
