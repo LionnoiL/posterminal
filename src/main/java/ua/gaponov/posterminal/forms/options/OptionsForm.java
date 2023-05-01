@@ -4,6 +4,7 @@
  */
 package ua.gaponov.posterminal.forms.options;
 
+import com.fazecast.jSerialComm.SerialPort;
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
@@ -61,8 +62,13 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopAddress.setText(AppProperties.shopAddress);
         fieldShopGuid.setText(AppProperties.shopGuid);
         fieldShopId.setText(String.valueOf(AppProperties.shopId));
-        fieldTerminalPort.setText(AppProperties.terminalPort);
         fieldCashRegister.setText(AppProperties.cashRegisterName);
+
+        SerialPort[] ports = SerialPort.getCommPorts();
+        for (SerialPort port: ports) {
+            fieldTerminalPort.addItem(port.getSystemPortName());
+        }
+        fieldTerminalPort.setSelectedItem(AppProperties.terminalPort);
     }
 
     /**
@@ -94,9 +100,9 @@ public class OptionsForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         fieldShopGuid = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        fieldTerminalPort = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         fieldCashRegister = new javax.swing.JTextField();
+        fieldTerminalPort = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -141,9 +147,6 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopGuid.setToolTipText("");
 
         jLabel9.setText("Порт терміналу");
-
-        fieldTerminalPort.setText("COM1");
-        fieldTerminalPort.setToolTipText("");
 
         jLabel10.setText("Назва каси");
 
@@ -194,7 +197,7 @@ public class OptionsForm extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(fieldCashRegister))
-                            .addComponent(fieldTerminalPort))))
+                            .addComponent(fieldTerminalPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -234,9 +237,9 @@ public class OptionsForm extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(fieldShopGuid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldTerminalPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(fieldTerminalPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -261,8 +264,10 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.shopAddress = fieldShopAddress.getText();
             AppProperties.shopGuid = fieldShopGuid.getText();
             AppProperties.shopId = Integer.parseInt(fieldShopId.getText());
-            AppProperties.terminalPort = fieldTerminalPort.getText();
             AppProperties.cashRegisterName = fieldCashRegister.getText();
+
+            AppProperties.terminalPort = (String) fieldTerminalPort.getSelectedItem();
+
             dispose();
         } catch (Exception e){
             DialogUtils.error(this, "Помилка збереження налаштувань!");
@@ -281,7 +286,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopGuid;
     private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
-    private javax.swing.JTextField fieldTerminalPort;
+    private javax.swing.JComboBox<String> fieldTerminalPort;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -17,7 +17,7 @@ import java.util.Map;
 public class PrintReceipt implements Printable {
 
     private final int MARGIN = 1;
-    private final int PAPER_WIDTH = 150;
+    private final int PAPER_WIDTH = 130;
     private final int PAPER_HEIGHT = 1000;
     private final int FONT_MARGIN = 10;
     private final Order order;
@@ -128,7 +128,8 @@ public class PrintReceipt implements Printable {
         printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
         printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
         printString(g2d, 6, false, Align.RIGHT, false, "Продаж", true);
-        printString(g2d, 8, false, Align.LEFT, false, "Товарний чек №1002154", true); //TODO номер чека
+        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №1002154", true); //TODO номер чека
+        printString(g2d, 8, false, Align.CENTER, false, AppProperties.cashRegisterName, true);
         printHorizontalLine(g2d);
     }
 
