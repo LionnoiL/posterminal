@@ -58,6 +58,7 @@ CREATE TABLE cards (
 
 CREATE TABLE orders (
     order_guid      VARCHAR (36) PRIMARY KEY,
+    order_number    BIGINT       NOT NULL,
     order_date      TIMESTAMP    DEFAULT (CURRENT_TIMESTAMP),
     card_guid       VARCHAR (36),
     summa_doc       DOUBLE,

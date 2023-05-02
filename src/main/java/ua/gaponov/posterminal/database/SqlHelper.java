@@ -23,7 +23,6 @@ public class SqlHelper<T> {
         } catch (SQLException e) {
             //NOP
         }
-
     }
 
     public void execSql(String sql, StatementParameters parameters) throws SQLException {
@@ -71,7 +70,6 @@ public class SqlHelper<T> {
             ex.printStackTrace();
         }
         return result;
-
     }
 
     public List<T> getAll(String sql, Mapper<T> mapper) {
@@ -97,4 +95,21 @@ public class SqlHelper<T> {
         }
         return list.get(0);
     }
+
+    public int getCount(String sql) {
+        int result = 0;
+        try (Connection connection = Database.getConnection();) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
 }

@@ -19,6 +19,7 @@ import ua.gaponov.posterminal.products.Product;
  */
 public class Order implements Serializable {
     private String guid = UUID.randomUUID().toString();
+    private long orderNumber;
     private LocalDateTime date;
     private transient boolean upload;
     private double documentSum;
@@ -117,7 +118,15 @@ public class Order implements Serializable {
         }
         return result;
     }
-    
+
+    public long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
     public String getGuid() {
         return guid;
     }

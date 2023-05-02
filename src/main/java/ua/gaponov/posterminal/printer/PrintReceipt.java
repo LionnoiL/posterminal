@@ -128,7 +128,7 @@ public class PrintReceipt implements Printable {
         printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
         printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
         printString(g2d, 6, false, Align.RIGHT, false, "Продаж", true);
-        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №1002154", true); //TODO номер чека
+        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №"+order.getOrderNumber(), true);
         printString(g2d, 8, false, Align.CENTER, false, AppProperties.cashRegisterName, true);
         printHorizontalLine(g2d);
     }

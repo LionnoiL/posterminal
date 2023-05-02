@@ -32,6 +32,10 @@ public class OrderService {
                 new OrderDatabaseMapper());
     }
 
+    public static long getCount() {
+        return helper.getCount("select count(order_guid) from orders");
+    }
+
     public static List<Order> getAll() {
         return helper.getAll("SELECT * FROM orders", new OrderDatabaseMapper());
     }
@@ -75,14 +79,16 @@ public class OrderService {
     }
 
     public static DatabaseRequest getInsertRequest(Order order) {
+        order.setOrderNumber(getCount() + 1);
         String sql = """
                     insert into orders
-                    (order_guid, summa_doc, summa_pay, doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid)
+                    (order_guid, order_number, summa_doc, summa_pay, doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid)
                     values
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
         StatementParameters<Object> parameters = StatementParameters.buildParameters(
                 order.getGuid(),
+                order.getOrderNumber(),
                 order.getDocumentSum(),
                 order.getPaySum(),
                 DocumentTypes.ORDER.toString(),
