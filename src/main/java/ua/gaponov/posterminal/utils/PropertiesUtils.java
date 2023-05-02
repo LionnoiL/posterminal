@@ -106,6 +106,7 @@ public class PropertiesUtils {
         saveApplicationProperties("shop_guid", AppProperties.shopGuid);
         saveApplicationProperties("terminal_port", AppProperties.terminalPort);
         saveApplicationProperties("cash_register_name", AppProperties.cashRegisterName);
+        saveApplicationProperties("display_port", AppProperties.displayPort);
     }
 
     public static void loadProperties() {
@@ -122,5 +123,6 @@ public class PropertiesUtils {
         AppProperties.shopGuid = getApplicationProperties("shop_guid");
         AppProperties.terminalPort = getApplicationProperties("terminal_port");
         AppProperties.cashRegisterName = getApplicationProperties("cash_register_name");
+        AppProperties.displayPort = getApplicationProperties("display_port");
     }
 }

@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringUtils {
 
     private StringUtils() {
@@ -20,6 +23,26 @@ public class StringUtils {
         }
         sb.append(inputString);
 
+        return sb.toString();
+    }
+
+    public static List<Character> convertStringToCharList(String str)
+    {
+        List<Character> chars = new ArrayList<>();
+        for (char ch : str.toCharArray()) {
+            chars.add(ch);
+        }
+        return chars;
+    }
+
+    public static String getSpaces(int spaceCount){
+        if (spaceCount<=0){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < spaceCount; i++) {
+            sb.append(" ");
+        }
         return sb.toString();
     }
 }

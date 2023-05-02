@@ -3,10 +3,10 @@ package ua.gaponov.posterminal.terminal.ingenico;
 import com.fazecast.jSerialComm.SerialPort;
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.terminal.Terminal;
-import ua.gaponov.posterminal.terminal.ingenico.exceptions.SequenceDoesNotMatchLengthException;
-import ua.gaponov.posterminal.terminal.ingenico.exceptions.SignalDoesNotExistException;
-import ua.gaponov.posterminal.terminal.ingenico.exceptions.TerminalInitializationFailedException;
-import ua.gaponov.posterminal.terminal.ingenico.exceptions.TerminalSerialLinkClosedException;
+import ua.gaponov.posterminal.terminal.exceptions.SequenceDoesNotMatchLengthException;
+import ua.gaponov.posterminal.terminal.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.terminal.exceptions.TerminalInitializationFailedException;
+import ua.gaponov.posterminal.terminal.exceptions.TerminalSerialLinkClosedException;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -93,7 +93,7 @@ public class IngenicoTerminal implements Terminal {
     }
 
     private void send(String data) {
-        byte[] bytes = new byte[0];
+        byte[] bytes;
         try {
             bytes = data.getBytes(TERMINAL_DATA_ENCODING);
         } catch (UnsupportedEncodingException e) {

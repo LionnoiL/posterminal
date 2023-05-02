@@ -1,8 +1,8 @@
 package ua.gaponov.posterminal.customerdisplay;
 
 public interface CustomerDisplay {
-    public void repaintLines();
-    public void writeDisplay(int animation, String sLine1, String sLine2);
-    public void writeDisplay(String sLine1, String sLine2);
-    public void clearDisplay();
+    void writeDisplay(String sLine1, String sLine2);
+    void writeDisplay(String sLine1, String sLine2, String sLine3);
+    void writeDisplay(String sLine1, String sLine2, String sLine3, String sLine4);
+    void clearDisplay();
 }

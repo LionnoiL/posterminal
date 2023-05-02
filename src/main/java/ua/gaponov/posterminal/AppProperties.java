@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal;
 
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
-import ua.gaponov.posterminal.saveorder.OrderSaveScheduler;
+import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.users.User;
 
 /**
@@ -31,4 +31,5 @@ public class AppProperties {
     public static boolean exchangeRunning;
 
     public static String terminalPort;
+    public static String displayPort;
 }

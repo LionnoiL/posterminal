@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.terminal.ingenico.exceptions;
+package ua.gaponov.posterminal.terminal.exceptions;
 
 public class SequenceDoesNotMatchLengthException extends Exception{
 

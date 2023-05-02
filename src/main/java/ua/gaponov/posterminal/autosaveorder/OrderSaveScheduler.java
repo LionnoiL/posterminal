@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.saveorder;
+package ua.gaponov.posterminal.autosaveorder;
 
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;

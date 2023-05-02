@@ -4,6 +4,8 @@ import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
+import ua.gaponov.posterminal.customerdisplay.CustomerDisplay;
+import ua.gaponov.posterminal.customerdisplay.lpos.LposDisplay;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.documents.orders.OrderService;
@@ -41,6 +43,7 @@ public class MainForm extends javax.swing.JFrame {
     private String infoMessage = "";
 
     public Timer infoTimer = new Timer();
+    private CustomerDisplay display = new LposDisplay();
 
 
     /**
@@ -737,6 +740,8 @@ public class MainForm extends javax.swing.JFrame {
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         refresh();
 
+        sendTotalSumToCustomerDisplay();
+
         //Pay
         if (order.getDetails().size()>0){
             PayForm payForm = PayForm.getPay(frame, order);
@@ -751,6 +756,8 @@ public class MainForm extends javax.swing.JFrame {
                     return;
                 }
 
+                sendRemainderSumToCustomerDisplay(payForm.getRemainder());
+
                 try {
                     OrderService.save(order);
                 } catch (Exception e){
@@ -758,6 +765,7 @@ public class MainForm extends javax.swing.JFrame {
                     System.out.println(e);
                     return;
                 }
+
                 PrintReceipt printReceipt = new PrintReceipt(order);
 
                 order = new Order();
@@ -850,6 +858,9 @@ public class MainForm extends javax.swing.JFrame {
         updateSumLabel();
         updateTable();
         selectTableRow(order.getDetails().size() - 1);
+        if (order.getDetails().size()>0){
+            sendOrderDetailInCustomerDisplay(order.getDetails().get(order.getDetails().size() - 1));
+        }
     }//GEN-LAST:event_btnDeleteProductRowActionPerformed
 
     private void btnNumpadCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumpadCancelActionPerformed
@@ -893,6 +904,7 @@ public class MainForm extends javax.swing.JFrame {
             Product product = quickProduct.getProduct();
             if (product != null) {
                 int lineNumber = order.addDetailRow(product, product.getQty());
+                sendOrderDetailInCustomerDisplay(order.getDetails().get(lineNumber));
                 updateTable();
                 selectTableRow(lineNumber);
                 updateSumLabel();
@@ -947,6 +959,26 @@ public class MainForm extends javax.swing.JFrame {
         updateSumLabel();
         updateTable();
         selectTableRow(row);
+
+        sendOrderDetailInCustomerDisplay(order.getDetails().get(row));
+    }
+
+    private void sendOrderDetailInCustomerDisplay(OrderDetail orderDetail){
+        if (Objects.isNull(orderDetail) || Objects.isNull(orderDetail.getProduct())){
+            return;
+        }
+        display.writeDisplay(orderDetail.getProduct().getName(),
+                orderDetail.getQty() + "x" + orderDetail.getPrice(),
+                String.valueOf(RoundUtils.round(orderDetail.getSumma())));
+    }
+
+    private void sendTotalSumToCustomerDisplay(){
+        display.writeDisplay("","Загалом", String.valueOf(RoundUtils.round(order.getDocumentSum())));
+    }
+
+    private void sendRemainderSumToCustomerDisplay(String summa){
+        display.writeDisplay("Загалом", String.valueOf(RoundUtils.round(order.getDocumentSum())),
+                            "Решта", summa);
     }
 
     private void refresh() {
@@ -969,6 +1001,7 @@ public class MainForm extends javax.swing.JFrame {
         Product product = ProductService.getByBarcode(barcode);
         if (product != null) {
             int lineNumber = order.addDetailRow(product, product.getQty());
+            sendOrderDetailInCustomerDisplay(order.getDetails().get(lineNumber));
             addExcise(product, lineNumber);
             updateTable();
             selectTableRow(lineNumber);
@@ -995,6 +1028,7 @@ public class MainForm extends javax.swing.JFrame {
         Product product = ProductService.getProductFromSku(sku);
         if (product != null) {
             int lineNumber = order.addDetailRow(product, product.getQty());
+            sendOrderDetailInCustomerDisplay(order.getDetails().get(lineNumber));
             updateTable();
             selectTableRow(lineNumber);
             updateSumLabel();
