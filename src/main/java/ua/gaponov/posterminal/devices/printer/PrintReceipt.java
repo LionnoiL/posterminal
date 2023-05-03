@@ -24,17 +24,19 @@ public class PrintReceipt implements Printable {
     private PrinterJob printerJob;
     private PageFormat pageFormat;
     private Paper paper;
-    private int currentLine = -50;
+    private int currentLine;
 
     public PrintReceipt(Order order) {
 
         this.order = order;
 
+        currentLine = -120 + -30 * order.getDetails().size();
+
         printerJob = PrinterJob.getPrinterJob();
         pageFormat = printerJob.defaultPage();
 
         paper = new Paper();
-        paper.setImageableArea(MARGIN, MARGIN, PAPER_WIDTH, PAPER_HEIGHT);
+        paper.setImageableArea(MARGIN, -1000, PAPER_WIDTH, PAPER_HEIGHT);
         pageFormat.setPaper(paper);
         pageFormat.setOrientation(PageFormat.PORTRAIT);
         printerJob.setPrintable(this, pageFormat);
