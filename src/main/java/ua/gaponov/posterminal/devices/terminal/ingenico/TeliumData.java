@@ -1,9 +1,9 @@
-package ua.gaponov.posterminal.terminal.ingenico;
+package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import java.io.UnsupportedEncodingException;
 
-import static ua.gaponov.posterminal.terminal.ingenico.Constants.CONTROL_NAMES;
-import static ua.gaponov.posterminal.terminal.ingenico.Constants.TERMINAL_DATA_ENCODING;
+import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.CONTROL_NAMES;
+import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.TERMINAL_DATA_ENCODING;
 
 public class TeliumData {
 

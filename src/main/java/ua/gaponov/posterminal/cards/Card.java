@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.cards;
 
+import ua.gaponov.posterminal.products.Product;
+
 import java.beans.Transient;
 import java.io.Serializable;
 
@@ -20,6 +22,13 @@ public class Card implements Serializable {
     private boolean debtAllowed;
     private double maxDebt;
     private int maxDebtDay;
+
+    public double getDiscountForProduct(Product product) {
+        if (product.isBanDisckount()) {
+            return 0;
+        }
+        return getDiscount();
+    }
 
     public String getGuid() {
         return guid;

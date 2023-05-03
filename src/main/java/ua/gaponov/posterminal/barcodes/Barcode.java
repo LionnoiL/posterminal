@@ -8,15 +8,15 @@ import ua.gaponov.posterminal.products.Product;
  */
 public class Barcode {
     
-    private String barcode;
+    private String barCodeValue;
     private Product product;
 
-    public String getBarcode() {
-        return barcode;
+    public String getBarCodeValue() {
+        return barCodeValue;
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    public void setBarCodeValue(String barCodeValue) {
+        this.barCodeValue = barCodeValue;
     }
 
     public Product getProduct() {

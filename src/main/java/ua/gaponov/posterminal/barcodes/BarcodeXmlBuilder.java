@@ -15,7 +15,7 @@ public class BarcodeXmlBuilder {
     public static Barcode create(XmlUtils processor){
         Barcode barcode = new Barcode();
         try {
-            barcode.setBarcode(processor.getStringAttribute("ean_code"));
+            barcode.setBarCodeValue(processor.getStringAttribute("ean_code"));
             barcode.setProduct(ProductService.getByGuid(processor.getStringAttribute("guid_product")));
 
         }

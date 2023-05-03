@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.documents.PayTypes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class OrderDatabaseMapper implements Mapper<Order>{
             order.setCard(CardService.getByGuid(rs.getString("card_guid")));
             order.setDocumentSum(rs.getDouble("summa_doc"));
             order.setPaySum(rs.getDouble("summa_pay"));
+            order.setDiscountSum(rs.getDouble("summa_dicount"));
             order.setFiscal(rs.getBoolean("fiscal"));
             order.setInternet(rs.getBoolean("internet"));
             order.setFiscalPrint(rs.getBoolean("fiscal_print"));
@@ -34,7 +36,7 @@ public class OrderDatabaseMapper implements Mapper<Order>{
 
             return order;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map order");
         }
         return null;
     }

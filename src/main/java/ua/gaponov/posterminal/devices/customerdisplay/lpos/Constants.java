@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.customerdisplay.lpos;
+package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 import ua.gaponov.posterminal.utils.StringUtils;
 

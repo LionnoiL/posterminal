@@ -23,7 +23,7 @@ public class BarcodeService {
     }
 
     public static void save(Barcode barcode) {
-        Barcode findBarcode = getByBarcode(barcode.getBarcode());
+        Barcode findBarcode = getByBarcode(barcode.getBarCodeValue());
         if (findBarcode == null) {
             insert(barcode);
         } else {
@@ -32,9 +32,9 @@ public class BarcodeService {
     }
 
     private static void insert(Barcode barcode) {
-        if (barcode.getProduct() != null && !barcode.getBarcode().isEmpty()) {
+        if (barcode.getProduct() != null && !barcode.getBarCodeValue().isEmpty()) {
             StatementParameters<String> parameters = StatementParameters.buildParameters(
-                    barcode.getBarcode(),
+                    barcode.getBarCodeValue(),
                     barcode.getProduct().getGuid()
             );
             String sql = """
@@ -52,10 +52,10 @@ public class BarcodeService {
     }
 
     private static void update(Barcode barcode) {
-        if (barcode.getProduct() != null && !barcode.getBarcode().isEmpty()) {
+        if (barcode.getProduct() != null && !barcode.getBarCodeValue().isEmpty()) {
             StatementParameters<String> parameters = StatementParameters.buildParameters(
                     barcode.getProduct().getGuid(),
-                    barcode.getBarcode()
+                    barcode.getBarCodeValue()
             );
             String sql = """
                     update eans set product_guid= ?

@@ -1,18 +1,18 @@
-package ua.gaponov.posterminal.terminal.ingenico;
+package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import com.fazecast.jSerialComm.SerialPort;
 import ua.gaponov.posterminal.AppProperties;
-import ua.gaponov.posterminal.terminal.Terminal;
-import ua.gaponov.posterminal.terminal.exceptions.SequenceDoesNotMatchLengthException;
-import ua.gaponov.posterminal.terminal.exceptions.SignalDoesNotExistException;
-import ua.gaponov.posterminal.terminal.exceptions.TerminalInitializationFailedException;
-import ua.gaponov.posterminal.terminal.exceptions.TerminalSerialLinkClosedException;
+import ua.gaponov.posterminal.devices.terminal.Terminal;
+import ua.gaponov.posterminal.devices.terminal.exceptions.SequenceDoesNotMatchLengthException;
+import ua.gaponov.posterminal.devices.terminal.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.devices.terminal.exceptions.TerminalInitializationFailedException;
+import ua.gaponov.posterminal.devices.terminal.exceptions.TerminalSerialLinkClosedException;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import java.io.UnsupportedEncodingException;
 
 import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
-import static ua.gaponov.posterminal.terminal.ingenico.Constants.*;
+import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.*;
 
 public class IngenicoTerminal implements Terminal {
 

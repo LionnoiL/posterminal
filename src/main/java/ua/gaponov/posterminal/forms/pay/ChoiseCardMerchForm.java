@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal.forms.pay;
 
-import ua.gaponov.posterminal.terminal.Terminal;
-import ua.gaponov.posterminal.terminal.ingenico.IngenicoTerminal;
+import ua.gaponov.posterminal.devices.terminal.Terminal;
+import ua.gaponov.posterminal.devices.terminal.ingenico.IngenicoTerminal;
 
 import javax.swing.*;
 import java.awt.*;

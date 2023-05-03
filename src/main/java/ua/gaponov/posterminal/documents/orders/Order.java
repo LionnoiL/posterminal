@@ -12,6 +12,7 @@ import java.util.*;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Order implements Serializable {
     private transient boolean upload;
     private double documentSum;
     private double paySum;
+    private double discountSum;
     private PayTypes payType = PayTypes.CASH;
     private boolean fiscal;
     private boolean internet;
@@ -66,7 +68,8 @@ public class Order implements Serializable {
         
         orderDetail.setProduct(product);
         orderDetail.setPrice(product.getPrice());
-        orderDetail.setSumma(orderDetail.getPrice() * orderDetail.getQty());
+        orderDetail.recalculateDiscountsInRow(getCard());
+        recalculateDocumentSum();
 
         return findLine;
     }
@@ -85,7 +88,7 @@ public class Order implements Serializable {
     public void changeQtyInRow(int row, double newQty){
         OrderDetail orderDetail = details.get(row);
         orderDetail.setQty(newQty);
-        orderDetail.recalculateSumma();
+        orderDetail.recalculateDiscountsInRow(getCard());
         recalculateDocumentSum();
     }
 
@@ -98,10 +101,18 @@ public class Order implements Serializable {
 
     public void recalculateDocumentSum(){
         double sum = 0;
+        double discount = 0;
         for (OrderDetail detail : details) {
             sum = sum + detail.getSumma();
+            discount = discount + detail.getSummaDiscount();
         }
         documentSum = sum;
+        discountSum = discount;
+    }
+
+    public void recalculateAllRowsDiscounts(){
+        getDetails().forEach(detail -> detail.recalculateDiscountsInRow(getCard()));
+        recalculateDocumentSum();
     }
 
     @Transient
@@ -117,6 +128,14 @@ public class Order implements Serializable {
             }
         }
         return result;
+    }
+
+    public double getDiscountSum() {
+        return discountSum;
+    }
+
+    public void setDiscountSum(double discountSum) {
+        this.discountSum = discountSum;
     }
 
     public long getOrderNumber() {

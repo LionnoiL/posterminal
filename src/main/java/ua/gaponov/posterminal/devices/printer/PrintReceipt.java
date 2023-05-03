@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.printer;
+package ua.gaponov.posterminal.devices.printer;
 
 import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;
@@ -155,7 +155,11 @@ public class PrintReceipt implements Printable {
 
     private void printPays(Graphics2D g2d) {
         printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", true);
-        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", true);
+
+        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
+        printString(g2d, 10, false, Align.RIGHT, false,
+                String.valueOf(RoundUtils.round(order.getDiscountSum())) +
+                        " " + AppProperties.currency, true);
     }
 
     private void printCardInfo(Graphics2D g2d) {

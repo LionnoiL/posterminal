@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 
 /**
  *
@@ -22,7 +23,7 @@ public class UserDatabaseMapper implements Mapper<User> {
            
             return user;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map user");
         }
         return null;
     }

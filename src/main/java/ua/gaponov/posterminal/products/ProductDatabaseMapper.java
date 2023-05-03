@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.products;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.organization.OrganizationService;
 
 /**
@@ -32,7 +33,7 @@ public class ProductDatabaseMapper implements Mapper<Product>{
             
             return product;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map product");
         }
         return null;
     }

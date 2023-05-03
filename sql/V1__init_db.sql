@@ -63,6 +63,7 @@ CREATE TABLE orders (
     card_guid       VARCHAR (36),
     summa_doc       DOUBLE,
     summa_pay       DOUBLE,
+    summa_dicount   DOUBLE,
     doc_type        VARCHAR(20)  DEFAULT ('ORDER'),
     pay_type        VARCHAR (20) DEFAULT ('CASH'),
     upload          BOOLEAN      DEFAULT (0),

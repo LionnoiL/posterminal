@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.customerdisplay.lpos;
+package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 public class ExtendedAscii {
     public static final char[] EXTENDED = { 0x00C7, 0x00FC, 0x00E9, 0x00E2,

@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.terminal.ingenico;
+package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import java.util.List;
 

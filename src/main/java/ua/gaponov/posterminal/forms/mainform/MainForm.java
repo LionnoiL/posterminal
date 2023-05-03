@@ -4,8 +4,8 @@ import ua.gaponov.posterminal.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
-import ua.gaponov.posterminal.customerdisplay.CustomerDisplay;
-import ua.gaponov.posterminal.customerdisplay.lpos.LposDisplay;
+import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
+import ua.gaponov.posterminal.devices.customerdisplay.lpos.LposDisplay;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.documents.orders.OrderService;
@@ -15,7 +15,7 @@ import ua.gaponov.posterminal.forms.options.OptionsForm;
 import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
 import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
-import ua.gaponov.posterminal.printer.PrintReceipt;
+import ua.gaponov.posterminal.devices.printer.PrintReceipt;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;
@@ -42,8 +42,8 @@ public class MainForm extends javax.swing.JFrame {
     private static Order order = new Order();
     private String infoMessage = "";
 
-    public Timer infoTimer = new Timer();
-    private CustomerDisplay display = new LposDisplay();
+    public transient Timer infoTimer = new Timer();
+    private transient CustomerDisplay display = new LposDisplay();
 
 
     /**
@@ -65,6 +65,7 @@ public class MainForm extends javax.swing.JFrame {
     private void loadOrder() {
         updateTable();
         updateLabelByOrderCard();
+        updateSumLabel();
     }
 
     /**
@@ -117,8 +118,10 @@ public class MainForm extends javax.swing.JFrame {
 
     private void updateByCard(Card card){
         order.setCard(card);
+        order.recalculateAllRowsDiscounts();
+        updateTable();
         updateLabelByOrderCard();
-        //TODO пересчет скидки по карте
+        updateSumLabel();
     }
 
     private void updateLabelByOrderCard(){

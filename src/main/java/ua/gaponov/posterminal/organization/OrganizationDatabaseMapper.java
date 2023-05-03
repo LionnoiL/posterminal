@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.organization;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 
 /**
  *
@@ -20,7 +21,7 @@ public class OrganizationDatabaseMapper implements Mapper<Organization>{
  
             return organization;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map organization");
         }
         return null;
     }

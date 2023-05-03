@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.customerdisplay;
+package ua.gaponov.posterminal.devices.customerdisplay;
 
 public interface CustomerDisplay {
     void writeDisplay(String sLine1, String sLine2);

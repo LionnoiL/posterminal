@@ -1,8 +1,11 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -20,6 +23,17 @@ public class OrderDetail implements Serializable {
     private double summaWithoutDiscount;
     private double summaDiscount;
     private String excise;
+
+    public void recalculateDiscountsInRow(Card card){
+        double discountForProduct = 0;
+        setSummaWithoutDiscount(getQty() * getPrice());
+        if (Objects.nonNull(card)){
+            discountForProduct = card.getDiscountForProduct(getProduct());
+        }
+        setSummaDiscount(RoundUtils.round(getSummaWithoutDiscount() * discountForProduct / 100)
+        );
+        setSumma(getSummaWithoutDiscount() - getSummaDiscount());
+    }
 
     public String getExcise() {
         return excise;

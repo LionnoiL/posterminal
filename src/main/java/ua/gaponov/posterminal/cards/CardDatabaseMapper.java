@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.cards;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 
 /**
  * @author gaponov
@@ -27,7 +28,7 @@ public class CardDatabaseMapper implements Mapper<Card> {
             card.setMaxDebtDay(rs.getInt("max_debt_day"));
             return card;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map card");
         }
         return null;
     }

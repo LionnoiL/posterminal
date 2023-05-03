@@ -1,9 +1,9 @@
-package ua.gaponov.posterminal.terminal.ingenico;
+package ua.gaponov.posterminal.devices.terminal.ingenico;
 
-import ua.gaponov.posterminal.terminal.exceptions.SequenceDoesNotMatchLengthException;
+import ua.gaponov.posterminal.devices.terminal.exceptions.SequenceDoesNotMatchLengthException;
 import ua.gaponov.posterminal.utils.StringUtils;
 
-import static ua.gaponov.posterminal.terminal.ingenico.Constants.TERMINAL_ASK_REQUIRED_SIZE;
+import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.TERMINAL_ASK_REQUIRED_SIZE;
 
 public class TeliumAsk extends TeliumData {
 

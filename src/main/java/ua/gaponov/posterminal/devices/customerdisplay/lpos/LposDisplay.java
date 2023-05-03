@@ -1,16 +1,15 @@
-package ua.gaponov.posterminal.customerdisplay.lpos;
+package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 import com.fazecast.jSerialComm.SerialPort;
 import java.util.Objects;
 import ua.gaponov.posterminal.AppProperties;
-import ua.gaponov.posterminal.customerdisplay.CustomerDisplay;
-import ua.gaponov.posterminal.terminal.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
+import ua.gaponov.posterminal.devices.terminal.exceptions.SignalDoesNotExistException;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import java.util.List;
 
 import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
-import static ua.gaponov.posterminal.customerdisplay.lpos.Constants.*;
 
 
 public class LposDisplay implements CustomerDisplay {
@@ -47,11 +46,11 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void sendSignal(String signal) throws SignalDoesNotExistException {
-        if (!CONTROL_NAMES.contains(signal)) {
-            throw new SignalDoesNotExistException("The " + TERMINAL_DATA_ENCODING + signal + " code doesn't exist.");
+        if (!Constants.CONTROL_NAMES.contains(signal)) {
+            throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal + " code doesn't exist.");
         }
 
-        int index = CONTROL_NAMES.indexOf(signal);
+        int index = Constants.CONTROL_NAMES.indexOf(signal);
         char code = (char) index;
         byte[] charBytes = {(byte) code};
         device.writeBytes(charBytes, 1);
@@ -84,8 +83,8 @@ public class LposDisplay implements CustomerDisplay {
         for (Character character : characters) {
             int characterCode = (int) character;
             if (characterCode >= 1040) {
-                if (CYRILYK_TABLE.containsKey(characterCode)) {
-                    byteCode = CYRILYK_TABLE.get(characterCode);
+                if (Constants.CYRILYK_TABLE.containsKey(characterCode)) {
+                    byteCode = Constants.CYRILYK_TABLE.get(characterCode);
                 } else {
                     byteCode = 0;
                 }
@@ -96,7 +95,7 @@ public class LposDisplay implements CustomerDisplay {
                 send(String.valueOf(character));
             }
         }
-        send((char) CONTROL_NAMES.indexOf("CR") + "");
+        send((char) Constants.CONTROL_NAMES.indexOf("CR") + "");
     }
 
     @Override
@@ -158,18 +157,18 @@ public class LposDisplay implements CustomerDisplay {
 
     private void writeFirstLine(String data){
         if (isOpen()) {
-            send((char) CONTROL_NAMES.indexOf("ESC") + "fR");
-            send((char) CONTROL_NAMES.indexOf("ESC") + "cR");
-            send((char) CONTROL_NAMES.indexOf("ESC") + "QA");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "QA");
             sendString(data);
         }
     }
 
     private void writeSecondLine(String data){
         if (isOpen()) {
-            send((char) CONTROL_NAMES.indexOf("ESC") + "fR");
-            send((char) CONTROL_NAMES.indexOf("ESC") + "cR");
-            send((char) CONTROL_NAMES.indexOf("ESC") + "QB");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");
+            send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "QB");
             sendString(data);
         }
     }

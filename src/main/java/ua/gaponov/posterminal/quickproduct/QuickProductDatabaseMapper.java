@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.quickproduct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.products.ProductService;
 
 public class QuickProductDatabaseMapper implements Mapper<QuickProduct> {
@@ -19,7 +20,7 @@ public class QuickProductDatabaseMapper implements Mapper<QuickProduct> {
 
             return product;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map quick product");
         }
         return null;
     }

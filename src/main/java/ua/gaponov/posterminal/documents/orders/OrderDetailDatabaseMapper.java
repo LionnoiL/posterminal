@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.documents.orders;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
+import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.products.ProductService;
 
 /**
@@ -26,7 +27,7 @@ public class OrderDetailDatabaseMapper implements Mapper<OrderDetail>{
             orderDetail.setExcise(rs.getString("excise"));
             return orderDetail;
         } catch (SQLException e) {
-            new RuntimeException();
+            new MapperException("Error map order detail");
         }
         return null;
     }

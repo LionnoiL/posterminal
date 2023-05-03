@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.terminal.exceptions;
+package ua.gaponov.posterminal.devices.terminal.exceptions;
 
 public class TerminalSerialLinkClosedException extends Exception{
 
