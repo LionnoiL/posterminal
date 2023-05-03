@@ -57,19 +57,22 @@ CREATE TABLE cards (
 );
 
 CREATE TABLE orders (
-    order_guid      VARCHAR (36) PRIMARY KEY,
-    order_number    BIGINT       NOT NULL,
-    order_date      TIMESTAMP    DEFAULT (CURRENT_TIMESTAMP),
-    card_guid       VARCHAR (36),
-    summa_doc       DOUBLE,
-    summa_pay       DOUBLE,
-    summa_dicount   DOUBLE,
-    doc_type        VARCHAR(20)  DEFAULT ('ORDER'),
-    pay_type        VARCHAR (20) DEFAULT ('CASH'),
-    upload          BOOLEAN      DEFAULT (0),
-    fiscal          BOOLEAN      DEFAULT (0),
-    internet        BOOLEAN      DEFAULT (0),
-    fiscal_print    BOOLEAN      DEFAULT (0),
+    order_guid                  VARCHAR (36) PRIMARY KEY,
+    order_number                BIGINT       NOT NULL,
+    order_date                  TIMESTAMP    DEFAULT (CURRENT_TIMESTAMP),
+    card_guid                   VARCHAR (36),
+    summa_doc                   DOUBLE,
+    summa_doc_without_discount  DOUBLE,
+    summa_pay                   DOUBLE,
+    summa_to_pay                DOUBLE,
+    summa_discount              DOUBLE,
+    summa_round                 DOUBLE,
+    doc_type                    VARCHAR(20)  DEFAULT ('ORDER'),
+    pay_type                    VARCHAR (20) DEFAULT ('CASH'),
+    upload                      BOOLEAN      DEFAULT (0),
+    fiscal                      BOOLEAN      DEFAULT (0),
+    internet                    BOOLEAN      DEFAULT (0),
+    fiscal_print                BOOLEAN      DEFAULT (0),
     CONSTRAINT orders_fk_cards FOREIGN KEY (card_guid) REFERENCES cards(card_guid)
 );
 

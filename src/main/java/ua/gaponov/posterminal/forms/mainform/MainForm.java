@@ -972,15 +972,15 @@ public class MainForm extends javax.swing.JFrame {
         }
         display.writeDisplay(orderDetail.getProduct().getName(),
                 orderDetail.getQty() + "x" + orderDetail.getPrice(),
-                String.valueOf(RoundUtils.round(orderDetail.getSumma())));
+                String.valueOf(RoundUtils.roundHalfUp(orderDetail.getSumma())));
     }
 
     private void sendTotalSumToCustomerDisplay(){
-        display.writeDisplay("","Загалом", String.valueOf(RoundUtils.round(order.getDocumentSum())));
+        display.writeDisplay("","Загалом", String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())));
     }
 
     private void sendRemainderSumToCustomerDisplay(String summa){
-        display.writeDisplay("Загалом", String.valueOf(RoundUtils.round(order.getDocumentSum())),
+        display.writeDisplay("Загалом", String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())),
                             "Решта", summa);
     }
 
@@ -1040,7 +1040,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void updateSumLabel() {
         order.recalculateDocumentSum();
-        sumLabel.setText(String.valueOf(RoundUtils.round(order.getDocumentSum())) + " " + AppProperties.currency);
+        sumLabel.setText(String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())) + " " + AppProperties.currency);
     }
 
     private void selectTableRow(int lineNumber) {

@@ -23,7 +23,8 @@ public class OrderDatabaseMapper implements Mapper<Order>{
             order.setCard(CardService.getByGuid(rs.getString("card_guid")));
             order.setDocumentSum(rs.getDouble("summa_doc"));
             order.setPaySum(rs.getDouble("summa_pay"));
-            order.setDiscountSum(rs.getDouble("summa_dicount"));
+            order.setToPaySum(rs.getDouble("summa_to_pay"));
+            order.setDiscountSum(rs.getDouble("summa_discount"));
             order.setFiscal(rs.getBoolean("fiscal"));
             order.setInternet(rs.getBoolean("internet"));
             order.setFiscalPrint(rs.getBoolean("fiscal_print"));

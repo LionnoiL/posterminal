@@ -2,20 +2,19 @@ package ua.gaponov.posterminal.documents.orders;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import ua.gaponov.posterminal.documents.PayTypes;
-
-import java.beans.Transient;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.*;
-
 import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
+import java.beans.Transient;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.*;
+
 /**
- *
  * @author wmcon
  */
 public class Order implements Serializable {
@@ -24,7 +23,10 @@ public class Order implements Serializable {
     private LocalDateTime date;
     private transient boolean upload;
     private double documentSum;
+    private double documentSumWithoutDiscount;
+    private double roundSum;
     private double paySum;
+    private double toPaySum;
     private double discountSum;
     private PayTypes payType = PayTypes.CASH;
     private boolean fiscal;
@@ -35,29 +37,29 @@ public class Order implements Serializable {
     @JacksonXmlProperty(localName = "detail")
     private List<OrderDetail> details = new ArrayList<>();
 
-    public boolean canBePrinted(){
+    public boolean canBePrinted() {
         double maxDebt = 0;
-        if (Objects.nonNull(getCard())){
-            if (getCard().isDebtAllowed()){
+        if (Objects.nonNull(getCard())) {
+            if (getCard().isDebtAllowed()) {
                 maxDebt = getCard().getMaxDebt();
             }
         }
 
-        if ((getDocumentSum() - getPaySum()) > maxDebt){
+        if ((RoundUtils.roundHalfUp(getDocumentSum()) - getPaySum()) > maxDebt) {
             return false;
         }
 
         return true;
     }
 
-    public int addDetailRow(Product product, double qty){
+    public int addDetailRow(Product product, double qty) {
         int findLine = -1;
-        if (!product.isNeedExcise()){
+        if (!product.isNeedExcise()) {
             findLine = findRowByProduct(product);
         }
         OrderDetail orderDetail = new OrderDetail();
 
-        if (findLine == -1){
+        if (findLine == -1) {
             details.add(orderDetail);
             orderDetail.setQty(qty);
             findLine = details.size() - 1;
@@ -65,7 +67,7 @@ public class Order implements Serializable {
             orderDetail = details.get(findLine);
             orderDetail.setQty(qty + orderDetail.getQty());
         }
-        
+
         orderDetail.setProduct(product);
         orderDetail.setPrice(product.getPrice());
         orderDetail.recalculateDiscountsInRow(getCard());
@@ -73,61 +75,93 @@ public class Order implements Serializable {
 
         return findLine;
     }
-    
-    public int findRowByProduct(Product product){
+
+    public int findRowByProduct(Product product) {
         int result = -1;
         for (int i = 0; i < details.size(); i++) {
-           if (details.get(i).getProduct().equals(product)){
-               result = i;
-               break;
-           } 
+            if (details.get(i).getProduct().equals(product)) {
+                result = i;
+                break;
+            }
         }
         return result;
     }
 
-    public void changeQtyInRow(int row, double newQty){
+    public void changeQtyInRow(int row, double newQty) {
         OrderDetail orderDetail = details.get(row);
         orderDetail.setQty(newQty);
         orderDetail.recalculateDiscountsInRow(getCard());
         recalculateDocumentSum();
     }
 
-    public void deleteRow(int row){
-        if (row<0 || row>details.size()){
+    public void deleteRow(int row) {
+        if (row < 0 || row > details.size()) {
             return;
         }
         details.remove(row);
     }
 
-    public void recalculateDocumentSum(){
+    public void recalculateDocumentSum() {
         double sum = 0;
+        double sumWithoutDiscount = 0;
         double discount = 0;
         for (OrderDetail detail : details) {
             sum = sum + detail.getSumma();
+            sumWithoutDiscount = sumWithoutDiscount + detail.getSummaWithoutDiscount();
             discount = discount + detail.getSummaDiscount();
         }
         documentSum = sum;
         discountSum = discount;
+        documentSumWithoutDiscount = sumWithoutDiscount;
+
+        BigDecimal result2 = new BigDecimal(documentSum).setScale(1, BigDecimal.ROUND_HALF_UP);
+        roundSum = documentSum - result2.doubleValue();
+
+        toPaySum = documentSum - roundSum;
     }
 
-    public void recalculateAllRowsDiscounts(){
+    public void recalculateAllRowsDiscounts() {
         getDetails().forEach(detail -> detail.recalculateDiscountsInRow(getCard()));
         recalculateDocumentSum();
     }
 
     @Transient
-    public Map<Organization, Double> getTotalsByOrganizations(){
+    public Map<Organization, Double> getTotalsByOrganizations() {
         Map<Organization, Double> result = new HashMap<>();
         List<OrderDetail> orderDetails = getDetails();
         for (OrderDetail orderDetail : orderDetails) {
             Organization organization = orderDetail.getProduct().getOrganization();
-            if (result.containsKey(organization)){
+            if (result.containsKey(organization)) {
                 result.put(organization, result.get(organization) + orderDetail.getSumma());
             } else {
                 result.put(organization, orderDetail.getSumma());
             }
         }
         return result;
+    }
+
+    public double getDocumentSumWithoutDiscount() {
+        return documentSumWithoutDiscount;
+    }
+
+    public void setDocumentSumWithoutDiscount(double documentSumWithoutDiscount) {
+        this.documentSumWithoutDiscount = documentSumWithoutDiscount;
+    }
+
+    public double getToPaySum() {
+        return toPaySum;
+    }
+
+    public void setToPaySum(double toPaySum) {
+        this.toPaySum = toPaySum;
+    }
+
+    public double getRoundSum() {
+        return roundSum;
+    }
+
+    public void setRoundSum(double roundSum) {
+        this.roundSum = roundSum;
     }
 
     public double getDiscountSum() {

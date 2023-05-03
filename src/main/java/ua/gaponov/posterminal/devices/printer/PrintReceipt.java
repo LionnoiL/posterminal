@@ -147,18 +147,26 @@ public class PrintReceipt implements Printable {
     }
 
     private void printTotals(Graphics2D g2d) {
-        printString(g2d, 10, false, Align.LEFT, false, "ПІДСУМОК", false);
-        printString(g2d, 10, false, Align.RIGHT, false,
-                String.valueOf(RoundUtils.round(order.getDocumentSum())) +
+        printString(g2d, 8, false, Align.LEFT, false, "ПІДСУМОК", false);
+        printString(g2d, 8, false, Align.RIGHT, false,
+                String.valueOf(RoundUtils.round(order.getDocumentSumWithoutDiscount())) +
                         " " + AppProperties.currency, true);
     }
 
     private void printPays(Graphics2D g2d) {
-        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", true);
-
         printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
-        printString(g2d, 10, false, Align.RIGHT, false,
+        printString(g2d, 8, false, Align.RIGHT, false,
                 String.valueOf(RoundUtils.round(order.getDiscountSum())) +
+                        " " + AppProperties.currency, true);
+
+        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", false);
+        printString(g2d, 8, false, Align.RIGHT, false,
+                String.valueOf(RoundUtils.round(order.getRoundSum())) +
+                        " " + AppProperties.currency, true);
+
+        printString(g2d, 10, false, Align.LEFT, false, "ДО СПЛАТИ", false);
+        printString(g2d, 10, false, Align.RIGHT, false,
+                String.valueOf(RoundUtils.round(order.getToPaySum())) +
                         " " + AppProperties.currency, true);
     }
 
@@ -182,7 +190,7 @@ public class PrintReceipt implements Printable {
                     detail.getQty() +
                             "("+detail.getProduct().getUnitName()+")x" +
                             detail.getPrice() +
-                            "= " +
+                            "=" +
                             RoundUtils.round(detail.getSumma()), true
             );
         }

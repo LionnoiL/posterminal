@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.forms.pay;
 
 import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -671,15 +672,15 @@ public class PayForm extends javax.swing.JDialog {
         setImages();
         getRootPane().setDefaultButton(okButton);
         ok = false;
-        lblTotal.setText(String.valueOf(order.getDocumentSum()));
+        lblTotal.setText(String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())));
         lblPay.setText(lblTotal.getText());
-        summaPay = order.getDocumentSum();
+        summaPay = RoundUtils.roundHalfUp(order.getDocumentSum());
         handleRemainder();
     }
 
     private void handleRemainder(){
         double summaPay = Double.parseDouble(lblPay.getText());
-        double remainder = summaPay - order.getDocumentSum();
+        double remainder = RoundUtils.roundHalfUp(summaPay - order.getDocumentSum());
         if (remainder<0){
             remainder = 0;
         }

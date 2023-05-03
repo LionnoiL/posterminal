@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.utils;
 
+import java.math.BigDecimal;
+
 public class RoundUtils {
 
     private RoundUtils() {
@@ -8,6 +10,11 @@ public class RoundUtils {
     public static double round(double dValue) {
         double fractionMultiplier = Math.pow(10.0, 2);
         return Math.rint(dValue * fractionMultiplier) / fractionMultiplier;
+    }
+
+    public static double roundHalfUp(double dValue) {
+        BigDecimal result2 = new BigDecimal(dValue).setScale(1, BigDecimal.ROUND_HALF_UP);
+        return result2.doubleValue();
     }
 
     public static int compare(double d1, double d2) {
