@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.forms.mainform;
 
-import ua.gaponov.posterminal.AppProperties;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.Posterminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;

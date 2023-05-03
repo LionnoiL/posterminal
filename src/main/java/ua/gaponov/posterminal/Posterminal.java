@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal;
 
 import ua.gaponov.posterminal.forms.login.LoginForm;
-import ua.gaponov.posterminal.utils.CommStream;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import javax.swing.*;

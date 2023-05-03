@@ -2,9 +2,9 @@ package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 import com.fazecast.jSerialComm.SerialPort;
 import java.util.Objects;
-import ua.gaponov.posterminal.AppProperties;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
-import ua.gaponov.posterminal.devices.terminal.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import java.util.List;
@@ -47,7 +47,8 @@ public class LposDisplay implements CustomerDisplay {
 
     private void sendSignal(String signal) throws SignalDoesNotExistException {
         if (!Constants.CONTROL_NAMES.contains(signal)) {
-            throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal + " code doesn't exist.");
+            throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal +
+                    " code doesn't exist.");
         }
 
         int index = Constants.CONTROL_NAMES.indexOf(signal);

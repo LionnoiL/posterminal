@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.devices.terminal.exceptions;
+package ua.gaponov.posterminal.devices.exceptions;
 
 public class TerminalInitializationFailedException extends Exception{
 

@@ -6,7 +6,7 @@ import java.util.List;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
-import static ua.gaponov.posterminal.AppProperties.currentUser;
+import static ua.gaponov.posterminal.utils.AppProperties.currentUser;
 
 /**
  *
@@ -19,7 +19,7 @@ public class UserService {
     }
     
     public static List<User> getAllActive(){
-       StatementParameters<Boolean> parameters = StatementParameters.buildParameters(true);
+       StatementParameters<Boolean> parameters = StatementParameters.build(true);
        return new SqlHelper<User>().getAll("SELECT * FROM users where active = ?",
                parameters,
                new UserDatabaseMapper());
@@ -27,7 +27,7 @@ public class UserService {
     
     public static User getByName(String userName){
         
-        StatementParameters<String> parameters = StatementParameters.buildParameters(userName);
+        StatementParameters<String> parameters = StatementParameters.build(userName);
         return new SqlHelper<User>().getOne("select * from users where user_name = ?",
                 parameters,
                 new UserDatabaseMapper());

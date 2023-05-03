@@ -1,13 +1,12 @@
 package ua.gaponov.posterminal.dataexchange;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.stream.XMLStreamException;
-import ua.gaponov.posterminal.AppProperties;
+
+import ua.gaponov.posterminal.utils.AppProperties;
 
 /**
  *

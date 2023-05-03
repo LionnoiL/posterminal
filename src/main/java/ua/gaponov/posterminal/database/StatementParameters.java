@@ -46,7 +46,7 @@ public class StatementParameters<T> {
         add(new Parametr(null));
     }
 
-    public static<T> StatementParameters<T> buildParameters(T... elements){
+    public static<T> StatementParameters<T> build(T... elements){
         StatementParameters<T> result = new StatementParameters<T>();
         result.addAll(elements);
         return result;

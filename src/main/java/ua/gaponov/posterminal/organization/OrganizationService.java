@@ -17,7 +17,7 @@ public class OrganizationService {
     }
 
     public static Organization getByGuid(String guid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
+        StatementParameters<String> parameters = StatementParameters.build(guid);
         return new SqlHelper<Organization>().getOne("select * from organization where org_guid = ?",
                 parameters,
                 new OrganizationDatabaseMapper());
@@ -38,7 +38,7 @@ public class OrganizationService {
 
     private static void insert(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters parameters = StatementParameters.buildParameters(
+            StatementParameters parameters = StatementParameters.build(
                     organization.getCode(),
                     organization.getName(),
                     organization.getGuid()
@@ -55,7 +55,7 @@ public class OrganizationService {
 
     private static void update(Organization organization) throws SQLException {
         if (!organization.getGuid().isEmpty() && !organization.getName().isEmpty()) {
-            StatementParameters parameters = StatementParameters.buildParameters(
+            StatementParameters parameters = StatementParameters.build(
                     organization.getCode(),
                     organization.getName(),
                     organization.getGuid()

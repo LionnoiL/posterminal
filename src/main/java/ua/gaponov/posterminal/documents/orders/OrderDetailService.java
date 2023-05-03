@@ -1,6 +1,5 @@
 package ua.gaponov.posterminal.documents.orders;
 
-import java.util.ArrayList;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -16,7 +15,7 @@ public class OrderDetailService {
     private static final SqlHelper<OrderDetail> helper = new SqlHelper<>();
 
     public static List<OrderDetail> getByOrder(String orderGuid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(orderGuid);
+        StatementParameters<String> parameters = StatementParameters.build(orderGuid);
         return helper.getAll("select * from orders_detail where order_guid = ?",
                 parameters,
                 new OrderDetailDatabaseMapper());
@@ -34,7 +33,7 @@ public class OrderDetailService {
                     values
                     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
                 """;
-        StatementParameters<Object> sqlInsertParameters = StatementParameters.buildParameters(
+        StatementParameters<Object> sqlInsertParameters = StatementParameters.build(
                 orderDetail.getGuid(),
                 order.getGuid(),
                 line,

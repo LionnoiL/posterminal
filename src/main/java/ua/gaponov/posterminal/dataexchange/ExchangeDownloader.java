@@ -1,13 +1,12 @@
 package ua.gaponov.posterminal.dataexchange;
 
-import ua.gaponov.posterminal.AppProperties;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.cards.CardXmlBuilder;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.quickproduct.QuickProductXmlBuilder;
-import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 import java.nio.file.Files;
 import java.nio.file.Paths;

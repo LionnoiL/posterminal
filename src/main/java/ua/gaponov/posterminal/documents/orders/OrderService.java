@@ -22,11 +22,14 @@ import java.util.logging.Logger;
  */
 public class OrderService {
 
+    private OrderService() {
+    }
+
     private static final SqlHelper<Order> helper = new SqlHelper<>();
     private static final String TEMP_FILE_ORDER_BACKUP = "files/temp-order.dat";
 
     public static Order getByGuid(String guid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
+        StatementParameters<String> parameters = StatementParameters.build(guid);
         return helper.getOne("select * from orders where order_guid = ?",
                 parameters,
                 new OrderDatabaseMapper());
@@ -41,14 +44,20 @@ public class OrderService {
     }
 
     public static List<Order> getAllNoUpload() {
-        StatementParameters<Boolean> parameters = StatementParameters.buildParameters(false);
+        StatementParameters<Boolean> parameters = StatementParameters.build(false);
         return helper.getAll("SELECT * FROM orders where upload = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
 
     public static void deleteAll() {
-        SqlHelper.execSql("delete from orders");
+        String sql = """
+                    BEGIN TRANSACTION;
+                    DELETE FROM orders_detail WHERE order_guid IN (SELECT order_guid FROM orders);
+                    DELETE FROM orders;
+                    COMMIT;
+                """;
+        SqlHelper.execSql(sql);
     }
 
     public static void deleteUploaded() {
@@ -74,7 +83,6 @@ public class OrderService {
             requestList.add(OrderDetailService.getInsertRequest(order, detail, line));
             line = line + 1;
         }
-
         helper.execSql(requestList);
     }
 
@@ -87,7 +95,7 @@ public class OrderService {
                     values
                     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> parameters = StatementParameters.build(
                 order.getGuid(),
                 order.getOrderNumber(),
                 order.getDocumentSum(),
@@ -98,10 +106,10 @@ public class OrderService {
                 DocumentTypes.ORDER.toString(),
                 order.getPayType().toString(),
                 false,
-                false,
-                false,
-                false
-        );//TODO fiscal_print and fiscal fix
+                order.isFiscal(),
+                order.isInternet(),
+                order.isFiscalPrint()
+        );
 
         if (Objects.nonNull(order.getCard())) {
             parameters.addAll(order.getCard().getGuid());

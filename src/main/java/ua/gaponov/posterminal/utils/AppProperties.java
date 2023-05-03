@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal;
+package ua.gaponov.posterminal.utils;
 
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;

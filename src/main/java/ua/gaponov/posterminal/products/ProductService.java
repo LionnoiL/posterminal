@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.products;
 
-import ua.gaponov.posterminal.AppProperties;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -17,7 +17,7 @@ public class ProductService {
     }
 
     public static Product getByGuid(String guid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
+        StatementParameters<String> parameters = StatementParameters.build(guid);
         return helper.getOne(
                 "select * from products where product_guid = ?",
                 parameters,
@@ -64,7 +64,7 @@ public class ProductService {
     }
 
     private static Product getProductFromOrdinaryBarcode(String barcode) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(barcode);
+        StatementParameters<String> parameters = StatementParameters.build(barcode);
         String sql = """
                 select * from eans
                 left join products on products.product_guid = eans.product_guid
@@ -81,7 +81,7 @@ public class ProductService {
     }
 
     public static Product getProductFromSku(String sku) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(sku);
+        StatementParameters<String> parameters = StatementParameters.build(sku);
         String sql = """
                 select * from products
                 where sku = ?
@@ -106,7 +106,7 @@ public class ProductService {
     }
 
     private static void insert(Product product) throws SQLException {
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> parameters = StatementParameters.build(
                 product.getUnitName(),
                 product.isNeedExcise(),
                 product.getGuid(),
@@ -135,7 +135,7 @@ public class ProductService {
     }
 
     private static void update(Product product) throws SQLException {
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> parameters = StatementParameters.build(
                 product.getName(),
                 product.getUnitName(),
                 product.getPrice(),

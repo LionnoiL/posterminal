@@ -20,14 +20,14 @@ public class CardService {
     }
 
     public static Card getByGuid(String guid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
+        StatementParameters<String> parameters = StatementParameters.build(guid);
         return new SqlHelper<Card>().getOne("select * from cards where card_guid = ?",
                 parameters,
                 new CardDatabaseMapper());
     }
 
     public static Card getByCode(String code) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(code);
+        StatementParameters<String> parameters = StatementParameters.build(code);
         return new SqlHelper<Card>().getOne("select * from cards where code = ?",
                 parameters,
                 new CardDatabaseMapper());
@@ -47,7 +47,7 @@ public class CardService {
     }
 
     private static void insert(Card card) throws SQLException {
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> parameters = StatementParameters.build(
                 card.getGuid(),
                 card.isActive(),
                 card.getCardType().toString(),
@@ -82,7 +82,7 @@ public class CardService {
     }
 
     private static void update(Card card) throws SQLException {
-        StatementParameters<Object> parameters = StatementParameters.buildParameters(
+        StatementParameters<Object> parameters = StatementParameters.build(
                 card.isActive(),
                 card.getCardType().toString(),
                 card.getClientEmail(),

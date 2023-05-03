@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.devices.terminal.ingenico;
 
-import ua.gaponov.posterminal.devices.terminal.exceptions.SequenceDoesNotMatchLengthException;
+import ua.gaponov.posterminal.devices.exceptions.SequenceDoesNotMatchLengthException;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.TERMINAL_ASK_REQUIRED_SIZE;

@@ -12,7 +12,7 @@ public class QuickProductService {
     public static final int buttonsCountOnPage = 42;
 
     public static List<QuickProduct> getByPage(int pageIndex) {
-        StatementParameters<Integer> parameters = StatementParameters.buildParameters(
+        StatementParameters<Integer> parameters = StatementParameters.build(
                 buttonsCountOnPage,
                 pageIndex * buttonsCountOnPage
         );
@@ -26,7 +26,7 @@ public class QuickProductService {
     }
 
     public static QuickProduct getByProduct(String guid) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(guid);
+        StatementParameters<String> parameters = StatementParameters.build(guid);
         return new SqlHelper<QuickProduct>().getOne(
             "select * from quick_products where product_id = ?",
             parameters,
@@ -46,7 +46,7 @@ public class QuickProductService {
         if (quickProduct.getProduct() == null) {
             return;
         }
-        StatementParameters parameters = StatementParameters.buildParameters(
+        StatementParameters parameters = StatementParameters.build(
                 quickProduct.getProduct().getGuid(),
                 quickProduct.getPosition(),
                 quickProduct.getColor()
@@ -64,7 +64,7 @@ public class QuickProductService {
             return;
         }
         StatementParameters parameters
-            = StatementParameters.buildParameters(
+            = StatementParameters.build(
                 quickProduct.getPosition(),
                 quickProduct.getColor(),
                 quickProduct.getProduct().getGuid()

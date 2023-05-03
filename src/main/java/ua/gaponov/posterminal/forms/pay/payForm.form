@@ -93,8 +93,6 @@
                   <Component id="cardButton" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="onlineButton" min="-2" pref="110" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="fiscalButton" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="okButton" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -108,7 +106,6 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="fiscalButton" min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="onlineButton" min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="cardButton" min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -158,14 +155,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onlineButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="fiscalButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x424;&#x406;&#x421;&#x41a;&#x410;&#x41b;&#x42c;&#x41d;&#x418;&#x419;"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fiscalButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

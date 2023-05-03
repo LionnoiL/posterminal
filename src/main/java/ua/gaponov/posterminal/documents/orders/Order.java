@@ -10,7 +10,6 @@ import ua.gaponov.posterminal.utils.RoundUtils;
 
 import java.beans.Transient;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -39,17 +38,10 @@ public class Order implements Serializable {
 
     public boolean canBePrinted() {
         double maxDebt = 0;
-        if (Objects.nonNull(getCard())) {
-            if (getCard().isDebtAllowed()) {
-                maxDebt = getCard().getMaxDebt();
-            }
+        if (Objects.nonNull(getCard()) && getCard().isDebtAllowed()) {
+            maxDebt = getCard().getMaxDebt();
         }
-
-        if ((RoundUtils.roundHalfUp(getDocumentSum()) - getPaySum()) > maxDebt) {
-            return false;
-        }
-
-        return true;
+        return (RoundUtils.roundHalfUp(getDocumentSum()) - getPaySum()) <= maxDebt;
     }
 
     public int addDetailRow(Product product, double qty) {

@@ -16,7 +16,7 @@ public class BarcodeService {
     }
 
     public static Barcode getByBarcode(String barcode) {
-        StatementParameters<String> parameters = StatementParameters.buildParameters(barcode);
+        StatementParameters<String> parameters = StatementParameters.build(barcode);
         return new SqlHelper<Barcode>().getOne("select * from eans where ean_code = ?",
                 parameters,
                 new BarcodeDatabaseMapper());
@@ -33,7 +33,7 @@ public class BarcodeService {
 
     private static void insert(Barcode barcode) {
         if (barcode.getProduct() != null && !barcode.getBarCodeValue().isEmpty()) {
-            StatementParameters<String> parameters = StatementParameters.buildParameters(
+            StatementParameters<String> parameters = StatementParameters.build(
                     barcode.getBarCodeValue(),
                     barcode.getProduct().getGuid()
             );
@@ -53,7 +53,7 @@ public class BarcodeService {
 
     private static void update(Barcode barcode) {
         if (barcode.getProduct() != null && !barcode.getBarCodeValue().isEmpty()) {
-            StatementParameters<String> parameters = StatementParameters.buildParameters(
+            StatementParameters<String> parameters = StatementParameters.build(
                     barcode.getProduct().getGuid(),
                     barcode.getBarCodeValue()
             );

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Objects;
 import java.util.Properties;
-import ua.gaponov.posterminal.AppProperties;
 
 /**
  * @author wmcon

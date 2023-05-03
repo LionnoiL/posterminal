@@ -1,12 +1,12 @@
 package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import com.fazecast.jSerialComm.SerialPort;
-import ua.gaponov.posterminal.AppProperties;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.devices.terminal.Terminal;
-import ua.gaponov.posterminal.devices.terminal.exceptions.SequenceDoesNotMatchLengthException;
-import ua.gaponov.posterminal.devices.terminal.exceptions.SignalDoesNotExistException;
-import ua.gaponov.posterminal.devices.terminal.exceptions.TerminalInitializationFailedException;
-import ua.gaponov.posterminal.devices.terminal.exceptions.TerminalSerialLinkClosedException;
+import ua.gaponov.posterminal.devices.exceptions.SequenceDoesNotMatchLengthException;
+import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.devices.exceptions.TerminalInitializationFailedException;
+import ua.gaponov.posterminal.devices.exceptions.TerminalSerialLinkClosedException;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import java.io.UnsupportedEncodingException;
