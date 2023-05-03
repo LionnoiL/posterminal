@@ -4,6 +4,8 @@ import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author wmcon
@@ -44,8 +46,7 @@ public class BarcodeService {
             try {
                 new SqlHelper<Barcode>().execSql(sql, parameters);
             } catch (SQLException ex) {
-                //TODO проблема з одинаковыми штрихкодами
-                //NOP
+                Logger.getLogger(BarcodeService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -57,14 +58,13 @@ public class BarcodeService {
                     barcode.getBarcode()
             );
             String sql = """
-                    update eans set product_guid= ?,
+                    update eans set product_guid= ?
                     where ean_code = ?
                     """;
             try {
                 new SqlHelper<Barcode>().execSql(sql, parameters);
             } catch (SQLException ex) {
-                //TODO проблема з одинаковыми штрихкодами
-                //NOP
+                Logger.getLogger(BarcodeService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

@@ -16,7 +16,7 @@ public class BarcodeDatabaseMapper implements Mapper<Barcode> {
         try {
             Barcode barcode = new Barcode();
             barcode.setBarcode(rs.getString("ean_code"));
-            barcode.setProduct(ProductService.getByGuid(rs.getString("org_name")));
+            barcode.setProduct(ProductService.getByGuid(rs.getString("PRODUCT_GUID")));
 
             return barcode;
         } catch (SQLException e) {
