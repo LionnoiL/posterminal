@@ -82,14 +82,18 @@ public class OrderService {
         order.setOrderNumber(getCount() + 1);
         String sql = """
                     insert into orders
-                    (order_guid, order_number, summa_doc, summa_pay, doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid)
+                    (order_guid, order_number, summa_doc, summa_to_pay, summa_discount, summa_round, summa_pay,
+                     doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid)
                     values
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
         StatementParameters<Object> parameters = StatementParameters.buildParameters(
                 order.getGuid(),
                 order.getOrderNumber(),
                 order.getDocumentSum(),
+                order.getToPaySum(),
+                order.getDiscountSum(),
+                order.getRoundSum(),
                 order.getPaySum(),
                 DocumentTypes.ORDER.toString(),
                 order.getPayType().toString(),

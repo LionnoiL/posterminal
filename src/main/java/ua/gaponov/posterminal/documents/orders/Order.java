@@ -114,8 +114,7 @@ public class Order implements Serializable {
         discountSum = discount;
         documentSumWithoutDiscount = sumWithoutDiscount;
 
-        BigDecimal result2 = new BigDecimal(documentSum).setScale(1, BigDecimal.ROUND_HALF_UP);
-        roundSum = documentSum - result2.doubleValue();
+        roundSum = RoundUtils.round(documentSum - RoundUtils.roundHalfUp(documentSum));
 
         toPaySum = documentSum - roundSum;
     }
