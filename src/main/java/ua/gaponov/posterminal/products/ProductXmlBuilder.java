@@ -25,6 +25,7 @@ public class ProductXmlBuilder {
             product.setSku(processor.getStringAttribute("sku"));
             product.setOrganization(OrganizationService.getByGuid(processor.getStringAttribute("guid_org")));
             product.setUnitName(processor.getStringAttribute("unit_name"));
+            product.setProstoPayProduct(processor.getBooleanAttribute("prostopay_product"));
         } catch (XMLStreamException ex) {
             Logger.getLogger(ProductXmlBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }

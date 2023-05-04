@@ -1,8 +1,6 @@
 package ua.gaponov.posterminal.utils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,5 +33,16 @@ public class FilesUtils {
     public static boolean fileExist(String fileName) {
         File file = new File(fileName);
         return file.exists();
+    }
+
+    public static FileInputStream getFileInputStream(String fileName)
+            throws FileNotFoundException {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            FilesUtils.checkFileDirAndCreateDir(fileName);
+            FilesUtils.saveTextFile(fileName, "");
+        }
+        FileInputStream fileInputStream = new FileInputStream(file);
+        return fileInputStream;
     }
 }

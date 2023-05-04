@@ -2,7 +2,11 @@ package ua.gaponov.posterminal.utils;
 
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
+import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.users.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Andriy Gaponov
@@ -25,6 +29,7 @@ public class AppProperties {
     public static boolean exchangeRunning;
     public static String terminalPort;
     public static String displayPort;
+    public static Map<Product, Integer> prostoPayProducts = new HashMap<>();
     private AppProperties() {
     }
 }

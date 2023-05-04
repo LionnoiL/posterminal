@@ -28,6 +28,7 @@ public class ProductDatabaseMapper implements Mapper<Product> {
             product.setNeedExcise(rs.getBoolean("need_excise"));
             product.setUnitName(rs.getString("unit_name"));
             product.setOrganization(OrganizationService.getByGuid(rs.getString("org_guid")));
+            product.setProstoPayProduct(rs.getBoolean("prostopay_product"));
 
             return product;
         } catch (SQLException e) {

@@ -1,4 +1,4 @@
-CREATE TABLE users (
+create TABLE users (
     user_guid     VARCHAR (36) NOT NULL PRIMARY KEY,
     user_name     VARCHAR (50) NOT NULL UNIQUE,
     user_password VARCHAR (60) DEFAULT ('d41d8cd98f00b204e9800998ecf8427e'),
@@ -9,30 +9,31 @@ CREATE TABLE users (
     )
 );
 
-CREATE TABLE organization (
+create TABLE organization (
     org_guid VARCHAR (36) NOT NULL PRIMARY KEY,
     org_name VARCHAR (150),
     code     VARCHAR (9) 
 );
 
-CREATE TABLE products (
-    product_guid    VARCHAR (36) NOT NULL PRIMARY KEY,
-    product_name    VARCHAR (150) NOT NULL,
-    product_code    VARCHAR (11),
-    price           DOUBLE NOT NULL,
-    org_guid        VARCHAR (36),
-    sku             VARCHAR (9),
-    no_discount     BOOLEAN         DEFAULT (1),
-    uktved          VARCHAR (20)    DEFAULT (''),
-    tax_group       VARCHAR         DEFAULT (1),
-    tax_rate        VARCHAR         DEFAULT (0),
-    weight          BOOLEAN         DEFAULT (0),
-    need_excise     BOOLEAN         DEFAULT (0),
-    unit_name       VARCHAR(10)     DEFAULT ('шт'),
+create TABLE products (
+    product_guid            VARCHAR (36) NOT NULL PRIMARY KEY,
+    product_name            VARCHAR (150) NOT NULL,
+    product_code            VARCHAR (11),
+    price                   DOUBLE NOT NULL,
+    org_guid                VARCHAR (36),
+    sku                     VARCHAR (9),
+    no_discount             BOOLEAN         DEFAULT (1),
+    uktved                  VARCHAR (20)    DEFAULT (''),
+    tax_group               VARCHAR         DEFAULT (1),
+    tax_rate                VARCHAR         DEFAULT (0),
+    weight                  BOOLEAN         DEFAULT (0),
+    need_excise             BOOLEAN         DEFAULT (0),
+    unit_name               VARCHAR(10)     DEFAULT ('шт'),
+    prostopay_product       BOOLEAN         DEFAULT (0),
     CONSTRAINT products_fk_organization FOREIGN KEY (org_guid) REFERENCES organization(org_guid)
 );
 
-CREATE TABLE eans (
+create TABLE eans (
     ean_code        VARCHAR (40) NOT NULL,
     product_guid    VARCHAR (36) NOT NULL,
     CONSTRAINT eans_fk_products FOREIGN KEY (product_guid) REFERENCES products(product_guid),
@@ -41,7 +42,7 @@ CREATE TABLE eans (
     )   
 );
 
-CREATE TABLE cards (
+create TABLE cards (
     card_guid       VARCHAR (36)  NOT NULL PRIMARY KEY,
     code            VARCHAR (50)  NOT NULL,
     active          BOOLEAN,
@@ -56,7 +57,7 @@ CREATE TABLE cards (
     max_debt_day    INTEGER       DEFAULT (0)
 );
 
-CREATE TABLE orders (
+create TABLE orders (
     order_guid                  VARCHAR (36) PRIMARY KEY,
     order_number                BIGINT       NOT NULL,
     order_date                  TIMESTAMP    DEFAULT (CURRENT_TIMESTAMP),
@@ -77,7 +78,7 @@ CREATE TABLE orders (
 );
 
 
-CREATE TABLE orders_detail (
+create TABLE orders_detail (
     orders_detail_guid      VARCHAR (36) PRIMARY KEY,
     order_guid              VARCHAR (36) NOT NULL,
     line_number             INT,
@@ -92,7 +93,7 @@ CREATE TABLE orders_detail (
     CONSTRAINT orders_detail_fk_productss FOREIGN KEY (product_guid) REFERENCES products(product_guid)
 );
 
-CREATE TABLE quick_products (
+create TABLE quick_products (
     product_id VARCHAR (36),
     pos_id     INTEGER,
     color      VARCHAR      DEFAULT 'F0F0F0'

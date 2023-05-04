@@ -25,6 +25,14 @@ public class ProductService {
                 mapper);
     }
 
+    public static Product getByCode(String code) {
+        StatementParameters<String> parameters = StatementParameters.build(code);
+        return helper.getOne(
+                "select * from products where product_code = ?",
+                parameters,
+                mapper);
+    }
+
     public static Product getByBarcode(String barcode) {
         if (barcode == null || barcode.isEmpty() || barcode.length() < 8) {
             return null;
@@ -114,6 +122,7 @@ public class ProductService {
                 product.getName(),
                 product.getPrice(),
                 product.isBanDisckount(),
+                product.isProstoPayProduct(),
                 product.getCode(),
                 product.getSku(),
                 product.isWeight()
@@ -127,10 +136,10 @@ public class ProductService {
 
         String sql = """
                 insert into products (unit_name, need_excise, product_guid, product_name, price,
-                no_discount, product_code, sku, weight, org_guid
+                no_discount, prostopay_product, product_code, sku, weight, org_guid
                 )
                 values
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
         helper.execSql(sql, parameters);
     }
@@ -141,6 +150,7 @@ public class ProductService {
                 product.getUnitName(),
                 product.getPrice(),
                 product.isBanDisckount(),
+                product.isProstoPayProduct(),
                 product.getCode(),
                 product.getSku(),
                 product.isWeight(),
@@ -158,6 +168,7 @@ public class ProductService {
                 unit_name = ?,
                 price= ?,
                 no_discount = ?,
+                prostopay_product = ?,
                 product_code = ?,
                 sku = ?,
                 weight = ?,

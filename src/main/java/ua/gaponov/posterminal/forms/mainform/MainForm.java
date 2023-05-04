@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.forms.mainform;
 
+import ua.gaponov.posterminal.devices.printer.PrintCoffeeBarCode;
+import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
 import ua.gaponov.posterminal.cards.Card;
@@ -769,7 +771,9 @@ public class MainForm extends javax.swing.JFrame {
                     return;
                 }
 
-                PrintReceipt printReceipt = new PrintReceipt(order);
+                new PrintReceipt(order);
+                ProstoPayService.printQrCodesByOrder(order);
+
 
                 order = new Order();
 

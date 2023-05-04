@@ -24,6 +24,15 @@ public class Product implements Serializable {
     private double qty;
     private boolean needExcise;
     private String unitName;
+    private boolean prostoPayProduct;
+
+    public boolean isProstoPayProduct() {
+        return prostoPayProduct;
+    }
+
+    public void setProstoPayProduct(boolean prostoPayProduct) {
+        this.prostoPayProduct = prostoPayProduct;
+    }
 
     @Transient
     public String getUnitName() {

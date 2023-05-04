@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Objects;
 import java.util.Properties;
 
+import static ua.gaponov.posterminal.utils.FilesUtils.getFileInputStream;
+
 /**
  * @author Andriy Gaponov
  */
@@ -14,16 +16,7 @@ public class PropertiesUtils {
     private PropertiesUtils() {
     }
 
-    private static FileInputStream getFileInputStream(String fileName)
-            throws FileNotFoundException {
-        File file = new File(fileName);
-        if (!file.exists()) {
-            FilesUtils.checkFileDirAndCreateDir(fileName);
-            FilesUtils.saveTextFile(fileName, "");
-        }
-        FileInputStream fileInputStream = new FileInputStream(file);
-        return fileInputStream;
-    }
+
 
     private static String getPropertyValue(FileInputStream fileInputStream, String propertyName)
             throws IOException {
