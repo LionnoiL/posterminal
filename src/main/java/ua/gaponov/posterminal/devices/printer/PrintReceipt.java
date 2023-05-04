@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class PrintReceipt implements Printable {
 
-    private final int MARGIN = 1;
+    private final int MARGIN = 0;
     private final int PAPER_WIDTH = 130;
     private final int PAPER_HEIGHT = 1000;
     private final int FONT_MARGIN = 10;
