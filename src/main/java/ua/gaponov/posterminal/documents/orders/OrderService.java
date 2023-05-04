@@ -24,7 +24,7 @@ public class OrderService {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
     private static final SqlHelper<Order> helper = new SqlHelper<>();
-    private static final String TEMP_FILE_ORDER_BACKUP = "files/temp-order.dat";
+    private static final String TEMP_FILE_ORDER_BACKUP = "tmp/temp-order.dat";
 
     private OrderService() {
     }
