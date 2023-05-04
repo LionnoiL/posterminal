@@ -12,6 +12,7 @@ pos.trace.db
 pos.trace.db.old
 files/*.xml
 files/temp-order.dat
+logs/*
 
 ### STS ###
 .apt_generated
