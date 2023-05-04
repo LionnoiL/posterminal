@@ -1,6 +1,9 @@
 package ua.gaponov.posterminal.forms.login;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.PosTerminal;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.forms.mainform.MainForm;
 import ua.gaponov.posterminal.users.User;
 import ua.gaponov.posterminal.users.UserService;
@@ -13,6 +16,8 @@ import java.util.List;
 * @author Andriy Gaponov
 */
 public class LoginForm extends javax.swing.JFrame {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LoginForm.class);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -140,8 +145,11 @@ public class LoginForm extends javax.swing.JFrame {
         if (UserService.login(userCombo.getSelectedItem().toString(), passwordField.getText())) {
             PropertiesUtils.saveApplicationTempValue("last_user",
                     userCombo.getSelectedItem().toString());
+            LOG.info("User " + userCombo.getSelectedItem().toString() + " enter success");
             dispose();
             MainForm.main(null);
+        } else {
+            LOG.info("User " + userCombo.getSelectedItem().toString() + " enter failed");
         }
     }//GEN-LAST:event_okButtonMouseClicked
 
