@@ -1,8 +1,7 @@
 package ua.gaponov.posterminal.users;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public enum UserRole {
     ADMIN, USER

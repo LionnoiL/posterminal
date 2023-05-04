@@ -1,14 +1,13 @@
 package ua.gaponov.posterminal.organization;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
+import java.sql.SQLException;
+import java.util.List;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class OrganizationService {
 
@@ -44,11 +43,11 @@ public class OrganizationService {
                     organization.getGuid()
             );
             String sql = """
-                     insert into organization (code, org_name, org_guid
-                     )
-                     values
-                     (?, ?, ?)
-                     """;
+                    insert into organization (code, org_name, org_guid
+                    )
+                    values
+                    (?, ?, ?)
+                    """;
             new SqlHelper<Organization>().execSql(sql, parameters);
         }
     }
@@ -61,9 +60,9 @@ public class OrganizationService {
                     organization.getGuid()
             );
             String sql = """
-                     update organization set code= ?, org_name = ?
-                     where org_guid = ?
-                     """;
+                    update organization set code= ?, org_name = ?
+                    where org_guid = ?
+                    """;
             new SqlHelper<Organization>().execSql(sql, parameters);
         }
     }

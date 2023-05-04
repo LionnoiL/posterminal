@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class SqlHelper<T> {
 
@@ -35,7 +35,7 @@ public class SqlHelper<T> {
     }
 
     public void execSql(List<DatabaseRequest> requests)
-        throws SQLException {
+            throws SQLException {
         try (Connection connection = Database.getConnection();) {
             connection.setAutoCommit(false);
             try {

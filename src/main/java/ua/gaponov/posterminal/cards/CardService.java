@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class CardService {
 

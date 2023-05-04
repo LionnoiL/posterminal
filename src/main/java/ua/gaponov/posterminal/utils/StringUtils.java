@@ -3,13 +3,16 @@ package ua.gaponov.posterminal.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class StringUtils {
 
     private StringUtils() {
     }
 
-    public static String[] splitStringByCharCount(String text, int charCount){
-        String newStr  = text.replaceAll("(.{"+charCount+"})", "$1|");
+    public static String[] splitStringByCharCount(String text, int charCount) {
+        String newStr = text.replaceAll("(.{" + charCount + "})", "$1|");
         return newStr.split("\\|");
     }
 
@@ -26,8 +29,7 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static List<Character> convertStringToCharList(String str)
-    {
+    public static List<Character> convertStringToCharList(String str) {
         List<Character> chars = new ArrayList<>();
         for (char ch : str.toCharArray()) {
             chars.add(ch);
@@ -35,8 +37,8 @@ public class StringUtils {
         return chars;
     }
 
-    public static String getSpaces(int spaceCount){
-        if (spaceCount<=0){
+    public static String getSpaces(int spaceCount) {
+        if (spaceCount <= 0) {
             return "";
         }
         StringBuilder sb = new StringBuilder();

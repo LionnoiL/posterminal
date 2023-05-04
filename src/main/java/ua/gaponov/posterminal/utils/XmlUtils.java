@@ -1,14 +1,13 @@
 package ua.gaponov.posterminal.utils;
 
-import java.io.InputStream;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
+import java.io.InputStream;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class XmlUtils implements AutoCloseable {
 
@@ -29,8 +28,7 @@ public class XmlUtils implements AutoCloseable {
         if (reader != null) {
             try {
                 reader.close();
-            }
-            catch (XMLStreamException e) { // empty
+            } catch (XMLStreamException e) { // empty
             }
         }
     }
@@ -57,20 +55,20 @@ public class XmlUtils implements AutoCloseable {
     public String getText() throws XMLStreamException {
         return reader.getElementText();
     }
-    
-    public boolean getBooleanAttribute(String name) throws XMLStreamException{          
-        if ("1".equals(getStringAttribute(name))){
+
+    public boolean getBooleanAttribute(String name) throws XMLStreamException {
+        if ("1".equals(getStringAttribute(name))) {
             return true;
         } else {
             return false;
         }
     }
-    
-    public double getDoubleAttribute(String name) throws XMLStreamException{          
+
+    public double getDoubleAttribute(String name) throws XMLStreamException {
         return Double.parseDouble(getStringAttribute(name));
     }
 
-    public int getIntegerAttribute(String name) throws XMLStreamException{
+    public int getIntegerAttribute(String name) throws XMLStreamException {
         return Integer.parseInt(getStringAttribute(name));
     }
 }

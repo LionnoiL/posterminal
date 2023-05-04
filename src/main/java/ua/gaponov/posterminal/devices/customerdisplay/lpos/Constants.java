@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class Constants {
 
     public static final String TERMINAL_DATA_ENCODING = "ASCII";
@@ -20,8 +23,7 @@ public class Constants {
 
     public static final Map<Integer, Byte> CYRILYK_TABLE = new HashMap<>();
 
-    static
-    {
+    static {
         String s = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдежзийклмноп" +
                 "                                                " +
                 "рстуфхцчшщьыъэюя";

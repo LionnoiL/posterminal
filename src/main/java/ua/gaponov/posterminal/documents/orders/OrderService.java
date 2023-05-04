@@ -18,15 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class OrderService {
 
-    private OrderService() {
-    }
-
     private static final SqlHelper<Order> helper = new SqlHelper<>();
     private static final String TEMP_FILE_ORDER_BACKUP = "files/temp-order.dat";
+    private OrderService() {
+    }
 
     public static Order getByGuid(String guid) {
         StatementParameters<String> parameters = StatementParameters.build(guid);
@@ -131,7 +130,7 @@ public class OrderService {
     public static Order loadOrderFromBackupDir() {
         Order order = new Order();
 
-        if (!FilesUtils.fileExist(TEMP_FILE_ORDER_BACKUP)){
+        if (!FilesUtils.fileExist(TEMP_FILE_ORDER_BACKUP)) {
             return order;
         }
 

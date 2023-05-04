@@ -8,6 +8,9 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+* @author Andriy Gaponov
+*/
 public class OrderSaveScheduler {
     public Timer timer = new Timer();
     private Order order;

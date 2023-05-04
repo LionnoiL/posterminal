@@ -11,8 +11,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ProductInfoForm extends javax.swing.JFrame {
 

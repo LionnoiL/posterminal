@@ -1,16 +1,16 @@
 package ua.gaponov.posterminal.products;
 
+import ua.gaponov.posterminal.organization.Organization;
+
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Objects;
-import ua.gaponov.posterminal.organization.Organization;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class Product implements Serializable {
-   
+
     private String guid;
     private String name;
     private String code;
@@ -58,7 +58,7 @@ public class Product implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getCode() {
         return code;
     }
@@ -163,9 +163,9 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "guid=" + guid + ", name=" + name + ", code=" + 
-                code + ", price=" + price + ", sku=" + sku + ", banDisckount=" + 
-                banDisckount + ", taxCode=" + taxCode + ", taxGroup=" + 
+        return "Product{" + "guid=" + guid + ", name=" + name + ", code=" +
+                code + ", price=" + price + ", sku=" + sku + ", banDisckount=" +
+                banDisckount + ", taxCode=" + taxCode + ", taxGroup=" +
                 taxGroup + ", weight=" + weight + '}';
     }
 }

@@ -9,11 +9,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class OrderDetail implements Serializable {
-    
+
     private String guid = UUID.randomUUID().toString();
     private int lineNumber;
     private Product product;
@@ -24,10 +23,10 @@ public class OrderDetail implements Serializable {
     private double summaDiscount;
     private String excise;
 
-    public void recalculateDiscountsInRow(Card card){
+    public void recalculateDiscountsInRow(Card card) {
         double discountForProduct = 0;
         setSummaWithoutDiscount(getQty() * getPrice());
-        if (Objects.nonNull(card)){
+        if (Objects.nonNull(card)) {
             discountForProduct = card.getDiscountForProduct(getProduct());
         }
         setSummaDiscount(RoundUtils.round(getSummaWithoutDiscount() * discountForProduct / 100)
@@ -43,7 +42,7 @@ public class OrderDetail implements Serializable {
         this.excise = excise;
     }
 
-    public void recalculateSumma(){
+    public void recalculateSumma() {
         setSumma(getQty() * getPrice());
     }
 

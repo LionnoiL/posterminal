@@ -1,12 +1,12 @@
 package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import com.fazecast.jSerialComm.SerialPort;
-import ua.gaponov.posterminal.utils.AppProperties;
-import ua.gaponov.posterminal.devices.terminal.Terminal;
 import ua.gaponov.posterminal.devices.exceptions.SequenceDoesNotMatchLengthException;
 import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
 import ua.gaponov.posterminal.devices.exceptions.TerminalInitializationFailedException;
 import ua.gaponov.posterminal.devices.exceptions.TerminalSerialLinkClosedException;
+import ua.gaponov.posterminal.devices.terminal.Terminal;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -14,6 +14,9 @@ import java.io.UnsupportedEncodingException;
 import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
 import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.*;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class IngenicoTerminal implements Terminal {
 
     private SerialPort device;
@@ -43,7 +46,7 @@ public class IngenicoTerminal implements Terminal {
 
             return ask;
         } catch (Exception e) {
-            if (isOpen()){
+            if (isOpen()) {
                 close();
             }
             DialogUtils.error(null, e.getMessage());

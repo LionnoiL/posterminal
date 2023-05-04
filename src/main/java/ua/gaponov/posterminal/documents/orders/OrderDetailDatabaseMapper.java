@@ -1,16 +1,16 @@
 package ua.gaponov.posterminal.documents.orders;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.products.ProductService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
-public class OrderDetailDatabaseMapper implements Mapper<OrderDetail>{
+public class OrderDetailDatabaseMapper implements Mapper<OrderDetail> {
 
     @Override
     public OrderDetail map(ResultSet rs) {
@@ -31,5 +31,5 @@ public class OrderDetailDatabaseMapper implements Mapper<OrderDetail>{
         }
         return null;
     }
-    
+
 }

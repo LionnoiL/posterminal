@@ -1,6 +1,9 @@
 package ua.gaponov.posterminal.devices.exceptions;
 
-public class TerminalSerialLinkClosedException extends Exception{
+/**
+ * @author Andriy Gaponov
+ */
+public class TerminalSerialLinkClosedException extends Exception {
 
     public TerminalSerialLinkClosedException(String message) {
         super(message);

@@ -1,18 +1,19 @@
 package ua.gaponov.posterminal.products;
 
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
+import ua.gaponov.posterminal.utils.AppProperties;
 
 import java.sql.SQLException;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ProductService {
 
     private static final ProductDatabaseMapper mapper = new ProductDatabaseMapper();
     private static final SqlHelper<Product> helper = new SqlHelper<>();
+
     private ProductService() {
     }
 

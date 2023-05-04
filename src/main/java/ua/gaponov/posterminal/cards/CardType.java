@@ -1,8 +1,7 @@
 package ua.gaponov.posterminal.cards;
 
 /**
- *
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public enum CardType {
     DISCOUNT, SERVICE

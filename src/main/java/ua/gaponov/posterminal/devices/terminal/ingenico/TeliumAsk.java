@@ -5,6 +5,9 @@ import ua.gaponov.posterminal.utils.StringUtils;
 
 import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.TERMINAL_ASK_REQUIRED_SIZE;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class TeliumAsk extends TeliumData {
 
     private String answerFlag;

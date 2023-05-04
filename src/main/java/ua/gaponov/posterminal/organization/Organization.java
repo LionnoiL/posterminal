@@ -5,12 +5,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.io.Serializable;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 @JacksonXmlRootElement(localName = "organizations_detail")
 public class Organization implements Serializable {
-    
+
     private String guid;
     private String name;
     private String code;

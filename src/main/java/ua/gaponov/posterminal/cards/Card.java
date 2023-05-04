@@ -6,8 +6,7 @@ import java.beans.Transient;
 import java.io.Serializable;
 
 /**
- *
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class Card implements Serializable {
     private String guid;

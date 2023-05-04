@@ -1,26 +1,21 @@
 package ua.gaponov.posterminal.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Objects;
 import java.util.Properties;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class PropertiesUtils {
 
-    private PropertiesUtils(){
-    }
     public static final String CONFIG_FILE_NAME = "config/application.properties";
     public static final String TEMP_FILE_NAME = "tmp/application.tmp";
+    private PropertiesUtils() {
+    }
 
     private static FileInputStream getFileInputStream(String fileName)
-        throws FileNotFoundException {
+            throws FileNotFoundException {
         File file = new File(fileName);
         if (!file.exists()) {
             FilesUtils.checkFileDirAndCreateDir(fileName);
@@ -31,10 +26,10 @@ public class PropertiesUtils {
     }
 
     private static String getPropertyValue(FileInputStream fileInputStream, String propertyName)
-        throws IOException {
+            throws IOException {
         Properties properties = new Properties();
         properties.load(fileInputStream);
-        if (!properties.containsKey(propertyName)){
+        if (!properties.containsKey(propertyName)) {
             properties.put(propertyName, "");
         }
         return properties.getProperty(propertyName);
@@ -79,7 +74,7 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
-            if (Objects.isNull(propertyValue)){
+            if (Objects.isNull(propertyValue)) {
                 propertyValue = "";
             }
             properties.setProperty(propertyName, propertyValue);
@@ -94,7 +89,7 @@ public class PropertiesUtils {
         }
     }
 
-    public static void saveAllApplicationProperties(){
+    public static void saveAllApplicationProperties() {
         saveApplicationProperties("currency", AppProperties.currency);
         saveApplicationProperties("weight_item_prefix", AppProperties.weightItemPrefix);
         saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.exchangeEnable));
@@ -111,9 +106,9 @@ public class PropertiesUtils {
     public static void loadProperties() {
         AppProperties.serverIpAdress = getApplicationProperties("server_ip");
         AppProperties.exchangeInterval =
-            Integer.parseInt(getApplicationProperties("exchange_interval_min")) * 60 * 1000;
+                Integer.parseInt(getApplicationProperties("exchange_interval_min")) * 60 * 1000;
         AppProperties.exchangeEnable = Boolean.parseBoolean(
-            getApplicationProperties("exchange_enable"));
+                getApplicationProperties("exchange_enable"));
         AppProperties.weightItemPrefix = getApplicationProperties("weight_item_prefix");
         AppProperties.currency = getApplicationProperties("currency");
         AppProperties.shopName = getApplicationProperties("shop_name");

@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal.forms.mainform;
 
 import ua.gaponov.posterminal.utils.AppProperties;
-import ua.gaponov.posterminal.Posterminal;
+import ua.gaponov.posterminal.PosTerminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
@@ -33,8 +33,8 @@ import java.util.Timer;
 import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationProperties;
 
 /**
- * @author wmcon
- */
+* @author Andriy Gaponov
+*/
 public class MainForm extends javax.swing.JFrame {
 
     private static MainForm frame;
@@ -727,7 +727,7 @@ public class MainForm extends javax.swing.JFrame {
             saveColumnsWidth();
             saveAllApplicationProperties();
             dispose();
-            Posterminal.closeApp();
+            PosTerminal.closeApp();
         }
     }//GEN-LAST:event_eixitButtonActionPerformed
 

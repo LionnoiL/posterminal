@@ -8,8 +8,7 @@ import java.awt.*;
 
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ChoiseCardMerchForm extends javax.swing.JDialog {
 

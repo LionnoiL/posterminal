@@ -11,8 +11,8 @@ import ua.gaponov.posterminal.utils.DialogUtils;
 import javax.swing.*;
 
 /**
- * @author wmcon
- */
+* @author Andriy Gaponov
+*/
 public class OptionsForm extends javax.swing.JFrame {
 
 

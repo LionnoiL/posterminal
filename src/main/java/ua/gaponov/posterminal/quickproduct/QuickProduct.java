@@ -2,6 +2,9 @@ package ua.gaponov.posterminal.quickproduct;
 
 import ua.gaponov.posterminal.products.Product;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class QuickProduct {
 
     private Product product;

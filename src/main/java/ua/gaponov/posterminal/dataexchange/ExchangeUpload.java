@@ -4,15 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderService;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.util.List;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ExchangeUpload {
 

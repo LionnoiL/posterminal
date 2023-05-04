@@ -1,12 +1,13 @@
 package ua.gaponov.posterminal.cards;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.stream.XMLStreamException;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
+import javax.xml.stream.XMLStreamException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class CardXmlBuilder {
 

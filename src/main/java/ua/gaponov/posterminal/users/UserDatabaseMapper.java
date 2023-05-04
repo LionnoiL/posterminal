@@ -1,13 +1,13 @@
 package ua.gaponov.posterminal.users;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class UserDatabaseMapper implements Mapper<User> {
 
@@ -20,7 +20,7 @@ public class UserDatabaseMapper implements Mapper<User> {
             user.setPassword(rs.getString("user_password"));
             user.setRole(UserRole.valueOf(rs.getString("user_role")));
             user.setActive(rs.getBoolean("active"));
-           
+
             return user;
         } catch (SQLException e) {
             new MapperException("Error map user");

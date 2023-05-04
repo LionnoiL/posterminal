@@ -7,9 +7,9 @@ import ua.gaponov.posterminal.utils.PropertiesUtils;
 import javax.swing.*;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
-public class Posterminal {
+public class PosTerminal {
 
 
     public static void main(String[] args) {

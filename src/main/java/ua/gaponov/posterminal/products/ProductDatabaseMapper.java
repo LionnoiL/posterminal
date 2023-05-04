@@ -1,17 +1,17 @@
 package ua.gaponov.posterminal.products;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.organization.OrganizationService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
-public class ProductDatabaseMapper implements Mapper<Product>{
-    
+public class ProductDatabaseMapper implements Mapper<Product> {
+
     @Override
     public Product map(ResultSet rs) {
         try {
@@ -27,10 +27,8 @@ public class ProductDatabaseMapper implements Mapper<Product>{
             product.setWeight(rs.getBoolean("weight"));
             product.setNeedExcise(rs.getBoolean("need_excise"));
             product.setUnitName(rs.getString("unit_name"));
-            product.setOrganization(
-                OrganizationService.getByGuid(rs.getString("org_guid"))
-            );
-            
+            product.setOrganization(OrganizationService.getByGuid(rs.getString("org_guid")));
+
             return product;
         } catch (SQLException e) {
             new MapperException("Error map product");

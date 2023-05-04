@@ -7,8 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class FilesUtils {
 
@@ -28,12 +27,12 @@ public class FilesUtils {
         }
     }
 
-    public static void deleteFile(String fileName){
+    public static void deleteFile(String fileName) {
         File file = new File(fileName);
         file.delete();
     }
 
-    public static boolean fileExist(String fileName){
+    public static boolean fileExist(String fileName) {
         File file = new File(fileName);
         return file.exists();
     }

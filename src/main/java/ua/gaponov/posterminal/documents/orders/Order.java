@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class Order implements Serializable {
     private String guid = UUID.randomUUID().toString();

@@ -1,14 +1,14 @@
 package ua.gaponov.posterminal.barcodes;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.products.ProductService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class BarcodeDatabaseMapper implements Mapper<Barcode> {
 

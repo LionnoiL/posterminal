@@ -7,8 +7,7 @@ import java.awt.Window;
 import javax.swing.*;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class NumberDialog extends javax.swing.JDialog {
 

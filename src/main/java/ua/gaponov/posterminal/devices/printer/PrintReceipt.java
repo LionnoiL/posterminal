@@ -1,9 +1,9 @@
 package ua.gaponov.posterminal.devices.printer;
 
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.organization.Organization;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
 import ua.gaponov.posterminal.utils.StringUtils;
@@ -14,6 +14,9 @@ import java.awt.print.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class PrintReceipt implements Printable {
 
     private final int MARGIN = 0;
@@ -130,7 +133,7 @@ public class PrintReceipt implements Printable {
         printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
         printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
         printString(g2d, 6, false, Align.RIGHT, false, "Продаж", true);
-        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №"+order.getOrderNumber(), true);
+        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №" + order.getOrderNumber(), true);
         printString(g2d, 8, false, Align.CENTER, false, AppProperties.cashRegisterName, true);
         printHorizontalLine(g2d);
     }
@@ -138,7 +141,7 @@ public class PrintReceipt implements Printable {
     private void printOrganizations(Graphics2D g2d) {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
-            if (organizationDoubleEntry.getKey()==null){
+            if (organizationDoubleEntry.getKey() == null) {
                 printString(g2d, 6, false, Align.LEFT, false, "", false);
             } else {
                 printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName(), false);
@@ -163,7 +166,7 @@ public class PrintReceipt implements Printable {
 
         printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", false);
         String sign = "+";
-        if (order.getRoundSum()>0){
+        if (order.getRoundSum() > 0) {
             sign = "-";
         }
         printString(g2d, 8, false, Align.RIGHT, false,
@@ -194,7 +197,7 @@ public class PrintReceipt implements Printable {
             printString(g2d, 8, false, Align.LEFT, true, detail.getProduct().getName().toUpperCase(), true);
             printString(g2d, 8, false, Align.RIGHT, false,
                     detail.getQty() +
-                            "("+detail.getProduct().getUnitName()+")x" +
+                            "(" + detail.getProduct().getUnitName() + ")x" +
                             detail.getPrice() +
                             "=" +
                             RoundUtils.round(detail.getSummaWithoutDiscount()), true

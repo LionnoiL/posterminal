@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.forms.login;
 
-import ua.gaponov.posterminal.Posterminal;
+import ua.gaponov.posterminal.PosTerminal;
 import ua.gaponov.posterminal.forms.mainform.MainForm;
 import ua.gaponov.posterminal.users.User;
 import ua.gaponov.posterminal.users.UserService;
@@ -10,8 +10,8 @@ import javax.swing.*;
 import java.util.List;
 
 /**
- * @author wmcon
- */
+* @author Andriy Gaponov
+*/
 public class LoginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -147,7 +147,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
-        Posterminal.closeApp();
+        PosTerminal.closeApp();
     }//GEN-LAST:event_cancelButtonActionPerformed
     // End of variables declaration//GEN-END:variables
 }

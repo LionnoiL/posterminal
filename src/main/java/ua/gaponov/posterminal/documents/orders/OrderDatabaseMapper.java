@@ -1,18 +1,18 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import ua.gaponov.posterminal.cards.CardService;
+import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.documents.PayTypes;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import ua.gaponov.posterminal.cards.CardService;
-import ua.gaponov.posterminal.database.Mapper;
 
 /**
- *
- * @author gaponov
+ * @author Andriy Gaponov
  */
-public class OrderDatabaseMapper implements Mapper<Order>{
+public class OrderDatabaseMapper implements Mapper<Order> {
 
     @Override
     public Order map(ResultSet rs) {
@@ -31,7 +31,7 @@ public class OrderDatabaseMapper implements Mapper<Order>{
             order.setUpload(rs.getBoolean("upload"));
             order.setPayType(PayTypes.valueOf(rs.getString("pay_type")));
             order.setOrderNumber(rs.getLong("order_number"));
-            
+
             List<OrderDetail> details = OrderDetailService.getByOrder(order.getGuid());
             order.setDetails(details);
 
@@ -41,5 +41,5 @@ public class OrderDatabaseMapper implements Mapper<Order>{
         }
         return null;
     }
-    
+
 }

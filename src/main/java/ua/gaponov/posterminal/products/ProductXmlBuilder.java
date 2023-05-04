@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ProductXmlBuilder {
 

@@ -3,11 +3,10 @@ package ua.gaponov.posterminal.barcodes;
 import ua.gaponov.posterminal.products.Product;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class Barcode {
-    
+
     private String barCodeValue;
     private Product product;
 

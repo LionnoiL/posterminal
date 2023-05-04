@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.devices.terminal.ingenico;
 
+/**
+ * @author Andriy Gaponov
+ */
 public enum TerminalTransactionTypes {
     DEBIT("0"),
     CREDIT("1"),

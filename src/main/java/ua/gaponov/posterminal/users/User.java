@@ -3,11 +3,10 @@ package ua.gaponov.posterminal.users;
 import java.util.Objects;
 
 /**
- *
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class User {
-    
+
     private String guid;
     private String name;
     private String password;
@@ -54,7 +53,7 @@ public class User {
         this.name = name;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return Objects.equals(UserRole.ADMIN, role);
     }
 }

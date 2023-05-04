@@ -17,8 +17,8 @@ import ua.gaponov.posterminal.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 /**
- * @author gaponov
- */
+* @author Andriy Gaponov
+*/
 public class QuickProductDialog extends javax.swing.JDialog {
 
     private Product product;

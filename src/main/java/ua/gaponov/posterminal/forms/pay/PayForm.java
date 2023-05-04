@@ -9,8 +9,7 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class PayForm extends javax.swing.JDialog {
 

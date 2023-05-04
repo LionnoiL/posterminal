@@ -9,8 +9,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 public class ExciseScanForm extends javax.swing.JDialog {
 

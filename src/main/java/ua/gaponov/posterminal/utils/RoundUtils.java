@@ -2,6 +2,9 @@ package ua.gaponov.posterminal.utils;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class RoundUtils {
 
     private RoundUtils() {

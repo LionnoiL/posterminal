@@ -3,19 +3,19 @@ package ua.gaponov.posterminal.dataexchange;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import java.util.List;
 import ua.gaponov.posterminal.documents.orders.Order;
 
+import java.util.List;
+
 /**
- *
- * @author wmcon
+ * @author Andriy Gaponov
  */
 @JacksonXmlRootElement(localName = "orders")
 public class OrdersUpload {
-    
+
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "order")
-    private List<Order> items; 
+    private List<Order> items;
 
     private String shopGuid;
     private int shopId;

@@ -1,45 +1,44 @@
 package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 import com.fazecast.jSerialComm.SerialPort;
-import java.util.Objects;
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
 import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
+import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
 
-
+/**
+ * @author Andriy Gaponov
+ */
 public class LposDisplay implements CustomerDisplay {
 
-    private SerialPort device;
     private static final int CHAR_COUNT = 20;
+    private SerialPort device;
 
     public LposDisplay() {
         createDevice();
     }
 
     private boolean open() {
-        if (Objects.isNull(device))
-        {
+        if (Objects.isNull(device)) {
             return false;
         }
         return device.openPort();
     }
 
     private boolean close() {
-        if (Objects.isNull(device))
-        {
+        if (Objects.isNull(device)) {
             return false;
         }
         return device.closePort();
     }
 
     private boolean isOpen() {
-        if (Objects.isNull(device))
-        {
+        if (Objects.isNull(device)) {
             return false;
         }
         return device.isOpen();
@@ -75,7 +74,7 @@ public class LposDisplay implements CustomerDisplay {
         return data;
     }
 
-    private void sendString(String data){
+    private void sendString(String data) {
         data = replaceUkrainianChar(data);
 
         List<Character> characters = StringUtils.convertStringToCharList(data);
@@ -130,7 +129,7 @@ public class LposDisplay implements CustomerDisplay {
             int spaceCount = posRight - sLine2.length();
             String spaces = StringUtils.getSpaces(spaceCount);
 
-            writeSecondLine(sLine2 + spaces +sLine3);
+            writeSecondLine(sLine2 + spaces + sLine3);
             close();
         }
     }
@@ -146,17 +145,17 @@ public class LposDisplay implements CustomerDisplay {
 
             posRight = CHAR_COUNT - sLine2.length();
             spaceCount = posRight - sLine1.length();
-            writeFirstLine(sLine1 + StringUtils.getSpaces(spaceCount) +sLine2);
+            writeFirstLine(sLine1 + StringUtils.getSpaces(spaceCount) + sLine2);
 
             posRight = CHAR_COUNT - sLine4.length();
             spaceCount = posRight - sLine3.length();
-            writeSecondLine(sLine3 + StringUtils.getSpaces(spaceCount) +sLine4);
+            writeSecondLine(sLine3 + StringUtils.getSpaces(spaceCount) + sLine4);
 
             close();
         }
     }
 
-    private void writeFirstLine(String data){
+    private void writeFirstLine(String data) {
         if (isOpen()) {
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");
@@ -165,7 +164,7 @@ public class LposDisplay implements CustomerDisplay {
         }
     }
 
-    private void writeSecondLine(String data){
+    private void writeSecondLine(String data) {
         if (isOpen()) {
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");
@@ -181,7 +180,7 @@ public class LposDisplay implements CustomerDisplay {
             device.setNumDataBits(8);
             device.setParity(NO_PARITY);
             device.setNumStopBits(1);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             //NOP
         }
     }

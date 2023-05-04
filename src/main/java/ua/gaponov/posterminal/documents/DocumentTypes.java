@@ -1,8 +1,7 @@
 package ua.gaponov.posterminal.documents;
 
 /**
- *
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public enum DocumentTypes {
     ORDER, RETURN, PAY

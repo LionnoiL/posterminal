@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.database;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class DatabaseRequest {
     private String sql;
     private StatementParameters<Object> param;

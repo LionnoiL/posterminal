@@ -105,7 +105,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                ua.gaponov.posterminal.Posterminal
+                                ua.gaponov.posterminal.PosTerminal
                             </mainClass>
                         </manifest>
                     </archive>
@@ -134,7 +134,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                ua.gaponov.posterminal.Posterminal
+                                ua.gaponov.posterminal.PosTerminal
                             </mainClass>
                         </manifest>
                     </archive>

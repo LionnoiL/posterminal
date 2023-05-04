@@ -1,12 +1,13 @@
 package ua.gaponov.posterminal.cards;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class CardDatabaseMapper implements Mapper<Card> {
 

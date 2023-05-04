@@ -9,10 +9,9 @@ import org.flywaydb.core.Flyway;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
 
 /**
- * @author gaponov
+ * @author Andriy Gaponov
  */
 public class Database {
 

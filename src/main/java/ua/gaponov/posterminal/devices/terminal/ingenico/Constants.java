@@ -2,6 +2,9 @@ package ua.gaponov.posterminal.devices.terminal.ingenico;
 
 import java.util.List;
 
+/**
+ * @author Andriy Gaponov
+ */
 public class Constants {
 
     public static final int DELAY_TERMINAL_ANSWER_TRANSACTION = 120;
