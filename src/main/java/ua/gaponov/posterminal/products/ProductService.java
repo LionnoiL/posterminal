@@ -2,7 +2,7 @@ package ua.gaponov.posterminal.products;
 
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.sql.SQLException;
 

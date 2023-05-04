@@ -5,7 +5,7 @@
 package ua.gaponov.posterminal.forms.options;
 
 import com.fazecast.jSerialComm.SerialPort;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import javax.swing.*;

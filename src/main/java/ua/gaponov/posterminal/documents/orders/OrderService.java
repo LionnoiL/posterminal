@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -14,16 +16,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Andriy Gaponov
  */
 public class OrderService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
     private static final SqlHelper<Order> helper = new SqlHelper<>();
     private static final String TEMP_FILE_ORDER_BACKUP = "files/temp-order.dat";
+
     private OrderService() {
     }
 
@@ -123,7 +125,7 @@ public class OrderService {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
             oos.writeObject(order);
         } catch (Exception ex) {
-            Logger.getLogger(OrderService.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error("Error save order to backup dir", ex);
         }
     }
 
@@ -138,7 +140,7 @@ public class OrderService {
             order = (Order) ois.readObject();
             return order;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error("Error load order from backup dir", ex);
         }
 
         return order;

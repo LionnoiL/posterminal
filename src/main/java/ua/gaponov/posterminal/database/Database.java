@@ -51,6 +51,7 @@ public class Database {
     public static void migrate() {
         Flyway flyway = Flyway
                 .configure()
+                .loggers("slf4j")
                 .locations("filesystem:./sql")
                 .dataSource(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword())
                 .load();

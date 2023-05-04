@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderService;
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
  * @author Andriy Gaponov
  */
 public class ExchangeUpload {
+    private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
 
     public static void upload() {
         uploadOrders();
@@ -36,7 +39,7 @@ public class ExchangeUpload {
                 String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
                 FilesUtils.saveTextFile("files/export_" + AppProperties.shopId + ".xml", employeeXml);
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                LOG.error("Export filed", e);
             }
         }
     }

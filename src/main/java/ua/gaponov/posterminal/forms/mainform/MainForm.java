@@ -1,8 +1,9 @@
 package ua.gaponov.posterminal.forms.mainform;
 
-import ua.gaponov.posterminal.devices.printer.PrintCoffeeBarCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
 import ua.gaponov.posterminal.cards.Card;
 import ua.gaponov.posterminal.cards.CardService;
@@ -39,6 +40,7 @@ import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationPro
 */
 public class MainForm extends javax.swing.JFrame {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MainForm.class);
     private static MainForm frame;
     private static StringBuilder barBufer = new StringBuilder();
     private static Order order = new Order();
@@ -82,10 +84,7 @@ public class MainForm extends javax.swing.JFrame {
                     frame.setExtendedState(Frame.MAXIMIZED_BOTH);
                     frame.setVisible(true);
                     frame.refresh();
-
-
                     frame.updateTable();
-
                     frame.loadColumnsWidth();
                     frame.updateSumLabel();
                     frame.updateByCard(null);
@@ -765,9 +764,9 @@ public class MainForm extends javax.swing.JFrame {
 
                 try {
                     OrderService.save(order);
-                } catch (Exception e){
+                } catch (Exception ex){
                     DialogUtils.error(this, "Помилка збереження чеку");
-                    System.out.println(e);
+                    LOG.error("Error save order", ex);
                     return;
                 }
 

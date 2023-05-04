@@ -6,7 +6,7 @@ import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
 import ua.gaponov.posterminal.devices.exceptions.TerminalInitializationFailedException;
 import ua.gaponov.posterminal.devices.exceptions.TerminalSerialLinkClosedException;
 import ua.gaponov.posterminal.devices.terminal.Terminal;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 import java.io.UnsupportedEncodingException;

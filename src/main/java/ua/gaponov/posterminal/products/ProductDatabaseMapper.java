@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.products;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.organization.OrganizationService;
@@ -11,6 +13,8 @@ import java.sql.SQLException;
  * @author Andriy Gaponov
  */
 public class ProductDatabaseMapper implements Mapper<Product> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProductDatabaseMapper.class);
 
     @Override
     public Product map(ResultSet rs) {
@@ -31,7 +35,8 @@ public class ProductDatabaseMapper implements Mapper<Product> {
             product.setProstoPayProduct(rs.getBoolean("prostopay_product"));
 
             return product;
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            LOG.error("Error map product", ex);
             new MapperException("Error map product");
         }
         return null;

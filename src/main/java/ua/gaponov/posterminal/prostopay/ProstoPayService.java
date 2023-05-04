@@ -4,14 +4,13 @@ import ua.gaponov.posterminal.devices.printer.PrintCoffeeBarCode;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 

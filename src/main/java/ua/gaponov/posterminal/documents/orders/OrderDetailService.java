@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -25,7 +27,7 @@ public class OrderDetailService {
         SqlHelper.execSql("delete from orders_detail");
     }
 
-    public static DatabaseRequest getInsertRequest(Order order, OrderDetail orderDetail, int line) throws SQLException {
+    public static DatabaseRequest getInsertRequest(Order order, OrderDetail orderDetail, int line) {
         String sqlInsertOrderDetail = """                  
                     insert into orders_detail
                     (orders_detail_guid, order_guid, line_number, product_guid, qty,

@@ -1,18 +1,20 @@
 package ua.gaponov.posterminal.dataexchange;
 
-import ua.gaponov.posterminal.utils.AppProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * @author Andriy Gaponov
  */
 public class ExchangeScheduler {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
     public Timer exchangeTimer = new Timer();
 
     public void setTimeReceived() {
@@ -27,7 +29,7 @@ public class ExchangeScheduler {
                     try {
                         ExchangeDownloader.download();
                     } catch (Exception ex) {
-                        Logger.getLogger(ExchangeScheduler.class.getName()).log(Level.SEVERE, null, ex);
+                        LOG.error("Import filed", ex);
                     }
                 }
             }

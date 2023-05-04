@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
@@ -13,6 +15,8 @@ import java.util.List;
  * @author Andriy Gaponov
  */
 public class OrderDatabaseMapper implements Mapper<Order> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderDatabaseMapper.class);
 
     @Override
     public Order map(ResultSet rs) {
@@ -36,7 +40,8 @@ public class OrderDatabaseMapper implements Mapper<Order> {
             order.setDetails(details);
 
             return order;
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            LOG.error("Mapping order failed", ex);
             new MapperException("Error map order");
         }
         return null;

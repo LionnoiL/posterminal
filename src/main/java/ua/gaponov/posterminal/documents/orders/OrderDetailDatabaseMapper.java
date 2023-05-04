@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.documents.orders;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.products.ProductService;
@@ -12,6 +14,7 @@ import java.sql.SQLException;
  */
 public class OrderDetailDatabaseMapper implements Mapper<OrderDetail> {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OrderDatabaseMapper.class);
     @Override
     public OrderDetail map(ResultSet rs) {
         try {
@@ -26,7 +29,8 @@ public class OrderDetailDatabaseMapper implements Mapper<OrderDetail> {
             orderDetail.setSummaDiscount(rs.getDouble("summa_discount"));
             orderDetail.setExcise(rs.getString("excise"));
             return orderDetail;
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            LOG.error("Mapping order detail failed", ex);
             new MapperException("Error map order detail");
         }
         return null;

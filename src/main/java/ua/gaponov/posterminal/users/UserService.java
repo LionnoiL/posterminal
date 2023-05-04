@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import static ua.gaponov.posterminal.utils.AppProperties.currentUser;
+import static ua.gaponov.posterminal.conf.AppProperties.currentUser;
 
 /**
  * @author Andriy Gaponov

@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.barcodes.Barcode;
 import ua.gaponov.posterminal.barcodes.BarcodeService;
 import ua.gaponov.posterminal.barcodes.BarcodeXmlBuilder;
@@ -15,7 +17,7 @@ import ua.gaponov.posterminal.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.quickproduct.QuickProductXmlBuilder;
-import ua.gaponov.posterminal.utils.AppProperties;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
 import java.nio.file.Files;
@@ -27,8 +29,10 @@ import java.nio.file.Paths;
 public class ExchangeDownloader {
 
     public static final String IMPORT_FILE = "files/import.xml";
+    private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
 
     public static void download() throws Exception {
+        LOG.info("Start import data");
 
         try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE)))) {
             AppProperties.exchangeRunning = true;
@@ -62,5 +66,7 @@ public class ExchangeDownloader {
             //TODO: delete file
             AppProperties.exchangeRunning = false;
         }
+
+        LOG.info("End import data");
     }
 }

@@ -1,9 +1,12 @@
 package ua.gaponov.posterminal.devices.customerdisplay.lpos;
 
 import com.fazecast.jSerialComm.SerialPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.dataexchange.ExchangeUpload;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
 import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
-import ua.gaponov.posterminal.utils.AppProperties;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
  */
 public class LposDisplay implements CustomerDisplay {
 
+    private static final Logger LOG = LoggerFactory.getLogger(LposDisplay.class);
     private static final int CHAR_COUNT = 20;
     private SerialPort device;
 
@@ -25,6 +29,7 @@ public class LposDisplay implements CustomerDisplay {
 
     private boolean open() {
         if (Objects.isNull(device)) {
+            LOG.error("Lpos customer display port {} not open", device.getPortDescription());
             return false;
         }
         return device.openPort();
@@ -181,7 +186,7 @@ public class LposDisplay implements CustomerDisplay {
             device.setParity(NO_PARITY);
             device.setNumStopBits(1);
         } catch (Exception ex) {
-            //NOP
+            LOG.error("LPos customer display create failed", ex);
         }
     }
 }

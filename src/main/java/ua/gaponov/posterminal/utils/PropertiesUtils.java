@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.utils;
 
+import ua.gaponov.posterminal.conf.AppProperties;
+
 import java.io.*;
 import java.util.Objects;
 import java.util.Properties;

@@ -4,13 +4,12 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import ua.gaponov.posterminal.documents.orders.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.products.Product;
-import ua.gaponov.posterminal.products.ProductService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.awt.print.*;
 
@@ -19,6 +18,7 @@ import java.awt.print.*;
  */
 public class PrintCoffeeBarCode implements Printable {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PrintCoffeeBarCode.class);
     private final Product product;
     private final String qrCodeText;
 
@@ -46,8 +46,17 @@ public class PrintCoffeeBarCode implements Printable {
         try {
             printerJob.print();
         } catch (PrinterException ex) {
+            LOG.error("Printing ProstoPay qr-code failed", ex);
             JOptionPane.showMessageDialog(null, "Printing Failed, Error: " + ex.toString());
         }
+    }
+
+    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
+        QRCodeWriter barcodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix =
+                barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 140, 140);
+
+        return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
     @Override
@@ -62,19 +71,12 @@ public class PrintCoffeeBarCode implements Printable {
         g2d.drawString(product.getName(), 10, 10);
         try {
             g2d.drawImage(generateQRCodeImage(qrCodeText), 1, 10, null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            LOG.error("Generate ProstoPay qr-code failed", ex);
+            throw new RuntimeException(ex);
         }
 
         return 0;
-    }
-
-    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
-        QRCodeWriter barcodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix =
-                barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 140, 140);
-
-        return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
 }
