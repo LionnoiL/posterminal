@@ -16,9 +16,20 @@ public class DateUtils {
         return dateTime.format(formatter);
     }
 
+    public static String formatDateTime(LocalDateTime dateTime, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return dateTime.format(formatter);
+    }
+
     public static String getDateTimeNow() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return now.format(formatter);
+    }
+
+    public static String getDateTimeNow(String pattern) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return now.format(formatter);
     }
 }

@@ -17,4 +17,7 @@ public interface DeviceFiscalPrinter {
     void printZReport();
 
     void printXReport();
+
+    boolean shiftIsOpen();
+    boolean openShift();
 }
