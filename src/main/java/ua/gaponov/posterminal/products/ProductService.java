@@ -118,6 +118,7 @@ public class ProductService {
         StatementParameters<Object> parameters = StatementParameters.build(
                 product.getUnitName(),
                 product.isNeedExcise(),
+                product.getTaxGroup(),
                 product.getGuid(),
                 product.getName(),
                 product.getPrice(),
@@ -135,11 +136,11 @@ public class ProductService {
         }
 
         String sql = """
-                insert into products (unit_name, need_excise, product_guid, product_name, price,
+                insert into products (unit_name, need_excise, tax_group, product_guid, product_name, price,
                 no_discount, prostopay_product, product_code, sku, weight, org_guid
                 )
                 values
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
         helper.execSql(sql, parameters);
     }
@@ -148,6 +149,7 @@ public class ProductService {
         StatementParameters<Object> parameters = StatementParameters.build(
                 product.getName(),
                 product.getUnitName(),
+                product.getTaxGroup(),
                 product.getPrice(),
                 product.isBanDisckount(),
                 product.isProstoPayProduct(),
@@ -166,6 +168,7 @@ public class ProductService {
         String sql = """
                 update products set product_name= ?,
                 unit_name = ?,
+                tax_group = ?,
                 price= ?,
                 no_discount = ?,
                 prostopay_product = ?,

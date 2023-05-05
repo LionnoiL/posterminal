@@ -14,6 +14,7 @@ import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoReport;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoStatus;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.PayType;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.TaxGroup;
+import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
 
@@ -24,6 +25,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Objects;
+import ua.gaponov.posterminal.products.Product;
 
 import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
@@ -68,14 +70,21 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             row.setCost(detail.getPrice());
             row.setCode(detail.getProduct().getCode());
             row.setExciseCode(detail.getExcise());
-            row.setTaxGroup(TaxGroup.VAT_20);
+            row.setTaxGroup(getTaxGroup(detail.getProduct()));
             rows[detail.getLineNumber()-1] =row;
         }
         receipt.setRows(rows);
 
         Pay[] pays = new Pay[1];
         Pay pay = new Pay();
-        pay.setType(PayType.CASH);
+        if (order.getPayType().equals(PayTypes.CASH)){
+            pay.setType(PayType.CASH);
+        } else if (order.getPayType().equals(PayTypes.CARD)){
+            pay.setType(PayType.CARD);
+        } else {
+            return false;
+        }
+
         pay.setSum(order.getDocumentSum());
         pays[0] = pay;
 
@@ -95,6 +104,20 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         LOG.info("Z-report success");
 
         return false;
+    }
+
+    private TaxGroup getTaxGroup(Product product){
+        int taxGroup = product.getTaxGroup();
+        switch (taxGroup) {
+            case 1:
+                return TaxGroup.VAT_20;
+            case 4:
+                return TaxGroup.NO_VAT_5;
+            case 5:
+                 return TaxGroup.VAT_14;
+            default:
+                return TaxGroup.NO_VAT;
+        }
     }
 
     @Override
