@@ -62,33 +62,9 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         Receipt receipt = new Receipt();
         receipt.setSum(order.getDocumentSum());
 
-        Row[] rows = new Row[order.getDetails().size()];
-        for (OrderDetail detail : order.getDetails()) {
-            Row row = new Row();
-            row.setName(detail.getProduct().getName());
-            row.setCnt(detail.getQty());
-            row.setCost(detail.getPrice());
-            row.setCode(detail.getProduct().getCode());
-            row.setExciseCode(detail.getExcise());
-            row.setTaxGroup(getTaxGroup(detail.getProduct()));
-            rows[detail.getLineNumber()-1] =row;
-        }
-        receipt.setRows(rows);
+        addOrderRows(order, receipt);
+        addPays(order, receipt);
 
-        Pay[] pays = new Pay[1];
-        Pay pay = new Pay();
-        if (order.getPayType().equals(PayTypes.CASH)){
-            pay.setType(PayType.CASH);
-        } else if (order.getPayType().equals(PayTypes.CARD)){
-            pay.setType(PayType.CARD);
-        } else {
-            return false;
-        }
-
-        pay.setSum(order.getDocumentSum());
-        pays[0] = pay;
-
-        receipt.setPays(pays);
         fiscal.setReceipt(receipt);
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, fiscal);
 
@@ -104,6 +80,37 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         LOG.info("Z-report success");
 
         return false;
+    }
+
+    private void addPays(Order order, Receipt receipt) {
+        Pay[] pays = new Pay[1];
+        Pay pay = new Pay();
+        pay.setType(getPayType(order.getPayType()));
+        pay.setSum(order.getDocumentSum());
+        pays[0] = pay;
+        receipt.setPays(pays);
+    }
+
+    private PayType getPayType(PayTypes payTypes){
+        if (PayType.CARD.equals(payTypes)){
+            return PayType.CARD;
+        }
+        return PayType.CASH;
+    }
+
+    private void addOrderRows(Order order, Receipt receipt) {
+        Row[] rows = new Row[order.getDetails().size()];
+        for (OrderDetail detail : order.getDetails()) {
+            Row row = new Row();
+            row.setName(detail.getProduct().getName());
+            row.setCnt(detail.getQty());
+            row.setCost(detail.getPrice());
+            row.setCode(detail.getProduct().getCode());
+            row.setExciseCode(detail.getExcise());
+            row.setTaxGroup(getTaxGroup(detail.getProduct()));
+            rows[detail.getLineNumber()-1] =row;
+        }
+        receipt.setRows(rows);
     }
 
     private TaxGroup getTaxGroup(Product product){
