@@ -12,7 +12,7 @@ import lombok.ToString;
 public class InfoDocument {
 
     @SerializedName(value = "fisid")
-    private long fiscalId;
+    private String fiscalId;
     @SerializedName(value = "dt")
     private String date;
     @SerializedName(value = "docno")
@@ -22,7 +22,7 @@ public class InfoDocument {
     @SerializedName(value = "qr")
     private String qrCode;
     @SerializedName(value = "cancelid")
-    private int cancelId;
+    private String cancelId;
     @SerializedName(value = "isprint")
     private int isPrint;
     @SerializedName(value = "printinfo")

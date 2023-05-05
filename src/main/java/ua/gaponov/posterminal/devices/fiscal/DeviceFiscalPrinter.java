@@ -1,18 +1,12 @@
 package ua.gaponov.posterminal.devices.fiscal;
 
+import ua.gaponov.posterminal.documents.orders.Order;
+
 /**
  * @author Andriy Gaponov
  */
 public interface DeviceFiscalPrinter {
-    void beginReceipt();
-
-    boolean endReceipt();
-
-    void printLine(String sProductName, double dPrice, double dUnits, int taxInfo);
-
-    void printMessage(String sMessage);
-
-    void printTotal(String sPayment, double dPaid);
+    boolean printOrder(Order order);
 
     boolean printZReport();
 

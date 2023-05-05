@@ -5,9 +5,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Fiscal;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Pay;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Receipt;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Row;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoDocument;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoOpenShift;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoReport;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoStatus;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.PayType;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.TaxGroup;
+import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.documents.orders.OrderDetail;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -15,6 +23,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Objects;
 
 import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
@@ -34,31 +43,58 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
     }
 
     @Override
-    public void beginReceipt() {
+    public boolean printOrder(Order order) {
+        if (Objects.isNull(order)){
+            return false;
+        }
+
         if (!shiftIsOpen()){
             openShift();
         }
 
-    }
+        if (!shiftIsOpen()){
+            return false;
+        }
 
-    @Override
-    public boolean endReceipt() {
-        return true;
-    }
+        Fiscal fiscal = Fiscal.salesReceipt();
+        Receipt receipt = new Receipt();
+        receipt.setSum(order.getDocumentSum());
 
-    @Override
-    public void printLine(String sProductName, double dPrice, double dUnits, int taxInfo) {
+        Row[] rows = new Row[order.getDetails().size()];
+        for (OrderDetail detail : order.getDetails()) {
+            Row row = new Row();
+            row.setName(detail.getProduct().getName());
+            row.setCnt(detail.getQty());
+            row.setCost(detail.getPrice());
+            row.setCode(detail.getProduct().getCode());
+            row.setExciseCode(detail.getExcise());
+            row.setTaxGroup(TaxGroup.VAT_20);
+            rows[detail.getLineNumber()-1] =row;
+        }
+        receipt.setRows(rows);
 
-    }
+        Pay[] pays = new Pay[1];
+        Pay pay = new Pay();
+        pay.setType(PayType.CASH);
+        pay.setSum(order.getDocumentSum());
+        pays[0] = pay;
 
-    @Override
-    public void printMessage(String sMessage) {
+        receipt.setPays(pays);
+        fiscal.setReceipt(receipt);
+        VchasnoRequest request = VchasnoRequest.of(deviceName, token, fiscal);
 
-    }
+        try {
+            String sResponce = sendRequest(request);
+            Type type = new TypeToken<VchasnoResponce<InfoDocument>>(){}.getType();
+            VchasnoResponce<InfoDocument> vchasnoResponce = GSON.fromJson(sResponce, type);
+            //TODO print receipt
+            return vchasnoResponce.getRes()==0;
+        } catch (Exception e) {
+            LOG.error("Get z-report failed", e);
+        }
+        LOG.info("Z-report success");
 
-    @Override
-    public void printTotal(String sPayment, double dPaid) {
-
+        return false;
     }
 
     @Override

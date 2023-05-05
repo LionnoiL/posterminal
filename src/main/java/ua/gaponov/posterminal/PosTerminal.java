@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
+import ua.gaponov.posterminal.documents.orders.OrderService;
 import ua.gaponov.posterminal.forms.login.LoginForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
@@ -30,18 +31,7 @@ public class PosTerminal {
         ProstoPayService.loadProstoPayProducts();
 
         DeviceFiscalPrinter fiscal = new VchasnoFiscal("test 1", "B5Rq82gGE6zicywYi6Kcr7NX9XMTlOag");
-        System.out.println(fiscal.shiftIsOpen());
-
-        if (!fiscal.shiftIsOpen()){
-            fiscal.openShift();
-        }
-        if (fiscal.shiftIsOpen()){
-            //fiscal.printXReport();
-
-            //if (fiscal.printZReport()){
-            //   LOG.info("Close shift");
-            //}
-        }
+        fiscal.printOrder(OrderService.getByGuid("ec2b65a8-b2b8-4100-87c3-dcdb66bc4b3d"));
 
         LoginForm.main(null);
 

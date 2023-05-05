@@ -53,4 +53,10 @@ public class Fiscal {
         fiscal.setTask(Task.Z_REPORT);
         return fiscal;
     }
+
+    public static Fiscal salesReceipt(){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.SALES_RECEIPT);
+        return fiscal;
+    }
 }
