@@ -6,7 +6,7 @@ package ua.gaponov.posterminal.devices.fiscal;
 public interface DeviceFiscalPrinter {
     void beginReceipt();
 
-    void endReceipt();
+    boolean endReceipt();
 
     void printLine(String sProductName, double dPrice, double dUnits, int taxInfo);
 
@@ -14,7 +14,7 @@ public interface DeviceFiscalPrinter {
 
     void printTotal(String sPayment, double dPaid);
 
-    void printZReport();
+    boolean printZReport();
 
     void printXReport();
 

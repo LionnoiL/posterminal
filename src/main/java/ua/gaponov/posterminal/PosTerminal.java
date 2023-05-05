@@ -35,7 +35,13 @@ public class PosTerminal {
         if (!fiscal.shiftIsOpen()){
             fiscal.openShift();
         }
-        System.out.println(fiscal.shiftIsOpen());
+        if (fiscal.shiftIsOpen()){
+            //fiscal.printXReport();
+
+            //if (fiscal.printZReport()){
+            //   LOG.info("Close shift");
+            //}
+        }
 
         LoginForm.main(null);
 

@@ -1,16 +1,14 @@
-package ua.gaponov.posterminal.devices.fiscal.vchasno.entity;
+package ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.*;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Andriy Gaponov
  */
 @ToString
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
 public class InfoStatus {
 
     @SerializedName(value = "fisid")

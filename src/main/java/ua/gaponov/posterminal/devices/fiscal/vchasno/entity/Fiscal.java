@@ -41,4 +41,16 @@ public class Fiscal {
         fiscal.setTask(Task.OPEN_SHIFT);
         return fiscal;
     }
+
+    public static Fiscal xReport(){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.X_REPORT);
+        return fiscal;
+    }
+
+    public static Fiscal zReport(){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.Z_REPORT);
+        return fiscal;
+    }
 }

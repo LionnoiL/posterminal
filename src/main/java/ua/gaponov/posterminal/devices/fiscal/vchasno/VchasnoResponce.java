@@ -2,7 +2,6 @@ package ua.gaponov.posterminal.devices.fiscal.vchasno;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
-import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.InfoStatus;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Warning;
 
 /**

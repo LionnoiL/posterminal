@@ -5,8 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Fiscal;
-import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.InfoOpenShift;
-import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.InfoStatus;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoOpenShift;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoReport;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.InfoStatus;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -41,8 +42,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
     }
 
     @Override
-    public void endReceipt() {
-
+    public boolean endReceipt() {
+        return true;
     }
 
     @Override
@@ -61,14 +62,35 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
     }
 
     @Override
-    public void printZReport() {
-
+    public boolean printZReport() {
+        if (shiftIsOpen()){
+            VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.zReport());
+            try {
+                String sResponce = sendRequest(request);
+                Type type = new TypeToken<VchasnoResponce<InfoReport>>(){}.getType();
+                VchasnoResponce<InfoReport> vchasnoResponce = GSON.fromJson(sResponce, type);
+                //TODO print report
+                return vchasnoResponce.getRes()==0;
+            } catch (Exception e) {
+                LOG.error("Get z-report failed", e);
+            }
+            LOG.info("Z-report success");
+        }
+        return false;
     }
 
     @Override
     public void printXReport() {
         if (shiftIsOpen()){
-
+            VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.xReport());
+            try {
+                String sResponce = sendRequest(request);
+                Type type = new TypeToken<VchasnoResponce<InfoReport>>(){}.getType();
+                VchasnoResponce<InfoReport> vchasnoResponce = GSON.fromJson(sResponce, type);
+                //TODO print report
+            } catch (Exception e) {
+                LOG.error("Get x-report failed", e);
+            }
         }
     }
 
@@ -76,10 +98,13 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.openShift());
         try {
             String sResponce = sendRequest(request);
-            Type collectionType = new TypeToken<VchasnoResponce<InfoOpenShift>>(){}.getType();
-            VchasnoResponce<InfoOpenShift> vchasnoResponce = GSON.fromJson(sResponce, collectionType);
+            Type type = new TypeToken<VchasnoResponce<InfoOpenShift>>(){}.getType();
+            VchasnoResponce<InfoOpenShift> vchasnoResponce = GSON.fromJson(sResponce, type);
             if (vchasnoResponce.getRes()==0){
+                LOG.info("Shift open");
                 return true;
+            } else {
+                LOG.error("Open shift failed");
             }
         } catch (Exception e) {
             LOG.error("Open shift failed", e);
@@ -92,8 +117,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.status());
         try {
             String sResponce = sendRequest(request);
-            Type collectionType = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
-            VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, collectionType);
+            Type type = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
+            VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, type);
             if (vchasnoResponce.getRes()==0){
                 InfoStatus info = vchasnoResponce.getInfo();
                 return info.getShiftStatus()==1;
