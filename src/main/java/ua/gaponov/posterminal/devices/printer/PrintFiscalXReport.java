@@ -97,6 +97,9 @@ public class PrintFiscalXReport implements Printable {
         printString( 8, false, PrintReceipt.Align.LEFT, false, "Картка", false);
         printString( 8, false, PrintReceipt.Align.RIGHT, false, String.valueOf(report.getSaleCard()), true);
 
+        printString( 8, false, PrintReceipt.Align.LEFT, false, "Загалом", false);
+        printString( 8, false, PrintReceipt.Align.RIGHT, false, String.valueOf(report.getSaleCash() + report.getSaleCard()), true);
+
         printEmptyLine();
     }
 
@@ -110,6 +113,9 @@ public class PrintFiscalXReport implements Printable {
 
         printString( 8, false, PrintReceipt.Align.LEFT, false, "Картка", false);
         printString( 8, false, PrintReceipt.Align.RIGHT, false, String.valueOf(report.getReturnCard()), true);
+
+        printString( 8, false, PrintReceipt.Align.LEFT, false, "Загалом", false);
+        printString( 8, false, PrintReceipt.Align.RIGHT, false, String.valueOf(report.getReturnCash() + report.getReturnCard()), true);
 
         printEmptyLine();
     }
