@@ -2,8 +2,7 @@ package ua.gaponov.posterminal.devices.printer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.documents.orders.PrintReceipt;
+import ua.gaponov.posterminal.documents.orders.PrintOrder;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 import java.awt.*;
@@ -58,7 +57,7 @@ public class Printer {
 
     private void printString(int fontSize,
                              boolean bold,
-                             PrintReceipt.Align align,
+                             PrintOrder.Align align,
                              boolean wrap,
                              String text,
                              boolean addLine
@@ -109,65 +108,78 @@ public class Printer {
         currentLine = currentLine + FONT_MARGIN;
     }
 
+    public void printEmptyString(){
+        printLeft("", 8);
+    }
+
     public void printCenter(String text, int fontSize, boolean bold, boolean wrap){
-        printString(fontSize, bold,PrintReceipt.Align.CENTER, wrap,text, true);
+        printString(fontSize, bold, PrintOrder.Align.CENTER, wrap,text, true);
     }
 
     public void printCenter(String text, int fontSize, boolean wrap){
-        printString(fontSize, false,PrintReceipt.Align.CENTER, wrap,text, true);
+        printString(fontSize, false, PrintOrder.Align.CENTER, wrap,text, true);
     }
 
     public void printCenter(String text, int fontSize){
-        printString(fontSize, false,PrintReceipt.Align.CENTER, false,text, true);
+        printString(fontSize, false, PrintOrder.Align.CENTER, false,text, true);
     }
 
     public void printLeft(String text, int fontSize, boolean bold, boolean wrap){
-        printString(fontSize, bold,PrintReceipt.Align.LEFT, wrap,text, true);
+        printString(fontSize, bold, PrintOrder.Align.LEFT, wrap,text, true);
     }
 
     public void printLeft(String text, int fontSize, boolean wrap){
-        printString(fontSize, false,PrintReceipt.Align.LEFT, wrap,text, true);
+        printString(fontSize, false, PrintOrder.Align.LEFT, wrap,text, true);
     }
 
     public void printLeft(String text, int fontSize){
-        printString(fontSize, false,PrintReceipt.Align.LEFT, false,text, true);
+        printString(fontSize, false, PrintOrder.Align.LEFT, false,text, true);
     }
 
     public void printRight(String text, int fontSize, boolean bold, boolean wrap){
-        printString(fontSize, bold, PrintReceipt.Align.RIGHT, wrap, text, true);
+        printString(fontSize, bold, PrintOrder.Align.RIGHT, wrap, text, true);
     }
 
     public void printRight(String text, int fontSize, boolean wrap){
-        printString(fontSize, false,PrintReceipt.Align.RIGHT, wrap,text, true);
+        printString(fontSize, false, PrintOrder.Align.RIGHT, wrap,text, true);
     }
 
     public void printRight(String text, int fontSize){
-        printString(fontSize, false,PrintReceipt.Align.RIGHT, false,text, true);
+        printString(fontSize, false, PrintOrder.Align.RIGHT, false,text, true);
     }
 
     public void printTwoLines(String textLeft, String textRight, int fontSizeLeft, int fontSizeRight,
                               boolean boldLeft, boolean boldRight){
-        printString(fontSizeLeft, boldLeft,PrintReceipt.Align.LEFT, false,textLeft, false);
-        printString(fontSizeRight, boldRight,PrintReceipt.Align.RIGHT, false,textRight, true);
+        printString(fontSizeLeft, boldLeft, PrintOrder.Align.LEFT, false,textLeft, false);
+        printString(fontSizeRight, boldRight, PrintOrder.Align.RIGHT, false,textRight, true);
     }
 
     public void printTwoLines(String textLeft, String textRight, int fontSize,
                               boolean boldLeft, boolean boldRight){
-        printString(fontSize, boldLeft,PrintReceipt.Align.LEFT, false,textLeft, false);
-        printString(fontSize, boldRight,PrintReceipt.Align.RIGHT, false,textRight, true);
+        printString(fontSize, boldLeft, PrintOrder.Align.LEFT, false,textLeft, false);
+        printString(fontSize, boldRight, PrintOrder.Align.RIGHT, false,textRight, true);
     }
 
     public void printTwoLines(String textLeft, String textRight, int fontSize, boolean bold){
-        printString(fontSize, bold,PrintReceipt.Align.LEFT, false,textLeft, false);
-        printString(fontSize, bold,PrintReceipt.Align.RIGHT, false,textRight, true);
+        printString(fontSize, bold, PrintOrder.Align.LEFT, false,textLeft, false);
+        printString(fontSize, bold, PrintOrder.Align.RIGHT, false,textRight, true);
     }
 
     public void printTwoLines(String textLeft, String textRight, int fontSize){
-        printString(fontSize, false,PrintReceipt.Align.LEFT, false,textLeft, false);
-        printString(fontSize, false,PrintReceipt.Align.RIGHT, false,textRight, true);
+        printString(fontSize, false, PrintOrder.Align.LEFT, false,textLeft, false);
+        printString(fontSize, false, PrintOrder.Align.RIGHT, false,textRight, true);
     }
 
     public void printImage(BufferedImage image){
         g2d.drawImage(image, 1, currentLine, null);
+    }
+
+    public void printImage(BufferedImage image, boolean scaleByWidthPage){
+        if (scaleByWidthPage){
+            int scale = image.getWidth() / PAPER_WIDTH;
+            g2d.drawImage(image, 1, currentLine, image.getWidth(), image.getHeight() / scale,null);
+        } else {
+            g2d.drawImage(image, 1, currentLine, null);
+        }
     }
 }

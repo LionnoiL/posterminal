@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
-public class XReport {
+public class XReportDto {
 
     private double safe;
     private double moneyIn;

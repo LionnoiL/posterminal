@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
-import ua.gaponov.posterminal.devices.fiscal.XReport;
+import ua.gaponov.posterminal.devices.fiscal.XReportDto;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Fiscal;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Pay;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Receipt;
@@ -165,8 +165,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         }
     }
 
-    private XReport convertXReport(VchasnoResponce<InfoReport> vchasnoResponce){
-        XReport report = new XReport();
+    private XReportDto convertXReport(VchasnoResponce<InfoReport> vchasnoResponce){
+        XReportDto report = new XReportDto();
         InfoReport info = vchasnoResponce.getInfo();
 
         report.setSafe(info.getSafe());

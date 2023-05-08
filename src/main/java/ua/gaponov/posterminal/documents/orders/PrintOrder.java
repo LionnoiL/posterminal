@@ -18,12 +18,12 @@ import java.util.Objects;
 /**
  * @author Andriy Gaponov
  */
-public class PrintReceipt implements Printable {
+public class PrintOrder implements Printable {
 
     private final Order order;
     private Printer printer = new Printer(130, 1000, 0, 0, this);
 
-    public PrintReceipt(Order order) {
+    public PrintOrder(Order order) {
         this.order = order;
         printer.setCurrentLine(-120 + -30 * order.getDetails().size());
         try {
