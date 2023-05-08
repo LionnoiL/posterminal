@@ -3,7 +3,6 @@ package ua.gaponov.posterminal.devices.printer;
 import jakarta.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.gaponov.posterminal.devices.fiscal.XReport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +17,7 @@ import java.io.InputStream;
  */
 public class PrintFiscalOrder implements Printable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PrintFiscalXReport.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PrintFiscalOrder.class);
 
     private final int MARGIN = 0;
     private final int PAPER_WIDTH = 130;
@@ -77,9 +76,9 @@ public class PrintFiscalOrder implements Printable {
             BufferedImage image = ImageIO.read(is);
             int scale = image.getWidth() / PAPER_WIDTH;
 
-            g2d.drawImage(image, 1, 1, PAPER_WIDTH, image.getHeight()/ scale, null);
-        } catch (Exception ex){
-           //NOP
+            g2d.drawImage(image, 1, 1, PAPER_WIDTH, image.getHeight() / scale, null);
+        } catch (Exception ex) {
+            //NOP
         }
 
     }
