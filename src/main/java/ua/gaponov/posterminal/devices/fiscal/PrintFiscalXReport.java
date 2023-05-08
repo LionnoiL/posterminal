@@ -1,9 +1,9 @@
-package ua.gaponov.posterminal.devices.printer;
+package ua.gaponov.posterminal.devices.fiscal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.devices.fiscal.XReport;
+import ua.gaponov.posterminal.documents.orders.PrintReceipt;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.StringUtils;
 

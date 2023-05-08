@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.devices.printer;
+package ua.gaponov.posterminal.devices.fiscal;
 
 import jakarta.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;

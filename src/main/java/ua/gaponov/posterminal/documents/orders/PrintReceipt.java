@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.devices.printer;
+package ua.gaponov.posterminal.documents.orders;
 
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;

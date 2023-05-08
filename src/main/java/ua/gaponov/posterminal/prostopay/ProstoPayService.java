@@ -1,6 +1,5 @@
 package ua.gaponov.posterminal.prostopay;
 
-import ua.gaponov.posterminal.devices.printer.PrintCoffeeBarCode;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;

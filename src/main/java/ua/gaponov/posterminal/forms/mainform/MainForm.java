@@ -21,7 +21,7 @@ import ua.gaponov.posterminal.forms.options.OptionsForm;
 import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
 import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
-import ua.gaponov.posterminal.devices.printer.PrintReceipt;
+import ua.gaponov.posterminal.documents.orders.PrintReceipt;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.products.ProductService;
 import ua.gaponov.posterminal.utils.DialogUtils;

@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.devices.printer;
+package ua.gaponov.posterminal.prostopay;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -6,6 +6,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.devices.printer.Printer;
 import ua.gaponov.posterminal.products.Product;
 
 import javax.swing.*;
@@ -21,33 +22,17 @@ public class PrintCoffeeBarCode implements Printable {
     private static final Logger LOG = LoggerFactory.getLogger(PrintCoffeeBarCode.class);
     private final Product product;
     private final String qrCodeText;
-
-    private final int MARGIN = 0;
-    private final int PAPER_WIDTH = 130;
-    private final int PAPER_HEIGHT = 1000;
-    private PrinterJob printerJob;
-    private PageFormat pageFormat;
-    private Paper paper;
+    private Printer printer = new Printer(130, 1000, 0, 0, this);
 
     public PrintCoffeeBarCode(Product product, String qrCodeText) {
         this.product = product;
         this.qrCodeText = qrCodeText;
 
-        printerJob = PrinterJob.getPrinterJob();
-        pageFormat = printerJob.defaultPage();
-
-        paper = new Paper();
-        paper.setImageableArea(MARGIN, MARGIN, PAPER_WIDTH, PAPER_HEIGHT);
-        pageFormat.setPaper(paper);
-        pageFormat.setOrientation(PageFormat.PORTRAIT);
-        printerJob.setPrintable(this, pageFormat);
-        printerJob.setCopies(1);
-
         try {
-            printerJob.print();
+            printer.print();
         } catch (PrinterException ex) {
             LOG.error("Printing ProstoPay qr-code failed", ex);
-            JOptionPane.showMessageDialog(null, "Printing Failed, Error: " + ex.toString());
+            JOptionPane.showMessageDialog(null, "Printing Failed, Error: " + ex);
         }
     }
 
@@ -60,17 +45,16 @@ public class PrintCoffeeBarCode implements Printable {
     }
 
     @Override
-    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
         if (pageIndex > 0) {
             return NO_SUCH_PAGE;
         }
+        printer.setG2d((Graphics2D) graphics);
 
-        Graphics2D g2d = (Graphics2D) graphics;
-        g2d.setColor(Color.black);
-        g2d.setFont(new Font("Arial", Font.BOLD, 8));
-        g2d.drawString(product.getName(), 10, 10);
+        printer.printCenter(product.getName(), 8);
+
         try {
-            g2d.drawImage(generateQRCodeImage(qrCodeText), 1, 10, null);
+            printer.printImage(generateQRCodeImage(qrCodeText));
         } catch (Exception ex) {
             LOG.error("Generate ProstoPay qr-code failed", ex);
             throw new RuntimeException(ex);
