@@ -52,14 +52,12 @@ public class PrintCoffeeBarCode implements Printable {
         printer.setG2d((Graphics2D) graphics);
 
         printer.printCenter(product.getName(), 8);
-
         try {
             printer.printImage(generateQRCodeImage(qrCodeText));
         } catch (Exception ex) {
             LOG.error("Generate ProstoPay qr-code failed", ex);
             throw new RuntimeException(ex);
         }
-
         return 0;
     }
 

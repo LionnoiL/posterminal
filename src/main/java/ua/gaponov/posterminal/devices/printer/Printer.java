@@ -52,6 +52,10 @@ public class Printer {
         this.g2d = g2d;
     }
 
+    public void setCurrentLine(int currentLine) {
+        this.currentLine = currentLine;
+    }
+
     private void printString(int fontSize,
                              boolean bold,
                              PrintReceipt.Align align,

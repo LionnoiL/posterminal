@@ -1,53 +1,33 @@
 package ua.gaponov.posterminal.documents.orders;
 
-import ua.gaponov.posterminal.documents.orders.Order;
-import ua.gaponov.posterminal.documents.orders.OrderDetail;
-import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.devices.printer.Printer;
+import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
-import ua.gaponov.posterminal.utils.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.print.*;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
  */
 public class PrintReceipt implements Printable {
 
-    private final int MARGIN = 0;
-    private final int PAPER_WIDTH = 130;
-    private final int PAPER_HEIGHT = 1000;
-    private final int FONT_MARGIN = 10;
     private final Order order;
-    private PrinterJob printerJob;
-    private PageFormat pageFormat;
-    private Paper paper;
-    private int currentLine;
-    private Graphics2D g2d;
+    private Printer printer = new Printer(130, 1000, 0, 0, this);
 
     public PrintReceipt(Order order) {
-
-
         this.order = order;
-
-        currentLine = -120 + -30 * order.getDetails().size();
-
-        printerJob = PrinterJob.getPrinterJob();
-        pageFormat = printerJob.defaultPage();
-
-        paper = new Paper();
-        paper.setImageableArea(MARGIN, -1000, PAPER_WIDTH, PAPER_HEIGHT);
-        pageFormat.setPaper(paper);
-        pageFormat.setOrientation(PageFormat.PORTRAIT);
-        printerJob.setPrintable(this, pageFormat);
-
+        printer.setCurrentLine(-120 + -30 * order.getDetails().size());
         try {
-            printerJob.print();
+            printer.print();
         } catch (PrinterException ex) {
             JOptionPane.showMessageDialog(null, "Printing Failed, Error: " + ex.toString());
         }
@@ -58,9 +38,7 @@ public class PrintReceipt implements Printable {
         if (pageIndex > 0) {
             return NO_SUCH_PAGE;
         }
-
-        g2d = (Graphics2D) graphics;
-        g2d.setColor(Color.black);
+        printer.setG2d((Graphics2D) graphics);
 
         printTitle();
         printProducts();
@@ -70,142 +48,76 @@ public class PrintReceipt implements Printable {
         printCardInfo();
         printFooter();
 
-
-        g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-
         return PAGE_EXISTS;
     }
 
-    private void printString(Graphics2D g2d,
-                             int fontSize,
-                             boolean bold,
-                             Align align,
-                             boolean wrap,
-                             String text,
-                             boolean addLine
-    ) {
-        int fontStyle = bold ? Font.BOLD : Font.PLAIN;
-        g2d.setFont(new Font("Consolas", fontStyle, fontSize));
-
-        int textWidth = g2d.getFontMetrics().stringWidth(text);
-        int x = 0;
-
-        switch (align) {
-            case CENTER:
-                x = (PAPER_WIDTH - textWidth) / 2;
-                break;
-            case RIGHT:
-                x = PAPER_WIDTH - textWidth;
-                break;
-            default:
-                x = 0;
-        }
-        if (wrap) {
-            int fontWidth = textWidth / text.length();
-            int blockWidth = PAPER_WIDTH - x;
-            int fontCount = blockWidth / fontWidth;
-
-            String[] lineStrings = StringUtils.splitStringByCharCount(text, fontCount);
-            for (String lineString : lineStrings) {
-                drawString(g2d, x, currentLine, lineString);
-                if (addLine) {
-                    currentLine = currentLine + FONT_MARGIN;
-                }
-            }
-        } else {
-            drawString(g2d, x, currentLine, text);
-            if (addLine) {
-                currentLine = currentLine + FONT_MARGIN;
-            }
-        }
-
-    }
-
-    private void drawString(Graphics2D g2d, int x, int y, String text) {
-        g2d.drawString(text, x, y);
-    }
-
-    private void printHorizontalLine(Graphics2D g2d) {
-        g2d.drawLine(0, currentLine, PAPER_WIDTH, currentLine);
-        currentLine = currentLine + FONT_MARGIN;
-    }
-
     private void printTitle() {
-        printString(g2d, 10, true, Align.CENTER, false, AppProperties.shopName, true);
-        printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
-        printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
-        printString(g2d, 6, false, Align.RIGHT, false, "Продаж", true);
-        printString(g2d, 8, false, Align.CENTER, false, "Товарний чек №" + order.getOrderNumber(), true);
-        printString(g2d, 8, false, Align.CENTER, false, AppProperties.cashRegisterName, true);
-        printHorizontalLine(g2d);
+        printer.printCenter(AppProperties.shopName, 10, true, false);
+        printer.printCenter(AppProperties.shopAddress, 8, true, true);
+        printer.printTwoLines(DateUtils.getDateTimeNow(), "Продаж", 6, false);
+        printer.printCenter("Товарний чек №" + order.getOrderNumber(), 8);
+        printer.printCenter(AppProperties.cashRegisterName, 8);
+        printer.printHorizontalLine();
     }
 
     private void printOrganizations() {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
-            if (organizationDoubleEntry.getKey() == null) {
-                printString(g2d, 6, false, Align.LEFT, false, "", false);
-            } else {
-                printString(g2d, 6, false, Align.LEFT, false, organizationDoubleEntry.getKey().getName(), false);
+            String organizationName = "";
+            if (Objects.nonNull(organizationDoubleEntry.getKey())) {
+                organizationName = organizationDoubleEntry.getKey().getName();
             }
-            printString(g2d, 6, false, Align.RIGHT, false, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())), true);
+            printer.printTwoLines(organizationName, String.valueOf(RoundUtils.round(organizationDoubleEntry.getValue())), 6);
         }
-        printHorizontalLine(g2d);
+        printer.printHorizontalLine();
     }
 
     private void printTotals() {
-        printString(g2d, 8, false, Align.LEFT, false, "ПІДСУМОК", false);
-        printString(g2d, 8, false, Align.RIGHT, false,
-                RoundUtils.round(order.getDocumentSumWithoutDiscount()) +
-                        " " + AppProperties.currency, true);
+        printer.printTwoLines("ПІДСУМОК",
+                RoundUtils.round(order.getDocumentSumWithoutDiscount()) + " " + AppProperties.currency,
+                8);
     }
 
     private void printPays() {
-        printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
-        printString(g2d, 8, false, Align.RIGHT, false,
-                RoundUtils.round(order.getDiscountSum()) +
-                        " " + AppProperties.currency, true);
+        printer.printTwoLines("ЗНИЖКА СКЛАЛА",
+                RoundUtils.round(order.getDiscountSum()) + " " + AppProperties.currency,
+                8);
 
-        printString(g2d, 8, false, Align.LEFT, false, "ОКРУГЛЕННЯ", false);
         String sign = "+";
         if (order.getRoundSum() > 0) {
             sign = "-";
         }
-        printString(g2d, 8, false, Align.RIGHT, false,
-                sign + Math.abs(RoundUtils.round(order.getRoundSum())) +
-                        " " + AppProperties.currency, true);
+        printer.printTwoLines("ОКРУГЛЕННЯ",
+                sign + Math.abs(RoundUtils.round(order.getRoundSum())) + " " + AppProperties.currency,
+                8);
 
-        printString(g2d, 10, false, Align.LEFT, false, "ДО СПЛАТИ", false);
-        printString(g2d, 10, false, Align.RIGHT, false,
-                RoundUtils.round(order.getToPaySum()) +
-                        " " + AppProperties.currency, true);
+        printer.printTwoLines("ДО СПЛАТИ",
+                RoundUtils.round(order.getToPaySum()) + " " + AppProperties.currency,
+                10);
     }
 
     private void printCardInfo() {
         if (order.getCard() != null) {
-            printString(g2d, 8, true, Align.CENTER, false,
-                    "Поточна знижка по картці " + order.getCard().getDiscount() + "%", true
-            );
+            printer.printCenter("Поточна знижка по картці " + order.getCard().getDiscount() + "%",
+                    8, true, false);
         }
     }
 
     private void printFooter() {
-        printString(g2d, 10, true, Align.CENTER, false, "Дякуємо за покупку", true);
+        printer.printCenter("Дякуємо за покупку", 10, true, false);
     }
 
     private void printProducts() {
         List<OrderDetail> details = order.getDetails();
         for (OrderDetail detail : details) {
-            printString(g2d, 8, false, Align.LEFT, true, detail.getProduct().getName().toUpperCase(), true);
-            printString(g2d, 8, false, Align.RIGHT, false,
-                    detail.getQty() +
-                            "(" + detail.getProduct().getUnitName() + ")x" +
-                            detail.getPrice() +
-                            "=" +
-                            RoundUtils.round(detail.getSummaWithoutDiscount()), true
-            );
+            printer.printLeft(detail.getProduct().getName().toUpperCase(), 8, true);
+            printer.printRight(detail.getQty() +
+                    "(" + detail.getProduct().getUnitName() + ")x" +
+                    detail.getPrice() +
+                    "=" +
+                    RoundUtils.round(detail.getSummaWithoutDiscount()), 8);
         }
-        printHorizontalLine(g2d);
+        printer.printHorizontalLine();
     }
 
     public enum Align {
