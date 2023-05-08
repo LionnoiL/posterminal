@@ -17,6 +17,7 @@ public class PayForm extends javax.swing.JDialog {
     private PayTypes payType = PayTypes.CASH;
 
     private boolean ok;
+    private boolean printFiscal;
 
     private Order order;
     private boolean edit = false;
@@ -74,6 +75,7 @@ public class PayForm extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
         cardButton = new javax.swing.JButton();
         onlineButton = new javax.swing.JButton();
+        chkFiscalPrint = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         btnNumpad7 = new javax.swing.JButton();
         btnNumpad4 = new javax.swing.JButton();
@@ -139,6 +141,9 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
+        chkFiscalPrint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chkFiscalPrint.setText("Друкувати фіскальний чек");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,6 +155,8 @@ public class PayForm extends javax.swing.JDialog {
                 .addComponent(cardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(onlineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkFiscalPrint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,16 +164,17 @@ public class PayForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(onlineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(onlineButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cnclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cashButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkFiscalPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -476,6 +484,7 @@ public class PayForm extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         ok = true;
         summaPay = Double.parseDouble(lblPay.getText());
+        printFiscal = chkFiscalPrint.isSelected();
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -495,6 +504,7 @@ public class PayForm extends javax.swing.JDialog {
         if (payCard.isOK()) {
             ok = true;
             summaPay = Double.parseDouble(lblTotal.getText());
+            printFiscal = chkFiscalPrint.isSelected();
             dispose();
         }
     }//GEN-LAST:event_cardButtonActionPerformed
@@ -675,6 +685,10 @@ public class PayForm extends javax.swing.JDialog {
         return ok;
     }
 
+    public boolean isPrintFiscal() {
+        return printFiscal;
+    }
+
     public double getPay() {
         return summaPay;
     }
@@ -706,6 +720,7 @@ public class PayForm extends javax.swing.JDialog {
     private javax.swing.JButton btnNumpadCancel;
     private javax.swing.JButton cardButton;
     private javax.swing.JButton cashButton;
+    private javax.swing.JCheckBox chkFiscalPrint;
     private javax.swing.JButton cnclButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

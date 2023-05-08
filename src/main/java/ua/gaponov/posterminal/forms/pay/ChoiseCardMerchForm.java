@@ -169,8 +169,9 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     private void payOnTerminal(){
 
-        Terminal terminal = new IngenicoTerminal();
-        ok = terminal.pay(merchId, 100);
+       // Terminal terminal = new IngenicoTerminal();
+        //ok = terminal.pay(merchId, 100);
+        ok = true;//TODO
         dispose();
     }
 

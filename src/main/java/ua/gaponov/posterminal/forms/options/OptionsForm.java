@@ -29,14 +29,6 @@ public class OptionsForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -71,6 +63,10 @@ public class OptionsForm extends javax.swing.JFrame {
         }
         comboTerminalPort.setSelectedItem(AppProperties.terminalPort);
         comboDisplayPort.setSelectedItem(AppProperties.displayPort);
+
+        fldFiscalName.setText(AppProperties.fiscalName);
+        fldFiscalToken.setText(AppProperties.fiscalToken);
+        fldFiscalIp.setText(AppProperties.fiscalIp);
     }
 
     /**
@@ -107,6 +103,12 @@ public class OptionsForm extends javax.swing.JFrame {
         comboTerminalPort = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         comboDisplayPort = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        fldFiscalName = new javax.swing.JTextField();
+        fldFiscalToken = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        fldFiscalIp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -156,6 +158,14 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jLabel11.setText("Порт дісплею");
 
+        jLabel12.setText("Ім'я РРО");
+
+        jLabel13.setText("Токен РРО");
+
+        fldFiscalName.setToolTipText("");
+
+        jLabel14.setText("IP РРО");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,7 +201,10 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel11))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldShopAddress)
@@ -205,7 +218,10 @@ public class OptionsForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(fieldCashRegister))
                             .addComponent(comboTerminalPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDisplayPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(comboDisplayPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fldFiscalName)
+                            .addComponent(fldFiscalToken)
+                            .addComponent(fldFiscalIp))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,6 +270,17 @@ public class OptionsForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboDisplayPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(fldFiscalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(fldFiscalToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(fldFiscalIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -283,6 +310,10 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.terminalPort = (String) comboTerminalPort.getSelectedItem();
             AppProperties.displayPort = (String) comboDisplayPort.getSelectedItem();
 
+            AppProperties.fiscalName = fldFiscalName.getText();
+            AppProperties.fiscalToken = fldFiscalToken.getText();
+            AppProperties.fiscalIp = fldFiscalIp.getText();
+
             dispose();
         } catch (Exception e){
             DialogUtils.error(this, "Помилка збереження налаштувань!");
@@ -303,9 +334,15 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopGuid;
     private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
+    private javax.swing.JTextField fldFiscalIp;
+    private javax.swing.JTextField fldFiscalName;
+    private javax.swing.JTextField fldFiscalToken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

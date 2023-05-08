@@ -13,5 +13,12 @@ public interface DeviceFiscalPrinter {
     void printXReport();
 
     boolean shiftIsOpen();
+
     boolean openShift();
+
+    double getSafeMoney();
+
+    boolean moneyPlus(double money);
+
+    boolean moneyMinus(double money);
 }

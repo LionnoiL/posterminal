@@ -26,41 +26,34 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnNumpad1" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad2" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad3" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnNumpad4" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad5" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad6" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnNumpad7" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad8" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpad9" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <Component id="btnNumpad0" min="-2" pref="108" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNumpad7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad1" alignment="0" pref="76" max="32767" attributes="0"/>
+                          <Component id="btnNumpad0" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpadC" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNumpad8" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad2" alignment="0" pref="76" max="32767" attributes="0"/>
+                          <Component id="btnNumpadC" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNumpadCancel" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNumpad9" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad6" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNumpad3" alignment="0" pref="78" max="32767" attributes="0"/>
+                          <Component id="btnNumpadCancel" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="okButton" min="-2" pref="162" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cnclButton" min="-2" pref="179" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="okButton" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cnclButton" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jTextField1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -93,12 +86,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnNumpad0" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnNumpadCancel" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="btnNumpadC" pref="59" max="32767" attributes="0"/>
+                  <Component id="btnNumpadC" min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="okButton" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="cnclButton" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="cnclButton" alignment="1" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

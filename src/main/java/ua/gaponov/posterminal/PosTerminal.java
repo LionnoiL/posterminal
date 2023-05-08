@@ -30,14 +30,9 @@ public class PosTerminal {
         PropertiesUtils.loadProperties();
         ProstoPayService.loadProstoPayProducts();
 
-        DeviceFiscalPrinter fiscal = new VchasnoFiscal("test 1", "B5Rq82gGE6zicywYi6Kcr7NX9XMTlOag");
-        fiscal.printOrder(OrderService.getByGuid("ec2b65a8-b2b8-4100-87c3-dcdb66bc4b3d"));
-
         LoginForm.main(null);
 
         AppProperties.scheduler.setTimeReceived();
-
-
     }
 
     private static void setTheme() {

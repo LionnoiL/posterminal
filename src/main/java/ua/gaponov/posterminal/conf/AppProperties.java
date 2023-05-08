@@ -30,6 +30,9 @@ public class AppProperties {
     public static String terminalPort;
     public static String displayPort;
     public static Map<Product, Integer> prostoPayProducts = new HashMap<>();
+    public static String fiscalName;
+    public static String fiscalToken;
+    public static String fiscalIp;
     private AppProperties() {
     }
 }

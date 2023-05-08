@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.devices.fiscal.vchasno.entity;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.PayType;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.Task;
 
 /**
@@ -57,6 +58,20 @@ public class Fiscal {
     public static Fiscal salesReceipt(){
         Fiscal fiscal = new Fiscal();
         fiscal.setTask(Task.SALES_RECEIPT);
+        return fiscal;
+    }
+
+    public static Fiscal moneyMinus(double money){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.WITHDRAWAL_OF_MONEY);
+        fiscal.setCash(Cash.of(PayType.CASH, money, "", ""));
+        return fiscal;
+    }
+
+    public static Fiscal moneyPlus(double money){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.DEPOSITING_MONEY);
+        fiscal.setCash(Cash.of(PayType.CASH, money, "", ""));
         return fiscal;
     }
 }

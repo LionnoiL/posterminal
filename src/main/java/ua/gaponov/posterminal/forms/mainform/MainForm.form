@@ -59,45 +59,35 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-            <EtchetBorder/>
-          </Border>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="quickProductsButton" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btnInfoProduct" alignment="0" max="32767" attributes="0"/>
-                              <Component id="skuButton" max="32767" attributes="0"/>
-                              <Component id="btnMoney" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="barcodeButoon" pref="176" max="32767" attributes="0"/>
-                              <Component id="btnInfoShift" max="32767" attributes="0"/>
-                              <Component id="btnPay" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+              <Component id="jPanel5" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="quickProductsButton" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btnInfoProduct" alignment="0" max="32767" attributes="0"/>
+                      <Component id="skuButton" max="32767" attributes="0"/>
+                      <Component id="btnMoney" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="barcodeButoon" max="32767" attributes="0"/>
+                      <Component id="btnInfoShift" max="32767" attributes="0"/>
+                      <Component id="btnPay" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <Component id="jPanel6" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="btnFiscal" min="-2" pref="131" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel6" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="quickProductsButton" min="-2" pref="56" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -106,18 +96,24 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnInfoProduct" max="32767" attributes="0"/>
-                      <Component id="btnInfoShift" max="32767" attributes="0"/>
+                      <Component id="btnInfoProduct" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnInfoShift" min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnMoney" pref="64" max="32767" attributes="0"/>
-                      <Component id="btnPay" max="32767" attributes="0"/>
+                      <Component id="btnMoney" max="32767" attributes="0"/>
+                      <Component id="btnPay" min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel6" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel6" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnFiscal" min="-2" pref="56" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel5" min="-2" pref="419" max="-2" attributes="0"/>
+                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -126,7 +122,7 @@
         <Component class="javax.swing.JButton" name="quickProductsButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x428;&#x432;&#x438;&#x434;&#x43a;&#x456; &#x442;&#x43e;&#x432;&#x430;&#x440;&#x438;"/>
           </Properties>
@@ -137,7 +133,7 @@
         <Component class="javax.swing.JButton" name="barcodeButoon">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x428;&#x442;&#x440;&#x438;&#x445;&#x43a;&#x43e;&#x434;"/>
           </Properties>
@@ -148,7 +144,7 @@
         <Component class="javax.swing.JButton" name="skuButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x421;&#x41a;&#x42e;"/>
           </Properties>
@@ -162,87 +158,85 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inputQty" pref="372" max="32767" attributes="0"/>
-                          <Component id="btnEnterQty" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnNumpadC" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="btnNumpad4" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpadCancel" min="-2" pref="113" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnDeleteProductRow" pref="139" max="32767" attributes="0"/>
+                              <Component id="btnNumpad5" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNumpad6" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnNumpad0" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="btnNumpad1" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpadComa" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="btnNumpad2" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad05" max="32767" attributes="0"/>
+                              <Component id="btnNumpad3" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnNumpad1" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="btnNumpad0" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad2" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="btnNumpadComa" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad3" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnNumpad4" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad5" min="-2" pref="113" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad6" max="32767" attributes="0"/>
+                              <Component id="btnNumpad05" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnNumpad7" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="btnNumpadC" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad8" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="btnNumpadCancel" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNumpad9" max="32767" attributes="0"/>
+                              <Component id="btnDeleteProductRow" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="inputQty" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnNumpad7" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnNumpad8" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnNumpad9" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnEnterQty" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="inputQty" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnNumpad7" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad9" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnNumpad7" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad8" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad9" linkSize="1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnNumpad4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad6" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnNumpad4" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad5" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad6" linkSize="1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnNumpad1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad3" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnNumpad1" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad2" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad3" linkSize="1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnNumpad0" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpadComa" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnNumpad05" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnNumpad0" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpadComa" linkSize="1" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpad05" linkSize="1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnNumpadC" max="32767" attributes="0"/>
-                          <Component id="btnNumpadCancel" max="32767" attributes="0"/>
-                          <Component id="btnDeleteProductRow" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnNumpadC" linkSize="1" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnNumpadCancel" linkSize="1" pref="56" max="32767" attributes="0"/>
+                          <Component id="btnDeleteProductRow" linkSize="1" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEnterQty" min="-2" pref="54" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -426,7 +420,7 @@
         <Component class="javax.swing.JButton" name="btnInfoProduct">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&#x406;&#x43d;&#x444;&#x43e;&#x440;&#x43c;&#x430;&#x446;&#x456;&#x44f; &lt;br&gt;&#x43f;&#x440;&#x43e; &#x43f;&#x440;&#x43e;&#x434;&#x443;&#x43a;&#x442;&lt;/html&gt;"/>
           </Properties>
@@ -437,7 +431,7 @@
         <Component class="javax.swing.JButton" name="btnInfoShift">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&#x406;&#x43d;&#x444;&#x43e;&#x440;&#x43c;&#x430;&#x446;&#x456;&#x44f; &lt;br&gt;&#x43f;&#x440;&#x43e; &#x437;&#x43c;&#x456;&#x43d;&#x443;&lt;/html&gt;"/>
           </Properties>
@@ -448,7 +442,7 @@
         <Component class="javax.swing.JButton" name="btnMoney">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x413;&#x440;&#x43e;&#x448;&#x456;"/>
           </Properties>
@@ -462,7 +456,7 @@
               <Color blue="0" green="cc" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x41e;&#x43f;&#x43b;&#x430;&#x442;&#x430;"/>
           </Properties>
@@ -475,16 +469,40 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnAdditionally" min="-2" pref="131" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnAdditionally" min="-2" pref="56" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="btnAdditionally">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x414;&#x43e;&#x434;&#x430;&#x442;&#x43a;&#x43e;&#x432;&#x43e;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdditionallyActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btnFiscal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x420;&#x420;&#x41e;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiscalActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -569,7 +587,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="sumLabel" min="-2" pref="318" max="-2" attributes="0"/>
-                          <EmptySpace pref="234" max="32767" attributes="0"/>
+                          <EmptySpace pref="248" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -687,7 +705,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="558" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" alignment="0" pref="572" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

@@ -28,8 +28,10 @@ public class PrintReceipt implements Printable {
     private PageFormat pageFormat;
     private Paper paper;
     private int currentLine;
+    private Graphics2D g2d;
 
     public PrintReceipt(Order order) {
+
 
         this.order = order;
 
@@ -57,16 +59,16 @@ public class PrintReceipt implements Printable {
             return NO_SUCH_PAGE;
         }
 
-        Graphics2D g2d = (Graphics2D) graphics;
+        g2d = (Graphics2D) graphics;
         g2d.setColor(Color.black);
 
-        printTitle(g2d);
-        printProducts(g2d);
-        printOrganizations(g2d);
-        printTotals(g2d);
-        printPays(g2d);
-        printCardInfo(g2d);
-        printFooter(g2d);
+        printTitle();
+        printProducts();
+        printOrganizations();
+        printTotals();
+        printPays();
+        printCardInfo();
+        printFooter();
 
 
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
@@ -128,7 +130,7 @@ public class PrintReceipt implements Printable {
         currentLine = currentLine + FONT_MARGIN;
     }
 
-    private void printTitle(Graphics2D g2d) {
+    private void printTitle() {
         printString(g2d, 10, true, Align.CENTER, false, AppProperties.shopName, true);
         printString(g2d, 8, false, Align.CENTER, true, AppProperties.shopAddress, true);
         printString(g2d, 6, false, Align.LEFT, false, DateUtils.getDateTimeNow(), false);
@@ -138,7 +140,7 @@ public class PrintReceipt implements Printable {
         printHorizontalLine(g2d);
     }
 
-    private void printOrganizations(Graphics2D g2d) {
+    private void printOrganizations() {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
             if (organizationDoubleEntry.getKey() == null) {
@@ -151,14 +153,14 @@ public class PrintReceipt implements Printable {
         printHorizontalLine(g2d);
     }
 
-    private void printTotals(Graphics2D g2d) {
+    private void printTotals() {
         printString(g2d, 8, false, Align.LEFT, false, "ПІДСУМОК", false);
         printString(g2d, 8, false, Align.RIGHT, false,
                 RoundUtils.round(order.getDocumentSumWithoutDiscount()) +
                         " " + AppProperties.currency, true);
     }
 
-    private void printPays(Graphics2D g2d) {
+    private void printPays() {
         printString(g2d, 8, false, Align.LEFT, false, "ЗНИЖКА СКЛАЛА", false);
         printString(g2d, 8, false, Align.RIGHT, false,
                 RoundUtils.round(order.getDiscountSum()) +
@@ -179,7 +181,7 @@ public class PrintReceipt implements Printable {
                         " " + AppProperties.currency, true);
     }
 
-    private void printCardInfo(Graphics2D g2d) {
+    private void printCardInfo() {
         if (order.getCard() != null) {
             printString(g2d, 8, true, Align.CENTER, false,
                     "Поточна знижка по картці " + order.getCard().getDiscount() + "%", true
@@ -187,11 +189,11 @@ public class PrintReceipt implements Printable {
         }
     }
 
-    private void printFooter(Graphics2D g2d) {
+    private void printFooter() {
         printString(g2d, 10, true, Align.CENTER, false, "Дякуємо за покупку", true);
     }
 
-    private void printProducts(Graphics2D g2d) {
+    private void printProducts() {
         List<OrderDetail> details = order.getDetails();
         for (OrderDetail detail : details) {
             printString(g2d, 8, false, Align.LEFT, true, detail.getProduct().getName().toUpperCase(), true);

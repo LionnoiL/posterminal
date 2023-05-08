@@ -96,6 +96,9 @@ public class PropertiesUtils {
         saveApplicationProperties("terminal_port", AppProperties.terminalPort);
         saveApplicationProperties("cash_register_name", AppProperties.cashRegisterName);
         saveApplicationProperties("display_port", AppProperties.displayPort);
+        saveApplicationProperties("fiscal.name", AppProperties.fiscalName);
+        saveApplicationProperties("fiscal.token", AppProperties.fiscalToken);
+        saveApplicationProperties("fiscal.ip", AppProperties.fiscalIp);
     }
 
     public static void loadProperties() {
@@ -113,5 +116,8 @@ public class PropertiesUtils {
         AppProperties.terminalPort = getApplicationProperties("terminal_port");
         AppProperties.cashRegisterName = getApplicationProperties("cash_register_name");
         AppProperties.displayPort = getApplicationProperties("display_port");
+        AppProperties.fiscalName = getApplicationProperties("fiscal.name");
+        AppProperties.fiscalToken = getApplicationProperties("fiscal.token");
+        AppProperties.fiscalIp = getApplicationProperties("fiscal.ip");
     }
 }
