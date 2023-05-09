@@ -815,6 +815,8 @@ public class MainForm extends javax.swing.JFrame {
                         DialogUtils.error(this, "Fiscal print order failed");
                         LOG.error("Fiscal print order failed");
                         return;
+                    } else {
+                        order.setFiscalPrint(true);
                     }
                 }
 
