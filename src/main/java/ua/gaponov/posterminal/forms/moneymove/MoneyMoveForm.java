@@ -209,10 +209,15 @@ public class MoneyMoveForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        ok = true;
-        summaDoc = Double.parseDouble(fldSum.getText());
-        comment = fldComment.getText();
-        dispose();
+        try {
+            ok = true;
+            summaDoc = Double.parseDouble(fldSum.getText());
+            comment = fldComment.getText();
+            dispose();
+        } catch (Exception ex){
+            //NOP
+        }
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void cnclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnclButtonActionPerformed

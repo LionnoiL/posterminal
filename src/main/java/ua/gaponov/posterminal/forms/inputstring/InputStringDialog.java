@@ -135,7 +135,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        btnString.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnString.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btnString.setText("Й");
         btnString.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +143,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton2.setText("Ц");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +152,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton3.setText("У");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton4.setText("К");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +168,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton5.setText("Е");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +176,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton6.setText("Н");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +184,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton7.setText("Г");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +192,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton8.setText("Ш");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +200,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton9.setText("Щ");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +208,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton10.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton10.setText("З");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +216,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton11.setText("Х");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +224,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton12.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton12.setText("Ї");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +232,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        btnString1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnString1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btnString1.setText("Ф");
         btnString1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +240,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton13.setText("І");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +248,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton14.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton14.setText("В");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +256,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton15.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton15.setText("А");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +264,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton16.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton16.setText("П");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +272,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton17.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton17.setText("Р");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +280,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton18.setText("О");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +288,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton19.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton19.setText("Л");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +296,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton20.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton20.setText("Д");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +304,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton21.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton21.setText("Ж");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +312,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton22.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton22.setText("Є");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +320,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        btnString2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnString2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btnString2.setText("Я");
         btnString2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,7 +328,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton24.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton24.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton24.setText("Ч");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,7 +336,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton25.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton25.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton25.setText("С");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,7 +344,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton26.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton26.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton26.setText("М");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,7 +352,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton27.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton27.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton27.setText("И");
         jButton27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,7 +360,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton28.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton28.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton28.setText("Т");
         jButton28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,7 +368,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton29.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton29.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton29.setText("Ь");
         jButton29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,7 +376,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton30.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton30.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton30.setText("Б");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,7 +384,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton31.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton31.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton31.setText("Ю");
         jButton31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,7 +392,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton33.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton33.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton33.setText("%");
         jButton33.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,7 +400,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton34.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton34.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton34.setText(":");
         jButton34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,7 +408,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton35.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton35.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton35.setText(";");
         jButton35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,7 +416,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton36.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton36.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton36.setText("+");
         jButton36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -424,7 +424,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton37.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton37.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton37.setText("-");
         jButton37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,7 +438,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton39.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton39.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton39.setText("9");
         jButton39.setToolTipText("");
         jButton39.addActionListener(new java.awt.event.ActionListener() {
@@ -447,7 +447,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton40.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton40.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton40.setText("8");
         jButton40.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,7 +455,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton41.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton41.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton41.setText("7");
         jButton41.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,7 +463,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton42.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton42.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton42.setText("6");
         jButton42.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -471,7 +471,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton43.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton43.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton43.setText("5");
         jButton43.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,7 +479,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton44.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton44.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton44.setText("4");
         jButton44.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,7 +487,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton45.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton45.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton45.setText("3");
         jButton45.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,7 +495,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton46.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton46.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton46.setText("2");
         jButton46.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -503,7 +503,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton47.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton47.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton47.setText("1");
         jButton47.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,7 +511,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton48.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton48.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton48.setText("C");
         jButton48.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,7 +519,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton49.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton49.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton49.setText(",");
         jButton49.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,7 +527,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton50.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton50.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton50.setText("0");
         jButton50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,7 +535,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton51.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton51.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton51.setText(".");
         jButton51.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -543,7 +543,7 @@ public class InputStringDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton23.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jButton23.setText("'");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

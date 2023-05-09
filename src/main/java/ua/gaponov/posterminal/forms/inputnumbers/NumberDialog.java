@@ -51,7 +51,7 @@ public class NumberDialog extends javax.swing.JDialog {
 
         okButton = new javax.swing.JButton();
         cnclButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        fldNumber = new javax.swing.JTextField();
         btnNumpad7 = new javax.swing.JButton();
         btnNumpad8 = new javax.swing.JButton();
         btnNumpad9 = new javax.swing.JButton();
@@ -79,8 +79,8 @@ public class NumberDialog extends javax.swing.JDialog {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField1.setToolTipText("");
+        fldNumber.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        fldNumber.setToolTipText("");
 
         btnNumpad7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnNumpad7.addActionListener(new java.awt.event.ActionListener() {
@@ -194,14 +194,14 @@ public class NumberDialog extends javax.swing.JDialog {
                         .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cnclButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jTextField1))
+                    .addComponent(fldNumber))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnNumpad7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,7 +238,7 @@ public class NumberDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         ok = true;
-        number = jTextField1.getText();
+        number = fldNumber.getText();
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -287,16 +287,16 @@ public class NumberDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNumpadCancelActionPerformed
 
     private void btnNumpadCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumpadCActionPerformed
-        jTextField1.setText("");
+        fldNumber.setText("");
     }//GEN-LAST:event_btnNumpadCActionPerformed
 
     private void addDigitToQtyField(String digit){
-        jTextField1.setText(jTextField1.getText()+digit);
+        fldNumber.setText(fldNumber.getText()+digit);
     }
 
     private void deleteLastDigitInQtyField(){
-        if (jTextField1.getText().length()>0){
-            jTextField1.setText(jTextField1.getText().substring(0, jTextField1.getText().length() - 1));
+        if (fldNumber.getText().length()>0){
+            fldNumber.setText(fldNumber.getText().substring(0, fldNumber.getText().length() - 1));
         }
     }
 
@@ -345,7 +345,7 @@ public class NumberDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnNumpadC;
     private javax.swing.JButton btnNumpadCancel;
     private javax.swing.JButton cnclButton;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField fldNumber;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 }
