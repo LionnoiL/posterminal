@@ -840,6 +840,7 @@ public class MainForm extends javax.swing.JFrame {
                 return;
             }
 
+            //TODO print money move
 
         }
     }//GEN-LAST:event_btnMoneyActionPerformed

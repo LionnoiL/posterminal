@@ -2,6 +2,9 @@ package ua.gaponov.posterminal.forms.moneymove;
 
 import lombok.Getter;
 import ua.gaponov.posterminal.documents.MoveType;
+import ua.gaponov.posterminal.forms.inputnumbers.InputDecimalDialog;
+import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
+import ua.gaponov.posterminal.forms.inputstring.InputStringDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,12 +60,13 @@ public class MoneyMoveForm extends javax.swing.JDialog {
         btnCash = new javax.swing.JButton();
         btnTaxi = new javax.swing.JButton();
         btnCoffe = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNumberForm = new javax.swing.JButton();
+        btnStringForm = new javax.swing.JButton();
         btnMoveOut = new javax.swing.JButton();
         btnMoveIn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Рух коштів");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -108,9 +112,19 @@ public class MoneyMoveForm extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("<-");
+        btnNumberForm.setText("...");
+        btnNumberForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNumberFormActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("<-");
+        btnStringForm.setText("...");
+        btnStringForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStringFormActionPerformed(evt);
+            }
+        });
 
         btnMoveOut.setBackground(new java.awt.Color(255, 204, 204));
         btnMoveOut.setText("ВИДАЧА");
@@ -143,12 +157,12 @@ public class MoneyMoveForm extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(fldComment)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(btnStringForm, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(fldSum, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNumberForm, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnMoveOut, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnMoveIn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -172,12 +186,12 @@ public class MoneyMoveForm extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(fldSum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNumberForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMoveIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMoveOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStringForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addComponent(fldComment))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
@@ -229,6 +243,22 @@ public class MoneyMoveForm extends javax.swing.JDialog {
         btnMoveIn.setBackground(new java.awt.Color(255, 204, 204));
     }//GEN-LAST:event_btnMoveInActionPerformed
 
+    private void btnNumberFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumberFormActionPerformed
+        InputDecimalDialog dialog = InputDecimalDialog.getNumber(this);
+        dialog.setVisible(true);
+        if (dialog.isOK()) {
+            fldSum.setText(dialog.getNumber());
+        }
+    }//GEN-LAST:event_btnNumberFormActionPerformed
+
+    private void btnStringFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStringFormActionPerformed
+        InputStringDialog dialog = InputStringDialog.getDialog(this, fldComment.getText());
+        dialog.setVisible(true);
+        if (dialog.isOk()) {
+            fldComment.setText(dialog.getInputString());
+        }
+    }//GEN-LAST:event_btnStringFormActionPerformed
+
     public static MoneyMoveForm getMoneyMove(Component parent) {
         Window window = SwingUtilities.windowForComponent(parent);
 
@@ -259,12 +289,12 @@ public class MoneyMoveForm extends javax.swing.JDialog {
     private javax.swing.JButton btnCoffe;
     private javax.swing.JButton btnMoveIn;
     private javax.swing.JButton btnMoveOut;
+    private javax.swing.JButton btnNumberForm;
+    private javax.swing.JButton btnStringForm;
     private javax.swing.JButton btnTaxi;
     private javax.swing.JButton cnclButton;
     private javax.swing.JTextField fldComment;
     private javax.swing.JTextField fldSum;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton okButton;
