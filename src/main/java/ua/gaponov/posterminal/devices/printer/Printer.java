@@ -177,7 +177,7 @@ public class Printer {
     public void printImage(BufferedImage image, boolean scaleByWidthPage){
         if (scaleByWidthPage){
             int scale = image.getWidth() / PAPER_WIDTH;
-            g2d.drawImage(image, 1, currentLine, image.getWidth(), image.getHeight() / scale,null);
+            g2d.drawImage(image, 1, currentLine, PAPER_WIDTH, image.getHeight() / scale,null);
         } else {
             g2d.drawImage(image, 1, currentLine, null);
         }

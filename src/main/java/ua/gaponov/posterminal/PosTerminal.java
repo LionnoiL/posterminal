@@ -4,14 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
-import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
-import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
-import ua.gaponov.posterminal.documents.orders.OrderService;
 import ua.gaponov.posterminal.forms.login.LoginForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
+import ua.gaponov.posterminal.server.PosHttpServer;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * @author Andriy Gaponov
@@ -33,6 +32,20 @@ public class PosTerminal {
         LoginForm.main(null);
 
         AppProperties.scheduler.setTimeReceived();
+
+        startHttpServer();
+    }
+
+    private static void startHttpServer() {
+        final int port = 5555;
+        final String path = "/";
+        final int nThreads = 2;
+        try {
+            AppProperties.httpServer = new PosHttpServer(port, path, nThreads);
+            AppProperties.httpServer.start();
+        } catch (IOException e) {
+            LOG.error("PosServer start failed");
+        }
     }
 
     private static void setTheme() {
@@ -46,7 +59,7 @@ public class PosTerminal {
     public static void closeApp() {
         AppProperties.scheduler.getExchangeTimer().cancel();
         AppProperties.autoSaveScheduler.getTimer().cancel();
-
+        AppProperties.httpServer.stop();
         LOG.info("End application");
     }
 }

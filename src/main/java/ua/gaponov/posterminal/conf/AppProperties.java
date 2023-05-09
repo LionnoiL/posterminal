@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.conf;
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
 import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.server.PosHttpServer;
 import ua.gaponov.posterminal.users.User;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class AppProperties {
     public static String shopGuid;
     public static ExchangeScheduler scheduler = new ExchangeScheduler();
     public static OrderSaveScheduler autoSaveScheduler = new OrderSaveScheduler();
+    public static PosHttpServer httpServer;
     public static User currentUser;
     public static boolean exchangeRunning;
     public static String terminalPort;
@@ -33,6 +35,7 @@ public class AppProperties {
     public static String fiscalName;
     public static String fiscalToken;
     public static String fiscalIp;
+
     private AppProperties() {
     }
 }
