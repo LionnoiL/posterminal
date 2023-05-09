@@ -23,8 +23,8 @@ public class PosHttpServer {
     private ExecutorService threadPool;
 
     public PosHttpServer(int port, String path, int nThreads) throws IOException {
-        String loaclIpAddress = getLocalIpAddress();
-        InetSocketAddress localhost = new InetSocketAddress(loaclIpAddress, port);
+        String localIpAddress = getLocalIpAddress();
+        InetSocketAddress localhost = new InetSocketAddress(localIpAddress, port);
         HttpServer httpServer = HttpServer.create(localhost, 0);
         httpServer.createContext(path, new ServerHandler());
         threadPool = Executors.newFixedThreadPool(nThreads);
@@ -34,7 +34,9 @@ public class PosHttpServer {
 
     public void start() {
         server.start();
-        LOG.info("Started http server, listening port:{}", server.getAddress().getPort());
+        LOG.info("Started http server, listening port:{} on {}",
+                server.getAddress().getPort(),
+                server.getAddress().getHostString());
     }
 
     public void stop() {
