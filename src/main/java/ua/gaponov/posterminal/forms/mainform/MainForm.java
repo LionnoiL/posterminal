@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
+import ua.gaponov.posterminal.documents.moneymove.MoneyMove;
+import ua.gaponov.posterminal.documents.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
+import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
@@ -32,6 +35,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
@@ -821,7 +825,23 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoneyActionPerformed
-        refresh();
+        MoneyMoveForm moneyMoveForm = MoneyMoveForm.getMoneyMove(frame);
+        moneyMoveForm.setVisible(true);
+        if (moneyMoveForm.isOk()) {
+            MoneyMove moneyMoveDoc = new MoneyMove();
+            moneyMoveDoc.setDocumentSum(moneyMoveForm.getSummaDoc());
+            moneyMoveDoc.setMoveType(moneyMoveForm.getMoveType());
+            moneyMoveDoc.setComment(moneyMoveForm.getComment());
+            try {
+                MoneyMoveService.save(moneyMoveDoc);
+            } catch (SQLException ex) {
+                DialogUtils.error(this, "Помилка збереження оплати");
+                LOG.error("Error save money move", ex);
+                return;
+            }
+
+
+        }
     }//GEN-LAST:event_btnMoneyActionPerformed
 
     private void btnInfoShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoShiftActionPerformed

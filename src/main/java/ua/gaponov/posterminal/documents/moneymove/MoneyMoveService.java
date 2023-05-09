@@ -6,17 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
-import ua.gaponov.posterminal.documents.DocumentTypes;
-import ua.gaponov.posterminal.documents.MoveType;
-import ua.gaponov.posterminal.documents.orders.Order;
-import ua.gaponov.posterminal.documents.orders.OrderDatabaseMapper;
-import ua.gaponov.posterminal.documents.orders.OrderDetail;
-import ua.gaponov.posterminal.documents.orders.OrderDetailService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
@@ -74,7 +67,7 @@ public class MoneyMoveService {
     }
 
     public static DatabaseRequest getInsertRequest(MoneyMove moneyMove) {
-        moneyMove.setOrderNumber(getCount() + 1);
+        moneyMove.setMoneyMoveNumber(getCount() + 1);
         String sql = """
                     insert into money_move
                     (money_move_guid, money_move_number, summa_doc, move_type, comment_doc)
@@ -83,7 +76,7 @@ public class MoneyMoveService {
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(
                 moneyMove.getGuid(),
-                moneyMove.getOrderNumber(),
+                moneyMove.getMoneyMoveNumber(),
                 moneyMove.getDocumentSum(),
                 moneyMove.getMoveType().toString(),
                 moneyMove.getComment()

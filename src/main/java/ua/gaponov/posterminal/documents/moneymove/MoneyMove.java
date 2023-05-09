@@ -19,7 +19,7 @@ import java.util.UUID;
 public class MoneyMove {
 
     private String guid = UUID.randomUUID().toString();
-    private long orderNumber;
+    private long moneyMoveNumber;
     private LocalDateTime date;
     private transient boolean upload;
     private double documentSum;
