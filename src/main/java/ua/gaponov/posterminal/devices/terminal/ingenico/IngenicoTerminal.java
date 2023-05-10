@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.devices.terminal.ingenico;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.terminal.Terminal;
@@ -14,7 +15,7 @@ import ua.gaponov.posterminal.utils.DialogUtils;
 @Slf4j
 public class IngenicoTerminal implements Terminal {
 
-    private ActiveXComponent device;
+    private ActiveXComponent device = null;
 
     @Override
     public boolean pay(int merchId, double summa) {
@@ -52,7 +53,12 @@ public class IngenicoTerminal implements Terminal {
     }
 
     private void createDevice() {
-        device = new ActiveXComponent("ECRCommX.BPOS1Lib");
+        try {
+            device = new ActiveXComponent("ECRCommX.BPOS1Lib");
+        } catch (UnsatisfiedLinkError|NoClassDefFoundError ex){
+            log.error("Error create ingenico device: {}", ex);
+            throw new RuntimeException("Error create ingenico device");
+        }
     }
 
     private boolean open() {
@@ -69,7 +75,9 @@ public class IngenicoTerminal implements Terminal {
     }
 
     private void close() {
-        Dispatch.call(device, "CommClose");
+        if (Objects.nonNull(device)){
+            Dispatch.call(device, "CommClose");
+        }
     }
 
     private boolean isOpen() {
