@@ -3,10 +3,7 @@ create TABLE users (
     user_name     VARCHAR (50) NOT NULL UNIQUE,
     user_password VARCHAR (60) DEFAULT ('d41d8cd98f00b204e9800998ecf8427e'),
     active        boolean DEFAULT 1,
-    user_role     VARCHAR (20),
-    PRIMARY KEY (
-        user_guid
-    )
+    user_role     VARCHAR (20)
 );
 
 create TABLE organization (
@@ -16,7 +13,7 @@ create TABLE organization (
 );
 
 create TABLE products (
-    product_guid            VARCHAR (36) NOT NULL PRIMARY KEY,
+    product_guid            VARCHAR (36)  NOT NULL PRIMARY KEY,
     product_name            VARCHAR (150) NOT NULL,
     product_code            VARCHAR (11),
     price                   DOUBLE NOT NULL,
@@ -31,6 +28,10 @@ create TABLE products (
     unit_name               VARCHAR(10)     DEFAULT ('шт'),
     prostopay_product       BOOLEAN         DEFAULT (0),
     CONSTRAINT products_fk_organization FOREIGN KEY (org_guid) REFERENCES organization(org_guid)
+);
+
+CREATE INDEX idx_products_sku ON products (
+    sku
 );
 
 create TABLE eans (

@@ -14,6 +14,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     private int merchId;
     private boolean ok;
+    private double summa;
 
     /**
      * Creates new form ChoiseCardMerchForm
@@ -139,7 +140,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         payOnTerminal();
     }//GEN-LAST:event_thirdMerchActionPerformed
 
-    public static ChoiseCardMerchForm getPay(Component parent) {
+    public static ChoiseCardMerchForm getPay(Component parent, double summa) {
         Window window = SwingUtilities.windowForComponent(parent);
 
         ChoiseCardMerchForm dialog;
@@ -149,6 +150,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         } else {
             dialog = new ChoiseCardMerchForm((Dialog) window, true);
         }
+        dialog.summa = summa;
         dialog.init();
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());
@@ -168,10 +170,8 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
 
     private void payOnTerminal(){
-
-       // Terminal terminal = new IngenicoTerminal();
-        //ok = terminal.pay(merchId, 100);
-        ok = true;//TODO
+        Terminal terminal = new IngenicoTerminal();
+        ok = terminal.pay(merchId, summa);//TODO summa
         dispose();
     }
 

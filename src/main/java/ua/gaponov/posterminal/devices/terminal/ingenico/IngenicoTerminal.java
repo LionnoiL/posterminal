@@ -1,25 +1,20 @@
 package ua.gaponov.posterminal.devices.terminal.ingenico;
 
-import com.fazecast.jSerialComm.SerialPort;
-import ua.gaponov.posterminal.devices.exceptions.SequenceDoesNotMatchLengthException;
-import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
-import ua.gaponov.posterminal.devices.exceptions.TerminalInitializationFailedException;
-import ua.gaponov.posterminal.devices.exceptions.TerminalSerialLinkClosedException;
-import ua.gaponov.posterminal.devices.terminal.Terminal;
+import com.jacob.activeX.ActiveXComponent;
+import com.jacob.com.Dispatch;
+import com.jacob.com.Variant;
+import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.devices.terminal.Terminal;
 import ua.gaponov.posterminal.utils.DialogUtils;
-
-import java.io.UnsupportedEncodingException;
-
-import static com.fazecast.jSerialComm.SerialPort.NO_PARITY;
-import static ua.gaponov.posterminal.devices.terminal.ingenico.Constants.*;
 
 /**
  * @author Andriy Gaponov
  */
+@Slf4j
 public class IngenicoTerminal implements Terminal {
 
-    private SerialPort device;
+    private ActiveXComponent device;
 
     @Override
     public boolean pay(int merchId, double summa) {
@@ -30,21 +25,23 @@ public class IngenicoTerminal implements Terminal {
                 return false;
             }
 
-            TeliumAsk payment = new TeliumAsk(
-                    String.valueOf(merchId),
-                    TERMINAL_ANSWER_SET_FULLSIZED,
-                    TERMINAL_MODE_PAYMENT_DEBIT,
-                    TERMINAL_TYPE_PAYMENT_CARD,
-                    TERMINAL_NUMERIC_CURRENCY_UAH,
-                    TERMINAL_REQUEST_ANSWER_WAIT_FOR_TRANSACTION,
-                    TERMINAL_FORCE_AUTHORIZATION_DISABLE,
-                    summa
-            );
+            Dispatch.call(device, "Purchase", summa * 100, 0, merchId);
+            if (isOk(20)) {
+                log.info("RRN: " + Dispatch.call(device, "RRN").toString());
+                log.info("AuthCode: " + Dispatch.call(device, "AuthCode").toString());
 
-            boolean ask = ask(payment);
+                Dispatch.call(device, "Confirm");
+                if (isOk(20)) {
+                    return true;
+                }
+            } else {
+                close();
+                return false;
+            }
+
             close();
 
-            return ask;
+            return true;
         } catch (Exception e) {
             if (isOpen()) {
                 close();
@@ -55,93 +52,45 @@ public class IngenicoTerminal implements Terminal {
     }
 
     private void createDevice() {
-        device = SerialPort.getCommPort(AppProperties.terminalPort);
-        device.setBaudRate(9600);
-        device.setNumDataBits(8);
-        device.setParity(NO_PARITY);
-        device.setNumStopBits(1);
+        device = new ActiveXComponent("ECRCommX.BPOS1Lib");
     }
 
     private boolean open() {
-        return device.openPort();
+        int com = 1;
+        try {
+            String terminalPort = AppProperties.terminalPort;
+            com = Integer.parseInt(terminalPort.replace("COM", ""));
+        } catch (Exception ex){
+            return false;
+        }
+
+        Dispatch.call(device, "CommOpen", com, 11520);
+        return isOk(10);
     }
 
-    private boolean close() {
-        return device.closePort();
+    private void close() {
+        Dispatch.call(device, "CommClose");
     }
 
     private boolean isOpen() {
-        return device.isOpen();
+        return true;
     }
 
-    private void sendSignal(String signal) throws SignalDoesNotExistException {
-        if (!CONTROL_NAMES.contains(signal)) {
-            throw new SignalDoesNotExistException("The " + TERMINAL_DATA_ENCODING + signal + " code doesn't exist.");
-        }
-
-        int index = CONTROL_NAMES.indexOf(signal);
-        char code = (char) index;
-        byte[] charBytes = {(byte) code};
-        device.writeBytes(charBytes, 1);
-    }
-
-    private boolean waitSignal(String signal) {
-        int index = CONTROL_NAMES.indexOf(signal);
-        char code = (char) index;
-        byte signalByte = (byte) code;
-
-        byte[] readBytes = new byte[1];
-        device.readBytes(readBytes, 1);
-        return readBytes[0] == signalByte;
-    }
-
-    private void send(String data) {
-        byte[] bytes;
-        try {
-            bytes = data.getBytes(TERMINAL_DATA_ENCODING);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-
-        device.writeBytes(bytes, bytes.length);
-    }
-
-    private boolean isOk() {
-        try {
-            sendSignal("ENQ");
-            if (!waitSignal("ACK")) {
+    private boolean isOk(int timeOut) {
+        long start = System.currentTimeMillis();
+        long end = start + timeOut * 1000;
+        while (System.currentTimeMillis() < end) {
+            Variant lastResult = Dispatch.call(device, "LastResult");
+            int resultInt = Integer.parseInt(lastResult.toString());
+            if (resultInt == 0) {
+                return resultInt == 0;
+            } else if (resultInt == 1) {
+                Variant lastErrorDescription = Dispatch.call(device, "LastErrorDescription");
+                DialogUtils.error(null, lastErrorDescription.toString());
+                log.error("Error ingenico: {}", lastErrorDescription.toString());
                 return false;
             }
-            sendSignal("EOT");
-        } catch (SignalDoesNotExistException e) {
-            return false;
         }
-        return true;
-    }
-
-    private boolean ask(TeliumAsk teliumAsk) throws
-            TerminalSerialLinkClosedException,
-            TerminalInitializationFailedException,
-            SignalDoesNotExistException,
-            SequenceDoesNotMatchLengthException {
-        if (!isOpen()) {
-            throw new TerminalSerialLinkClosedException("Your device isn\\'t opened yet.");
-        }
-
-        sendSignal("ENQ");
-        if (!waitSignal("ACK")) {
-            throw new TerminalInitializationFailedException("Payment terminal isn't ready to accept data from host. " +
-                    "Check if terminal is properly configured or not busy.");
-        }
-
-        send(teliumAsk.encode());
-
-        if (!waitSignal("ACK")) {
-            return false;
-        }
-
-        sendSignal("EOT");
-
-        return true;
+        return false;
     }
 }

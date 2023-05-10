@@ -499,7 +499,7 @@ public class PayForm extends javax.swing.JDialog {
 //        clearPayTypesButtonsColor();
 //        cardButton.setBackground(new java.awt.Color(255, 204, 204));
 
-        ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this);
+        ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this, RoundUtils.roundHalfUp(order.getDocumentSum()));
         payCard.setVisible(true);
         if (payCard.isOK()) {
             ok = true;

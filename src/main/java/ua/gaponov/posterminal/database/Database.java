@@ -19,7 +19,8 @@ public class Database {
 
     static {
         dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
+        //dataSource.setDriverClassName("org.sqlite.JDBC");
+        //dataSource.setUrl("jdbc:sqlite:./pos.db");
         dataSource.setUrl("jdbc:h2:./pos;TRACE_LEVEL_FILE=0;DEFRAG_ALWAYS=TRUE");
         dataSource.setUsername("");
         dataSource.setPassword("");
