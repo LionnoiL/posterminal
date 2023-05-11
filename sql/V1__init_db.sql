@@ -1,15 +1,18 @@
 create TABLE users (
-    user_guid     VARCHAR (36) NOT NULL PRIMARY KEY,
-    user_name     VARCHAR (50) NOT NULL UNIQUE,
-    user_password VARCHAR (60) DEFAULT ('d41d8cd98f00b204e9800998ecf8427e'),
-    active        boolean DEFAULT 1,
+    user_guid     VARCHAR (36)  NOT NULL PRIMARY KEY,
+    user_name     VARCHAR (50)  NOT NULL UNIQUE,
+    user_password VARCHAR (60)  DEFAULT ('d41d8cd98f00b204e9800998ecf8427e'),
+    active        boolean       DEFAULT 1,
     user_role     VARCHAR (20)
 );
 
 create TABLE organization (
-    org_guid VARCHAR (36) NOT NULL PRIMARY KEY,
-    org_name VARCHAR (150),
-    code     VARCHAR (9) 
+    org_guid     VARCHAR (36) NOT NULL PRIMARY KEY,
+    org_name     VARCHAR (150),
+    code         VARCHAR (9),
+    rro_name     VARCHAR (50),
+    rro_token    VARCHAR (36),
+    rro_active   boolean DEFAULT 1
 );
 
 create TABLE products (
@@ -69,12 +72,14 @@ create TABLE orders (
     summa_to_pay                DOUBLE,
     summa_discount              DOUBLE,
     summa_round                 DOUBLE,
-    doc_type                    VARCHAR(20)  DEFAULT ('ORDER'),
+    doc_type                    VARCHAR (20)  DEFAULT ('ORDER'),
     pay_type                    VARCHAR (20) DEFAULT ('CASH'),
     upload                      BOOLEAN      DEFAULT (0),
     fiscal                      BOOLEAN      DEFAULT (0),
     internet                    BOOLEAN      DEFAULT (0),
     fiscal_print                BOOLEAN      DEFAULT (0),
+    prn                         VARCHAR (50),
+    auth_code                   VARCHAR (50),
     CONSTRAINT orders_fk_cards FOREIGN KEY (card_guid) REFERENCES cards(card_guid)
 );
 
@@ -90,6 +95,8 @@ create TABLE orders_detail (
     summa_discount          DOUBLE       DEFAULT (0),
     summa                   DOUBLE       DEFAULT (0),
     excise                  VARCHAR (50),
+    org_guid                VARCHAR (36),
+    fiscal_print            BOOLEAN      DEFAULT (0),
     CONSTRAINT orders_detail_fk_orders FOREIGN KEY (order_guid) REFERENCES orders(order_guid),
     CONSTRAINT orders_detail_fk_productss FOREIGN KEY (product_guid) REFERENCES products(product_guid)
 );

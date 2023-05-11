@@ -17,6 +17,9 @@ public class OrganizationXmlBuilder {
             organization.setGuid(processor.getStringAttribute("guid_org"));
             organization.setCode(processor.getStringAttribute("code"));
             organization.setName(processor.getStringAttribute("name"));
+            organization.setRroName(processor.getStringAttribute("rro_name"));
+            organization.setRroToken(processor.getStringAttribute("rro_token"));
+            organization.setRroActive(processor.getBooleanAttribute("rro_active"));
 
         } catch (XMLStreamException ex) {
             Logger.getLogger(OrganizationXmlBuilder.class.getName()).log(Level.SEVERE, null, ex);

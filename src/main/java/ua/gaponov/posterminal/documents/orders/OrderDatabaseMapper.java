@@ -35,6 +35,8 @@ public class OrderDatabaseMapper implements Mapper<Order> {
             order.setUpload(rs.getBoolean("upload"));
             order.setPayType(PayTypes.valueOf(rs.getString("pay_type")));
             order.setOrderNumber(rs.getLong("order_number"));
+            order.setPrnCode(rs.getString("prn"));
+            order.setAuthCode(rs.getString("auth_code"));
 
             List<OrderDetail> details = OrderDetailService.getByOrder(order.getGuid());
             order.setDetails(details);

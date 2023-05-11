@@ -40,13 +40,16 @@ public class OrganizationService {
             StatementParameters parameters = StatementParameters.build(
                     organization.getCode(),
                     organization.getName(),
-                    organization.getGuid()
+                    organization.getGuid(),
+                    organization.getRroName(),
+                    organization.getRroToken(),
+                    organization.isRroActive()
             );
             String sql = """
-                    insert into organization (code, org_name, org_guid
+                    insert into organization (code, org_name, org_guid, rro_name, rro_token, rro_active
                     )
                     values
-                    (?, ?, ?)
+                    (?, ?, ?, ?, ?, ?)
                     """;
             new SqlHelper<Organization>().execSql(sql, parameters);
         }
@@ -57,10 +60,13 @@ public class OrganizationService {
             StatementParameters parameters = StatementParameters.build(
                     organization.getCode(),
                     organization.getName(),
+                    organization.getRroName(),
+                    organization.getRroToken(),
+                    organization.isRroActive(),
                     organization.getGuid()
             );
             String sql = """
-                    update organization set code= ?, org_name = ?
+                    update organization set code= ?, org_name = ?, rro_name = ?, rro_token = ?, rro_active = ?
                     where org_guid = ?
                     """;
             new SqlHelper<Organization>().execSql(sql, parameters);

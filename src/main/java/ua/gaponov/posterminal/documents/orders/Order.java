@@ -28,6 +28,8 @@ public class Order implements Serializable {
     private double toPaySum;
     private double discountSum;
     private PayTypes payType = PayTypes.CASH;
+    private String prnCode;
+    private String authCode;
     private boolean fiscal;
     private boolean internet;
     private boolean fiscalPrint;
@@ -137,6 +139,22 @@ public class Order implements Serializable {
 
     public void setDocumentSumWithoutDiscount(double documentSumWithoutDiscount) {
         this.documentSumWithoutDiscount = documentSumWithoutDiscount;
+    }
+
+    public String getPrnCode() {
+        return prnCode;
+    }
+
+    public void setPrnCode(String prnCode) {
+        this.prnCode = prnCode;
+    }
+
+    public String getAuthCode() {
+        return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
     }
 
     public double getToPaySum() {

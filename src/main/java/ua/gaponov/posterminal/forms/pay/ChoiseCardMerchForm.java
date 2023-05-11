@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.forms.pay;
 
 import ua.gaponov.posterminal.devices.terminal.Terminal;
 import ua.gaponov.posterminal.devices.terminal.ingenico.IngenicoTerminal;
+import ua.gaponov.posterminal.documents.orders.Order;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
     private int merchId;
     private boolean ok;
     private double summa;
+    private Order order;
 
     /**
      * Creates new form ChoiseCardMerchForm
@@ -140,7 +142,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         payOnTerminal();
     }//GEN-LAST:event_thirdMerchActionPerformed
 
-    public static ChoiseCardMerchForm getPay(Component parent, double summa) {
+    public static ChoiseCardMerchForm getPay(Component parent, double summa, Order order) {
         Window window = SwingUtilities.windowForComponent(parent);
 
         ChoiseCardMerchForm dialog;
@@ -151,6 +153,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
             dialog = new ChoiseCardMerchForm((Dialog) window, true);
         }
         dialog.summa = summa;
+        dialog.order = order;
         dialog.init();
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());
@@ -171,7 +174,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     private void payOnTerminal(){
         Terminal terminal = new IngenicoTerminal();
-        ok = terminal.pay(merchId, summa);//TODO summa
+        ok = terminal.pay(merchId, summa, order);//TODO summa
         dispose();
     }
 

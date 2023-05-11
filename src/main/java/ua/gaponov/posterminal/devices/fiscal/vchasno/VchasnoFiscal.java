@@ -77,9 +77,9 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             new PrintFiscalOrder(vchasnoResponce.getPrintFormImage());
             return vchasnoResponce.getRes()==0;
         } catch (Exception e) {
-            LOG.error("Get z-report failed", e);
+            LOG.error("Print fiscal order failed", e);
         }
-        LOG.info("Z-report success");
+        LOG.info("Print fiscal order success");
 
         return false;
     }

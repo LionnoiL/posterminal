@@ -7,6 +7,7 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.terminal.Terminal;
+import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 /**
@@ -18,7 +19,10 @@ public class IngenicoTerminal implements Terminal {
     private ActiveXComponent device = null;
 
     @Override
-    public boolean pay(int merchId, double summa) {
+    public boolean pay(int merchId, double summa, Order order) {
+        String prn;
+        String authCode;
+
         try {
             createDevice();
             open();
@@ -28,11 +32,13 @@ public class IngenicoTerminal implements Terminal {
 
             Dispatch.call(device, "Purchase", summa * 100, 0, merchId);
             if (isOk(20)) {
-                log.info("RRN: " + Dispatch.call(device, "RRN").toString());
-                log.info("AuthCode: " + Dispatch.call(device, "AuthCode").toString());
+                prn = Dispatch.call(device, "RRN").toString();
+                authCode = Dispatch.call(device, "AuthCode").toString();
 
                 Dispatch.call(device, "Confirm");
                 if (isOk(20)) {
+                    order.setPrnCode(prn);
+                    order.setAuthCode(authCode);
                     deleteDevice();
                     return true;
                 }
