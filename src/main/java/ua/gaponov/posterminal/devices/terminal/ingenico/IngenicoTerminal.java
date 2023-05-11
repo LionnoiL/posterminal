@@ -33,23 +33,31 @@ public class IngenicoTerminal implements Terminal {
 
                 Dispatch.call(device, "Confirm");
                 if (isOk(20)) {
+                    deleteDevice();
                     return true;
                 }
             } else {
                 close();
+                deleteDevice();
                 return false;
             }
 
             close();
 
+            deleteDevice();
             return true;
         } catch (Exception e) {
             if (isOpen()) {
                 close();
             }
+            deleteDevice();
             DialogUtils.error(null, e.getMessage());
             return false;
         }
+    }
+
+    private void deleteDevice(){
+        device.getObject().safeRelease();
     }
 
     private void createDevice() {
