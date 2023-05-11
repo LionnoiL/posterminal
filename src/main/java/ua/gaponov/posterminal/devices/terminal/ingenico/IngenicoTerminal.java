@@ -57,13 +57,15 @@ public class IngenicoTerminal implements Terminal {
     }
 
     private void deleteDevice(){
-        device.getObject().safeRelease();
+        if (Objects.nonNull(device)){
+            device.getObject().safeRelease();
+        }
     }
 
     private void createDevice() {
         try {
             device = new ActiveXComponent("ECRCommX.BPOS1Lib");
-        } catch (UnsatisfiedLinkError|NoClassDefFoundError ex){
+        } catch (Error|Exception ex){
             log.error("Error create ingenico device: {}", ex);
             throw new RuntimeException("Error create ingenico device");
         }
