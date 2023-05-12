@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.documents.DocumentTypes;
+import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.io.FileInputStream;
@@ -146,5 +147,19 @@ public class OrderService {
         }
 
         return order;
+    }
+
+    public static Order createOrderByOrganization(Order order, Organization organization){
+        Order tempOrder = new Order();
+        tempOrder.setCard(order.getCard());
+        tempOrder.setPayType(order.getPayType());
+        List<OrderDetail> details = order.getDetails();
+        for (OrderDetail detail : details) {
+            if (Objects.equals(detail.getProduct().getOrganization(), organization)){
+                tempOrder.getDetails().add(detail);
+            }
+        }
+        tempOrder.recalculateDocumentSum();
+        return tempOrder;
     }
 }

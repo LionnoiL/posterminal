@@ -26,6 +26,7 @@ public class Product implements Serializable {
     private String unitName;
     private boolean prostoPayProduct;
 
+    @Transient
     public boolean isProstoPayProduct() {
         return prostoPayProduct;
     }

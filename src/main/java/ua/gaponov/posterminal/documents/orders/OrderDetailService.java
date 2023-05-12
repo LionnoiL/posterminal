@@ -1,13 +1,11 @@
 package ua.gaponov.posterminal.documents.orders;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
@@ -31,9 +29,9 @@ public class OrderDetailService {
         String sqlInsertOrderDetail = """                  
                     insert into orders_detail
                     (orders_detail_guid, order_guid, line_number, product_guid, qty,
-                    price, summa_without_discount, summa_discount, summa, excise)
+                    price, summa_without_discount, summa_discount, summa, excise, fiscal_print, org_guid)
                     values
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
         StatementParameters<Object> sqlInsertParameters = StatementParameters.build(
                 orderDetail.getGuid(),
@@ -45,8 +43,15 @@ public class OrderDetailService {
                 orderDetail.getSummaWithoutDiscount(),
                 orderDetail.getSummaDiscount(),
                 orderDetail.getSumma(),
-                orderDetail.getExcise()
+                orderDetail.getExcise(),
+                orderDetail.isFiscalPrint()
         );
+
+        if (Objects.nonNull(orderDetail.getOrganization())) {
+            sqlInsertParameters.addAll(orderDetail.getOrganization().getGuid());
+        } else {
+            sqlInsertParameters.addNull();
+        }
 
         return new DatabaseRequest(sqlInsertOrderDetail, sqlInsertParameters);
     }

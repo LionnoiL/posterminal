@@ -1,9 +1,11 @@
 package ua.gaponov.posterminal.documents.orders;
 
 import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.products.Product;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,6 +24,8 @@ public class OrderDetail implements Serializable {
     private double summaWithoutDiscount;
     private double summaDiscount;
     private String excise;
+    private Organization organization;
+    private boolean fiscalPrint;
 
     public void recalculateDiscountsInRow(Card card) {
         double discountForProduct = 0;
@@ -32,6 +36,22 @@ public class OrderDetail implements Serializable {
         setSummaDiscount(RoundUtils.round(getSummaWithoutDiscount() * discountForProduct / 100)
         );
         setSumma(getSummaWithoutDiscount() - getSummaDiscount());
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public boolean isFiscalPrint() {
+        return fiscalPrint;
+    }
+
+    public void setFiscalPrint(boolean fiscalPrint) {
+        this.fiscalPrint = fiscalPrint;
     }
 
     public String getExcise() {

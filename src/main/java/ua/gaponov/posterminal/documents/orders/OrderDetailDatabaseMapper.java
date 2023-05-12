@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
+import ua.gaponov.posterminal.organization.OrganizationService;
 import ua.gaponov.posterminal.products.ProductService;
 
 import java.sql.ResultSet;
@@ -28,6 +29,8 @@ public class OrderDetailDatabaseMapper implements Mapper<OrderDetail> {
             orderDetail.setSummaWithoutDiscount(rs.getDouble("summa_without_discount"));
             orderDetail.setSummaDiscount(rs.getDouble("summa_discount"));
             orderDetail.setExcise(rs.getString("excise"));
+            orderDetail.setOrganization(OrganizationService.getByGuid(rs.getString("org_guid")));
+            orderDetail.setFiscalPrint(rs.getBoolean("fiscal_print"));
             return orderDetail;
         } catch (SQLException ex) {
             LOG.error("Mapping order detail failed", ex);

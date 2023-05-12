@@ -18,6 +18,9 @@ public class OrganizationDatabaseMapper implements Mapper<Organization> {
             organization.setGuid(rs.getString("org_guid"));
             organization.setName(rs.getString("org_name"));
             organization.setCode(rs.getString("code"));
+            organization.setRroName(rs.getString("rro_name"));
+            organization.setRroToken(rs.getString("rro_token"));
+            organization.setRroActive(rs.getBoolean("rro_active"));
 
             return organization;
         } catch (SQLException e) {

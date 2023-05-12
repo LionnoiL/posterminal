@@ -1,6 +1,7 @@
 package ua.gaponov.posterminal.devices.fiscal.vchasno;
 
 import com.google.gson.reflect.TypeToken;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -25,20 +26,27 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 import java.util.Objects;
+
+import ua.gaponov.posterminal.documents.orders.OrderService;
+import ua.gaponov.posterminal.organization.Organization;
+import ua.gaponov.posterminal.organization.OrganizationService;
 import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor
 public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     private static final Logger LOG = LoggerFactory.getLogger(VchasnoFiscal.class);
     private static final String VCHASNO_DEVICE_HOST = "http://"+ AppProperties.fiscalIp +":3939/dm/execute";
-    private final String deviceName;
-    private final String token;
+    private String deviceName;
+    private String token;
 
     public VchasnoFiscal(String deviceName, String token) {
         this.deviceName = deviceName;
@@ -47,6 +55,39 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     @Override
     public boolean printOrder(Order order) {
+        if (Objects.isNull(token) || token.isEmpty()){
+            return printFiscalOrderByOrganization(order);
+        } else {
+            return printAllRowsInOneFiscal(order);
+        }
+    }
+
+    private boolean printFiscalOrderByOrganization(Order order){
+        Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
+        for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
+            if (Objects.nonNull(organizationDoubleEntry.getKey())) {
+                Organization organization = OrganizationService.getByGuid(organizationDoubleEntry.getKey().getGuid());
+                if (organization.isRroActive()){
+                    Order tempOrder = OrderService.createOrderByOrganization(order, organization);
+                    DeviceFiscalPrinter fiscalPrinter = new VchasnoFiscal(organization.getRroName(), organization.getRroToken());
+                    if (!fiscalPrinter.printOrder(tempOrder)){
+                        return false;
+                    }
+                    for (OrderDetail detail : order.getDetails()) {
+                        for (OrderDetail tempOrderDetail : tempOrder.getDetails()) {
+                            if (Objects.equals(tempOrderDetail.getProduct(), detail.getProduct())){
+                                detail.setOrganization(organization);
+                                detail.setFiscalPrint(true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean printAllRowsInOneFiscal(Order order){
         if (Objects.isNull(order)){
             return false;
         }

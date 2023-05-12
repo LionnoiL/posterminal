@@ -57,7 +57,7 @@ public class MainForm extends javax.swing.JFrame {
     public transient Timer infoTimer = new Timer();
     private transient CustomerDisplay display = new LposDisplay();
 
-    private DeviceFiscalPrinter fiscal = new VchasnoFiscal(AppProperties.fiscalName, AppProperties.fiscalToken);
+    private DeviceFiscalPrinter fiscal = new VchasnoFiscal();
 
 
     /**
