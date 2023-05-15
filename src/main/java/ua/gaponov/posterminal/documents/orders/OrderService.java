@@ -37,6 +37,13 @@ public class OrderService {
                 new OrderDatabaseMapper());
     }
 
+    public static Order getByNumber(String number) {
+        StatementParameters<String> parameters = StatementParameters.build(number);
+        return helper.getOne("select * from orders where order_number = ?",
+                parameters,
+                new OrderDatabaseMapper());
+    }
+
     public static long getCount() {
         return helper.getCount("select count(order_guid) from orders");
     }

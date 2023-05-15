@@ -9,6 +9,7 @@ import ua.gaponov.posterminal.documents.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.documents.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
+import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
@@ -1005,7 +1006,11 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdditionallyActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        // TODO add your handling code here:
+        ReturnForm returnForm = ReturnForm.getReturn(frame);
+        returnForm.setVisible(true);
+        if (returnForm.isOk()) {
+
+        }
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void addDigitToQtyField(String digit) {
@@ -1171,6 +1176,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void loadColumnsWidth() {
+        try {
         jTableProducts.getColumn("Товар")
                 .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_product")));
         jTableProducts.getColumn("Одиниці")
@@ -1183,7 +1189,9 @@ public class MainForm extends javax.swing.JFrame {
                 .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_sum")));
         jTableProducts.getColumn("Акцизна марка")
                 .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_akciz")));
-
+        } catch (Exception e){
+            //NOP
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
