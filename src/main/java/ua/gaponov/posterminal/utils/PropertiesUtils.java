@@ -99,6 +99,7 @@ public class PropertiesUtils {
         saveApplicationProperties("fiscal.name", AppProperties.fiscalName);
         saveApplicationProperties("fiscal.token", AppProperties.fiscalToken);
         saveApplicationProperties("fiscal.ip", AppProperties.fiscalIp);
+        saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.fiscalAutoPlusMoneySum));
     }
 
     public static void loadProperties() {
@@ -119,5 +120,6 @@ public class PropertiesUtils {
         AppProperties.fiscalName = getApplicationProperties("fiscal.name");
         AppProperties.fiscalToken = getApplicationProperties("fiscal.token");
         AppProperties.fiscalIp = getApplicationProperties("fiscal.ip");
+        AppProperties.fiscalAutoPlusMoneySum = Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum"));
     }
 }

@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
+import ua.gaponov.posterminal.devices.fiscal.PrintFiscalOrder;
+import ua.gaponov.posterminal.devices.fiscal.PrintFiscalXReport;
 import ua.gaponov.posterminal.devices.fiscal.XReportDto;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Fiscal;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Pay;
@@ -14,11 +16,13 @@ import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Row;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.*;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.PayType;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.TaxGroup;
-import ua.gaponov.posterminal.devices.fiscal.PrintFiscalOrder;
-import ua.gaponov.posterminal.devices.fiscal.PrintFiscalXReport;
 import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
+import ua.gaponov.posterminal.documents.orders.OrderService;
+import ua.gaponov.posterminal.organization.Organization;
+import ua.gaponov.posterminal.organization.OrganizationService;
+import ua.gaponov.posterminal.products.Product;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -29,12 +33,6 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Objects;
 
-import ua.gaponov.posterminal.documents.orders.OrderService;
-import ua.gaponov.posterminal.organization.Organization;
-import ua.gaponov.posterminal.organization.OrganizationService;
-import ua.gaponov.posterminal.products.Product;
-import ua.gaponov.posterminal.utils.RoundUtils;
-
 import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
 /**
@@ -44,7 +42,7 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     private static final Logger LOG = LoggerFactory.getLogger(VchasnoFiscal.class);
-    private static final String VCHASNO_DEVICE_HOST = "http://"+ AppProperties.fiscalIp +":3939/dm/execute";
+    private static final String VCHASNO_DEVICE_HOST = "http://" + AppProperties.fiscalIp + ":3939/dm/execute";
     private String deviceName;
     private String token;
 
@@ -55,27 +53,27 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     @Override
     public boolean printOrder(Order order) {
-        if (Objects.isNull(token) || token.isEmpty()){
+        if (Objects.isNull(token) || token.isEmpty()) {
             return printFiscalOrderByOrganization(order);
         } else {
             return printAllRowsInOneFiscal(order);
         }
     }
 
-    private boolean printFiscalOrderByOrganization(Order order){
+    private boolean printFiscalOrderByOrganization(Order order) {
         Map<Organization, Double> totalsByOrganizations = order.getTotalsByOrganizations();
         for (Map.Entry<Organization, Double> organizationDoubleEntry : totalsByOrganizations.entrySet()) {
             if (Objects.nonNull(organizationDoubleEntry.getKey())) {
                 Organization organization = OrganizationService.getByGuid(organizationDoubleEntry.getKey().getGuid());
-                if (organization.isRroActive()){
+                if (organization.isRroActive()) {
                     Order tempOrder = OrderService.createOrderByOrganization(order, organization);
                     DeviceFiscalPrinter fiscalPrinter = new VchasnoFiscal(organization.getRroName(), organization.getRroToken());
-                    if (!fiscalPrinter.printOrder(tempOrder)){
+                    if (!fiscalPrinter.printOrder(tempOrder)) {
                         return false;
                     }
                     for (OrderDetail detail : order.getDetails()) {
                         for (OrderDetail tempOrderDetail : tempOrder.getDetails()) {
-                            if (Objects.equals(tempOrderDetail.getProduct(), detail.getProduct())){
+                            if (Objects.equals(tempOrderDetail.getProduct(), detail.getProduct())) {
                                 detail.setOrganization(organization);
                                 detail.setFiscalPrint(true);
                             }
@@ -87,16 +85,16 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         return true;
     }
 
-    private boolean printAllRowsInOneFiscal(Order order){
-        if (Objects.isNull(order)){
+    private boolean printAllRowsInOneFiscal(Order order) {
+        if (Objects.isNull(order)) {
             return false;
         }
 
-        if (!shiftIsOpen()){
+        if (!shiftIsOpen()) {
             openShift();
         }
 
-        if (!shiftIsOpen()){
+        if (!shiftIsOpen()) {
             return false;
         }
 
@@ -113,10 +111,11 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoDocument>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoDocument>>() {
+            }.getType();
             VchasnoResponce<InfoDocument> vchasnoResponce = GSON.fromJson(sResponce, type);
             new PrintFiscalOrder(vchasnoResponce.getPrintFormImage());
-            return vchasnoResponce.getRes()==0;
+            return vchasnoResponce.getRes() == 0;
         } catch (Exception e) {
             LOG.error("Print fiscal order failed", e);
         }
@@ -134,8 +133,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         receipt.setPays(pays);
     }
 
-    private PayType getPayType(PayTypes payTypes){
-        if (PayTypes.CARD.equals(payTypes)){
+    private PayType getPayType(PayTypes payTypes) {
+        if (PayTypes.CARD.equals(payTypes)) {
             return PayType.CARD;
         }
         return PayType.CASH;
@@ -153,13 +152,13 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             row.setCode(detail.getProduct().getCode());
             row.setExciseCode(detail.getExcise());
             row.setTaxGroup(getTaxGroup(detail.getProduct()));
-            rows[line] =row;
+            rows[line] = row;
             line = line + 1;
         }
         receipt.setRows(rows);
     }
 
-    private TaxGroup getTaxGroup(Product product){
+    private TaxGroup getTaxGroup(Product product) {
         int taxGroup = product.getTaxGroup();
         switch (taxGroup) {
             case 1:
@@ -167,7 +166,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             case 4:
                 return TaxGroup.NO_VAT_5;
             case 5:
-                 return TaxGroup.VAT_14;
+                return TaxGroup.VAT_14;
             default:
                 return TaxGroup.NO_VAT;
         }
@@ -175,14 +174,15 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     @Override
     public boolean printZReport() {
-        if (shiftIsOpen()){
+        if (shiftIsOpen()) {
             VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.zReport());
             try {
                 String sResponce = sendRequest(request);
-                Type type = new TypeToken<VchasnoResponce<InfoReport>>(){}.getType();
+                Type type = new TypeToken<VchasnoResponce<InfoReport>>() {
+                }.getType();
                 VchasnoResponce<InfoReport> vchasnoResponce = GSON.fromJson(sResponce, type);
                 //TODO print report
-                return vchasnoResponce.getRes()==0;
+                return vchasnoResponce.getRes() == 0;
             } catch (Exception e) {
                 LOG.error("Get z-report failed", e);
             }
@@ -193,11 +193,12 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     @Override
     public void printXReport() {
-        if (shiftIsOpen()){
+        if (shiftIsOpen()) {
             VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.xReport());
             try {
                 String sResponce = sendRequest(request);
-                Type type = new TypeToken<VchasnoResponce<InfoReport>>(){}.getType();
+                Type type = new TypeToken<VchasnoResponce<InfoReport>>() {
+                }.getType();
                 VchasnoResponce<InfoReport> vchasnoResponce = GSON.fromJson(sResponce, type);
                 new PrintFiscalXReport(convertXReport(vchasnoResponce));
             } catch (Exception e) {
@@ -206,7 +207,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         }
     }
 
-    private XReportDto convertXReport(VchasnoResponce<InfoReport> vchasnoResponce){
+    private XReportDto convertXReport(VchasnoResponce<InfoReport> vchasnoResponce) {
         XReportDto report = new XReportDto();
         InfoReport info = vchasnoResponce.getInfo();
 
@@ -214,11 +215,11 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
         ReportTotalPays[] pays = info.getPays();
         for (ReportTotalPays pay : pays) {
-            if (pay.getType() == 0){
+            if (pay.getType() == 0) {
                 report.setSaleCash(pay.getSumSale());
                 report.setReturnCash(pay.getSumReturn());
             }
-            if (pay.getType() == 2){
+            if (pay.getType() == 2) {
                 report.setSaleCard(pay.getSumSale());
                 report.setReturnCard(pay.getSumReturn());
             }
@@ -226,7 +227,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
         ReportTotalMoneys[] money = info.getMoney();
         for (ReportTotalMoneys reportTotalMoneys : money) {
-            if (reportTotalMoneys.getType() == 0){
+            if (reportTotalMoneys.getType() == 0) {
                 report.setMoneyIn(reportTotalMoneys.getSumSale());
                 report.setMoneyOut(reportTotalMoneys.getSumReturn());
             }
@@ -238,14 +239,18 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         return report;
     }
 
-    public boolean openShift(){
+    public boolean openShift() {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.openShift());
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoOpenShift>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoOpenShift>>() {
+            }.getType();
             VchasnoResponce<InfoOpenShift> vchasnoResponce = GSON.fromJson(sResponce, type);
-            if (vchasnoResponce.getRes()==0){
+            if (vchasnoResponce.getRes() == 0) {
                 LOG.info("Shift open");
+                if (AppProperties.fiscalAutoPlusMoneySum>0){
+                    moneyPlus(AppProperties.fiscalAutoPlusMoneySum);
+                }
                 return true;
             } else {
                 LOG.error("Open shift failed");
@@ -262,9 +267,10 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.status());
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoStatus>>() {
+            }.getType();
             VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, type);
-            if (vchasnoResponce.getRes()==0){
+            if (vchasnoResponce.getRes() == 0) {
                 InfoStatus info = vchasnoResponce.getInfo();
                 return info.getSafe();
             }
@@ -280,9 +286,10 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.moneyPlus(money));
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoStatus>>() {
+            }.getType();
             VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, type);
-            if (vchasnoResponce.getRes()==0){
+            if (vchasnoResponce.getRes() == 0) {
                 return true;
             }
         } catch (Exception e) {
@@ -297,9 +304,10 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.moneyMinus(money));
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoStatus>>() {
+            }.getType();
             VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, type);
-            if (vchasnoResponce.getRes()==0){
+            if (vchasnoResponce.getRes() == 0) {
                 return true;
             }
         } catch (Exception e) {
@@ -313,11 +321,12 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         VchasnoRequest request = VchasnoRequest.of(deviceName, token, Fiscal.status());
         try {
             String sResponce = sendRequest(request);
-            Type type = new TypeToken<VchasnoResponce<InfoStatus>>(){}.getType();
+            Type type = new TypeToken<VchasnoResponce<InfoStatus>>() {
+            }.getType();
             VchasnoResponce<InfoStatus> vchasnoResponce = GSON.fromJson(sResponce, type);
-            if (vchasnoResponce.getRes()==0){
+            if (vchasnoResponce.getRes() == 0) {
                 InfoStatus info = vchasnoResponce.getInfo();
-                return info.getShiftStatus()==1;
+                return info.getShiftStatus() == 1;
             }
         } catch (Exception e) {
             LOG.error("Get fiscal status failed", e);

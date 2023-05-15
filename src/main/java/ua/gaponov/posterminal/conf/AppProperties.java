@@ -35,6 +35,7 @@ public class AppProperties {
     public static String fiscalName;
     public static String fiscalToken;
     public static String fiscalIp;
+    public static double fiscalAutoPlusMoneySum;
 
     private AppProperties() {
     }

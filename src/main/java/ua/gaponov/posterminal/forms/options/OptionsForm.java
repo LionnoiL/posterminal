@@ -67,6 +67,7 @@ public class OptionsForm extends javax.swing.JFrame {
         fldFiscalName.setText(AppProperties.fiscalName);
         fldFiscalToken.setText(AppProperties.fiscalToken);
         fldFiscalIp.setText(AppProperties.fiscalIp);
+        fldFiscalAutoSum.setText(String.valueOf(AppProperties.fiscalAutoPlusMoneySum));
     }
 
     /**
@@ -109,6 +110,8 @@ public class OptionsForm extends javax.swing.JFrame {
         fldFiscalToken = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         fldFiscalIp = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        fldFiscalAutoSum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -166,6 +169,11 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jLabel14.setText("IP РРО");
 
+        jLabel15.setText("Розмінна монета");
+        jLabel15.setToolTipText("");
+
+        fldFiscalAutoSum.setToolTipText("Сума яка буде автомтатично внесена в фіскальний реєстратор при відкриті зміни");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,7 +212,8 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel14))
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldShopAddress)
@@ -221,7 +230,10 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(comboDisplayPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(fldFiscalName)
                             .addComponent(fldFiscalToken)
-                            .addComponent(fldFiscalIp))))
+                            .addComponent(fldFiscalIp)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fldFiscalAutoSum, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -281,7 +293,11 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(fldFiscalIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(fldFiscalAutoSum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -313,6 +329,7 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.fiscalName = fldFiscalName.getText();
             AppProperties.fiscalToken = fldFiscalToken.getText();
             AppProperties.fiscalIp = fldFiscalIp.getText();
+            AppProperties.fiscalAutoPlusMoneySum = Double.parseDouble(fldFiscalAutoSum.getText());
 
             dispose();
         } catch (Exception e){
@@ -334,6 +351,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopGuid;
     private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
+    private javax.swing.JTextField fldFiscalAutoSum;
     private javax.swing.JTextField fldFiscalIp;
     private javax.swing.JTextField fldFiscalName;
     private javax.swing.JTextField fldFiscalToken;
@@ -343,6 +361,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
