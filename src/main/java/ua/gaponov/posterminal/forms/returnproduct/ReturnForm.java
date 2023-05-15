@@ -4,6 +4,7 @@
  */
 package ua.gaponov.posterminal.forms.returnproduct;
 
+import java.util.Objects;
 import lombok.Getter;
 import ua.gaponov.posterminal.PosTerminal;
 import ua.gaponov.posterminal.documents.DocumentTypes;
@@ -69,9 +70,11 @@ public class ReturnForm extends javax.swing.JDialog {
     private void updateTable() {
         DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
         model.setRowCount(0);
-        List<OrderDetail> details = order.getDetails();
-        for (int i = 0; i < details.size(); i++) {
-            model.addRow(createRowTable(details.get(i)));
+        if (Objects.nonNull(order)){
+            List<OrderDetail> details = order.getDetails();
+            for (int i = 0; i < details.size(); i++) {
+                model.addRow(createRowTable(details.get(i)));
+            }
         }
     }
 
