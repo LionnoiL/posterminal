@@ -3,6 +3,7 @@ package ua.gaponov.posterminal.documents.orders;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import ua.gaponov.posterminal.cards.Card;
+import ua.gaponov.posterminal.documents.DocumentTypes;
 import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.products.Product;
@@ -34,6 +35,7 @@ public class Order implements Serializable {
     private boolean internet;
     private boolean fiscalPrint;
     private Card card;
+    private DocumentTypes documentType = DocumentTypes.ORDER;
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "detail")
     private List<OrderDetail> details = new ArrayList<>();
@@ -131,6 +133,14 @@ public class Order implements Serializable {
             }
         }
         return result;
+    }
+
+    public DocumentTypes getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(DocumentTypes documentType) {
+        this.documentType = documentType;
     }
 
     public double getDocumentSumWithoutDiscount() {

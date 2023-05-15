@@ -112,7 +112,7 @@ public class OrderService {
                 order.getDiscountSum(),
                 order.getRoundSum(),
                 order.getPaySum(),
-                DocumentTypes.ORDER.toString(),
+                order.getDocumentType().toString(),
                 order.getPayType().toString(),
                 false,
                 order.isFiscal(),

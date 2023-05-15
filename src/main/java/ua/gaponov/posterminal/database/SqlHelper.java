@@ -1,5 +1,9 @@
 package ua.gaponov.posterminal.database;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.documents.orders.OrderService;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +15,8 @@ import java.util.List;
  * @author Andriy Gaponov
  */
 public class SqlHelper<T> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SqlHelper.class);
 
     public SqlHelper() {
     }
@@ -49,6 +55,7 @@ public class SqlHelper<T> {
                 connection.commit();
             } catch (Exception ex) {
                 connection.rollback();
+                LOG.error("Database request execute failed. {}", ex);
             } finally {
                 connection.setAutoCommit(true);
             }

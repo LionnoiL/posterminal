@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.documents.orders;
 
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.printer.Printer;
+import ua.gaponov.posterminal.documents.DocumentTypes;
 import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
@@ -52,9 +53,13 @@ public class PrintOrder implements Printable {
     }
 
     private void printTitle() {
+        String documentType = "Продаж";
+        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
+            documentType = "Повернення";
+        }
         printer.printCenter(AppProperties.shopName, 10, true, false);
         printer.printCenter(AppProperties.shopAddress, 8, true, true);
-        printer.printTwoLines(DateUtils.getDateTimeNow(), "Продаж", 6, false);
+        printer.printTwoLines(DateUtils.getDateTimeNow(), documentType, 6, false);
         printer.printCenter("Товарний чек №" + order.getOrderNumber(), 8);
         printer.printCenter(AppProperties.cashRegisterName, 8);
         printer.printHorizontalLine();
@@ -91,8 +96,11 @@ public class PrintOrder implements Printable {
                 sign + Math.abs(RoundUtils.round(order.getRoundSum())) + " " + AppProperties.currency,
                 8);
 
-        printer.printTwoLines("ДО СПЛАТИ",
-                RoundUtils.round(order.getToPaySum()) + " " + AppProperties.currency,
+        String documentType = "ДО СПЛАТИ";
+        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
+            documentType = "ДО ПОВЕРНЕННЯ";
+        }
+        printer.printTwoLines(documentType,RoundUtils.round(order.getToPaySum()) + " " + AppProperties.currency,
                 10);
     }
 
