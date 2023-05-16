@@ -202,6 +202,7 @@ public class OrderService {
         newOrder.setAuthCode(null);
         newOrder.setUpload(false);
         newOrder.setPrnCode(null);
+        newOrder.setPaySum(0);
 
         return newOrder;
     }
