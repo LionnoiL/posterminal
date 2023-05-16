@@ -7,7 +7,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.devices.printer.Printer;
-import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.entity.products.Product;
 
 import javax.swing.*;
 import java.awt.*;

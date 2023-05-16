@@ -3,7 +3,7 @@ package ua.gaponov.posterminal.dataexchange;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 
 import java.util.List;
 

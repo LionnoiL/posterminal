@@ -1,8 +1,8 @@
 package ua.gaponov.posterminal.prostopay;
 
-import ua.gaponov.posterminal.documents.orders.Order;
-import ua.gaponov.posterminal.products.Product;
-import ua.gaponov.posterminal.products.ProductService;
+import ua.gaponov.posterminal.entity.orders.Order;
+import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.products.ProductService;
 import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.io.IOException;

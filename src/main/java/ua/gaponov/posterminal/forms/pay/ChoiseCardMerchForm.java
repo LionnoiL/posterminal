@@ -2,7 +2,7 @@ package ua.gaponov.posterminal.forms.pay;
 
 import ua.gaponov.posterminal.devices.terminal.Terminal;
 import ua.gaponov.posterminal.devices.terminal.ingenico.IngenicoTerminal;
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 
 import javax.swing.*;
 import java.awt.*;

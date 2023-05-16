@@ -4,16 +4,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 
-import ua.gaponov.posterminal.products.Product;
-import ua.gaponov.posterminal.quickproduct.QuickProduct;
-import ua.gaponov.posterminal.quickproduct.QuickProductService;
+import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
+import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.utils.StringUtils;
 
 /**

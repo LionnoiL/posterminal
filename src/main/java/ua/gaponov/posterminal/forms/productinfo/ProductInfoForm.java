@@ -4,8 +4,8 @@
  */
 package ua.gaponov.posterminal.forms.productinfo;
 
-import ua.gaponov.posterminal.products.Product;
-import ua.gaponov.posterminal.products.ProductService;
+import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.products.ProductService;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

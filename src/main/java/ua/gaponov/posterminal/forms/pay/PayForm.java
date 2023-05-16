@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal.forms.pay;
 
-import ua.gaponov.posterminal.documents.PayTypes;
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.PayTypes;
+import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
 import javax.swing.*;

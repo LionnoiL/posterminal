@@ -1,8 +1,8 @@
 package ua.gaponov.posterminal.autosaveorder;
 
 import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.documents.orders.Order;
-import ua.gaponov.posterminal.documents.orders.OrderService;
+import ua.gaponov.posterminal.entity.orders.Order;
+import ua.gaponov.posterminal.entity.orders.OrderService;
 
 import java.util.Calendar;
 import java.util.Timer;

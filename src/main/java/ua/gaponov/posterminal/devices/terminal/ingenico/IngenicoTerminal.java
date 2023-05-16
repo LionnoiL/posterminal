@@ -7,7 +7,7 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.terminal.Terminal;
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
 /**

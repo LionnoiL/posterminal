@@ -7,8 +7,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.documents.orders.Order;
-import ua.gaponov.posterminal.documents.orders.OrderService;
+import ua.gaponov.posterminal.entity.orders.Order;
+import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.util.List;

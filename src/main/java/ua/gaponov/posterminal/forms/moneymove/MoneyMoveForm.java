@@ -1,9 +1,8 @@
 package ua.gaponov.posterminal.forms.moneymove;
 
 import lombok.Getter;
-import ua.gaponov.posterminal.documents.MoveType;
+import ua.gaponov.posterminal.entity.MoveType;
 import ua.gaponov.posterminal.forms.inputnumbers.InputDecimalDialog;
-import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.forms.inputstring.InputStringDialog;
 
 import javax.swing.*;

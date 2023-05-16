@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.devices.fiscal;
 
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 
 /**
  * @author Andriy Gaponov

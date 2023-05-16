@@ -2,9 +2,9 @@ package ua.gaponov.posterminal.conf;
 
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
-import ua.gaponov.posterminal.products.Product;
+import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.server.PosHttpServer;
-import ua.gaponov.posterminal.users.User;
+import ua.gaponov.posterminal.entity.users.User;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,10 +3,9 @@ package ua.gaponov.posterminal.forms.login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.PosTerminal;
-import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.forms.mainform.MainForm;
-import ua.gaponov.posterminal.users.User;
-import ua.gaponov.posterminal.users.UserService;
+import ua.gaponov.posterminal.entity.users.User;
+import ua.gaponov.posterminal.entity.users.UserService;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import javax.swing.*;

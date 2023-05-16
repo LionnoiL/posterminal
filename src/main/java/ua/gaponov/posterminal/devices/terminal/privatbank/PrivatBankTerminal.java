@@ -1,7 +1,7 @@
 package ua.gaponov.posterminal.devices.terminal.privatbank;
 
 import ua.gaponov.posterminal.devices.terminal.Terminal;
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 
 /**
  * @author Andriy Gaponov

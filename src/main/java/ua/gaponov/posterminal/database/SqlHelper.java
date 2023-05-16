@@ -2,14 +2,15 @@ package ua.gaponov.posterminal.database;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.gaponov.posterminal.documents.orders.OrderService;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
@@ -110,6 +111,46 @@ public class SqlHelper<T> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result = resultSet.getInt(1);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public double getSum(String sql) {
+        double result = 0;
+        try (Connection connection = Database.getConnection();) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                BigDecimal sumResult = (BigDecimal) resultSet.getObject(1);
+                if (Objects.nonNull(sumResult)){
+                    result = result + sumResult.doubleValue ();
+                }
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public T getLast(String tableName, String resultFieldName, String idFieldName) {
+        String sql = "select "+resultFieldName+" from "+tableName+" order by "+idFieldName+" desc limit 1;";
+        T result = null;
+        try (Connection connection = Database.getConnection();) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                T sumResult = (T) resultSet.getObject(1);
+                if (Objects.nonNull(sumResult)){
+                    result = sumResult;
+                }
             }
             resultSet.close();
             statement.close();

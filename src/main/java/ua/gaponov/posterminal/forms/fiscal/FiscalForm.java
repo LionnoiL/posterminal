@@ -7,8 +7,8 @@ package ua.gaponov.posterminal.forms.fiscal;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
-import ua.gaponov.posterminal.organization.Organization;
-import ua.gaponov.posterminal.organization.OrganizationService;
+import ua.gaponov.posterminal.entity.organization.Organization;
+import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.utils.DialogUtils;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 

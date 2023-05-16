@@ -1,6 +1,6 @@
 package ua.gaponov.posterminal.devices.terminal;
 
-import ua.gaponov.posterminal.documents.orders.Order;
+import ua.gaponov.posterminal.entity.orders.Order;
 
 /**
  * @author Andriy Gaponov
