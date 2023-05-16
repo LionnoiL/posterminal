@@ -50,6 +50,9 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void sendSignal(String signal) throws SignalDoesNotExistException {
+        if (Objects.isNull(device)) {
+            return;
+        }
         if (!Constants.CONTROL_NAMES.contains(signal)) {
             throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal +
                     " code doesn't exist.");
@@ -62,12 +65,18 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void send(String data) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         byte[] bytes;
         bytes = data.getBytes();
         device.writeBytes(bytes, bytes.length);
     }
 
     private void send(byte[] data) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         device.writeBytes(data, data.length);
     }
 
@@ -80,6 +89,9 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void sendString(String data) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         data = replaceUkrainianChar(data);
 
         List<Character> characters = StringUtils.convertStringToCharList(data);
@@ -105,6 +117,9 @@ public class LposDisplay implements CustomerDisplay {
 
     @Override
     public void clearDisplay() {
+        if (Objects.isNull(device)) {
+            return;
+        }
         try {
             sendSignal("FF");
         } catch (SignalDoesNotExistException e) {
@@ -114,6 +129,9 @@ public class LposDisplay implements CustomerDisplay {
 
     @Override
     public void writeDisplay(String sLine1, String sLine2) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         open();
         if (isOpen()) {
             clearDisplay();
@@ -125,6 +143,9 @@ public class LposDisplay implements CustomerDisplay {
 
     @Override
     public void writeDisplay(String sLine1, String sLine2, String sLine3) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         open();
         if (isOpen()) {
             clearDisplay();
@@ -141,6 +162,9 @@ public class LposDisplay implements CustomerDisplay {
 
     @Override
     public void writeDisplay(String sLine1, String sLine2, String sLine3, String sLine4) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         int posRight;
         int spaceCount;
 
@@ -161,6 +185,9 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void writeFirstLine(String data) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         if (isOpen()) {
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");
@@ -170,6 +197,9 @@ public class LposDisplay implements CustomerDisplay {
     }
 
     private void writeSecondLine(String data) {
+        if (Objects.isNull(device)) {
+            return;
+        }
         if (isOpen()) {
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "fR");
             send((char) Constants.CONTROL_NAMES.indexOf("ESC") + "cR");

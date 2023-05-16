@@ -39,22 +39,6 @@ public class FiscalForm extends javax.swing.JDialog {
         loadColumnsWidth();
     }
 
-//    private void setCurrentFiscalDevice(Organization organization){
-//        fiscal = new VchasnoFiscal(organization.getRroName(), organization.getRroToken());
-//        String shiftStatus = "Зміна закрита";
-//        btnCloseShift.setEnabled(false);
-//        btnOpenShift.setEnabled(false);
-//        if (fiscal.shiftIsOpen()){
-//            double safeMoney = fiscal.getSafeMoney();
-//            shiftStatus = "Зміна відкрита. В сейфі " + safeMoney + " " + AppProperties.currency;
-//            btnCloseShift.setEnabled(true);
-//
-//        }else{
-//            btnOpenShift.setEnabled(true);
-//        }
-//        lblShiftInfo.setText(shiftStatus);
-//    }
-
     private void setCurrentFiscalDevice(){
         tblFiscals.changeSelection(selectedRow, 0, false, false);
         String orgGuid = (String) model.getValueAt(selectedRow, 3);
