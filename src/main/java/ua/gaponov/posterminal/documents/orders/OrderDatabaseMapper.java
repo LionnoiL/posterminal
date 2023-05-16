@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.cards.CardService;
 import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
+import ua.gaponov.posterminal.documents.DocumentTypes;
 import ua.gaponov.posterminal.documents.PayTypes;
 
 import java.sql.ResultSet;
@@ -37,6 +38,7 @@ public class OrderDatabaseMapper implements Mapper<Order> {
             order.setOrderNumber(rs.getLong("order_number"));
             order.setPrnCode(rs.getString("prn"));
             order.setAuthCode(rs.getString("auth_code"));
+            order.setDocumentType(DocumentTypes.valueOf(rs.getString("doc_type")));
 
             List<OrderDetail> details = OrderDetailService.getByOrder(order.getGuid());
             order.setDetails(details);

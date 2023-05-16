@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.documents.DocumentTypes;
+import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.organization.Organization;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author Andriy Gaponov
@@ -40,6 +42,16 @@ public class OrderService {
     public static Order getByNumber(String number) {
         StatementParameters<String> parameters = StatementParameters.build(number);
         return helper.getOne("select * from orders where order_number = ?",
+                parameters,
+                new OrderDatabaseMapper());
+    }
+
+    public static Order getByNumber(String number, boolean itsReturn) {
+        if (!itsReturn){
+            return getByNumber(number);
+        }
+        StatementParameters<String> parameters = StatementParameters.build(number);
+        return helper.getOne("select * from orders where order_number = ? and doc_type ='ORDER'",
                 parameters,
                 new OrderDatabaseMapper());
     }
@@ -160,6 +172,7 @@ public class OrderService {
         Order tempOrder = new Order();
         tempOrder.setCard(order.getCard());
         tempOrder.setPayType(order.getPayType());
+        tempOrder.setDocumentType(order.getDocumentType());
         List<OrderDetail> details = order.getDetails();
         for (OrderDetail detail : details) {
             if (Objects.equals(detail.getProduct().getOrganization(), organization)){
@@ -168,5 +181,28 @@ public class OrderService {
         }
         tempOrder.recalculateDocumentSum();
         return tempOrder;
+    }
+
+    public static Order copyOrder(Order order){
+        Order newOrder;
+        try {
+            newOrder = (Order) order.clone();
+        } catch (CloneNotSupportedException e) {
+            newOrder = new Order();
+        }
+        newOrder.setGuid(UUID.randomUUID().toString());
+        for (OrderDetail detail : newOrder.getDetails()) {
+            detail.setGuid(UUID.randomUUID().toString());
+            detail.setFiscalPrint(false);
+            detail.setOrganization(null);
+        }
+        newOrder.setDocumentType(DocumentTypes.RETURN);
+        newOrder.setPayType(PayTypes.CASH);
+        newOrder.setFiscalPrint(false);
+        newOrder.setAuthCode(null);
+        newOrder.setUpload(false);
+        newOrder.setPrnCode(null);
+
+        return newOrder;
     }
 }

@@ -644,8 +644,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(sumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(573, Short.MAX_VALUE))
+                        .addComponent(sumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -658,7 +658,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblDebt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addContainerGap(503, Short.MAX_VALUE))
                             .addComponent(lblCardCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1009,7 +1009,7 @@ public class MainForm extends javax.swing.JFrame {
         ReturnForm returnForm = ReturnForm.getReturn(frame);
         returnForm.setVisible(true);
         if (returnForm.isOk()) {
-
+            sumLabel.setText("Повернути "+RoundUtils.roundHalfUp(returnForm.getOrder().getDocumentSum()) + " " + AppProperties.currency);
         }
     }//GEN-LAST:event_btnReturnActionPerformed
 

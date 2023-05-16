@@ -16,6 +16,7 @@ import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.Row;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.entity.info.*;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.PayType;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.enums.TaxGroup;
+import ua.gaponov.posterminal.documents.DocumentTypes;
 import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
 import ua.gaponov.posterminal.documents.orders.OrderDetail;
@@ -68,6 +69,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
                 if (organization.isRroActive()) {
                     Order tempOrder = OrderService.createOrderByOrganization(order, organization);
                     DeviceFiscalPrinter fiscalPrinter = new VchasnoFiscal(organization.getRroName(), organization.getRroToken());
+
                     if (!fiscalPrinter.printOrder(tempOrder)) {
                         return false;
                     }
@@ -99,6 +101,9 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         }
 
         Fiscal fiscal = Fiscal.salesReceipt();
+        if (Objects.equals(DocumentTypes.RETURN,order.getDocumentType())){
+            fiscal = Fiscal.returnReceipt();
+        }
         Receipt receipt = new Receipt();
         receipt.setSum(order.getDocumentSum());
 

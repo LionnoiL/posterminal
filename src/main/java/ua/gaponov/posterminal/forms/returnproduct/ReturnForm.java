@@ -6,7 +6,10 @@ package ua.gaponov.posterminal.forms.returnproduct;
 
 import java.util.Objects;
 import lombok.Getter;
-import ua.gaponov.posterminal.PosTerminal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
+import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.documents.DocumentTypes;
 import ua.gaponov.posterminal.documents.PayTypes;
 import ua.gaponov.posterminal.documents.orders.Order;
@@ -14,6 +17,7 @@ import ua.gaponov.posterminal.documents.orders.OrderDetail;
 import ua.gaponov.posterminal.documents.orders.OrderService;
 import ua.gaponov.posterminal.documents.orders.PrintOrder;
 import ua.gaponov.posterminal.forms.inputnumbers.InputDecimalDialog;
+import ua.gaponov.posterminal.forms.mainform.MainForm;
 import ua.gaponov.posterminal.utils.DialogUtils;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
@@ -22,9 +26,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-import java.util.UUID;
-
-import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationProperties;
 
 /**
  *
@@ -33,6 +34,7 @@ import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationPro
 @Getter
 public class ReturnForm extends javax.swing.JDialog {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ReturnForm.class);
     private boolean ok;
     private Order order;
 
@@ -421,7 +423,12 @@ public class ReturnForm extends javax.swing.JDialog {
         dialog.setVisible(true);
         if (dialog.isOK()) {
             fldOrderNumber.setText(dialog.getNumber());
-            order = OrderService.getByNumber(dialog.getNumber());
+            Order oldOrder = OrderService.getByNumber(dialog.getNumber(), true);
+            if (Objects.nonNull(oldOrder)){
+                order = OrderService.copyOrder(oldOrder);
+                order.setDocumentType(DocumentTypes.RETURN);
+                order.setPayType(PayTypes.CASH);
+            }
             updateTable();
         }
     }//GEN-LAST:event_btnNumberFormActionPerformed
@@ -438,12 +445,19 @@ public class ReturnForm extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         if (DialogUtils.okcancel(null, "Підтвердження", "Провести повернення?") == 0) {
             try {
-                order.setGuid(UUID.randomUUID().toString());
-                for (OrderDetail detail : order.getDetails()) {
-                    detail.setGuid(UUID.randomUUID().toString());
+
+                order.recalculateDocumentSum();
+                if (chkFiscalPrint.isSelected()){
+                    DeviceFiscalPrinter fiscal = new VchasnoFiscal();
+                    if (!fiscal.printOrder(order)){
+                        DialogUtils.error(null, "Fiscal print return failed");
+                        LOG.error("Fiscal print return failed");
+                        return;
+                    } else {
+                        order.setFiscalPrint(true);
+                    }
                 }
-                order.setDocumentType(DocumentTypes.RETURN);
-                order.setPayType(PayTypes.CASH);
+
                 OrderService.save(order);
                 new PrintOrder(order);
                 ok = true;

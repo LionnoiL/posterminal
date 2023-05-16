@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * @author Andriy Gaponov
  */
-public class Order implements Serializable {
+public class Order implements Serializable, Cloneable {
     private String guid = UUID.randomUUID().toString();
     private long orderNumber;
     private LocalDateTime date;
@@ -112,7 +112,7 @@ public class Order implements Serializable {
 
         roundSum = RoundUtils.round(documentSum - RoundUtils.roundHalfUp(documentSum));
 
-        toPaySum = documentSum - roundSum;
+        toPaySum = RoundUtils.roundHalfUp(documentSum - roundSum);
     }
 
     public void recalculateAllRowsDiscounts() {
@@ -285,5 +285,10 @@ public class Order implements Serializable {
 
     public void setDetails(List<OrderDetail> details) {
         this.details = details;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

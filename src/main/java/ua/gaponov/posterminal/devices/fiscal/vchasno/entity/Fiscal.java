@@ -61,6 +61,12 @@ public class Fiscal {
         return fiscal;
     }
 
+    public static Fiscal returnReceipt(){
+        Fiscal fiscal = new Fiscal();
+        fiscal.setTask(Task.RETURN_RECEIPT);
+        return fiscal;
+    }
+
     public static Fiscal moneyMinus(double money){
         Fiscal fiscal = new Fiscal();
         fiscal.setTask(Task.WITHDRAWAL_OF_MONEY);
