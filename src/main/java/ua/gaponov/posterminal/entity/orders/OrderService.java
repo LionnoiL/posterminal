@@ -162,10 +162,14 @@ public class OrderService {
         double summaReturn = 0;
         double summaSafe = 0;
 
+        double toPaySum = order.getPaySum();
+        if (toPaySum>order.getToPaySum()){
+            toPaySum=order.getToPaySum();
+        }
         if (Objects.equals(PayTypes.CASH, order.getPayType())) {
-            summaCash = order.getToPaySum();
+            summaCash = toPaySum;
         } else if (Objects.equals(PayTypes.CARD, order.getPayType())) {
-            summaCard = order.getToPaySum();
+            summaCard = toPaySum;
         }
 
         if (Objects.equals(DocumentTypes.ORDER, order.getDocumentType())) {

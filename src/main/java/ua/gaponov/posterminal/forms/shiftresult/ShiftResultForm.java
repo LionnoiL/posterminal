@@ -8,6 +8,7 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.entity.shift.ShiftResultTotal;
 import ua.gaponov.posterminal.utils.DateUtils;
+import ua.gaponov.posterminal.utils.RoundUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -261,12 +262,12 @@ public class ShiftResultForm extends javax.swing.JDialog {
                 DateUtils.getDateTimeNow("yyyy-MM-dd 23:59:59")
         );
 
-        dialog.lblSales.setText(String.valueOf(shiftTotals.getSummaSale()));
-        dialog.lblreturns.setText(String.valueOf(shiftTotals.getSummaReturn()));
-        dialog.lblCash.setText(String.valueOf(shiftTotals.getSummaOrderCash()- shiftTotals.getSummaReturnCash()));
-        dialog.lblCard.setText(String.valueOf(shiftTotals.getSummaOrderCard()));
-        dialog.lblMoneyIn.setText(String.valueOf(shiftTotals.getSummaMoneyMoveIn()));
-        dialog.lblMoneyOut.setText(String.valueOf(shiftTotals.getSummaMoneyMoveOut()));
+        dialog.lblSales.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaSale())));
+        dialog.lblreturns.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaReturn())));
+        dialog.lblCash.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCash()- shiftTotals.getSummaReturnCash())));
+        dialog.lblCard.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCard())));
+        dialog.lblMoneyIn.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveIn())));
+        dialog.lblMoneyOut.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveOut())));
 
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());
