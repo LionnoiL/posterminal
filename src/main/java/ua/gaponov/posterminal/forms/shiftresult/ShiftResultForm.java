@@ -4,20 +4,30 @@
  */
 package ua.gaponov.posterminal.forms.shiftresult;
 
-import ua.gaponov.posterminal.forms.login.LoginForm;
+import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
  * @author wmcon
  */
-public class ShiftResultForm extends javax.swing.JFrame {
+public class ShiftResultForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ShiftResultForm
      */
-    public ShiftResultForm() {
+
+    public ShiftResultForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+    }
+
+    public ShiftResultForm(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+    }
+
+    private void init() {
         initComponents();
         setImages();
     }
@@ -227,15 +237,19 @@ public class ShiftResultForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cnclButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            ShiftResultForm frame = new ShiftResultForm();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
+    public static ShiftResultForm showDialog(Component parent) {
+        Window window = SwingUtilities.windowForComponent(parent);
+
+        ShiftResultForm dialog;
+        if (window instanceof Frame) {
+            dialog = new ShiftResultForm((Frame) window, true);
+        } else {
+            dialog = new ShiftResultForm((Dialog) window, true);
+        }
+        dialog.init();
+        dialog.setLocationRelativeTo(null);
+        dialog.applyComponentOrientation(parent.getComponentOrientation());
+        return dialog;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

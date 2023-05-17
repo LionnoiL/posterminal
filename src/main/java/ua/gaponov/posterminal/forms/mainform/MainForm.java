@@ -866,7 +866,9 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnInfoShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoShiftActionPerformed
         refresh();
-        ShiftResultForm.main(null);
+
+        ShiftResultForm shiftResultForm = ShiftResultForm.showDialog(frame);
+        shiftResultForm.setVisible(true);
     }//GEN-LAST:event_btnInfoShiftActionPerformed
 
     private void btnInfoProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoProductActionPerformed
