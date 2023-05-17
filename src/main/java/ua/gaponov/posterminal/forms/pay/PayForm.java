@@ -495,16 +495,13 @@ public class PayForm extends javax.swing.JDialog {
     }
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
-        setPayType(PayTypes.CARD);
-//        clearPayTypesButtonsColor();
-//        cardButton.setBackground(new java.awt.Color(255, 204, 204));
-
         ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this, RoundUtils.roundHalfUp(order.getDocumentSum()), order);
         payCard.setVisible(true);
         if (payCard.isOK()) {
             ok = true;
             summaPay = Double.parseDouble(lblTotal.getText());
             printFiscal = chkFiscalPrint.isSelected();
+            setPayType(PayTypes.CARD);
             dispose();
         }
     }//GEN-LAST:event_cardButtonActionPerformed

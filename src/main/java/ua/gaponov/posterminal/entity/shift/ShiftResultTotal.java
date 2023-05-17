@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 /**
  * @author Andriy Gaponov
  */
@@ -14,14 +12,10 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
-public class ShiftResult {
+public class ShiftResultTotal {
 
-    private long id;
-    private LocalDateTime date;
-    private String userGuid;
     private double summaOrderCash;
     private double summaReturnCash;
-    private double summaSafe;
     private double summaOrderCard;
     private double summaReturnCard;
     private double summaMoneyMoveIn;

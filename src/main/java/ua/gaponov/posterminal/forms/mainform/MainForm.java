@@ -7,6 +7,7 @@ import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
+import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
@@ -66,6 +67,8 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form mainForm
      */
     public MainForm() {
+        ShiftResultService.startShift();
+
         this.setUndecorated(true);
         initComponents();
         setImages();

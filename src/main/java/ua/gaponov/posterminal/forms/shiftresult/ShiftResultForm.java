@@ -4,7 +4,10 @@
  */
 package ua.gaponov.posterminal.forms.shiftresult;
 
-import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
+import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.entity.shift.ShiftResultService;
+import ua.gaponov.posterminal.entity.shift.ShiftResultTotal;
+import ua.gaponov.posterminal.utils.DateUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -176,7 +179,7 @@ public class ShiftResultForm extends javax.swing.JDialog {
                             .addComponent(lblMoneyOut)
                             .addComponent(lblCard)
                             .addComponent(lblMoneyIn)
-                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)))
+                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
                     .addComponent(jLabel2))
                 .addContainerGap())
         );
@@ -247,6 +250,24 @@ public class ShiftResultForm extends javax.swing.JDialog {
             dialog = new ShiftResultForm((Dialog) window, true);
         }
         dialog.init();
+
+        dialog.lblDate.setText(ShiftResultService.getShiftStartDate());
+        dialog.lblUser.setText(ShiftResultService.getShiftStartUserName());
+        dialog.lblMoneyStart.setText(ShiftResultService.getStartSumSafe() + " " + AppProperties.currency);
+        dialog.lblMoneyEnd.setText(ShiftResultService.getTotalSumSafe() + " " + AppProperties.currency);
+
+        ShiftResultTotal shiftTotals = ShiftResultService.getShiftTotals(
+                DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00"),
+                DateUtils.getDateTimeNow("yyyy-MM-dd 23:59:59")
+        );
+
+        dialog.lblSales.setText(String.valueOf(shiftTotals.getSummaSale()));
+        dialog.lblreturns.setText(String.valueOf(shiftTotals.getSummaReturn()));
+        dialog.lblCash.setText(String.valueOf(shiftTotals.getSummaOrderCash()- shiftTotals.getSummaReturnCash()));
+        dialog.lblCard.setText(String.valueOf(shiftTotals.getSummaOrderCard()));
+        dialog.lblMoneyIn.setText(String.valueOf(shiftTotals.getSummaMoneyMoveIn()));
+        dialog.lblMoneyOut.setText(String.valueOf(shiftTotals.getSummaMoneyMoveOut()));
+
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());
         return dialog;

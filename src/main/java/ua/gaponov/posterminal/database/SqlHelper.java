@@ -127,8 +127,8 @@ public class SqlHelper<T> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 BigDecimal sumResult = (BigDecimal) resultSet.getObject(1);
-                if (Objects.nonNull(sumResult)){
-                    result = result + sumResult.doubleValue ();
+                if (Objects.nonNull(sumResult)) {
+                    result = result + sumResult.doubleValue();
                 }
             }
             resultSet.close();
@@ -140,15 +140,35 @@ public class SqlHelper<T> {
     }
 
 
-    public T getLast(String tableName, String resultFieldName, String idFieldName) {
-        String sql = "select "+resultFieldName+" from "+tableName+" order by "+idFieldName+" desc limit 1;";
+    public T getLast(String tableName, String resultFieldName, String idFieldName, String where) {
+        String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " desc limit 1;";
         T result = null;
         try (Connection connection = Database.getConnection();) {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 T sumResult = (T) resultSet.getObject(1);
-                if (Objects.nonNull(sumResult)){
+                if (Objects.nonNull(sumResult)) {
+                    result = sumResult;
+                }
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public T getFirst(String tableName, String resultFieldName, String idFieldName, String where) {
+        String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " limit 1;";
+        T result = null;
+        try (Connection connection = Database.getConnection();) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                T sumResult = (T) resultSet.getObject(1);
+                if (Objects.nonNull(sumResult)) {
                     result = sumResult;
                 }
             }

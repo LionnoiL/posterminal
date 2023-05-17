@@ -26,9 +26,15 @@ public class UserService {
     }
 
     public static User getByName(String userName) {
-
         StatementParameters<String> parameters = StatementParameters.build(userName);
         return new SqlHelper<User>().getOne("select * from users where user_name = ?",
+                parameters,
+                new UserDatabaseMapper());
+    }
+
+    public static User getByGuid(String guid) {
+        StatementParameters<String> parameters = StatementParameters.build(guid);
+        return new SqlHelper<User>().getOne("select * from users where user_guid = ?",
                 parameters,
                 new UserDatabaseMapper());
     }
