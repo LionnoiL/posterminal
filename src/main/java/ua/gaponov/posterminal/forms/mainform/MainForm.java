@@ -10,6 +10,7 @@ import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
+import ua.gaponov.posterminal.forms.shiftresult.ShiftResultForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
@@ -865,6 +866,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnInfoShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoShiftActionPerformed
         refresh();
+        ShiftResultForm.main(null);
     }//GEN-LAST:event_btnInfoShiftActionPerformed
 
     private void btnInfoProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoProductActionPerformed

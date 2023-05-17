@@ -12,6 +12,9 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="&#x423;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x456;&#x43d;&#x43d;&#x44f; &#x444;&#x456;&#x441;&#x43a;&#x430;&#x43b;&#x44c;&#x43d;&#x438;&#x43c; &#x440;&#x435;&#x454;&#x441;&#x442;&#x440;&#x430;&#x442;&#x43e;&#x440;&#x43e;&#x43c;"/>
     <Property name="resizable" type="boolean" value="false"/>
+    <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
+      <Value id="UTILITY"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
