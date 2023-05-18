@@ -1,16 +1,20 @@
 package ua.gaponov.posterminal.entity.cards;
 
+import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.entity.products.Product;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Andriy Gaponov
  */
 public class CardService {
+
+    private static final SqlHelper<Card> helper = new SqlHelper<>();
 
     private CardService() {
     }
@@ -47,8 +51,35 @@ public class CardService {
     }
 
     private static void insert(Card card) throws SQLException {
+        List<DatabaseRequest> requestList = new ArrayList<>();
+        requestList.add(getInsertRequest(card));
+        helper.execSql(requestList);
+    }
+
+    private static void update(Card card) throws SQLException {
+        List<DatabaseRequest> requestList = new ArrayList<>();
+        requestList.add(getUpdateRequest(card));
+        helper.execSql(requestList);
+    }
+
+
+    public static DatabaseRequest getUpdateRequest(Card card) {
+        String sql = """
+                update CARDS set
+                    ACTIVE = ?,
+                    CARD_TYPE = ?,
+                    CLIENT_EMAIL = ?,
+                    CLIENT_NAME = ?,
+                    CLIENT_PHONE = ?,
+                    CODE = ?,
+                    DEBT = ?,
+                    DEBT_ALLOWED = ?,
+                    DISCOUNT = ?,
+                    MAX_DEBT = ?,
+                    MAX_DEBT_DAY = ?               
+                where CARD_GUID = ?
+                """;
         StatementParameters<Object> parameters = StatementParameters.build(
-                card.getGuid(),
                 card.isActive(),
                 card.getCardType().toString(),
                 card.getClientEmail(),
@@ -59,9 +90,13 @@ public class CardService {
                 card.isDebtAllowed(),
                 card.getDiscount(),
                 card.getMaxDebt(),
-                card.getMaxDebtDay()
-        );
+                card.getMaxDebtDay(),
+                card.getGuid());
 
+        return new DatabaseRequest(sql, parameters);
+    }
+
+    public static DatabaseRequest getInsertRequest(Card card) {
         String sql = """
                     insert into CARDS (
                                  CARD_GUID,
@@ -78,11 +113,9 @@ public class CardService {
                                  MAX_DEBT_DAY)
                     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
-        new SqlHelper<Product>().execSql(sql, parameters);
-    }
 
-    private static void update(Card card) throws SQLException {
         StatementParameters<Object> parameters = StatementParameters.build(
+                card.getGuid(),
                 card.isActive(),
                 card.getCardType().toString(),
                 card.getClientEmail(),
@@ -93,24 +126,9 @@ public class CardService {
                 card.isDebtAllowed(),
                 card.getDiscount(),
                 card.getMaxDebt(),
-                card.getMaxDebtDay(),
-                card.getGuid());
+                card.getMaxDebtDay()
+        );
 
-        String sql = """
-                update CARDS set
-                    ACTIVE = ?,
-                    CARD_TYPE = ?,
-                    CLIENT_EMAIL = ?,
-                    CLIENT_NAME = ?,
-                    CLIENT_PHONE = ?,
-                    CODE = ?,
-                    DEBT = ?,
-                    DEBT_ALLOWED = ?,
-                    DISCOUNT = ?,
-                    MAX_DEBT = ?,
-                    MAX_DEBT_DAY = ?               
-                where CARD_GUID = ?
-                """;
-        new SqlHelper<Product>().execSql(sql, parameters);
+        return new DatabaseRequest(sql, parameters);
     }
 }

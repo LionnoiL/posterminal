@@ -8,6 +8,8 @@ import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.PayTypes;
+import ua.gaponov.posterminal.entity.cards.Card;
+import ua.gaponov.posterminal.entity.cards.CardService;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.utils.FilesUtils;
@@ -107,6 +109,15 @@ public class OrderService {
             line = line + 1;
         }
         requestList.add(getInsertShiftResultRequest(order));
+
+        if (Objects.nonNull(order.getCard())){
+            double deltaSum = order.getDocumentSum() - order.getPaySum();
+            if (deltaSum>0){
+                Card card = order.getCard();
+                card.setDebt(card.getDebt() + deltaSum);
+                requestList.add(CardService.getUpdateRequest(card));
+            }
+        }
         helper.execSql(requestList);
     }
 
