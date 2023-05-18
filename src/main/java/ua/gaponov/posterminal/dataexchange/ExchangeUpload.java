@@ -1,7 +1,12 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
@@ -11,6 +16,11 @@ import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,9 +41,12 @@ public class ExchangeUpload {
             list.setShopId(AppProperties.shopId);
             list.setItems(items);
 
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.registerModule(new JavaTimeModule());
-            xmlMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            ObjectMapper xmlMapper = new XmlMapper();
+
+            SimpleModule module = new SimpleModule();
+            module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
+            xmlMapper.registerModule(module);
+
             xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
             try {
                 String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
@@ -41,6 +54,15 @@ public class ExchangeUpload {
             } catch (JsonProcessingException e) {
                 LOG.error("Export filed", e);
             }
+        }
+    }
+
+    private static class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
+        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+
+        @Override
+        public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeString(value.format(FORMATTER));
         }
     }
 }

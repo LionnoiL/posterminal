@@ -106,8 +106,8 @@ public class Order implements Serializable, Cloneable {
             sumWithoutDiscount = sumWithoutDiscount + detail.getSummaWithoutDiscount();
             discount = discount + detail.getSummaDiscount();
         }
-        documentSum = sum;
-        discountSum = discount;
+        documentSum = RoundUtils.round(sum);
+        discountSum = RoundUtils.round(discount);
         documentSumWithoutDiscount = sumWithoutDiscount;
 
         roundSum = RoundUtils.round(documentSum - RoundUtils.roundHalfUp(documentSum));
