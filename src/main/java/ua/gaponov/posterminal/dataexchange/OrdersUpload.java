@@ -20,7 +20,6 @@ public class OrdersUpload {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "order")
     private List<Order> items;
-
     private String shopGuid;
     private int shopId;
 }
