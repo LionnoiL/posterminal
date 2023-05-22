@@ -3,7 +3,6 @@ package ua.gaponov.posterminal.entity.cards;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
-import ua.gaponov.posterminal.entity.products.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
-import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.forms.login.LoginForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.server.PosHttpServer;
