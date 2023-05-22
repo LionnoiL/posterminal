@@ -8,19 +8,19 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.entity.messages.ExchangeMessage;
+import ua.gaponov.posterminal.entity.messages.ExchangeMessageService;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,8 +35,11 @@ public class ExchangeUpload {
 
     private static void uploadOrders() {
         List<Order> items = OrderService.getAllNoUpload();
+        ExchangeMessage messages = ExchangeMessageService.getMessages();
+        messages.setReceivedNumber(messages.getReceivedNumber() + 1);
         if (items.size() > 0) {
             OrdersUpload list = new OrdersUpload();
+            list.setExchangeMessage(messages);
             list.setShopGuid(AppProperties.shopGuid);
             list.setShopId(AppProperties.shopId);
             list.setItems(items);
@@ -51,7 +54,8 @@ public class ExchangeUpload {
             try {
                 String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
                 FilesUtils.saveTextFile("files/export_" + AppProperties.shopId + ".xml", employeeXml);
-            } catch (JsonProcessingException e) {
+                ExchangeMessageService.saveMessages(messages);
+            } catch (JsonProcessingException | SQLException e) {
                 LOG.error("Export filed", e);
             }
         }

@@ -22,9 +22,9 @@ public class ExchangeMessageService {
 
     public static ExchangeMessage getMessages() {
         ExchangeMessage exchangeMessage = new ExchangeMessage();
-        String received = helper.getFirst("app_options", "options_value", OPTIONS_NAME_RECEIVED,
+        String received = helper.getFirst("app_options", "options_value", "options_name",
                 "where options_name = '" + OPTIONS_NAME_RECEIVED + "'");
-        String taken = helper.getFirst("app_options", "options_value", OPTIONS_NAME_TAKEN,
+        String taken = helper.getFirst("app_options", "options_value", "options_name",
                 "where options_name = '" + OPTIONS_NAME_TAKEN + "'");
         exchangeMessage.setReceivedNumber(Long.parseLong(received));
         exchangeMessage.setTakenNumber(Long.parseLong(taken));
