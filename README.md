@@ -2,6 +2,8 @@
 The program is a workplace of a cashier in a store. The program is under development.
 ![main window](assets/main_window.jpeg)
 ![pay_form](assets/pay_form.jpeg)
+![money_form](assets/money_form.jpeg)
+![shift_result](assets/shift_result.jpeg)
 # Devices
 * barcode scanner working in keyboard mode
 * receipt printer with a ribbon width of 58 mm
