@@ -59,7 +59,7 @@ public class ExchangeMessageService {
                 where options_name = ?
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(
-                String.valueOf(exchangeMessage.getReceivedNumber()),
+                String.valueOf(exchangeMessage.getTakenNumber()),
                 OPTIONS_NAME_TAKEN
         );
 
