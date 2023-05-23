@@ -1,10 +1,12 @@
 package ua.gaponov.posterminal.conf;
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
 import ua.gaponov.posterminal.entity.products.Product;
-import ua.gaponov.posterminal.server.PosHttpServer;
 import ua.gaponov.posterminal.entity.users.User;
+import ua.gaponov.posterminal.server.PosHttpServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,30 +14,80 @@ import java.util.Map;
 /**
  * @author Andriy Gaponov
  */
+
 public class AppProperties {
-    public static int exchangeInterval = 120000;
-    public static boolean exchangeEnable = true;
-    public static boolean autoSaveEnable = true;
-    public static String serverIpAdress;
-    public static String weightItemPrefix = "29";
-    public static String currency = "грн";
-    public static String shopName = "Shop";
-    public static String shopAddress = "";
-    public static String cashRegisterName = "";
-    public static int shopId;
-    public static String shopGuid;
-    public static ExchangeScheduler scheduler = new ExchangeScheduler();
-    public static OrderSaveScheduler autoSaveScheduler = new OrderSaveScheduler();
-    public static PosHttpServer httpServer;
-    public static User currentUser;
+    @Getter
+    @Setter
     public static boolean exchangeRunning;
-    public static String terminalPort;
-    public static String displayPort;
-    public static Map<Product, Integer> prostoPayProducts = new HashMap<>();
-    public static String fiscalName;
-    public static String fiscalToken;
-    public static String fiscalIp;
-    public static double fiscalAutoPlusMoneySum;
+    @Getter
+    @Setter
+    private static int exchangeInterval = 120000;
+    @Getter
+    @Setter
+    private static boolean exchangeEnable = true;
+    @Getter
+    @Setter
+    private static boolean autoSaveEnable = true;
+    @Getter
+    @Setter
+    private static String serverIpAddress;
+    @Getter
+    @Setter
+    private static String weightItemPrefix = "29";
+    @Getter
+    @Setter
+    private static String currency = "грн";
+    @Getter
+    @Setter
+    private static String shopName = "Shop";
+    @Getter
+    @Setter
+    private static String shopAddress = "";
+    @Getter
+    @Setter
+    private static String cashRegisterName = "";
+    @Getter
+    @Setter
+    private static int shopId;
+    @Getter
+    @Setter
+    private static String shopGuid;
+    @Getter
+    @Setter
+    private static ExchangeScheduler scheduler = new ExchangeScheduler();
+    @Getter
+    @Setter
+    private static OrderSaveScheduler autoSaveScheduler = new OrderSaveScheduler();
+    @Getter
+    @Setter
+    private static PosHttpServer httpServer;
+    @Getter
+    @Setter
+    private static User currentUser;
+    @Getter
+    @Setter
+    private static String terminalPort;
+    @Getter
+    @Setter
+    private static String displayPort;
+    @Getter
+    @Setter
+    private static Map<Product, Integer> prostoPayProducts = new HashMap<>();
+    @Getter
+    @Setter
+    private static String fiscalName;
+    @Getter
+    @Setter
+    private static String fiscalToken;
+    @Getter
+    @Setter
+    private static String fiscalIp;
+    @Getter
+    @Setter
+    private static double fiscalAutoPlusMoneySum;
+    @Getter
+    @Setter
+    private static String prostoPayToken;
 
     private AppProperties() {
     }

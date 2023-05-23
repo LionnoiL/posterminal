@@ -22,7 +22,7 @@ public class OrderSaveScheduler {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if (AppProperties.autoSaveEnable) {
+                if (AppProperties.isAutoSaveEnable()) {
                     OrderService.saveOrderToBackupDir(getOrder());
                 }
             }

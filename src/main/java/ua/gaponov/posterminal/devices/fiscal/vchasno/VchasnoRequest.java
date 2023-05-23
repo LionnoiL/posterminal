@@ -39,7 +39,7 @@ public class VchasnoRequest {
         request.setToken(token);
         request.setDevice(deviceName);
         request.setVersionApi(6);
-        request.setSource("POS " + AppProperties.shopName + " " + AppProperties.cashRegisterName);
+        request.setSource("POS " + AppProperties.getShopName() + " " + AppProperties.getCashRegisterName());
         request.setType(1);
         request.setTag("");
         request.setDt(DateUtils.getDateTimeNow(DATE_FORMAT_PATTERN));

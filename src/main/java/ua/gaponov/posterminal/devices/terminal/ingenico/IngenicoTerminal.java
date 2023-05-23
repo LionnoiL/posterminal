@@ -80,7 +80,7 @@ public class IngenicoTerminal implements Terminal {
     private boolean open() {
         int com = 1;
         try {
-            String terminalPort = AppProperties.terminalPort;
+            String terminalPort = AppProperties.getTerminalPort();
             com = Integer.parseInt(terminalPort.replace("COM", ""));
         } catch (Exception ex){
             return false;

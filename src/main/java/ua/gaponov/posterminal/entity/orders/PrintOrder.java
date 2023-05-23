@@ -57,11 +57,11 @@ public class PrintOrder implements Printable {
         if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
             documentType = "Повернення";
         }
-        printer.printCenter(AppProperties.shopName, 10, true, false);
-        printer.printCenter(AppProperties.shopAddress, 8, true, true);
+        printer.printCenter(AppProperties.getShopName(), 10, true, false);
+        printer.printCenter(AppProperties.getShopAddress(), 8, true, true);
         printer.printTwoLines(DateUtils.getDateTimeNow(), documentType, 6, false);
         printer.printCenter("Товарний чек №" + order.getOrderNumber(), 8);
-        printer.printCenter(AppProperties.cashRegisterName, 8);
+        printer.printCenter(AppProperties.getCashRegisterName(), 8);
         printer.printHorizontalLine();
     }
 
@@ -79,13 +79,13 @@ public class PrintOrder implements Printable {
 
     private void printTotals() {
         printer.printTwoLines("ПІДСУМОК",
-                RoundUtils.round(order.getDocumentSumWithoutDiscount()) + " " + AppProperties.currency,
+                RoundUtils.round(order.getDocumentSumWithoutDiscount()) + " " + AppProperties.getCurrency(),
                 8);
     }
 
     private void printPays() {
         printer.printTwoLines("ЗНИЖКА СКЛАЛА",
-                RoundUtils.round(order.getDiscountSum()) + " " + AppProperties.currency,
+                RoundUtils.round(order.getDiscountSum()) + " " + AppProperties.getCurrency(),
                 8);
 
         String sign = "+";
@@ -93,14 +93,14 @@ public class PrintOrder implements Printable {
             sign = "-";
         }
         printer.printTwoLines("ОКРУГЛЕННЯ",
-                sign + Math.abs(RoundUtils.round(order.getRoundSum())) + " " + AppProperties.currency,
+                sign + Math.abs(RoundUtils.round(order.getRoundSum())) + " " + AppProperties.getCurrency(),
                 8);
 
         String documentType = "ДО СПЛАТИ";
         if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
             documentType = "ДО ПОВЕРНЕННЯ";
         }
-        printer.printTwoLines(documentType,RoundUtils.round(order.getToPaySum()) + " " + AppProperties.currency,
+        printer.printTwoLines(documentType,RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
                 10);
     }
 

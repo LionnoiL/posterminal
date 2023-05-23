@@ -53,14 +53,14 @@ public class PrintFiscalXReport implements Printable {
     }
 
     private void printTitle() {
-        printer.printCenter(AppProperties.shopName, 10, false, true);
+        printer.printCenter(AppProperties.getShopName(), 10, false, true);
         printer.printCenter("X-звіт", 12, false, true);
         printer.printEmptyString();
     }
 
     private void printFooter() {
         printer.printCenter(DateUtils.getDateTimeNow(), 8);
-        printer.printTwoLines(AppProperties.cashRegisterName, AppProperties.fiscalName, 8);
+        printer.printTwoLines(AppProperties.getCashRegisterName(), AppProperties.getFiscalName(), 8);
     }
 
     private void printSales() {

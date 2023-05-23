@@ -43,7 +43,7 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     private static final Logger LOG = LoggerFactory.getLogger(VchasnoFiscal.class);
-    private static final String VCHASNO_DEVICE_HOST = "http://" + AppProperties.fiscalIp + ":3939/dm/execute";
+    private static final String VCHASNO_DEVICE_HOST = "http://" + AppProperties.getFiscalIp() + ":3939/dm/execute";
     private String deviceName;
     private String token;
 
@@ -253,8 +253,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             VchasnoResponce<InfoOpenShift> vchasnoResponce = GSON.fromJson(sResponce, type);
             if (vchasnoResponce.getRes() == 0) {
                 LOG.info("Shift open");
-                if (AppProperties.fiscalAutoPlusMoneySum>0){
-                    moneyPlus(AppProperties.fiscalAutoPlusMoneySum);
+                if (AppProperties.getFiscalAutoPlusMoneySum()>0){
+                    moneyPlus(AppProperties.getFiscalAutoPlusMoneySum());
                 }
                 return true;
             } else {

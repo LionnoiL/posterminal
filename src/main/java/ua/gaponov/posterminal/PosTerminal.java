@@ -32,7 +32,7 @@ public class PosTerminal {
 
         LoginForm.main(null);
 
-        AppProperties.scheduler.setTimeReceived();
+        AppProperties.getScheduler().setTimeReceived();
 
         startHttpServer();
     }
@@ -42,8 +42,8 @@ public class PosTerminal {
         final String path = "/";
         final int nThreads = 2;
         try {
-            AppProperties.httpServer = new PosHttpServer(port, path, nThreads);
-            AppProperties.httpServer.start();
+            AppProperties.setHttpServer(new PosHttpServer(port, path, nThreads));
+            AppProperties.getHttpServer().start();
         } catch (IOException e) {
             LOG.error("PosServer start failed");
         }
@@ -58,9 +58,9 @@ public class PosTerminal {
     }
 
     public static void closeApp() {
-        AppProperties.scheduler.getExchangeTimer().cancel();
-        AppProperties.autoSaveScheduler.getTimer().cancel();
-        AppProperties.httpServer.stop();
+        AppProperties.getScheduler().getExchangeTimer().cancel();
+        AppProperties.getAutoSaveScheduler().getTimer().cancel();
+        AppProperties.getHttpServer().stop();
         LOG.info("End application");
     }
 }

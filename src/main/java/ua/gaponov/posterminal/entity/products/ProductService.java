@@ -47,7 +47,7 @@ public class ProductService {
     }
 
     private static boolean isWeightBarcode(String barcode) {
-        String weightItemPrefix = AppProperties.weightItemPrefix;
+        String weightItemPrefix = AppProperties.getWeightItemPrefix();
         return weightItemPrefix.equals(barcode.substring(0, 2));
     }
 

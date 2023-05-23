@@ -56,46 +56,46 @@ public class ShiftResultService {
         new SqlHelper<Product>().execSql(sql, parameters);
     }
 
-    public static double getTotalSumSafe(){
+    public static double getTotalSumSafe() {
         Double last = new SqlHelper<Double>().getLast("shift_results", "SUMMA_SAFE", "id", "");
-        if (Objects.isNull(last)){
+        if (Objects.isNull(last)) {
             return 0;
         } else {
             return last;
         }
     }
 
-    public static double getStartSumSafe(){
+    public static double getStartSumSafe() {
         Double last = new SqlHelper<Double>().getFirst("shift_results", "SUMMA_SAFE",
-                "id", " where DOC_DATE >= '"+ DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") +"'");
-        if (Objects.isNull(last)){
+                "id", " where DOC_DATE >= '" + DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
+        if (Objects.isNull(last)) {
             return 0;
         } else {
             return last;
         }
     }
 
-    public static String getShiftStartUserName(){
+    public static String getShiftStartUserName() {
         String userGuid = new SqlHelper<String>().getFirst("shift_results", "user_guid",
-                "id", " where DOC_DATE >= '"+ DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") +"'");
-        if (Objects.isNull(userGuid)){
+                "id", " where DOC_DATE >= '" + DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
+        if (Objects.isNull(userGuid)) {
             return "";
         } else {
             return UserService.getByGuid(userGuid).getName();
         }
     }
 
-    public static String getShiftStartDate(){
+    public static String getShiftStartDate() {
         Timestamp dateStart = new SqlHelper<Timestamp>().getFirst("shift_results", "doc_date",
-                "id", " where DOC_DATE >= '"+ DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") +"'");
-        if (Objects.isNull(dateStart)){
+                "id", " where DOC_DATE >= '" + DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
+        if (Objects.isNull(dateStart)) {
             return "";
         } else {
             return DateUtils.formatDateTime(dateStart.toLocalDateTime());
         }
     }
 
-    public static ShiftResultTotal getShiftTotals(String dateTimeStart, String dateTimeEnd){
+    public static ShiftResultTotal getShiftTotals(String dateTimeStart, String dateTimeEnd) {
         StatementParameters<String> parameters = StatementParameters.build(dateTimeStart, dateTimeEnd);
         String sql = """
                 SELECT sum(summa_order_cash) summa_order_cash, sum(SUMMA_RETURN_CASH  ) SUMMA_RETURN_CASH,
@@ -108,14 +108,14 @@ public class ShiftResultService {
                 new ShiftResultTotalDatabaseMapper());
     }
 
-    public static void startShift(){
+    public static void startShift() {
         int count = helper.getCount("select count(id) from shift_results where DOC_DATE >= '" +
                 DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
-        if (count==0){
+        if (count == 0) {
             double totalSumSafe = getTotalSumSafe();
             ShiftResult shiftResult = new ShiftResult();
             shiftResult.setSummaSafe(totalSumSafe);
-            shiftResult.setUserGuid(AppProperties.currentUser.getGuid());
+            shiftResult.setUserGuid(AppProperties.getCurrentUser().getGuid());
             try {
                 save(shiftResult);
             } catch (SQLException e) {

@@ -66,7 +66,7 @@ public class FiscalForm extends javax.swing.JDialog {
         if (fiscal.shiftIsOpen()){
             shiftStatus = "Відкрита";
             double safeMoney = fiscal.getSafeMoney();
-            inSafe = "" + safeMoney + " " + AppProperties.currency;
+            inSafe = "" + safeMoney + " " + AppProperties.getCurrency();
         }
         Object[] rowData = new Object[4];
         rowData[0] = organization.getName();

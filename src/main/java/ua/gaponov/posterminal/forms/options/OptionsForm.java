@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ua.gaponov.posterminal.forms.options;
 
 import com.fazecast.jSerialComm.SerialPort;
@@ -46,28 +42,30 @@ public class OptionsForm extends javax.swing.JFrame {
     }
 
     private void fillOptions() {
-        fieldCurrency.setText(AppProperties.currency);
-        fieldPrifixWegthBarcode.setText(AppProperties.weightItemPrefix);
-        fieldIntervalExchange.setText(String.valueOf(AppProperties.exchangeInterval / 60000));
-        chkExchangeEnable.setSelected(AppProperties.exchangeEnable);
-        fieldShopName.setText(AppProperties.shopName);
-        fieldShopAddress.setText(AppProperties.shopAddress);
-        fieldShopGuid.setText(AppProperties.shopGuid);
-        fieldShopId.setText(String.valueOf(AppProperties.shopId));
-        fieldCashRegister.setText(AppProperties.cashRegisterName);
+        fieldCurrency.setText(AppProperties.getCurrency());
+        fieldPrifixWegthBarcode.setText(AppProperties.getWeightItemPrefix());
+        fieldIntervalExchange.setText(String.valueOf(AppProperties.getExchangeInterval() / 60000));
+        chkExchangeEnable.setSelected(AppProperties.isExchangeEnable());
+        fieldShopName.setText(AppProperties.getShopName());
+        fieldShopAddress.setText(AppProperties.getShopAddress());
+        fieldShopGuid.setText(AppProperties.getShopGuid());
+        fieldShopId.setText(String.valueOf(AppProperties.getShopId()));
+        fieldCashRegister.setText(AppProperties.getCashRegisterName());
 
         SerialPort[] ports = SerialPort.getCommPorts();
         for (SerialPort port: ports) {
             comboTerminalPort.addItem(port.getSystemPortName());
             comboDisplayPort.addItem(port.getSystemPortName());
         }
-        comboTerminalPort.setSelectedItem(AppProperties.terminalPort);
-        comboDisplayPort.setSelectedItem(AppProperties.displayPort);
+        comboTerminalPort.setSelectedItem(AppProperties.getTerminalPort());
+        comboDisplayPort.setSelectedItem(AppProperties.getDisplayPort());
 
-        fldFiscalName.setText(AppProperties.fiscalName);
-        fldFiscalToken.setText(AppProperties.fiscalToken);
-        fldFiscalIp.setText(AppProperties.fiscalIp);
-        fldFiscalAutoSum.setText(String.valueOf(AppProperties.fiscalAutoPlusMoneySum));
+        fldFiscalName.setText(AppProperties.getFiscalName());
+        fldFiscalToken.setText(AppProperties.getFiscalToken());
+        fldFiscalIp.setText(AppProperties.getFiscalIp());
+        fldFiscalAutoSum.setText(String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
+
+        fldProstoPayToken.setText(AppProperties.getProstoPayToken());
     }
 
     /**
@@ -112,6 +110,8 @@ public class OptionsForm extends javax.swing.JFrame {
         fldFiscalIp = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         fldFiscalAutoSum = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        fldProstoPayToken = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Налаштування");
@@ -174,6 +174,8 @@ public class OptionsForm extends javax.swing.JFrame {
 
         fldFiscalAutoSum.setToolTipText("Сума яка буде автомтатично внесена в фіскальний реєстратор при відкриті зміни");
 
+        jLabel16.setText("Токен ProstoPay");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +196,7 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldIntervalExchange, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                            .addComponent(fieldIntervalExchange, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                             .addComponent(fieldPrifixWegthBarcode)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -213,9 +215,11 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fldProstoPayToken)
                             .addComponent(fieldShopAddress)
                             .addComponent(fieldShopName)
                             .addComponent(jTextField1)
@@ -297,7 +301,11 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(fldFiscalAutoSum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(fldProstoPayToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -313,23 +321,25 @@ public class OptionsForm extends javax.swing.JFrame {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         try {
-            AppProperties.weightItemPrefix = fieldPrifixWegthBarcode.getText();
-            AppProperties.currency = fieldCurrency.getText();
-            AppProperties.exchangeInterval = Integer.parseInt(fieldIntervalExchange.getText()) * 60000;
-            AppProperties.exchangeEnable = chkExchangeEnable.isSelected();
-            AppProperties.shopName = fieldShopName.getText();
-            AppProperties.shopAddress = fieldShopAddress.getText();
-            AppProperties.shopGuid = fieldShopGuid.getText();
-            AppProperties.shopId = Integer.parseInt(fieldShopId.getText());
-            AppProperties.cashRegisterName = fieldCashRegister.getText();
+            AppProperties.setWeightItemPrefix(fieldPrifixWegthBarcode.getText());
+            AppProperties.setCurrency(fieldCurrency.getText());
+            AppProperties.setExchangeInterval(Integer.parseInt(fieldIntervalExchange.getText()) * 60000);
+            AppProperties.setExchangeEnable(chkExchangeEnable.isSelected());
+            AppProperties.setShopName(fieldShopName.getText());
+            AppProperties.setShopAddress(fieldShopAddress.getText());
+            AppProperties.setShopGuid(fieldShopGuid.getText());
+            AppProperties.setShopId(Integer.parseInt(fieldShopId.getText()));
+            AppProperties.setCashRegisterName(fieldCashRegister.getText());
 
-            AppProperties.terminalPort = (String) comboTerminalPort.getSelectedItem();
-            AppProperties.displayPort = (String) comboDisplayPort.getSelectedItem();
+            AppProperties.setTerminalPort((String) comboTerminalPort.getSelectedItem());
+            AppProperties.setDisplayPort((String) comboDisplayPort.getSelectedItem());
 
-            AppProperties.fiscalName = fldFiscalName.getText();
-            AppProperties.fiscalToken = fldFiscalToken.getText();
-            AppProperties.fiscalIp = fldFiscalIp.getText();
-            AppProperties.fiscalAutoPlusMoneySum = Double.parseDouble(fldFiscalAutoSum.getText());
+            AppProperties.setFiscalName(fldFiscalName.getText());
+            AppProperties.setFiscalToken(fldFiscalToken.getText());
+            AppProperties.setFiscalIp(fldFiscalIp.getText());
+            AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(fldFiscalAutoSum.getText()));
+
+            AppProperties.setProstoPayToken(fldProstoPayToken.getText());
 
             dispose();
         } catch (Exception e){
@@ -355,6 +365,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fldFiscalIp;
     private javax.swing.JTextField fldFiscalName;
     private javax.swing.JTextField fldFiscalToken;
+    private javax.swing.JTextField fldProstoPayToken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -362,6 +373,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

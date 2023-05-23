@@ -254,8 +254,8 @@ public class ShiftResultForm extends javax.swing.JDialog {
 
         dialog.lblDate.setText(ShiftResultService.getShiftStartDate());
         dialog.lblUser.setText(ShiftResultService.getShiftStartUserName());
-        dialog.lblMoneyStart.setText(ShiftResultService.getStartSumSafe() + " " + AppProperties.currency);
-        dialog.lblMoneyEnd.setText(ShiftResultService.getTotalSumSafe() + " " + AppProperties.currency);
+        dialog.lblMoneyStart.setText(ShiftResultService.getStartSumSafe() + " " + AppProperties.getCurrency());
+        dialog.lblMoneyEnd.setText(ShiftResultService.getTotalSumSafe() + " " + AppProperties.getCurrency());
 
         ShiftResultTotal shiftTotals = ShiftResultService.getShiftTotals(
                 DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00"),

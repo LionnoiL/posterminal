@@ -1,13 +1,12 @@
 package ua.gaponov.posterminal.entity.users;
 
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import static ua.gaponov.posterminal.conf.AppProperties.currentUser;
 
 /**
  * @author Andriy Gaponov
@@ -42,15 +41,15 @@ public class UserService {
     public static boolean login(String userName, String password) {
         User user = UserService.getByName(userName);
         if (user.getPassword().isEmpty() && password.isEmpty()) {
-            currentUser = user;
+            AppProperties.setCurrentUser(user);
             return true;
         }
         String encryptPassword = UserService.encryptPassword(password);
         boolean passwordEquals = encryptPassword.equals(user.getPassword());
         if (passwordEquals) {
-            currentUser = user;
+            AppProperties.setCurrentUser(user);
         } else {
-            currentUser = null;
+            AppProperties.setCurrentUser(null);
         }
         return passwordEquals;
     }

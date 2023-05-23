@@ -76,7 +76,7 @@ public class MainForm extends javax.swing.JFrame {
 
         order = OrderService.loadOrderFromBackupDir();
 
-        AppProperties.autoSaveScheduler.setTimeReceived(order);
+        AppProperties.getAutoSaveScheduler().setTimeReceived(order);
 
         loadOrder();
         setInfoTimer();
@@ -130,7 +130,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void updateVisibleButtons() {
-        btnOptions.setVisible(AppProperties.currentUser.isAdmin());
+        btnOptions.setVisible(AppProperties.getCurrentUser().isAdmin());
     }
 
     private void updateByCard(Card card){
@@ -840,11 +840,11 @@ public class MainForm extends javax.swing.JFrame {
 
                 order = new Order();
 
-                AppProperties.autoSaveScheduler.setOrder(order);
+                AppProperties.getAutoSaveScheduler().setOrder(order);
                 OrderService.saveOrderToBackupDir(order);
 
                 loadOrder();
-                sumLabel.setText(payForm.getRemainder() + " " + AppProperties.currency);
+                sumLabel.setText(payForm.getRemainder() + " " + AppProperties.getCurrency());
             }
         }
     }//GEN-LAST:event_btnPayActionPerformed
@@ -1016,7 +1016,7 @@ public class MainForm extends javax.swing.JFrame {
         ReturnForm returnForm = ReturnForm.getReturn(frame);
         returnForm.setVisible(true);
         if (returnForm.isOk()) {
-            sumLabel.setText("Повернути "+RoundUtils.roundHalfUp(returnForm.getOrder().getDocumentSum()) + " " + AppProperties.currency);
+            sumLabel.setText("Повернути "+RoundUtils.roundHalfUp(returnForm.getOrder().getDocumentSum()) + " " + AppProperties.getCurrency());
         }
     }//GEN-LAST:event_btnReturnActionPerformed
 
@@ -1140,7 +1140,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void updateSumLabel() {
         order.recalculateDocumentSum();
-        sumLabel.setText(String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())) + " " + AppProperties.currency);
+        sumLabel.setText(String.valueOf(RoundUtils.roundHalfUp(order.getDocumentSum())) + " " + AppProperties.getCurrency());
     }
 
     private void selectTableRow(int lineNumber) {

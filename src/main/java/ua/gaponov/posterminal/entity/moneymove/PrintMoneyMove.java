@@ -48,18 +48,18 @@ public class PrintMoneyMove implements Printable {
         if (moneyMove.getMoveType().equals(MoveType.MOVE_IN)) {
             moveType = "Службове внесення";
         }
-        printer.printCenter(AppProperties.shopName, 10, true, false);
-        printer.printCenter(AppProperties.shopAddress, 8, true, true);
+        printer.printCenter(AppProperties.getShopName(), 10, true, false);
+        printer.printCenter(AppProperties.getShopAddress(), 8, true, true);
         printer.printCenter(DateUtils.getDateTimeNow(),  6, false);
         printer.printCenter(moveType + " №" + moneyMove.getMoneyMoveNumber(), 8);
-        printer.printCenter(AppProperties.cashRegisterName, 8);
+        printer.printCenter(AppProperties.getCashRegisterName(), 8);
         printer.printHorizontalLine();
     }
 
 
     private void printPays() {
         printer.printTwoLines("Сума",
-                RoundUtils.round(moneyMove.getDocumentSum()) + " " + AppProperties.currency,
+                RoundUtils.round(moneyMove.getDocumentSum()) + " " + AppProperties.getCurrency(),
                 8);
 
         printer.printTwoLines("Коментар", moneyMove.getComment(), 10);

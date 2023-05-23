@@ -44,8 +44,8 @@ public class ExchangeUpload {
         if (orders.size() + moneyMoves.size() > 0) {
             DocumentsUpload list = new DocumentsUpload();
             list.setExchangeMessage(messages);
-            list.setShopGuid(AppProperties.shopGuid);
-            list.setShopId(AppProperties.shopId);
+            list.setShopGuid(AppProperties.getShopGuid());
+            list.setShopId(AppProperties.getShopId());
 
             list.setOrders(orders);
             list.setMoneyMoves(moneyMoves);
@@ -58,7 +58,7 @@ public class ExchangeUpload {
             xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
             try {
                 String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-                FilesUtils.saveTextFile("files/export_" + AppProperties.shopId + ".xml", employeeXml);
+                FilesUtils.saveTextFile("files/export_" + AppProperties.getShopId() + ".xml", employeeXml);
                 ExchangeMessageService.saveMessages(messages);
             } catch (JsonProcessingException | SQLException e) {
                 LOG.error("Export filed", e);

@@ -110,9 +110,9 @@ public class OrderService {
         }
         requestList.add(getInsertShiftResultRequest(order));
 
-        if (Objects.nonNull(order.getCard())){
+        if (Objects.nonNull(order.getCard())) {
             double deltaSum = order.getDocumentSum() - order.getPaySum();
-            if (deltaSum>0){
+            if (deltaSum > 0) {
                 Card card = order.getCard();
                 card.setDebt(card.getDebt() + deltaSum);
                 requestList.add(CardService.getUpdateRequest(card));
@@ -174,8 +174,8 @@ public class OrderService {
         double summaSafe = 0;
 
         double toPaySum = order.getPaySum();
-        if (toPaySum>order.getToPaySum()){
-            toPaySum=order.getToPaySum();
+        if (toPaySum > order.getToPaySum()) {
+            toPaySum = order.getToPaySum();
         }
         if (Objects.equals(PayTypes.CASH, order.getPayType())) {
             summaCash = toPaySum;
@@ -195,7 +195,7 @@ public class OrderService {
         }
 
         StatementParameters<Object> parameters = StatementParameters.build(
-                AppProperties.currentUser.getGuid(),
+                AppProperties.getCurrentUser().getGuid(),
                 summaOrderCash,
                 summaReturnCash,
                 summaSafe,

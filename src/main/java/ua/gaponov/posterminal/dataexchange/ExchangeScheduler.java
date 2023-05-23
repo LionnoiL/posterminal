@@ -24,7 +24,7 @@ public class ExchangeScheduler {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if (AppProperties.exchangeEnable) {
+                if (AppProperties.isExchangeEnable()) {
                     ExchangeUpload.upload();
                     try {
                         ExchangeDownloader.download();
@@ -38,7 +38,7 @@ public class ExchangeScheduler {
         exchangeTimer.schedule(
                 timerTask,
                 calendar.getTime(),
-                AppProperties.exchangeInterval
+                AppProperties.getExchangeInterval()
         );
     }
 

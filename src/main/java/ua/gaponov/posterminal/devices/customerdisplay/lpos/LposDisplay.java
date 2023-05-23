@@ -210,7 +210,7 @@ public class LposDisplay implements CustomerDisplay {
 
     private void createDevice() {
         try {
-            device = SerialPort.getCommPort(AppProperties.displayPort);
+            device = SerialPort.getCommPort(AppProperties.getDisplayPort());
             device.setBaudRate(9600);
             device.setNumDataBits(8);
             device.setParity(NO_PARITY);

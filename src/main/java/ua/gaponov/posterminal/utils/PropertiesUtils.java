@@ -85,41 +85,41 @@ public class PropertiesUtils {
     }
 
     public static void saveAllApplicationProperties() {
-        saveApplicationProperties("currency", AppProperties.currency);
-        saveApplicationProperties("weight_item_prefix", AppProperties.weightItemPrefix);
-        saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.exchangeEnable));
-        saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.exchangeInterval / 60000));
-        saveApplicationProperties("shop_name", AppProperties.shopName);
-        saveApplicationProperties("shop_address", AppProperties.shopAddress);
-        saveApplicationProperties("shop_id", String.valueOf(AppProperties.shopId));
-        saveApplicationProperties("shop_guid", AppProperties.shopGuid);
-        saveApplicationProperties("terminal_port", AppProperties.terminalPort);
-        saveApplicationProperties("cash_register_name", AppProperties.cashRegisterName);
-        saveApplicationProperties("display_port", AppProperties.displayPort);
-        saveApplicationProperties("fiscal.name", AppProperties.fiscalName);
-        saveApplicationProperties("fiscal.token", AppProperties.fiscalToken);
-        saveApplicationProperties("fiscal.ip", AppProperties.fiscalIp);
-        saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.fiscalAutoPlusMoneySum));
+        saveApplicationProperties("currency", AppProperties.getCurrency());
+        saveApplicationProperties("weight_item_prefix", AppProperties.getWeightItemPrefix());
+        saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.isExchangeEnable()));
+        saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.getExchangeInterval() / 60000));
+        saveApplicationProperties("shop_name", AppProperties.getShopName());
+        saveApplicationProperties("shop_address", AppProperties.getShopAddress());
+        saveApplicationProperties("shop_id", String.valueOf(AppProperties.getShopId()));
+        saveApplicationProperties("shop_guid", AppProperties.getShopGuid());
+        saveApplicationProperties("terminal_port", AppProperties.getTerminalPort());
+        saveApplicationProperties("cash_register_name", AppProperties.getCashRegisterName());
+        saveApplicationProperties("display_port", AppProperties.getDisplayPort());
+        saveApplicationProperties("fiscal.name", AppProperties.getFiscalName());
+        saveApplicationProperties("fiscal.token", AppProperties.getFiscalToken());
+        saveApplicationProperties("fiscal.ip", AppProperties.getFiscalIp());
+        saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
+        saveApplicationProperties("prostopay.token", AppProperties.getProstoPayToken());
     }
 
     public static void loadProperties() {
-        AppProperties.serverIpAdress = getApplicationProperties("server_ip");
-        AppProperties.exchangeInterval =
-                Integer.parseInt(getApplicationProperties("exchange_interval_min")) * 60 * 1000;
-        AppProperties.exchangeEnable = Boolean.parseBoolean(
-                getApplicationProperties("exchange_enable"));
-        AppProperties.weightItemPrefix = getApplicationProperties("weight_item_prefix");
-        AppProperties.currency = getApplicationProperties("currency");
-        AppProperties.shopName = getApplicationProperties("shop_name");
-        AppProperties.shopAddress = getApplicationProperties("shop_address");
-        AppProperties.shopId = Integer.parseInt(getApplicationProperties("shop_id"));
-        AppProperties.shopGuid = getApplicationProperties("shop_guid");
-        AppProperties.terminalPort = getApplicationProperties("terminal_port");
-        AppProperties.cashRegisterName = getApplicationProperties("cash_register_name");
-        AppProperties.displayPort = getApplicationProperties("display_port");
-        AppProperties.fiscalName = getApplicationProperties("fiscal.name");
-        AppProperties.fiscalToken = getApplicationProperties("fiscal.token");
-        AppProperties.fiscalIp = getApplicationProperties("fiscal.ip");
-        AppProperties.fiscalAutoPlusMoneySum = Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum"));
+        AppProperties.setServerIpAddress(getApplicationProperties("server_ip"));
+        AppProperties.setExchangeInterval(Integer.parseInt(getApplicationProperties("exchange_interval_min")) * 60 * 1000);
+        AppProperties.setExchangeEnable(Boolean.parseBoolean(getApplicationProperties("exchange_enable")));
+        AppProperties.setWeightItemPrefix(getApplicationProperties("weight_item_prefix"));
+        AppProperties.setCurrency(getApplicationProperties("currency"));
+        AppProperties.setShopName(getApplicationProperties("shop_name"));
+        AppProperties.setShopAddress(getApplicationProperties("shop_address"));
+        AppProperties.setShopId(Integer.parseInt(getApplicationProperties("shop_id")));
+        AppProperties.setShopGuid(getApplicationProperties("shop_guid"));
+        AppProperties.setTerminalPort(getApplicationProperties("terminal_port"));
+        AppProperties.setCashRegisterName(getApplicationProperties("cash_register_name"));
+        AppProperties.setDisplayPort(getApplicationProperties("display_port"));
+        AppProperties.setFiscalName(getApplicationProperties("fiscal.name"));
+        AppProperties.setFiscalToken(getApplicationProperties("fiscal.token"));
+        AppProperties.setFiscalIp(getApplicationProperties("fiscal.ip"));
+        AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum")));
+        AppProperties.setProstoPayToken(getApplicationProperties("prostopay.token"));
     }
 }

@@ -22,7 +22,7 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 public class ProstoPayService {
 
     private static final String PROSTOPAY_HOST = "https://dashboard.prostopay.net/api/v1/qreceipt/generate";
-    private static final String PROSTOPAY_API_KEY = "d4666842-60b9-4b47-bb0d-f4ccda6e0a9f";
+    private static final String PROSTOPAY_API_KEY = AppProperties.getProstoPayToken();
     private static final String PROSTOPAY_PRODUCTS_FILE_NAME = "config/prostopay-products.properties";
 
     private ProstoPayService() {
@@ -35,7 +35,7 @@ public class ProstoPayService {
             for (Map.Entry<Object, Object> property : properties.entrySet()) {
                 Integer key = Integer.parseInt((String) property.getKey());
                 String productCode = (String) property.getValue();
-                AppProperties.prostoPayProducts.put(ProductService.getByCode(productCode), key);
+                AppProperties.getProstoPayProducts().put(ProductService.getByCode(productCode), key);
             }
 
         } catch (IOException e) {
@@ -60,11 +60,11 @@ public class ProstoPayService {
 
     private static ProstoPayRequest getProstoPayRequest(Product product){
         ProstoPayRequest prostoPayRequest = new ProstoPayRequest();
-        prostoPayRequest.setPos(AppProperties.shopId);
+        prostoPayRequest.setPos(AppProperties.getShopId());
         prostoPayRequest.setTill(1);
         prostoPayRequest.setNumber(1);
         prostoPayRequest.setAmount((int) (product.getPrice() * 100));
-        prostoPayRequest.setPluFrom(AppProperties.prostoPayProducts.get(product));//product code in coffee machine
+        prostoPayRequest.setPluFrom(AppProperties.getProstoPayProducts().get(product));//product code in coffee machine
         return prostoPayRequest;
     }
 

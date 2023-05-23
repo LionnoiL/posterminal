@@ -7,10 +7,7 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
-import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.MoveType;
-import ua.gaponov.posterminal.entity.PayTypes;
-import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 
 import java.sql.SQLException;
@@ -104,16 +101,16 @@ public class MoneyMoveService {
         double summaSafe = 0;
 
 
-        if (Objects.equals(MoveType.MOVE_IN, moneyMove.getMoveType())){
+        if (Objects.equals(MoveType.MOVE_IN, moneyMove.getMoveType())) {
             summaMoneyIn = moneyMove.getDocumentSum();
             summaSafe = ShiftResultService.getTotalSumSafe() + summaMoneyIn;
-        } else if (Objects.equals(MoveType.MOVE_OUT, moneyMove.getMoveType())){
+        } else if (Objects.equals(MoveType.MOVE_OUT, moneyMove.getMoveType())) {
             summaMoneyOut = moneyMove.getDocumentSum();
             summaSafe = ShiftResultService.getTotalSumSafe() - summaMoneyOut;
         }
 
         StatementParameters<Object> parameters = StatementParameters.build(
-                AppProperties.currentUser.getGuid(),
+                AppProperties.getCurrentUser().getGuid(),
                 summaMoneyIn,
                 summaMoneyOut,
                 summaSafe
