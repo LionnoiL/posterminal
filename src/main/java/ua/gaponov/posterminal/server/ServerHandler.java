@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.dataexchange.ExchangeUpload;
 import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 
 import java.io.IOException;
@@ -81,13 +82,31 @@ public class ServerHandler implements HttpHandler {
     }
 
     private ResponseEntity handlePOST(HttpExchange exchange, URI endpoint) {
+        final int status = 201;
         try {
             byte[] bytes = exchange.getRequestBody().readAllBytes();
-            LOG.info(new String(bytes));
+
+            String path = endpoint.getPath();
+            switch (path) {
+                case "/command":
+                    handleCommand(new String(bytes));
+                    return ResponseEntity.of("", status);
+                default:
+                    return ResponseEntity.of("", 404);
+            }
         } catch (Exception e) {
             throw new ServerInternalErrorException("can't read request");
         }
-        final int status = 201;
-        return ResponseEntity.of("post", status);
+    }
+
+    private void handleCommand(String command){
+        switch (command){
+            case "upload documents":
+                ExchangeUpload.upload();
+                break;
+            default:
+                //NOP
+        }
+        LOG.info(command);
     }
 }
