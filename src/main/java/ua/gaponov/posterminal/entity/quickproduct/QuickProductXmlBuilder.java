@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.quickproduct;
 
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.entity.products.ProductService;
 import ua.gaponov.posterminal.entity.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.utils.XmlUtils;
@@ -11,9 +12,9 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class QuickProductXmlBuilder {
+public class QuickProductXmlBuilder implements ExchangeBuilder<QuickProduct, XmlUtils> {
 
-    public static QuickProduct create(XmlUtils processor) {
+    public QuickProduct create(XmlUtils processor) {
         QuickProduct quickProduct = new QuickProduct();
         try {
             quickProduct.setProduct(

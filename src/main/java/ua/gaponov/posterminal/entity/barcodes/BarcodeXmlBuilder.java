@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.barcodes;
 
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.entity.products.ProductService;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -10,9 +11,9 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class BarcodeXmlBuilder {
+public class BarcodeXmlBuilder implements ExchangeBuilder<Barcode, XmlUtils> {
 
-    public static Barcode create(XmlUtils processor) {
+    public Barcode create(XmlUtils processor) {
         Barcode barcode = new Barcode();
         try {
             barcode.setBarCodeValue(processor.getStringAttribute("ean_code"));

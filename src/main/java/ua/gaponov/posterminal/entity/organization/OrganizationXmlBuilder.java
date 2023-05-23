@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.organization;
 
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
 import javax.xml.stream.XMLStreamException;
@@ -9,9 +10,9 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class OrganizationXmlBuilder {
+public class OrganizationXmlBuilder implements ExchangeBuilder<Organization, XmlUtils> {
 
-    public static Organization create(XmlUtils processor) {
+    public Organization create(XmlUtils processor) {
         Organization organization = new Organization();
         try {
             organization.setGuid(processor.getStringAttribute("guid_org"));

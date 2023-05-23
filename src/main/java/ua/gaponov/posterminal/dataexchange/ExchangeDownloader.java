@@ -30,6 +30,11 @@ public class ExchangeDownloader {
 
     public static final String IMPORT_FILE = "files/import.xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
+    private static final ExchangeBuilder<Organization, XmlUtils> organizationBuilder = new OrganizationXmlBuilder();
+    private static final ExchangeBuilder<Product, XmlUtils> productBuilder = new ProductXmlBuilder();
+    private static final ExchangeBuilder<Barcode, XmlUtils> barcodeBuilder = new BarcodeXmlBuilder();
+    private static final ExchangeBuilder<Card, XmlUtils> cardBuilder = new CardXmlBuilder();
+    private static final ExchangeBuilder<QuickProduct, XmlUtils> quickProductBuilder = new QuickProductXmlBuilder();
 
     public static void download() throws Exception {
         LOG.info("Start import data");
@@ -38,27 +43,27 @@ public class ExchangeDownloader {
             AppProperties.exchangeRunning = true;
 
             while (processor.startElement("organization", "organizations")) {
-                Organization organization = OrganizationXmlBuilder.create(processor);
+                Organization organization = organizationBuilder.create(processor);
                 OrganizationService.save(organization);
             }
 
             while (processor.startElement("product", "products")) {
-                Product product = ProductXmlBuilder.create(processor);
+                Product product = productBuilder.create(processor);
                 ProductService.save(product);
             }
 
             while (processor.startElement("ean", "eans")) {
-                Barcode barcode = BarcodeXmlBuilder.create(processor);
+                Barcode barcode = barcodeBuilder.create(processor);
                 BarcodeService.save(barcode);
             }
 
             while (processor.startElement("discounts_card", "discounts_cards")) {
-                Card card = CardXmlBuilder.create(processor);
+                Card card = cardBuilder.create(processor);
                 CardService.save(card);
             }
 
             while (processor.startElement("quick_product", "quick_products")) {
-                QuickProduct quickProduct = QuickProductXmlBuilder.create(processor);
+                QuickProduct quickProduct = quickProductBuilder.create(processor);
                 QuickProductService.save(quickProduct);
             }
 

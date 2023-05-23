@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.cards;
 
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
 import javax.xml.stream.XMLStreamException;
@@ -9,9 +10,9 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class CardXmlBuilder {
+public class CardXmlBuilder implements ExchangeBuilder<Card, XmlUtils> {
 
-    public static Card create(XmlUtils processor) {
+    public Card create(XmlUtils processor) {
         Card card = new Card();
         try {
             card.setGuid(processor.getStringAttribute("guid_card"));

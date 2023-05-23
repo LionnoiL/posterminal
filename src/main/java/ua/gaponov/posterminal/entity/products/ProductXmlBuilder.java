@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.products;
 
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -10,9 +11,9 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class ProductXmlBuilder {
+public class ProductXmlBuilder implements ExchangeBuilder<Product, XmlUtils> {
 
-    public static Product create(XmlUtils processor) {
+    public Product create(XmlUtils processor) {
         Product product = new Product();
         try {
             product.setGuid(processor.getStringAttribute("guid_product"));
