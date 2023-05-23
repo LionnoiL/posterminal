@@ -1,153 +1,45 @@
 package ua.gaponov.posterminal.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import ua.gaponov.posterminal.entity.organization.Organization;
 
-import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
  */
+@Getter
+@Setter
 public class Product implements Serializable {
 
     private String guid;
     private String name;
     private String code;
+    @JsonIgnore
     private double price;
+    @JsonIgnore
     private String sku;
+    @JsonIgnore
     private boolean banDisckount;
+    @JsonIgnore
     private String taxCode;
+    @JsonIgnore
     private int taxGroup;
+    @JsonIgnore
     private boolean weight;
+    @JsonIgnore
     private Organization organization;
+    @JsonIgnore
     private double qty;
+    @JsonIgnore
     private boolean needExcise;
+    @JsonIgnore
     private String unitName;
+    @JsonIgnore
     private boolean prostoPayProduct;
-
-    @Transient
-    public boolean isProstoPayProduct() {
-        return prostoPayProduct;
-    }
-
-    public void setProstoPayProduct(boolean prostoPayProduct) {
-        this.prostoPayProduct = prostoPayProduct;
-    }
-
-    @Transient
-    public String getUnitName() {
-        return unitName;
-    }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
-    }
-
-    @Transient
-    public boolean isNeedExcise() {
-        return needExcise;
-    }
-
-    public void setNeedExcise(boolean needExcise) {
-        this.needExcise = needExcise;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    @Transient
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    @Transient
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    @Transient
-    public boolean isBanDisckount() {
-        return banDisckount;
-    }
-
-    public void setBanDisckount(boolean banDisckount) {
-        this.banDisckount = banDisckount;
-    }
-
-    @Transient
-    public String getTaxCode() {
-        return taxCode;
-    }
-
-    public void setTaxCode(String taxCode) {
-        this.taxCode = taxCode;
-    }
-
-    @Transient
-    public int getTaxGroup() {
-        return taxGroup;
-    }
-
-    public void setTaxGroup(int taxGroup) {
-        this.taxGroup = taxGroup;
-    }
-
-    @Transient
-    public boolean isWeight() {
-        return weight;
-    }
-
-    public void setWeight(boolean weight) {
-        this.weight = weight;
-    }
-
-    @Transient
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    @Transient
-    public double getQty() {
-        return qty;
-    }
-
-    public void setQty(double qty) {
-        this.qty = qty;
-    }
 
     @Override
     public int hashCode() {

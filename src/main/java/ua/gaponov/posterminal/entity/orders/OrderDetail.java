@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.orders;
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.products.Product;
@@ -12,6 +14,8 @@ import java.util.UUID;
 /**
  * @author Andriy Gaponov
  */
+@Getter
+@Setter
 public class OrderDetail implements Serializable {
 
     private String guid = UUID.randomUUID().toString();
@@ -35,97 +39,5 @@ public class OrderDetail implements Serializable {
         setSummaDiscount(RoundUtils.round(getSummaWithoutDiscount() * discountForProduct / 100)
         );
         setSumma(getSummaWithoutDiscount() - getSummaDiscount());
-    }
-
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public boolean isFiscalPrint() {
-        return fiscalPrint;
-    }
-
-    public void setFiscalPrint(boolean fiscalPrint) {
-        this.fiscalPrint = fiscalPrint;
-    }
-
-    public String getExcise() {
-        return excise;
-    }
-
-    public void setExcise(String excise) {
-        this.excise = excise;
-    }
-
-    public void recalculateSumma() {
-        setSumma(getQty() * getPrice());
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    public int getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(int lineNumber) {
-        this.lineNumber = lineNumber;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public double getQty() {
-        return qty;
-    }
-
-    public void setQty(double qty) {
-        this.qty = qty;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getSumma() {
-        return summa;
-    }
-
-    public void setSumma(double summa) {
-        this.summa = summa;
-    }
-
-    public double getSummaWithoutDiscount() {
-        return summaWithoutDiscount;
-    }
-
-    public void setSummaWithoutDiscount(double summaWithoutDiscount) {
-        this.summaWithoutDiscount = summaWithoutDiscount;
-    }
-
-    public double getSummaDiscount() {
-        return summaDiscount;
-    }
-
-    public void setSummaDiscount(double summaDiscount) {
-        this.summaDiscount = summaDiscount;
     }
 }

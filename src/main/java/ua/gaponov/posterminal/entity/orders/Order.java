@@ -1,10 +1,13 @@
 package ua.gaponov.posterminal.entity.orders;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import ua.gaponov.posterminal.entity.cards.Card;
+import lombok.Getter;
+import lombok.Setter;
 import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.PayTypes;
+import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.utils.RoundUtils;
@@ -17,11 +20,14 @@ import java.util.*;
 /**
  * @author Andriy Gaponov
  */
+@Getter
+@Setter
 public class Order implements Serializable, Cloneable {
     private String guid = UUID.randomUUID().toString();
     private long orderNumber;
     private LocalDateTime date;
-    private transient boolean upload;
+    @JsonIgnore
+    private boolean upload;
     private double documentSum;
     private double documentSumWithoutDiscount;
     private double roundSum;
@@ -133,158 +139,6 @@ public class Order implements Serializable, Cloneable {
             }
         }
         return result;
-    }
-
-    public DocumentTypes getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(DocumentTypes documentType) {
-        this.documentType = documentType;
-    }
-
-    public double getDocumentSumWithoutDiscount() {
-        return documentSumWithoutDiscount;
-    }
-
-    public void setDocumentSumWithoutDiscount(double documentSumWithoutDiscount) {
-        this.documentSumWithoutDiscount = documentSumWithoutDiscount;
-    }
-
-    public String getPrnCode() {
-        return prnCode;
-    }
-
-    public void setPrnCode(String prnCode) {
-        this.prnCode = prnCode;
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public double getToPaySum() {
-        return toPaySum;
-    }
-
-    public void setToPaySum(double toPaySum) {
-        this.toPaySum = toPaySum;
-    }
-
-    public double getRoundSum() {
-        return roundSum;
-    }
-
-    public void setRoundSum(double roundSum) {
-        this.roundSum = roundSum;
-    }
-
-    public double getDiscountSum() {
-        return discountSum;
-    }
-
-    public void setDiscountSum(double discountSum) {
-        this.discountSum = discountSum;
-    }
-
-    public long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public boolean isUpload() {
-        return upload;
-    }
-
-    public void setUpload(boolean upload) {
-        this.upload = upload;
-    }
-
-    public double getDocumentSum() {
-        return documentSum;
-    }
-
-    public void setDocumentSum(double documentSum) {
-        this.documentSum = documentSum;
-    }
-
-    public double getPaySum() {
-        return paySum;
-    }
-
-    public void setPaySum(double paySum) {
-        this.paySum = paySum;
-    }
-
-    public PayTypes getPayType() {
-        return payType;
-    }
-
-    public void setPayType(PayTypes payType) {
-        this.payType = payType;
-    }
-
-    public boolean isFiscal() {
-        return fiscal;
-    }
-
-    public void setFiscal(boolean fiscal) {
-        this.fiscal = fiscal;
-    }
-
-    public boolean isInternet() {
-        return internet;
-    }
-
-    public void setInternet(boolean internet) {
-        this.internet = internet;
-    }
-
-    public boolean isFiscalPrint() {
-        return fiscalPrint;
-    }
-
-    public void setFiscalPrint(boolean fiscalPrint) {
-        this.fiscalPrint = fiscalPrint;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public List<OrderDetail> getDetails() {
-        return details;
-    }
-
-    public void setDetails(List<OrderDetail> details) {
-        this.details = details;
     }
 
     @Override

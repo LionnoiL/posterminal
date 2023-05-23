@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessage;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessageService;
+import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
+import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.utils.FilesUtils;
@@ -34,18 +36,21 @@ public class ExchangeUpload {
     }
 
     private static void uploadOrders() {
-        List<Order> items = OrderService.getAllNoUpload();
+        List<Order> orders = OrderService.getAllNoUpload();
+        List<MoneyMove> moneyMoves = MoneyMoveService.getAllNoUpload();
+
         ExchangeMessage messages = ExchangeMessageService.getMessages();
         messages.setReceivedNumber(messages.getReceivedNumber() + 1);
-        if (items.size() > 0) {
-            OrdersUpload list = new OrdersUpload();
+        if (orders.size() + moneyMoves.size() > 0) {
+            DocumentsUpload list = new DocumentsUpload();
             list.setExchangeMessage(messages);
             list.setShopGuid(AppProperties.shopGuid);
             list.setShopId(AppProperties.shopId);
-            list.setItems(items);
+
+            list.setOrders(orders);
+            list.setMoneyMoves(moneyMoves);
 
             ObjectMapper xmlMapper = new XmlMapper();
-
             SimpleModule module = new SimpleModule();
             module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
             xmlMapper.registerModule(module);

@@ -9,9 +9,6 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor()
-@Builder
 public class ExchangeMessage implements Serializable {
     private long receivedNumber;
     private long takenNumber;

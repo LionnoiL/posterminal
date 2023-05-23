@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.moneymove;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,8 @@ public class MoneyMove {
     private String guid = UUID.randomUUID().toString();
     private long moneyMoveNumber;
     private LocalDateTime date;
-    private transient boolean upload;
+    @JsonIgnore
+    private boolean upload;
     private double documentSum;
     private MoveType moveType;
     private String comment;
