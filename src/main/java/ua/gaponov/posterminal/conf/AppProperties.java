@@ -8,6 +8,7 @@ import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.entity.users.User;
 import ua.gaponov.posterminal.server.PosHttpServer;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,6 +89,20 @@ public class AppProperties {
     @Getter
     @Setter
     private static String prostoPayToken;
+    @Setter
+    private static String exchangeFolder;
+
+    public static String getExchangeFolder() {
+        if (!exchangeFolder.isEmpty()){
+            exchangeFolder = exchangeFolder.replace("\\", File.separator);
+            if (!exchangeFolder.endsWith(File.separator)){
+                exchangeFolder += File.separator;
+            }
+            return exchangeFolder;
+        } else {
+            return "files"+File.separator;
+        }
+    }
 
     private AppProperties() {
     }

@@ -51,7 +51,6 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopGuid.setText(AppProperties.getShopGuid());
         fieldShopId.setText(String.valueOf(AppProperties.getShopId()));
         fieldCashRegister.setText(AppProperties.getCashRegisterName());
-
         SerialPort[] ports = SerialPort.getCommPorts();
         for (SerialPort port: ports) {
             comboTerminalPort.addItem(port.getSystemPortName());
@@ -59,13 +58,12 @@ public class OptionsForm extends javax.swing.JFrame {
         }
         comboTerminalPort.setSelectedItem(AppProperties.getTerminalPort());
         comboDisplayPort.setSelectedItem(AppProperties.getDisplayPort());
-
         fldFiscalName.setText(AppProperties.getFiscalName());
         fldFiscalToken.setText(AppProperties.getFiscalToken());
         fldFiscalIp.setText(AppProperties.getFiscalIp());
         fldFiscalAutoSum.setText(String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
-
         fldProstoPayToken.setText(AppProperties.getProstoPayToken());
+        fldExchangeFolder.setText(AppProperties.getExchangeFolder());
     }
 
     /**
@@ -85,7 +83,7 @@ public class OptionsForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         fieldIntervalExchange = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fldExchangeFolder = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -127,7 +125,7 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jLabel4.setText("Каталог обміну");
 
-        jTextField1.setToolTipText("");
+        fldExchangeFolder.setToolTipText("");
 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +220,7 @@ public class OptionsForm extends javax.swing.JFrame {
                             .addComponent(fldProstoPayToken)
                             .addComponent(fieldShopAddress)
                             .addComponent(fieldShopName)
-                            .addComponent(jTextField1)
+                            .addComponent(fldExchangeFolder)
                             .addComponent(fieldShopGuid)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(fieldShopId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +257,7 @@ public class OptionsForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fldExchangeFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -330,16 +328,14 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.setShopGuid(fieldShopGuid.getText());
             AppProperties.setShopId(Integer.parseInt(fieldShopId.getText()));
             AppProperties.setCashRegisterName(fieldCashRegister.getText());
-
             AppProperties.setTerminalPort((String) comboTerminalPort.getSelectedItem());
             AppProperties.setDisplayPort((String) comboDisplayPort.getSelectedItem());
-
             AppProperties.setFiscalName(fldFiscalName.getText());
             AppProperties.setFiscalToken(fldFiscalToken.getText());
             AppProperties.setFiscalIp(fldFiscalIp.getText());
             AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(fldFiscalAutoSum.getText()));
-
             AppProperties.setProstoPayToken(fldProstoPayToken.getText());
+            AppProperties.setExchangeFolder(fldExchangeFolder.getText());
 
             dispose();
         } catch (Exception e){
@@ -361,6 +357,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldShopGuid;
     private javax.swing.JTextField fieldShopId;
     private javax.swing.JTextField fieldShopName;
+    private javax.swing.JTextField fldExchangeFolder;
     private javax.swing.JTextField fldFiscalAutoSum;
     private javax.swing.JTextField fldFiscalIp;
     private javax.swing.JTextField fldFiscalName;
@@ -382,7 +379,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 }

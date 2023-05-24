@@ -87,8 +87,9 @@ public class PropertiesUtils {
     public static void saveAllApplicationProperties() {
         saveApplicationProperties("currency", AppProperties.getCurrency());
         saveApplicationProperties("weight_item_prefix", AppProperties.getWeightItemPrefix());
-        saveApplicationProperties("exchange_enable", String.valueOf(AppProperties.isExchangeEnable()));
-        saveApplicationProperties("exchange_interval_min", String.valueOf(AppProperties.getExchangeInterval() / 60000));
+        saveApplicationProperties("exchange.enable", String.valueOf(AppProperties.isExchangeEnable()));
+        saveApplicationProperties("exchange.interval.min", String.valueOf(AppProperties.getExchangeInterval() / 60000));
+        saveApplicationProperties("exchange.folder", AppProperties.getExchangeFolder());
         saveApplicationProperties("shop_name", AppProperties.getShopName());
         saveApplicationProperties("shop_address", AppProperties.getShopAddress());
         saveApplicationProperties("shop_id", String.valueOf(AppProperties.getShopId()));
@@ -105,8 +106,9 @@ public class PropertiesUtils {
 
     public static void loadProperties() {
         AppProperties.setServerIpAddress(getApplicationProperties("server_ip"));
-        AppProperties.setExchangeInterval(Integer.parseInt(getApplicationProperties("exchange_interval_min")) * 60 * 1000);
-        AppProperties.setExchangeEnable(Boolean.parseBoolean(getApplicationProperties("exchange_enable")));
+        AppProperties.setExchangeInterval(Integer.parseInt(getApplicationProperties("exchange.interval.min")) * 60 * 1000);
+        AppProperties.setExchangeEnable(Boolean.parseBoolean(getApplicationProperties("exchange.enable")));
+        AppProperties.setExchangeFolder(getApplicationProperties("exchange.folder"));
         AppProperties.setWeightItemPrefix(getApplicationProperties("weight_item_prefix"));
         AppProperties.setCurrency(getApplicationProperties("currency"));
         AppProperties.setShopName(getApplicationProperties("shop_name"));

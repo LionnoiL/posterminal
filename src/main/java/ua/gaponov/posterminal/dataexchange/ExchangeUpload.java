@@ -20,8 +20,6 @@ import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.orders.OrderService;
-import ua.gaponov.posterminal.entity.products.Product;
-import ua.gaponov.posterminal.entity.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -37,8 +35,9 @@ import java.util.List;
  * @author Andriy Gaponov
  */
 public class ExchangeUpload {
+    public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getShopId() + ".xml";
+    public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getShopId() + ".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
-    public static final String IMPORT_FILE_CONFIRMATION = "files/confirmation_" + AppProperties.getShopId() + ".xml";
     private static final ExchangeBuilder<Confirmation, XmlUtils> confirmationBuilder = new ConfirmationXmlBuilder();
 
     public static void upload() {
@@ -69,7 +68,7 @@ public class ExchangeUpload {
             xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
             try {
                 String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-                FilesUtils.saveTextFile("files/export_" + AppProperties.getShopId() + ".xml", employeeXml);
+                FilesUtils.saveTextFile(EXPORT_FILE, employeeXml);
                 ExchangeMessageService.saveMessages(messages);
             } catch (JsonProcessingException | SQLException e) {
                 LOG.error("Export filed", e);
@@ -78,6 +77,10 @@ public class ExchangeUpload {
     }
 
     private static void downloadConfirmations() {
+        if (!FilesUtils.fileExist(IMPORT_FILE_CONFIRMATION)) {
+            return;
+        }
+
         LOG.info("Start import confirmations");
         try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE_CONFIRMATION)))) {
             while (processor.startElement("confirmations", "confirmation")) {
