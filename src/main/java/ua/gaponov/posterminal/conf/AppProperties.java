@@ -49,7 +49,7 @@ public class AppProperties {
     private static String cashRegisterName = "";
     @Getter
     @Setter
-    private static int shopId;
+    private static int armId;
     @Getter
     @Setter
     private static String shopGuid;

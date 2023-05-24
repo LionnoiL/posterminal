@@ -49,7 +49,7 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldShopName.setText(AppProperties.getShopName());
         fieldShopAddress.setText(AppProperties.getShopAddress());
         fieldShopGuid.setText(AppProperties.getShopGuid());
-        fieldShopId.setText(String.valueOf(AppProperties.getShopId()));
+        fieldShopId.setText(String.valueOf(AppProperties.getArmId()));
         fieldCashRegister.setText(AppProperties.getCashRegisterName());
         SerialPort[] ports = SerialPort.getCommPorts();
         for (SerialPort port: ports) {
@@ -326,7 +326,7 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.setShopName(fieldShopName.getText());
             AppProperties.setShopAddress(fieldShopAddress.getText());
             AppProperties.setShopGuid(fieldShopGuid.getText());
-            AppProperties.setShopId(Integer.parseInt(fieldShopId.getText()));
+            AppProperties.setArmId(Integer.parseInt(fieldShopId.getText()));
             AppProperties.setCashRegisterName(fieldCashRegister.getText());
             AppProperties.setTerminalPort((String) comboTerminalPort.getSelectedItem());
             AppProperties.setDisplayPort((String) comboDisplayPort.getSelectedItem());

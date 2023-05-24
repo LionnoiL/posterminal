@@ -27,6 +27,6 @@ public class DocumentsUpload {
     private List<MoneyMove> moneyMoves;
 
     private String shopGuid;
-    private int shopId;
+    private int armId;
     private ExchangeMessage exchangeMessage;
 }

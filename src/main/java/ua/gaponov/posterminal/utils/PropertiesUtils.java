@@ -92,7 +92,7 @@ public class PropertiesUtils {
         saveApplicationProperties("exchange.folder", AppProperties.getExchangeFolder());
         saveApplicationProperties("shop_name", AppProperties.getShopName());
         saveApplicationProperties("shop_address", AppProperties.getShopAddress());
-        saveApplicationProperties("shop_id", String.valueOf(AppProperties.getShopId()));
+        saveApplicationProperties("shop_id", String.valueOf(AppProperties.getArmId()));
         saveApplicationProperties("shop_guid", AppProperties.getShopGuid());
         saveApplicationProperties("terminal_port", AppProperties.getTerminalPort());
         saveApplicationProperties("cash_register_name", AppProperties.getCashRegisterName());
@@ -113,7 +113,7 @@ public class PropertiesUtils {
         AppProperties.setCurrency(getApplicationProperties("currency"));
         AppProperties.setShopName(getApplicationProperties("shop_name"));
         AppProperties.setShopAddress(getApplicationProperties("shop_address"));
-        AppProperties.setShopId(Integer.parseInt(getApplicationProperties("shop_id")));
+        AppProperties.setArmId(Integer.parseInt(getApplicationProperties("shop_id")));
         AppProperties.setShopGuid(getApplicationProperties("shop_guid"));
         AppProperties.setTerminalPort(getApplicationProperties("terminal_port"));
         AppProperties.setCashRegisterName(getApplicationProperties("cash_register_name"));

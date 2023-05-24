@@ -35,8 +35,8 @@ import java.util.List;
  * @author Andriy Gaponov
  */
 public class ExchangeUpload {
-    public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getShopId() + ".xml";
-    public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getShopId() + ".xml";
+    public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getArmId() + ".xml";
+    public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getArmId() + ".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
     private static final ExchangeBuilder<Confirmation, XmlUtils> confirmationBuilder = new ConfirmationXmlBuilder();
 
@@ -55,7 +55,7 @@ public class ExchangeUpload {
             DocumentsUpload list = new DocumentsUpload();
             list.setExchangeMessage(messages);
             list.setShopGuid(AppProperties.getShopGuid());
-            list.setShopId(AppProperties.getShopId());
+            list.setArmId(AppProperties.getArmId());
 
             list.setOrders(orders);
             list.setMoneyMoves(moneyMoves);

@@ -60,7 +60,7 @@ public class ProstoPayService {
 
     private static ProstoPayRequest getProstoPayRequest(Product product){
         ProstoPayRequest prostoPayRequest = new ProstoPayRequest();
-        prostoPayRequest.setPos(AppProperties.getShopId());
+        prostoPayRequest.setPos(AppProperties.getArmId());
         prostoPayRequest.setTill(1);
         prostoPayRequest.setNumber(1);
         prostoPayRequest.setAmount((int) (product.getPrice() * 100));
