@@ -8,6 +8,9 @@ import ua.gaponov.posterminal.entity.barcodes.BarcodeXmlBuilder;
 import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.cards.CardService;
 import ua.gaponov.posterminal.entity.cards.CardXmlBuilder;
+import ua.gaponov.posterminal.entity.messages.ExchangeMessage;
+import ua.gaponov.posterminal.entity.messages.ExchangeMessageService;
+import ua.gaponov.posterminal.entity.messages.ExchangeMessageXmlBuilder;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.entity.organization.OrganizationXmlBuilder;
@@ -18,6 +21,7 @@ import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductXmlBuilder;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
 import java.nio.file.Files;
@@ -31,6 +35,7 @@ public class ExchangeDownloader {
     public static final String IMPORT_FILE = AppProperties.getExchangeFolder() + "import_"+AppProperties.getArmId()+".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
     private static final ExchangeBuilder<Organization, XmlUtils> organizationBuilder = new OrganizationXmlBuilder();
+    private static final ExchangeBuilder<ExchangeMessage, XmlUtils> messageBuilder = new ExchangeMessageXmlBuilder();
     private static final ExchangeBuilder<Product, XmlUtils> productBuilder = new ProductXmlBuilder();
     private static final ExchangeBuilder<Barcode, XmlUtils> barcodeBuilder = new BarcodeXmlBuilder();
     private static final ExchangeBuilder<Card, XmlUtils> cardBuilder = new CardXmlBuilder();
@@ -41,6 +46,11 @@ public class ExchangeDownloader {
 
         try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE)))) {
             AppProperties.exchangeRunning = true;
+
+            while (processor.startElement("message", "messages")) {
+                ExchangeMessage message = messageBuilder.create(processor);
+                ExchangeMessageService.saveMessages(message);
+            }
 
             while (processor.startElement("organization", "organizations")) {
                 Organization organization = organizationBuilder.create(processor);
@@ -68,10 +78,8 @@ public class ExchangeDownloader {
             }
 
             //FilesUtils.deleteFile(IMPORT_FILE);
-            //TODO: delete file
             AppProperties.exchangeRunning = false;
         }
-
         LOG.info("End import data");
     }
 }
