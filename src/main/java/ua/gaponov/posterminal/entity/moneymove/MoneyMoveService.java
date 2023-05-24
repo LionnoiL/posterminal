@@ -118,4 +118,12 @@ public class MoneyMoveService {
 
         return new DatabaseRequest(sql, parameters);
     }
+
+    public static void confirmUploadDocument(String guid) throws SQLException {
+        String sql = """
+                    UPDATE money_move set upload = true WHERE money_move_guid = ?;
+                """;
+        StatementParameters<Object> parameters = StatementParameters.build(guid);
+        helper.execSql(sql, parameters);
+    }
 }

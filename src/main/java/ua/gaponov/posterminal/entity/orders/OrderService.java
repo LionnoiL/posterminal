@@ -270,4 +270,12 @@ public class OrderService {
 
         return newOrder;
     }
+
+    public static void confirmUploadDocument(String guid) throws SQLException {
+        String sql = """
+                    UPDATE orders set upload = true WHERE order_guid = ?;
+                """;
+        StatementParameters<Object> parameters = StatementParameters.build(guid);
+        helper.execSql(sql, parameters);
+    }
 }

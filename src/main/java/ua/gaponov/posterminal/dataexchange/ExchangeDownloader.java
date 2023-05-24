@@ -28,7 +28,7 @@ import java.nio.file.Paths;
  */
 public class ExchangeDownloader {
 
-    public static final String IMPORT_FILE = "files/import.xml";
+    public static final String IMPORT_FILE = "files/import_"+AppProperties.getShopId()+".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
     private static final ExchangeBuilder<Organization, XmlUtils> organizationBuilder = new OrganizationXmlBuilder();
     private static final ExchangeBuilder<Product, XmlUtils> productBuilder = new ProductXmlBuilder();
