@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.dataexchange;
 
+import com.sun.nio.file.ExtendedOpenOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.entity.barcodes.Barcode;
@@ -24,8 +25,12 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
+import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 /**
  * @author Andriy Gaponov
@@ -42,11 +47,20 @@ public class ExchangeDownloader {
     private static final ExchangeBuilder<QuickProduct, XmlUtils> quickProductBuilder = new QuickProductXmlBuilder();
 
     public static void download() throws Exception {
+        if (!FilesUtils.fileExist(IMPORT_FILE)) {
+            return;
+        }
+        File f = new File(IMPORT_FILE);
+        if (!f.canRead()){
+            return;
+        }
+
         LOG.info("Start import data");
+        Path path = Paths.get(IMPORT_FILE);
+        try (InputStream is = Files.newInputStream(path);
+             XmlUtils processor = new XmlUtils(is)) {
 
-        try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE)))) {
             AppProperties.exchangeRunning = true;
-
             while (processor.startElement("message", "messages")) {
                 ExchangeMessage message = messageBuilder.create(processor);
                 ExchangeMessageService.saveMessages(message);
@@ -77,9 +91,9 @@ public class ExchangeDownloader {
                 QuickProductService.save(quickProduct);
             }
 
-            //FilesUtils.deleteFile(IMPORT_FILE);
             AppProperties.exchangeRunning = false;
         }
+        FilesUtils.deleteFile(IMPORT_FILE);
         LOG.info("End import data");
     }
 }
