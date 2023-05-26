@@ -91,10 +91,16 @@ public class ExchangeUpload {
                 Confirmation confirmation = confirmationBuilder.create(processor);
                 ConfirmationService.save(confirmation);
             }
-            FilesUtils.deleteFile(IMPORT_FILE_CONFIRMATION);
         } catch (Exception e) {
             LOG.error("Import confirmations filed", e);
         }
+
+        try {
+            FilesUtils.deleteFile(IMPORT_FILE_CONFIRMATION);
+        } catch (IOException e){
+            LOG.error("Delete confirmation file failed");
+        }
+
         LOG.info("End import confirmations");
     }
 
