@@ -53,29 +53,29 @@ public class ExchangeUpload {
 
         ExchangeMessage messages = ExchangeMessageService.getMessages();
         messages.setReceivedNumber(messages.getReceivedNumber() + 1);
-        if (orders.size() + moneyMoves.size() > 0) {
-            DocumentsUpload list = new DocumentsUpload();
-            list.setExchangeMessage(messages);
-            list.setShopGuid(AppProperties.getShopGuid());
-            list.setArmId(AppProperties.getArmId());
 
-            list.setOrders(orders);
-            list.setMoneyMoves(moneyMoves);
+        DocumentsUpload list = new DocumentsUpload();
+        list.setExchangeMessage(messages);
+        list.setShopGuid(AppProperties.getShopGuid());
+        list.setArmId(AppProperties.getArmId());
 
-            ObjectMapper xmlMapper = new XmlMapper();
-            SimpleModule module = new SimpleModule();
-            module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-            xmlMapper.registerModule(module);
+        list.setOrders(orders);
+        list.setMoneyMoves(moneyMoves);
 
-            xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
-            try {
-                String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-                FilesUtils.saveTextFile(EXPORT_FILE, employeeXml);
-                ExchangeMessageService.saveMessages(messages);
-            } catch (JsonProcessingException | SQLException e) {
-                LOG.error("Export filed", e);
-            }
+        ObjectMapper xmlMapper = new XmlMapper();
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
+        xmlMapper.registerModule(module);
+
+        xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
+        try {
+            String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            FilesUtils.saveTextFile(EXPORT_FILE, employeeXml);
+            ExchangeMessageService.saveMessages(messages);
+        } catch (JsonProcessingException | SQLException e) {
+            LOG.error("Export filed", e);
         }
+
     }
 
     private static void downloadConfirmations() {
@@ -97,7 +97,7 @@ public class ExchangeUpload {
 
         try {
             FilesUtils.deleteFile(IMPORT_FILE_CONFIRMATION);
-        } catch (IOException e){
+        } catch (IOException e) {
             LOG.error("Delete confirmation file failed");
         }
 
