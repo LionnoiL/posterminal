@@ -24,7 +24,9 @@ import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -82,8 +84,10 @@ public class ExchangeUpload {
         }
 
         LOG.info("Start import confirmations");
-        try (XmlUtils processor = new XmlUtils(Files.newInputStream(Paths.get(IMPORT_FILE_CONFIRMATION)))) {
-            while (processor.startElement("confirmations", "confirmation")) {
+        Path path = Paths.get(IMPORT_FILE_CONFIRMATION);
+        try (InputStream is = Files.newInputStream(path);
+             XmlUtils processor = new XmlUtils(is)) {
+            while (processor.startElement("confirmation", "confirmations")) {
                 Confirmation confirmation = confirmationBuilder.create(processor);
                 ConfirmationService.save(confirmation);
             }

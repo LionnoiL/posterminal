@@ -28,7 +28,6 @@ public class FilesUtils {
 
     public static void deleteFile(String fileName) throws IOException {
         File file = new File(fileName);
-        //file.delete();
         Files.delete(file.toPath());
     }
 
@@ -46,26 +45,5 @@ public class FilesUtils {
         }
         FileInputStream fileInputStream = new FileInputStream(file);
         return fileInputStream;
-    }
-
-    public static void read(int countdown) throws IOException {
-        File f = new File("test.txt");
-        if (f.canRead())
-        {
-            // читаем удобным способом
-            FileReader fr = new FileReader(f);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-
-            // закрываем поток
-            br.close();
-            fr.close();
-        }
-        else
-        {
-            if (countdown < 1)
-                return;
-            read(countdown - 1);
-        }
     }
 }
