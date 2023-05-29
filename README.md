@@ -1,5 +1,5 @@
 # POS-Terminal
-The program is a workplace of a cashier in a store. The program is under development.
+The program is a workplace of a cashier in a store.
 ![main window](assets/main_window.jpeg)
 ![pay_form](assets/pay_form.jpeg)
 ![money_form](assets/money_form.jpeg)
