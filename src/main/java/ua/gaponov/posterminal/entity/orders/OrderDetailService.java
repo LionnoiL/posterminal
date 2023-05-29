@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.orders;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -10,13 +12,14 @@ import java.util.Objects;
 /**
  * @author Andriy Gaponov
  */
-public class OrderDetailService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class OrderDetailService {
 
-    private static final SqlHelper<OrderDetail> helper = new SqlHelper<>();
+    private static final SqlHelper<OrderDetail> SQL_HELPER = new SqlHelper<>();
 
     public static List<OrderDetail> getByOrder(String orderGuid) {
         StatementParameters<String> parameters = StatementParameters.build(orderGuid);
-        return helper.getAll("select * from orders_detail where order_guid = ?",
+        return SQL_HELPER.getAll("select * from orders_detail where order_guid = ?",
                 parameters,
                 new OrderDetailDatabaseMapper());
     }
@@ -26,7 +29,7 @@ public class OrderDetailService {
     }
 
     public static DatabaseRequest getInsertRequest(Order order, OrderDetail orderDetail, int line) {
-        String sqlInsertOrderDetail = """                  
+        String sqlInsertOrderDetail = """
                     insert into orders_detail
                     (orders_detail_guid, order_guid, line_number, product_guid, qty,
                     price, summa_without_discount, summa_discount, summa, excise, fiscal_print, org_guid)

@@ -12,9 +12,10 @@ import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.utils.DialogUtils;
 import ua.gaponov.posterminal.utils.PropertiesUtils;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 
 /**
  *
@@ -47,7 +48,7 @@ public class FiscalForm extends javax.swing.JDialog {
     }
 
     private void setImages() {
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
+        this.setIconImage(getImage("barcode.png"));
     }
 
     private void updateTable() {

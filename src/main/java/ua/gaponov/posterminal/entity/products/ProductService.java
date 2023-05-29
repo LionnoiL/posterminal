@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.products;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -9,28 +11,26 @@ import java.sql.SQLException;
 /**
  * @author Andriy Gaponov
  */
-public class ProductService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ProductService {
 
-    private static final ProductDatabaseMapper mapper = new ProductDatabaseMapper();
-    private static final SqlHelper<Product> helper = new SqlHelper<>();
-
-    private ProductService() {
-    }
+    private static final ProductDatabaseMapper MAPPER = new ProductDatabaseMapper();
+    private static final SqlHelper<Product> SQL_HELPER = new SqlHelper<>();
 
     public static Product getByGuid(String guid) {
         StatementParameters<String> parameters = StatementParameters.build(guid);
-        return helper.getOne(
+        return SQL_HELPER.getOne(
                 "select * from products where product_guid = ?",
                 parameters,
-                mapper);
+                MAPPER);
     }
 
     public static Product getByCode(String code) {
         StatementParameters<String> parameters = StatementParameters.build(code);
-        return helper.getOne(
+        return SQL_HELPER.getOne(
                 "select * from products where product_code = ?",
                 parameters,
-                mapper);
+                MAPPER);
     }
 
     public static Product getByBarcode(String barcode) {
@@ -79,10 +79,10 @@ public class ProductService {
                 left join products on products.product_guid = eans.product_guid
                 where eans.ean_code = ?
                 """;
-        Product product = helper.getOne(
+        Product product = SQL_HELPER.getOne(
                 sql,
                 parameters,
-                mapper);
+                MAPPER);
         if (product != null) {
             product.setQty(1);
         }
@@ -95,10 +95,10 @@ public class ProductService {
                 select * from products
                 where sku = ?
                 """;
-        Product product = helper.getOne(
+        Product product = SQL_HELPER.getOne(
                 sql,
                 parameters,
-                mapper);
+                MAPPER);
         if (product != null) {
             product.setQty(1);
         }
@@ -142,7 +142,7 @@ public class ProductService {
                 values
                 (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
-        helper.execSql(sql, parameters);
+        SQL_HELPER.execSql(sql, parameters);
     }
 
     private static void update(Product product) throws SQLException {
@@ -179,6 +179,6 @@ public class ProductService {
                 org_guid = ?
                 where product_guid = ?
                 """;
-        helper.execSql(sql, parameters);
+        SQL_HELPER.execSql(sql, parameters);
     }
 }

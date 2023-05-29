@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.organization;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -9,7 +11,8 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
-public class OrganizationService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class OrganizationService {
 
     public static List<Organization> getAll() {
         return new SqlHelper<Organization>().getAll("SELECT * FROM organization", new OrganizationDatabaseMapper());

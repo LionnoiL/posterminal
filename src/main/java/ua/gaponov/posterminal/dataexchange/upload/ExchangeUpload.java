@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.dataexchange;
+package ua.gaponov.posterminal.dataexchange.upload;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,9 +8,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
 import ua.gaponov.posterminal.entity.confirmation.Confirmation;
 import ua.gaponov.posterminal.entity.confirmation.ConfirmationService;
 import ua.gaponov.posterminal.entity.confirmation.ConfirmationXmlBuilder;
@@ -36,11 +39,12 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExchangeUpload {
     public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getArmId() + ".xml";
     public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getArmId() + ".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
-    private static final ExchangeBuilder<Confirmation, XmlUtils> confirmationBuilder = new ConfirmationXmlBuilder();
+    private static final ExchangeBuilder<Confirmation, XmlUtils> CONFIRMATION_BUILDER = new ConfirmationXmlBuilder();
 
     public static void upload() {
         downloadConfirmations();
@@ -88,7 +92,7 @@ public class ExchangeUpload {
         try (InputStream is = Files.newInputStream(path);
              XmlUtils processor = new XmlUtils(is)) {
             while (processor.startElement("confirmation", "confirmations")) {
-                Confirmation confirmation = confirmationBuilder.create(processor);
+                Confirmation confirmation = CONFIRMATION_BUILDER.create(processor);
                 ConfirmationService.save(confirmation);
             }
         } catch (Exception e) {

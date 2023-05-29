@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.shift;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -17,13 +19,11 @@ import java.util.Objects;
 /**
  * @author Andriy Gaponov
  */
-public class ShiftResultService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ShiftResultService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ShiftResultService.class);
-    private static final SqlHelper<ShiftResultService> helper = new SqlHelper<>();
-
-    private ShiftResultService() {
-    }
+    private static final SqlHelper<ShiftResultService> SQL_HELPER = new SqlHelper<>();
 
     public static List<ShiftResult> getAll() {
         return new SqlHelper<ShiftResult>().getAll("SELECT * FROM shift_results", new ShiftResultDatabaseMapper());
@@ -100,7 +100,7 @@ public class ShiftResultService {
         String sql = """
                 SELECT sum(summa_order_cash) summa_order_cash, sum(SUMMA_RETURN_CASH  ) SUMMA_RETURN_CASH,
                  sum(SUMMA_ORDER_CARD  ) SUMMA_ORDER_CARD, sum(SUMMA_MONEY_MOVE_IN) SUMMA_MONEY_MOVE_IN,
-                 sum(SUMMA_MONEY_MOVE_OUT) SUMMA_MONEY_MOVE_OUT, sum (SUMMA_SALE) SUMMA_SALE, sum(SUMMA_RETURN) SUMMA_RETURN\s
+                 sum(SUMMA_MONEY_MOVE_OUT) SUMMA_MONEY_MOVE_OUT, sum (SUMMA_SALE) SUMMA_SALE, sum(SUMMA_RETURN) SUMMA_RETURN
                 FROM shift_results where DOC_DATE >= ? and DOC_DATE <= ?
                 """;
         return new SqlHelper<ShiftResultTotal>().getOne(sql,
@@ -109,8 +109,8 @@ public class ShiftResultService {
     }
 
     public static void startShift() {
-        int count = helper.getCount("select count(id) from shift_results where DOC_DATE >= '" +
-                DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
+        int count = SQL_HELPER.getCount("select count(id) from shift_results where DOC_DATE >= '"
+                + DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00") + "'");
         if (count == 0) {
             double totalSumSafe = getTotalSumSafe();
             ShiftResult shiftResult = new ShiftResult();

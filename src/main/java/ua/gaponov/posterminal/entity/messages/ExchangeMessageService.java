@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
-public class ExchangeMessageService {
+public final class ExchangeMessageService {
 
-    private static final SqlHelper<String> helper = new SqlHelper<>();
+    private static final SqlHelper<String> SQL_HELPER = new SqlHelper<>();
     private static final String OPTIONS_NAME_RECEIVED = "number_message_received";
     private static final String OPTIONS_NAME_TAKEN = "number_message_taken";
 
@@ -22,9 +22,9 @@ public class ExchangeMessageService {
 
     public static ExchangeMessage getMessages() {
         ExchangeMessage exchangeMessage = new ExchangeMessage();
-        String received = helper.getFirst("app_options", "options_value", "options_name",
+        String received = SQL_HELPER.getFirst("app_options", "options_value", "options_name",
                 "where options_name = '" + OPTIONS_NAME_RECEIVED + "'");
-        String taken = helper.getFirst("app_options", "options_value", "options_name",
+        String taken = SQL_HELPER.getFirst("app_options", "options_value", "options_name",
                 "where options_name = '" + OPTIONS_NAME_TAKEN + "'");
         exchangeMessage.setReceivedNumber(Long.parseLong(received));
         exchangeMessage.setTakenNumber(Long.parseLong(taken));
@@ -35,7 +35,7 @@ public class ExchangeMessageService {
         List<DatabaseRequest> requestList = new ArrayList<>();
         requestList.add(getUpdateReceivedRequest(exchangeMessage));
         requestList.add(getUpdateTakenRequest(exchangeMessage));
-        helper.execSql(requestList);
+        SQL_HELPER.execSql(requestList);
     }
 
     public static DatabaseRequest getUpdateReceivedRequest(ExchangeMessage exchangeMessage) {

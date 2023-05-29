@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.quickproduct;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 import ua.gaponov.posterminal.entity.products.Product;
@@ -10,13 +12,10 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
-public class QuickProductService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class QuickProductService {
 
     public static final int BUTTONS_COUNT_ON_PAGE = 42;
-
-    private QuickProductService() {
-
-    }
 
     public static List<QuickProduct> getByPage(int pageIndex) {
         StatementParameters<Integer> parameters = StatementParameters.build(

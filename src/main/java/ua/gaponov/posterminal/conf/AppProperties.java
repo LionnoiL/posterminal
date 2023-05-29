@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Andriy Gaponov
  */
 
-public class AppProperties {
+public final class AppProperties {
     @Getter
     @Setter
     public static boolean exchangeRunning;

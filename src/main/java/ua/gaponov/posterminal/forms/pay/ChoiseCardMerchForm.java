@@ -7,6 +7,9 @@ import ua.gaponov.posterminal.entity.orders.Order;
 import javax.swing.*;
 import java.awt.*;
 
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
+
 
 /**
  * @author Andriy Gaponov
@@ -30,11 +33,11 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
     }
 
     private void setImages(){
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
-        firstMerch.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn1.png")));
-        secondMerch.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn2.png")));
-        thirdMerch.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn3.png")));
+        this.setIconImage(getImage("barcode.png"));
+        cnclButton.setIcon(getIcon("button_cancel.png"));
+        firstMerch.setIcon(getIcon("btn1.png"));
+        secondMerch.setIcon(getIcon("btn2.png"));
+        thirdMerch.setIcon(getIcon("btn3.png"));
     }
 
     /**

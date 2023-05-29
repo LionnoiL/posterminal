@@ -5,6 +5,9 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
+
 /**
  * @author Andriy Gaponov
  */
@@ -24,9 +27,9 @@ public class InputStringDialog extends javax.swing.JDialog {
 
 
     private void setImages(){
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
-        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        okButton.setIcon(getIcon("button_ok.png"));
+        cnclButton.setIcon(getIcon("button_cancel.png"));
     }
 
     public static InputStringDialog getDialog(Component parent, String inputString) {

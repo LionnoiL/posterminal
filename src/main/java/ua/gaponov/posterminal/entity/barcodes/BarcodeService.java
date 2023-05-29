@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.barcodes;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
 
@@ -10,10 +12,8 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
-public class BarcodeService {
-
-    private BarcodeService() {
-    }
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class BarcodeService {
 
     public static Barcode getByBarcode(String barcode) {
         StatementParameters<String> parameters = StatementParameters.build(barcode);

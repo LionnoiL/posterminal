@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ua.gaponov.posterminal.forms.productinfo;
 
 import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.entity.products.ProductService;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
+
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 
 /**
  * @author Andriy Gaponov
@@ -67,8 +65,8 @@ public class ProductInfoForm extends javax.swing.JFrame {
     }
 
     private void setImages() {
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        cancelButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        cancelButton.setIcon(getIcon("button_cancel.png"));
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -54,7 +54,7 @@ public class PrintOrder implements Printable {
 
     private void printTitle() {
         String documentType = "Продаж";
-        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
+        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())) {
             documentType = "Повернення";
         }
         printer.printCenter(AppProperties.getShopName(), 10, true, false);
@@ -97,10 +97,10 @@ public class PrintOrder implements Printable {
                 8);
 
         String documentType = "ДО СПЛАТИ";
-        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())){
+        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())) {
             documentType = "ДО ПОВЕРНЕННЯ";
         }
-        printer.printTwoLines(documentType,RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
+        printer.printTwoLines(documentType, RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
                 10);
     }
 
@@ -119,11 +119,11 @@ public class PrintOrder implements Printable {
         List<OrderDetail> details = order.getDetails();
         for (OrderDetail detail : details) {
             printer.printLeft(detail.getProduct().getName().toUpperCase(), 8, true);
-            printer.printRight(detail.getQty() +
-                    "(" + detail.getProduct().getUnitName() + ")x" +
-                    detail.getPrice() +
-                    "=" +
-                    RoundUtils.round(detail.getSummaWithoutDiscount()), 8);
+            printer.printRight(detail.getQty()
+                    + "(" + detail.getProduct().getUnitName() + ")x"
+                    + detail.getPrice()
+                    + "="
+                    + RoundUtils.round(detail.getSummaWithoutDiscount()), 8);
         }
         printer.printHorizontalLine();
     }

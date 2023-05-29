@@ -3,6 +3,9 @@ package ua.gaponov.posterminal.dataexchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.dataexchange.download.ExchangeDownloader;
+import ua.gaponov.posterminal.dataexchange.download.UpdateDownloadException;
+import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 
 import java.util.Calendar;
 import java.util.Timer;
@@ -14,8 +17,8 @@ import java.util.TimerTask;
  */
 public class ExchangeScheduler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ExchangeDownloader.class);
-    public Timer exchangeTimer = new Timer();
+    private static final Logger LOG = LoggerFactory.getLogger(ExchangeScheduler.class);
+    public static final Timer EXCHANGE_TIMER = new Timer();
 
     public void setTimeReceived() {
 
@@ -28,14 +31,14 @@ public class ExchangeScheduler {
                     ExchangeUpload.upload();
                     try {
                         ExchangeDownloader.download();
-                    } catch (Exception ex) {
+                    } catch (UpdateDownloadException ex) {
                         LOG.error("Import filed", ex);
                     }
                 }
             }
         };
 
-        exchangeTimer.schedule(
+        EXCHANGE_TIMER.schedule(
                 timerTask,
                 calendar.getTime(),
                 AppProperties.getExchangeInterval()
@@ -43,6 +46,6 @@ public class ExchangeScheduler {
     }
 
     public Timer getExchangeTimer() {
-        return exchangeTimer;
+        return EXCHANGE_TIMER;
     }
 }

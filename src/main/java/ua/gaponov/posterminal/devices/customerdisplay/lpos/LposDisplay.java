@@ -4,7 +4,6 @@ import com.fazecast.jSerialComm.SerialPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.dataexchange.ExchangeUpload;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
 import ua.gaponov.posterminal.devices.exceptions.SignalDoesNotExistException;
 import ua.gaponov.posterminal.utils.StringUtils;
@@ -54,8 +53,8 @@ public class LposDisplay implements CustomerDisplay {
             return;
         }
         if (!Constants.CONTROL_NAMES.contains(signal)) {
-            throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal +
-                    " code doesn't exist.");
+            throw new SignalDoesNotExistException("The " + Constants.TERMINAL_DATA_ENCODING + signal
+                    + " code doesn't exist.");
         }
 
         int index = Constants.CONTROL_NAMES.indexOf(signal);

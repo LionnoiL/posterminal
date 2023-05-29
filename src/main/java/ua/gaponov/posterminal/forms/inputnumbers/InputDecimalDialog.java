@@ -6,6 +6,9 @@ import java.awt.Frame;
 import java.awt.Window;
 import javax.swing.*;
 
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
+
 /**
  * @author Andriy Gaponov
  */
@@ -23,21 +26,21 @@ public class InputDecimalDialog extends javax.swing.JDialog {
     }
 
     private void setImages(){
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        btnNumpadDot.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btndot.png")));
-        btnNumpadCancel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnback.png")));
-        btnNumpad0.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn0.png")));
-        btnNumpad1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn1.png")));
-        btnNumpad2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn2.png")));
-        btnNumpad3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn3.png")));
-        btnNumpad4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn4.png")));
-        btnNumpad5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn5.png")));
-        btnNumpad6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn6.png")));
-        btnNumpad7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn7.png")));
-        btnNumpad9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn9.png")));
-        btnNumpad8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn8.png")));
-        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
-        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        btnNumpadDot.setIcon(getIcon("btndot.png"));
+        btnNumpadCancel.setIcon(getIcon("btnback.png"));
+        btnNumpad0.setIcon(getIcon("btn0.png"));
+        btnNumpad1.setIcon(getIcon("btn1.png"));
+        btnNumpad2.setIcon(getIcon("btn2.png"));
+        btnNumpad3.setIcon(getIcon("btn3.png"));
+        btnNumpad4.setIcon(getIcon("btn4.png"));
+        btnNumpad5.setIcon(getIcon("btn5.png"));
+        btnNumpad6.setIcon(getIcon("btn6.png"));
+        btnNumpad7.setIcon(getIcon("btn7.png"));
+        btnNumpad9.setIcon(getIcon("btn9.png"));
+        btnNumpad8.setIcon(getIcon("btn8.png"));
+        okButton.setIcon(getIcon("button_ok.png"));
+        cnclButton.setIcon(getIcon("button_cancel.png"));
     }
 
     /**

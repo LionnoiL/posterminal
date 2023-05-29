@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.cards;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -11,12 +13,10 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
-public class CardService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class CardService {
 
-    private static final SqlHelper<Card> helper = new SqlHelper<>();
-
-    private CardService() {
-    }
+    private static final SqlHelper<Card> SQL_HELPER = new SqlHelper<>();
 
     public static List<Card> getAll() {
         return new SqlHelper<Card>().getAll("SELECT * FROM cards", new CardDatabaseMapper());
@@ -52,13 +52,13 @@ public class CardService {
     private static void insert(Card card) throws SQLException {
         List<DatabaseRequest> requestList = new ArrayList<>();
         requestList.add(getInsertRequest(card));
-        helper.execSql(requestList);
+        SQL_HELPER.execSql(requestList);
     }
 
     private static void update(Card card) throws SQLException {
         List<DatabaseRequest> requestList = new ArrayList<>();
         requestList.add(getUpdateRequest(card));
-        helper.execSql(requestList);
+        SQL_HELPER.execSql(requestList);
     }
 
 
@@ -75,7 +75,7 @@ public class CardService {
                     DEBT_ALLOWED = ?,
                     DISCOUNT = ?,
                     MAX_DEBT = ?,
-                    MAX_DEBT_DAY = ?               
+                    MAX_DEBT_DAY = ?
                 where CARD_GUID = ?
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(

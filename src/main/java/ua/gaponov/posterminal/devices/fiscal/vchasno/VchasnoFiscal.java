@@ -101,7 +101,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         }
 
         Fiscal fiscal = Fiscal.salesReceipt();
-        if (Objects.equals(DocumentTypes.RETURN,order.getDocumentType())){
+        if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())) {
             fiscal = Fiscal.returnReceipt();
         }
         Receipt receipt = new Receipt();
@@ -253,7 +253,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
             VchasnoResponce<InfoOpenShift> vchasnoResponce = GSON.fromJson(sResponce, type);
             if (vchasnoResponce.getRes() == 0) {
                 LOG.info("Shift open");
-                if (AppProperties.getFiscalAutoPlusMoneySum()>0){
+                if (AppProperties.getFiscalAutoPlusMoneySum() > 0) {
                     moneyPlus(AppProperties.getFiscalAutoPlusMoneySum());
                 }
                 return true;

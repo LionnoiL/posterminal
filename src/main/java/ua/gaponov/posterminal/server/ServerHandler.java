@@ -4,13 +4,14 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.gaponov.posterminal.dataexchange.ExchangeUpload;
+import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author Andriy Gaponov
@@ -53,7 +54,9 @@ public class ServerHandler implements HttpHandler {
                 responseEntity = ResponseEntity.of("", status);
             }
         } finally {
-            sendResponse(exchange, responseEntity);
+            if (Objects.nonNull(responseEntity)){
+                sendResponse(exchange, responseEntity);
+            }
         }
 
     }

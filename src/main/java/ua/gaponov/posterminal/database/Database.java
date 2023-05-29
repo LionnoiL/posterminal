@@ -4,6 +4,8 @@
  */
 package ua.gaponov.posterminal.database;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.flywaydb.core.Flyway;
 
@@ -13,7 +15,8 @@ import java.sql.SQLException;
 /**
  * @author Andriy Gaponov
  */
-public class Database {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class Database {
 
     private static BasicDataSource dataSource = null;
 
@@ -31,10 +34,6 @@ public class Database {
         dataSource.setMaxOpenPreparedStatements(100);
 
         migrate();
-    }
-
-    private Database() {
-
     }
 
     public static void setDataSource(BasicDataSource dataSource) {

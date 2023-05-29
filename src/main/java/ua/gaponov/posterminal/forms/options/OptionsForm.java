@@ -4,7 +4,8 @@ import com.fazecast.jSerialComm.SerialPort;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.utils.DialogUtils;
 
-import javax.swing.*;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 
 /**
 * @author Andriy Gaponov
@@ -36,9 +37,9 @@ public class OptionsForm extends javax.swing.JFrame {
     }
 
     private void setImages() {
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        cancelButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
-        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
+        this.setIconImage(getImage("barcode.png"));
+        cancelButton.setIcon(getIcon("button_cancel.png"));
+        okButton.setIcon(getIcon("button_ok.png"));
     }
 
     private void fillOptions() {

@@ -15,6 +15,9 @@ import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.utils.StringUtils;
 
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
+
 /**
 * @author Andriy Gaponov
 */
@@ -48,11 +51,11 @@ public class QuickProductDialog extends javax.swing.JDialog {
     }
 
     private void setImages(){
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        btnPrev.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1leftarrow.png")));
-        btnNext.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/1rightarrow.png")));
-        btnStart.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/gohome.png")));
-        btnClose.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        btnPrev.setIcon(getIcon("1leftarrow.png"));
+        btnNext.setIcon(getIcon("1rightarrow.png"));
+        btnStart.setIcon(getIcon("gohome.png"));
+        btnClose.setIcon(getIcon("button_cancel.png"));
     }
 
     /**

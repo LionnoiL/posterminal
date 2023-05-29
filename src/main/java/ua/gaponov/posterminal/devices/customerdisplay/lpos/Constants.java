@@ -24,9 +24,9 @@ public class Constants {
     public static final Map<Integer, Byte> CYRILYK_TABLE = new HashMap<>();
 
     static {
-        String s = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдежзийклмноп" +
-                "                                                " +
-                "рстуфхцчшщьыъэюя";
+        String s = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдежзийклмноп"
+                + "                                                "
+                + "рстуфхцчшщьыъэюя";
         String[] strings = StringUtils.splitStringByCharCount(s, 1);
         for (int i = 0; i < strings.length; i++) {
             CYRILYK_TABLE.put(strings[i].codePointAt(0), (byte) (-128 + i));

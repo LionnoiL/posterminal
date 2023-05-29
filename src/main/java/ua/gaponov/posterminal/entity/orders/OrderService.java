@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.entity.orders;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -27,25 +29,23 @@ import java.util.UUID;
 /**
  * @author Andriy Gaponov
  */
-public class OrderService {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class OrderService {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
-    private static final SqlHelper<Order> helper = new SqlHelper<>();
+    private static final SqlHelper<Order> SQL_HELPER = new SqlHelper<>();
     private static final String TEMP_FILE_ORDER_BACKUP = "tmp/temp-order.dat";
-
-    private OrderService() {
-    }
 
     public static Order getByGuid(String guid) {
         StatementParameters<String> parameters = StatementParameters.build(guid);
-        return helper.getOne("select * from orders where order_guid = ?",
+        return SQL_HELPER.getOne("select * from orders where order_guid = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
 
     public static Order getByNumber(String number) {
         StatementParameters<String> parameters = StatementParameters.build(number);
-        return helper.getOne("select * from orders where order_number = ?",
+        return SQL_HELPER.getOne("select * from orders where order_number = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
@@ -55,22 +55,22 @@ public class OrderService {
             return getByNumber(number);
         }
         StatementParameters<String> parameters = StatementParameters.build(number);
-        return helper.getOne("select * from orders where order_number = ? and doc_type ='ORDER'",
+        return SQL_HELPER.getOne("select * from orders where order_number = ? and doc_type ='ORDER'",
                 parameters,
                 new OrderDatabaseMapper());
     }
 
     public static long getCount() {
-        return helper.getCount("select count(order_guid) from orders");
+        return SQL_HELPER.getCount("select count(order_guid) from orders");
     }
 
     public static List<Order> getAll() {
-        return helper.getAll("SELECT * FROM orders", new OrderDatabaseMapper());
+        return SQL_HELPER.getAll("SELECT * FROM orders", new OrderDatabaseMapper());
     }
 
     public static List<Order> getAllNoUpload() {
         StatementParameters<Boolean> parameters = StatementParameters.build(false);
-        return helper.getAll("SELECT * FROM orders where upload = ?",
+        return SQL_HELPER.getAll("SELECT * FROM orders where upload = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
@@ -118,7 +118,7 @@ public class OrderService {
                 requestList.add(CardService.getUpdateRequest(card));
             }
         }
-        helper.execSql(requestList);
+        SQL_HELPER.execSql(requestList);
     }
 
     public static DatabaseRequest getInsertRequest(Order order) {
@@ -276,6 +276,6 @@ public class OrderService {
                     UPDATE orders set upload = true WHERE order_guid = ?;
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(guid);
-        helper.execSql(sql, parameters);
+        SQL_HELPER.execSql(sql, parameters);
     }
 }

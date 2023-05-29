@@ -2,7 +2,6 @@ package ua.gaponov.posterminal.entity.moneymove;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
@@ -18,30 +17,29 @@ import java.util.Objects;
 /**
  * @author Andriy Gaponov
  */
-@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MoneyMoveService {
+public final class MoneyMoveService {
 
-    private static final SqlHelper<MoneyMove> helper = new SqlHelper<>();
+    private static final SqlHelper<MoneyMove> SQL_HELPER = new SqlHelper<>();
 
     public static MoneyMove getByGuid(String guid) {
         StatementParameters<String> parameters = StatementParameters.build(guid);
-        return helper.getOne("select * from money_move where money_move_guid = ?",
+        return SQL_HELPER.getOne("select * from money_move where money_move_guid = ?",
                 parameters,
                 new MoneyMoveDatabaseMapper());
     }
 
     public static long getCount() {
-        return helper.getCount("select count(money_move_guid) from money_move");
+        return SQL_HELPER.getCount("select count(money_move_guid) from money_move");
     }
 
     public static List<MoneyMove> getAll() {
-        return helper.getAll("SELECT * FROM money_move", new MoneyMoveDatabaseMapper());
+        return SQL_HELPER.getAll("SELECT * FROM money_move", new MoneyMoveDatabaseMapper());
     }
 
     public static List<MoneyMove> getAllNoUpload() {
         StatementParameters<Boolean> parameters = StatementParameters.build(false);
-        return helper.getAll("SELECT * FROM money_move where upload = ?",
+        return SQL_HELPER.getAll("SELECT * FROM money_move where upload = ?",
                 parameters,
                 new MoneyMoveDatabaseMapper());
     }
@@ -68,7 +66,7 @@ public class MoneyMoveService {
         List<DatabaseRequest> requestList = new ArrayList<>();
         requestList.add(getInsertRequest(moneyMove));
         requestList.add(getInsertShiftResultRequest(moneyMove));
-        helper.execSql(requestList);
+        SQL_HELPER.execSql(requestList);
     }
 
     public static DatabaseRequest getInsertRequest(MoneyMove moneyMove) {
@@ -124,6 +122,6 @@ public class MoneyMoveService {
                     UPDATE money_move set upload = true WHERE money_move_guid = ?;
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(guid);
-        helper.execSql(sql, parameters);
+        SQL_HELPER.execSql(sql, parameters);
     }
 }

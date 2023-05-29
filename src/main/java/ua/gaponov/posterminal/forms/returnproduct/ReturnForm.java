@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package ua.gaponov.posterminal.forms.returnproduct;
 
 import java.util.Objects;
@@ -26,6 +22,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
+
 /**
  *
  * @author wmcon
@@ -38,26 +37,26 @@ public class ReturnForm extends javax.swing.JDialog {
     private Order order;
 
     private void setImages(){
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        okButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_ok.png")));
-        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        okButton.setIcon(getIcon("button_ok.png"));
+        cnclButton.setIcon(getIcon("button_cancel.png"));
 
-        btnNumpadC.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnce.png")));
-        btnNumpadCancel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnback.png")));
-        btnDeleteProductRow.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btnminus.png")));
-        btnNumpad0.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn0.png")));
-        btnNumpadComa.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btndot.png")));
-        btnNumpad05.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btndiv.png")));
-        btnNumpad1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn1.png")));
-        btnNumpad2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn2.png")));
-        btnNumpad3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn3.png")));
-        btnNumpad4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn4.png")));
-        btnNumpad5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn5.png")));
-        btnNumpad6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn6.png")));
-        btnNumpad7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn7.png")));
-        btnNumpad9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn9.png")));
-        btnNumpad8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/btn8.png")));
-        btnEnterQty.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/apply.png")));
+        btnNumpadC.setIcon(getIcon("btnce.png"));
+        btnNumpadCancel.setIcon(getIcon("btnback.png"));
+        btnDeleteProductRow.setIcon(getIcon("btnminus.png"));
+        btnNumpad0.setIcon(getIcon("btn0.png"));
+        btnNumpadComa.setIcon(getIcon("btndot.png"));
+        btnNumpad05.setIcon(getIcon("btndiv.png"));
+        btnNumpad1.setIcon(getIcon("btn1.png"));
+        btnNumpad2.setIcon(getIcon("btn2.png"));
+        btnNumpad3.setIcon(getIcon("btn3.png"));
+        btnNumpad4.setIcon(getIcon("btn4.png"));
+        btnNumpad5.setIcon(getIcon("btn5.png"));
+        btnNumpad6.setIcon(getIcon("btn6.png"));
+        btnNumpad7.setIcon(getIcon("btn7.png"));
+        btnNumpad9.setIcon(getIcon("btn9.png"));
+        btnNumpad8.setIcon(getIcon("btn8.png"));
+        btnEnterQty.setIcon(getIcon("apply.png"));
     }
 
     public ReturnForm(java.awt.Frame parent, boolean modal) {

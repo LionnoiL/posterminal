@@ -1,4 +1,4 @@
-package ua.gaponov.posterminal.dataexchange;
+package ua.gaponov.posterminal.dataexchange.upload;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;

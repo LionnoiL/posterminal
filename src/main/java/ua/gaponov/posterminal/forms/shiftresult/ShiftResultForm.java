@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ua.gaponov.posterminal.forms.shiftresult;
 
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -12,6 +8,9 @@ import ua.gaponov.posterminal.utils.RoundUtils;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
+import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 
 /**
  *
@@ -37,8 +36,8 @@ public class ShiftResultForm extends javax.swing.JDialog {
     }
 
     private void setImages() {
-        this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/barcode.png")).getImage());
-        cnclButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/button_cancel.png")));
+        this.setIconImage(getImage("barcode.png"));
+        cnclButton.setIcon(getIcon("button_cancel.png"));
     }
 
     /**
@@ -264,7 +263,9 @@ public class ShiftResultForm extends javax.swing.JDialog {
 
         dialog.lblSales.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaSale())));
         dialog.lblreturns.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaReturn())));
-        dialog.lblCash.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCash()- shiftTotals.getSummaReturnCash())));
+        dialog.lblCash.setText(String.valueOf(
+                RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCash() - shiftTotals.getSummaReturnCash())
+        ));
         dialog.lblCard.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCard())));
         dialog.lblMoneyIn.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveIn())));
         dialog.lblMoneyOut.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveOut())));
