@@ -1,9 +1,9 @@
 package ua.gaponov.posterminal.prostopay;
 
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.entity.products.ProductService;
-import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,7 +19,7 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 /**
  * @author Andriy Gaponov
  */
-public class ProstoPayService {
+public final class ProstoPayService {
 
     private static final String PROSTOPAY_HOST = "https://dashboard.prostopay.net/api/v1/qreceipt/generate";
     private static final String PROSTOPAY_API_KEY = AppProperties.getProstoPayToken();
@@ -28,7 +28,7 @@ public class ProstoPayService {
     private ProstoPayService() {
     }
 
-    public static void loadProstoPayProducts(){
+    public static void loadProstoPayProducts() {
         Properties properties = new Properties();
         try {
             properties.load(getFileInputStream(PROSTOPAY_PRODUCTS_FILE_NAME));
@@ -58,13 +58,13 @@ public class ProstoPayService {
         });
     }
 
-    private static ProstoPayRequest getProstoPayRequest(Product product){
+    private static ProstoPayRequest getProstoPayRequest(Product product) {
         ProstoPayRequest prostoPayRequest = new ProstoPayRequest();
         prostoPayRequest.setPos(AppProperties.getArmId());
         prostoPayRequest.setTill(1);
         prostoPayRequest.setNumber(1);
         prostoPayRequest.setAmount((int) (product.getPrice() * 100));
-        prostoPayRequest.setPluFrom(AppProperties.getProstoPayProducts().get(product));//product code in coffee machine
+        prostoPayRequest.setPluFrom(AppProperties.getProstoPayProducts().get(product));
         return prostoPayRequest;
     }
 

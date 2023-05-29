@@ -48,10 +48,11 @@ public class PosHttpServer {
         try {
             Enumeration<NetworkInterface> networkInterfaceEnumeration = NetworkInterface.getNetworkInterfaces();
             while (networkInterfaceEnumeration.hasMoreElements()) {
-                for (InterfaceAddress interfaceAddress : networkInterfaceEnumeration.nextElement().getInterfaceAddresses())
+                for (InterfaceAddress interfaceAddress : networkInterfaceEnumeration.nextElement().getInterfaceAddresses()) {
                     if (interfaceAddress.getAddress().isSiteLocalAddress()) {
                         return interfaceAddress.getAddress().getHostAddress();
                     }
+                }
             }
         } catch (SocketException e) {
             e.printStackTrace();

@@ -57,11 +57,7 @@ public class XmlUtils implements AutoCloseable {
     }
 
     public boolean getBooleanAttribute(String name) throws XMLStreamException {
-        if ("1".equals(getStringAttribute(name))) {
-            return true;
-        } else {
-            return false;
-        }
+        return "1".equals(getStringAttribute(name));
     }
 
     public double getDoubleAttribute(String name) throws XMLStreamException {

@@ -21,16 +21,14 @@ public class PropertiesUtils {
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesUtils.class);
     public static final String CONFIG_FILE_NAME = "config/application.properties";
     public static final String TEMP_FILE_NAME = "tmp/application.tmp";
-    private static final String ERROR_READ_TEMP_FILE = "Error read temp file";
-    private static final String ERROR_SAVE_TEMP_FILE = "Error save temp file";
-    private static final String ERROR_READ_PROPERTIES_FILE = "Error read properties file";
-    private static final String ERROR_SAVE_PROPERTIES_FILE = "Error save properties file";
 
     private static String getPropertyValue(FileInputStream fileInputStream, String propertyName)
             throws IOException {
         Properties properties = new Properties();
         properties.load(fileInputStream);
-        properties.computeIfAbsent(propertyName, k -> properties.put(propertyName, ""));
+        if (!properties.containsKey(propertyName)) {
+            properties.put(propertyName, "");
+        }
         return properties.getProperty(propertyName);
     }
 
@@ -39,20 +37,23 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME)) {
             propertyValue = getPropertyValue(fileInputStream, propertyName);
         } catch (IOException e) {
-            LOG.error(ERROR_READ_TEMP_FILE);
+            LOG.error("Error read temp file");
         }
         return propertyValue;
     }
 
     public static void saveApplicationTempValue(String propertyName, String propertyValue) {
-        try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME);
-             OutputStream output = new FileOutputStream(TEMP_FILE_NAME)) {
+        try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
             properties.setProperty(propertyName, propertyValue);
-            properties.store(output, null);
+            try (OutputStream output = new FileOutputStream(TEMP_FILE_NAME)) {
+                properties.store(output, null);
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
         } catch (IOException e) {
-            LOG.error(ERROR_SAVE_TEMP_FILE);
+            LOG.error("Error read temp file");
         }
     }
 
@@ -61,23 +62,27 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             propertyValue = getPropertyValue(fileInputStream, propertyName);
         } catch (IOException e) {
-            LOG.error(ERROR_READ_PROPERTIES_FILE);
+            LOG.error("Error read properties file");
         }
         return propertyValue;
     }
 
     private static void saveApplicationProperties(String propertyName, String propertyValue) {
-        try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME);
-             OutputStream output = new FileOutputStream(CONFIG_FILE_NAME)) {
+        try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
             if (Objects.isNull(propertyValue)) {
                 propertyValue = "";
             }
             properties.setProperty(propertyName, propertyValue);
-            properties.store(output, null);
+
+            try (OutputStream output = new FileOutputStream(CONFIG_FILE_NAME)) {
+                properties.store(output, null);
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
         } catch (IOException e) {
-            LOG.error(ERROR_SAVE_PROPERTIES_FILE, e);
+            LOG.error("Error save properties file");
         }
     }
 
