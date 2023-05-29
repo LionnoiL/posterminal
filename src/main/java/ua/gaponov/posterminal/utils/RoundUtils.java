@@ -1,14 +1,15 @@
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RoundUtils {
-
-    private RoundUtils() {
-    }
 
     public static double round(double dValue) {
         double fractionMultiplier = Math.pow(10.0, 2);
@@ -16,7 +17,7 @@ public class RoundUtils {
     }
 
     public static double roundHalfUp(double dValue) {
-        BigDecimal result2 = new BigDecimal(dValue).setScale(1, BigDecimal.ROUND_HALF_UP);
+        BigDecimal result2 = BigDecimal.valueOf(dValue).setScale(1, BigDecimal.ROUND_HALF_UP);
         return result2.doubleValue();
     }
 

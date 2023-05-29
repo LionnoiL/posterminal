@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.util.logging.Level;
@@ -8,6 +11,7 @@ import java.util.logging.Logger;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FilesUtils {
 
     public static void saveTextFile(String filePath, String text) {

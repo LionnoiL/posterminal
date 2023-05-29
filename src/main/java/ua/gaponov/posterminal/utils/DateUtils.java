@@ -1,15 +1,16 @@
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DateUtils {
-
-    private DateUtils() {
-    }
 
     public static String formatDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

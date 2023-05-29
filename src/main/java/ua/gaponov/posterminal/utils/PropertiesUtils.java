@@ -1,5 +1,9 @@
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.io.*;
@@ -11,22 +15,22 @@ import static ua.gaponov.posterminal.utils.FilesUtils.getFileInputStream;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertiesUtils {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesUtils.class);
     public static final String CONFIG_FILE_NAME = "config/application.properties";
     public static final String TEMP_FILE_NAME = "tmp/application.tmp";
-    private PropertiesUtils() {
-    }
-
-
+    private static final String ERROR_READ_TEMP_FILE = "Error read temp file";
+    private static final String ERROR_SAVE_TEMP_FILE = "Error save temp file";
+    private static final String ERROR_READ_PROPERTIES_FILE = "Error read properties file";
+    private static final String ERROR_SAVE_PROPERTIES_FILE = "Error save properties file";
 
     private static String getPropertyValue(FileInputStream fileInputStream, String propertyName)
             throws IOException {
         Properties properties = new Properties();
         properties.load(fileInputStream);
-        if (!properties.containsKey(propertyName)) {
-            properties.put(propertyName, "");
-        }
+        properties.computeIfAbsent(propertyName, k -> properties.put(propertyName, ""));
         return properties.getProperty(propertyName);
     }
 
@@ -35,23 +39,20 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME)) {
             propertyValue = getPropertyValue(fileInputStream, propertyName);
         } catch (IOException e) {
-            System.out.println("Error read temp file");
+            LOG.error(ERROR_READ_TEMP_FILE);
         }
         return propertyValue;
     }
 
     public static void saveApplicationTempValue(String propertyName, String propertyValue) {
-        try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME)) {
+        try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME);
+             OutputStream output = new FileOutputStream(TEMP_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
             properties.setProperty(propertyName, propertyValue);
-            try (OutputStream output = new FileOutputStream(TEMP_FILE_NAME)) {
-                properties.store(output, null);
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
+            properties.store(output, null);
         } catch (IOException e) {
-            System.out.println("Error read properties file");
+            LOG.error(ERROR_SAVE_TEMP_FILE);
         }
     }
 
@@ -60,27 +61,23 @@ public class PropertiesUtils {
         try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
             propertyValue = getPropertyValue(fileInputStream, propertyName);
         } catch (IOException e) {
-            System.out.println("Error read properties file");
+            LOG.error(ERROR_READ_PROPERTIES_FILE);
         }
         return propertyValue;
     }
 
     private static void saveApplicationProperties(String propertyName, String propertyValue) {
-        try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
+        try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME);
+             OutputStream output = new FileOutputStream(CONFIG_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(fileInputStream);
             if (Objects.isNull(propertyValue)) {
                 propertyValue = "";
             }
             properties.setProperty(propertyName, propertyValue);
-
-            try (OutputStream output = new FileOutputStream(CONFIG_FILE_NAME)) {
-                properties.store(output, null);
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
+            properties.store(output, null);
         } catch (IOException e) {
-            System.out.println("Error read properties file");
+            LOG.error(ERROR_SAVE_PROPERTIES_FILE, e);
         }
     }
 

@@ -2,6 +2,8 @@ package ua.gaponov.posterminal.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtils {
 
     public static final Gson GSON = new Gson();

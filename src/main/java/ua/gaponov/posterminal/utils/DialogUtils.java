@@ -4,6 +4,9 @@
  */
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.swing.*;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -11,6 +14,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DialogUtils {
 
     public static int okcancel(JFrame parent, String title, String theMessage) {

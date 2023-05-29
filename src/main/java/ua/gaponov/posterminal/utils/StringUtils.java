@@ -1,15 +1,16 @@
 package ua.gaponov.posterminal.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringUtils {
-
-    private StringUtils() {
-    }
 
     public static String[] splitStringByCharCount(String text, int charCount) {
         String newStr = text.replaceAll("(.{" + charCount + "})", "$1|");
