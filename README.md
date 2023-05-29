@@ -17,3 +17,4 @@ The program is a workplace of a cashier in a store.
 * Java 17 LTS
 * <a href="https://github.com/freemansoft/jacob-project">Jacob</a>
 * NetBeans Swing GUI editor
+* H2 Database
