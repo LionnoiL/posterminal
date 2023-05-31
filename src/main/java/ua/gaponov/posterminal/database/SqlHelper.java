@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.database;
 
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,35 +16,31 @@ import java.util.Objects;
 /**
  * @author Andriy Gaponov
  */
+@NoArgsConstructor
 public class SqlHelper<T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(SqlHelper.class);
 
-    public SqlHelper() {
-    }
-
     public static void execSql(String sql) {
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             //NOP
         }
     }
 
     public void execSql(String sql, StatementParameters parameters) throws SQLException {
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
             parameters.fillStatement(statement);
             statement.executeUpdate();
-            statement.close();
         }
     }
 
     public void execSql(List<DatabaseRequest> requests)
             throws SQLException {
-        try (Connection connection = Database.getConnection();) {
+        try (Connection connection = Database.getConnection()) {
             connection.setAutoCommit(false);
             try {
                 for (DatabaseRequest request : requests) {
@@ -82,14 +79,13 @@ public class SqlHelper<T> {
 
     public List<T> getAll(String sql, Mapper<T> mapper) {
         List<T> result = new ArrayList<T>();
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result.add(mapper.map(resultSet));
             }
             resultSet.close();
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -106,14 +102,13 @@ public class SqlHelper<T> {
 
     public int getCount(String sql) {
         int result = 0;
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result = resultSet.getInt(1);
             }
             resultSet.close();
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -143,8 +138,8 @@ public class SqlHelper<T> {
     public T getLast(String tableName, String resultFieldName, String idFieldName, String where) {
         String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " desc limit 1;";
         T result = null;
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 T sumResult = (T) resultSet.getObject(1);
@@ -153,7 +148,6 @@ public class SqlHelper<T> {
                 }
             }
             resultSet.close();
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -163,8 +157,8 @@ public class SqlHelper<T> {
     public T getFirst(String tableName, String resultFieldName, String idFieldName, String where) {
         String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " limit 1;";
         T result = null;
-        try (Connection connection = Database.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 T sumResult = (T) resultSet.getObject(1);
@@ -173,11 +167,9 @@ public class SqlHelper<T> {
                 }
             }
             resultSet.close();
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return result;
     }
-
 }

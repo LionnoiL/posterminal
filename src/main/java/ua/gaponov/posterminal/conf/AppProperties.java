@@ -1,6 +1,8 @@
 package ua.gaponov.posterminal.conf;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ua.gaponov.posterminal.autosaveorder.OrderSaveScheduler;
 import ua.gaponov.posterminal.dataexchange.ExchangeScheduler;
@@ -15,7 +17,7 @@ import java.util.Map;
 /**
  * @author Andriy Gaponov
  */
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AppProperties {
     @Getter
     @Setter
@@ -102,8 +104,5 @@ public final class AppProperties {
         } else {
             return "files"+File.separator;
         }
-    }
-
-    private AppProperties() {
     }
 }

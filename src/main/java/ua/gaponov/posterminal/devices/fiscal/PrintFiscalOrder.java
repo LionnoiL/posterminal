@@ -47,7 +47,6 @@ public class PrintFiscalOrder implements Printable {
     }
 
     private void printOrder() {
-
         try {
             String[] strings = base64Image.split(",");
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);

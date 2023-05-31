@@ -21,6 +21,4 @@ public class XReportDto {
     private double returnCard;
     private int countSaleReceipts;
     private int countReturnReceipts;
-
-
 }
