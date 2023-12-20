@@ -19,16 +19,20 @@ public final class QuickProductService {
 
     public static List<QuickProduct> getByPage(int pageIndex) {
         StatementParameters<Integer> parameters = StatementParameters.build(
-                BUTTONS_COUNT_ON_PAGE,
-                pageIndex * BUTTONS_COUNT_ON_PAGE
+                pageIndex * BUTTONS_COUNT_ON_PAGE + 1,
+                (pageIndex +1 ) * BUTTONS_COUNT_ON_PAGE
         );
 
         String sql = """
-                SELECT * FROM quick_products Order by QUICK_PRODUCTS.POS_ID  limit ? offset ?
+                SELECT * FROM quick_products p  where p.POS_ID >= ? and p.POS_ID <= ? Order by p.POS_ID
                 """;
-        return new SqlHelper<QuickProduct>().getAll(sql,
+        List<QuickProduct> products = new SqlHelper<QuickProduct>().getAll(sql,
                 parameters,
                 new QuickProductDatabaseMapper());
+        for (QuickProduct product : products) {
+            product.setPosition(product.getPosition() - pageIndex * BUTTONS_COUNT_ON_PAGE);
+        }
+        return products;
     }
 
     public static QuickProduct getByProduct(String guid) {

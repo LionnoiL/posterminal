@@ -64,6 +64,8 @@ public class ExchangeDownloader {
              XmlUtils processor = new XmlUtils(is)) {
 
             AppProperties.exchangeRunning = true;
+            QuickProductService.deleteAll();
+
             while (processor.startElement("message", "messages")) {
                 ExchangeMessage message = MESSAGE_BUILDER.create(processor);
                 ExchangeMessageService.saveMessages(message);
@@ -81,7 +83,9 @@ public class ExchangeDownloader {
 
             while (processor.startElement("ean", "eans")) {
                 Barcode barcode = BARCODE_BUILDER.create(processor);
-                BarcodeService.save(barcode);
+                if (barcode.getProduct() != null){
+                    BarcodeService.save(barcode);
+                }
             }
 
             while (processor.startElement("discounts_card", "discounts_cards")) {
@@ -91,12 +95,15 @@ public class ExchangeDownloader {
 
             while (processor.startElement("quick_product", "quick_products")) {
                 QuickProduct quickProduct = QUICK_PRODUCT_BUILDER.create(processor);
-                QuickProductService.save(quickProduct);
+                if (quickProduct.getProduct() != null){
+                    QuickProductService.save(quickProduct);
+                }
             }
 
             AppProperties.exchangeRunning = false;
         } catch (Exception e){
             LOG.error("Failed download updates");
+            LOG.error(e.toString());
             throw new UpdateDownloadException("Failed download updates");
         }
         try {
