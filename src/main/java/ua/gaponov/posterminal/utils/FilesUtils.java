@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,7 @@ public class FilesUtils {
 
     public static void saveTextFile(String filePath, String text) {
         checkFileDirAndCreateDir(filePath);
-        try (FileWriter file = new FileWriter(filePath)) {
+        try (FileWriter file = new FileWriter(filePath, Charset.forName("UTF-8"))) {
             file.write(text);
         } catch (IOException e) {
             Logger.getLogger(FilesUtils.class.getName()).log(Level.SEVERE, null, e);
