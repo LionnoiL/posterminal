@@ -30,7 +30,7 @@ public final class QuickProductService {
                 parameters,
                 new QuickProductDatabaseMapper());
         for (QuickProduct product : products) {
-            product.setPosition(product.getPosition() - pageIndex * BUTTONS_COUNT_ON_PAGE);
+            product.setPosition(product.getPosition() - pageIndex * BUTTONS_COUNT_ON_PAGE - 1);
         }
         return products;
     }
