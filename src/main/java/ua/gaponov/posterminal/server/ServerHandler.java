@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
+import ua.gaponov.posterminal.entity.options.OptionsValue;
+import ua.gaponov.posterminal.entity.options.OptionsValueService;
 import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 
 import java.io.IOException;
@@ -78,19 +80,20 @@ public class ServerHandler implements HttpHandler {
 
     private ResponseEntity getLastUpdate() {
         final int status = 200;
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return ResponseEntity.of(now.format(formatter), status);
+        OptionsValue lastUpdate = OptionsValueService.getOptions("last_update");
+        return ResponseEntity.of(lastUpdate.getOptionsValue(), status);
     }
 
     private ResponseEntity getApplicationEcho() {
         final int status = 200;
+        OptionsValue lastUpdate = OptionsValueService.getOptions("last_update");
         String res = """
                 {
                 "name":"posterminal",
                 "shop_name": "%s",
                 "cash_register_name": "%s",
-                "arm_id": %d
+                "arm_id": %d,
+                "last_update": "%s"
                 }
                 """;
         return ResponseEntity.of(
@@ -98,7 +101,9 @@ public class ServerHandler implements HttpHandler {
                         res,
                         AppProperties.getShopName(),
                         AppProperties.getCashRegisterName(),
-                        AppProperties.getArmId())
+                        AppProperties.getArmId(),
+                        lastUpdate.getOptionsValue()
+                )
                 , status);
     }
 

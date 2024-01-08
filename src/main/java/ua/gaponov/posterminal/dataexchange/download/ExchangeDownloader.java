@@ -15,6 +15,8 @@ import ua.gaponov.posterminal.entity.cards.CardXmlBuilder;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessage;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessageService;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessageXmlBuilder;
+import ua.gaponov.posterminal.entity.options.OptionsValue;
+import ua.gaponov.posterminal.entity.options.OptionsValueService;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.entity.organization.OrganizationXmlBuilder;
@@ -24,6 +26,7 @@ import ua.gaponov.posterminal.entity.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductXmlBuilder;
+import ua.gaponov.posterminal.server.ResponseEntity;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -33,6 +36,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Andriy Gaponov
@@ -99,6 +104,14 @@ public class ExchangeDownloader {
                     QuickProductService.save(quickProduct);
                 }
             }
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            OptionsValue optionsValue = OptionsValue.builder()
+                    .optionsKey("last_update")
+                    .optionsValue(now.format(formatter))
+                    .build();
+            OptionsValueService.updateOptionsValue(optionsValue);
 
             AppProperties.exchangeRunning = false;
         } catch (Exception e){
