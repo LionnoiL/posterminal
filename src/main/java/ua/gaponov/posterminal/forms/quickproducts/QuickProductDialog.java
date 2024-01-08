@@ -451,6 +451,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
         for (QuickProduct quickProduct : productsByPage) {
             Product prod = quickProduct.getProduct();
             prod.setQty(1);
+            index = quickProduct.getPosition();
             buttons.get(index).setProduct(prod);
             JButton jButton = buttons.get(index).getButton();
             jButton.setBackground(Color.decode("#"+quickProduct.getColor()));

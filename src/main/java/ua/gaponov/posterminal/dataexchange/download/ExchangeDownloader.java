@@ -15,6 +15,8 @@ import ua.gaponov.posterminal.entity.cards.CardXmlBuilder;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessage;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessageService;
 import ua.gaponov.posterminal.entity.messages.ExchangeMessageXmlBuilder;
+import ua.gaponov.posterminal.entity.options.OptionsValue;
+import ua.gaponov.posterminal.entity.options.OptionsValueService;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.organization.OrganizationService;
 import ua.gaponov.posterminal.entity.organization.OrganizationXmlBuilder;
@@ -33,6 +35,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Andriy Gaponov
@@ -64,6 +68,8 @@ public class ExchangeDownloader {
              XmlUtils processor = new XmlUtils(is)) {
 
             AppProperties.exchangeRunning = true;
+            QuickProductService.deleteAll();
+
             while (processor.startElement("message", "messages")) {
                 ExchangeMessage message = MESSAGE_BUILDER.create(processor);
                 ExchangeMessageService.saveMessages(message);
@@ -81,7 +87,9 @@ public class ExchangeDownloader {
 
             while (processor.startElement("ean", "eans")) {
                 Barcode barcode = BARCODE_BUILDER.create(processor);
-                BarcodeService.save(barcode);
+                if (barcode.getProduct() != null){
+                    BarcodeService.save(barcode);
+                }
             }
 
             while (processor.startElement("discounts_card", "discounts_cards")) {
@@ -91,12 +99,23 @@ public class ExchangeDownloader {
 
             while (processor.startElement("quick_product", "quick_products")) {
                 QuickProduct quickProduct = QUICK_PRODUCT_BUILDER.create(processor);
-                QuickProductService.save(quickProduct);
+                if (quickProduct.getProduct() != null){
+                    QuickProductService.save(quickProduct);
+                }
             }
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            OptionsValue optionsValue = OptionsValue.builder()
+                    .key("last_update")
+                    .value(now.format(formatter))
+                    .build();
+            OptionsValueService.updateOptionsValue(optionsValue);
 
             AppProperties.exchangeRunning = false;
         } catch (Exception e){
             LOG.error("Failed download updates");
+            LOG.error(e.toString());
             throw new UpdateDownloadException("Failed download updates");
         }
         try {
