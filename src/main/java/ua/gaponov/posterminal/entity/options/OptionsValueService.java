@@ -21,8 +21,8 @@ public class OptionsValueService implements Serializable {
         String optionsValueString = SQL_HELPER.getFirst("app_options", "options_value", "options_name",
                 "where options_name = '" + optionsKey + "'");
         OptionsValue optionsValue = OptionsValue.builder()
-                .optionsKey(optionsKey)
-                .optionsValue(optionsValueString)
+                .key(optionsKey)
+                .value(optionsValueString)
                 .build();
         return optionsValue;
     }
@@ -34,14 +34,14 @@ public class OptionsValueService implements Serializable {
                 where options_name = ?
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(
-                optionsValue.getOptionsValue(),
-                optionsValue.getOptionsKey()
+                optionsValue.getValue(),
+                optionsValue.getKey()
         );
 
         try {
             SQL_HELPER.execSql(sql, parameters);
         } catch (SQLException ex) {
-            LOG.error("Update options value {} failed. {}", optionsValue.getOptionsValue(), ex);
+            LOG.error("Update options value {} failed. {}", optionsValue.getValue(), ex);
         }
     }
 }

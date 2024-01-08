@@ -26,7 +26,6 @@ import ua.gaponov.posterminal.entity.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductXmlBuilder;
-import ua.gaponov.posterminal.server.ResponseEntity;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -108,8 +107,8 @@ public class ExchangeDownloader {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             OptionsValue optionsValue = OptionsValue.builder()
-                    .optionsKey("last_update")
-                    .optionsValue(now.format(formatter))
+                    .key("last_update")
+                    .value(now.format(formatter))
                     .build();
             OptionsValueService.updateOptionsValue(optionsValue);
 

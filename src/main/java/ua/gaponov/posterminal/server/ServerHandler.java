@@ -13,8 +13,6 @@ import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -81,7 +79,7 @@ public class ServerHandler implements HttpHandler {
     private ResponseEntity getLastUpdate() {
         final int status = 200;
         OptionsValue lastUpdate = OptionsValueService.getOptions("last_update");
-        return ResponseEntity.of(lastUpdate.getOptionsValue(), status);
+        return ResponseEntity.of(lastUpdate.getValue(), status);
     }
 
     private ResponseEntity getApplicationEcho() {
@@ -102,7 +100,7 @@ public class ServerHandler implements HttpHandler {
                         AppProperties.getShopName(),
                         AppProperties.getCashRegisterName(),
                         AppProperties.getArmId(),
-                        lastUpdate.getOptionsValue()
+                        lastUpdate.getValue()
                 )
                 , status);
     }

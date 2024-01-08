@@ -13,6 +13,6 @@ import java.io.Serializable;
 @Setter
 @Builder
 public class OptionsValue implements Serializable {
-    private String optionsKey;
-    private String optionsValue;
+    private String key;
+    private String value;
 }
