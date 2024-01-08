@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -54,7 +56,7 @@ public class ServerHandler implements HttpHandler {
                 responseEntity = ResponseEntity.of("", status);
             }
         } finally {
-            if (Objects.nonNull(responseEntity)){
+            if (Objects.nonNull(responseEntity)) {
                 sendResponse(exchange, responseEntity);
             }
         }
@@ -76,12 +78,28 @@ public class ServerHandler implements HttpHandler {
 
     private ResponseEntity getLastUpdate() {
         final int status = 200;
-        return ResponseEntity.of(LocalDateTime.now().toString(), status);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return ResponseEntity.of(now.format(formatter), status);
     }
 
     private ResponseEntity getApplicationEcho() {
         final int status = 200;
-        return ResponseEntity.of("posterminal", status);
+        String res = """
+                {
+                "name":"posterminal",
+                "shop_name": "%s",
+                "cash_register_name": "%s",
+                "arm_id": %d
+                }
+                """;
+        return ResponseEntity.of(
+                String.format(
+                        res,
+                        AppProperties.getShopName(),
+                        AppProperties.getCashRegisterName(),
+                        AppProperties.getArmId())
+                , status);
     }
 
     private ResponseEntity handlePOST(HttpExchange exchange, URI endpoint) {
@@ -102,8 +120,8 @@ public class ServerHandler implements HttpHandler {
         }
     }
 
-    private void handleCommand(String command){
-        switch (command){
+    private void handleCommand(String command) {
+        switch (command) {
             case "upload documents":
                 ExchangeUpload.upload();
                 break;
