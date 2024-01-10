@@ -423,7 +423,7 @@ public class PayForm extends javax.swing.JDialog {
 
         lblPay.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 
-        lblRemainder.setFont(new java.awt.Font("Segoe UI", 0, 100)); // NOI18N
+        lblRemainder.setFont(new java.awt.Font("Segoe UI", 1, 100)); // NOI18N
         lblRemainder.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -513,7 +513,7 @@ public class PayForm extends javax.swing.JDialog {
     private void onlineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onlineButtonActionPerformed
         setPayType(PayTypes.ONLINE);
         clearPayTypesButtonsColor();
-        onlineButton.setBackground(new java.awt.Color(255, 204, 204));
+        onlineButton.setBackground(new java.awt.Color(255, 51, 51));
     }//GEN-LAST:event_onlineButtonActionPerformed
 
     private void btnNumpad7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumpad7ActionPerformed

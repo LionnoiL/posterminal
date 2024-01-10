@@ -4,6 +4,8 @@
  */
 package ua.gaponov.posterminal.forms.additionally;
 
+import ua.gaponov.posterminal.devices.printer.Printer;
+
 import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
 import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 
@@ -41,6 +43,7 @@ public class AdditionallyForm extends javax.swing.JDialog {
 
         jButton1 = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        skuButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -60,19 +63,34 @@ public class AdditionallyForm extends javax.swing.JDialog {
             }
         });
 
+        skuButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        skuButton.setText("Відкрити скриньку");
+        skuButton.setToolTipText("");
+        skuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skuButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(538, Short.MAX_VALUE)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(skuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(397, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(skuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -87,6 +105,10 @@ public class AdditionallyForm extends javax.swing.JDialog {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void skuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skuButtonActionPerformed
+        Printer.openCashDrawer();
+    }//GEN-LAST:event_skuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,5 +127,6 @@ public class AdditionallyForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton skuButton;
     // End of variables declaration//GEN-END:variables
 }
