@@ -1015,6 +1015,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdditionallyActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        refresh();
         ReturnForm returnForm = ReturnForm.getReturn(frame);
         returnForm.setVisible(true);
         if (returnForm.isOk()) {
