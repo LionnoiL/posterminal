@@ -110,7 +110,7 @@ public class PayForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        cashButton.setBackground(new java.awt.Color(255, 204, 204));
+        cashButton.setBackground(new java.awt.Color(255, 51, 51));
         cashButton.setText("ГОТІВКА");
         cashButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +264,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad10.setText("5");
         btnNumpad10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +272,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad11.setText("50");
         btnNumpad11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +280,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad12.setText("500");
         btnNumpad12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +288,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad13.setText("10");
         btnNumpad13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +296,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad14.setText("100");
         btnNumpad14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +304,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad15.setText("1000");
         btnNumpad15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +312,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad16.setText("20");
         btnNumpad16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +320,7 @@ public class PayForm extends javax.swing.JDialog {
             }
         });
 
-        btnNumpad17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNumpad17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNumpad17.setText("200");
         btnNumpad17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -424,6 +424,7 @@ public class PayForm extends javax.swing.JDialog {
         lblPay.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 
         lblRemainder.setFont(new java.awt.Font("Segoe UI", 0, 100)); // NOI18N
+        lblRemainder.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -477,7 +478,7 @@ public class PayForm extends javax.swing.JDialog {
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         setPayType(PayTypes.CASH);
         clearPayTypesButtonsColor();
-        cashButton.setBackground(new java.awt.Color(255, 204, 204));
+        cashButton.setBackground(new java.awt.Color(255, 51, 51));
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cnclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnclButtonActionPerformed

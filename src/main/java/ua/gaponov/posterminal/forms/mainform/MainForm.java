@@ -8,6 +8,7 @@ import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
+import ua.gaponov.posterminal.forms.additionally.AdditionallyForm;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
@@ -1010,7 +1011,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFiscalActionPerformed
 
     private void btnAdditionallyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdditionallyActionPerformed
-        // TODO add your handling code here:
+        AdditionallyForm.main(null);
     }//GEN-LAST:event_btnAdditionallyActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
