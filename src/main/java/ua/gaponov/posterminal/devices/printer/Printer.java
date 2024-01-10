@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.entity.orders.PrintOrder;
 import ua.gaponov.posterminal.utils.StringUtils;
 
+import javax.print.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.print.*;
@@ -180,6 +181,17 @@ public class Printer {
             g2d.drawImage(image, 1, currentLine, paperWidth, image.getHeight() / scale, null);
         } else {
             g2d.drawImage(image, 1, currentLine, null);
+        }
+    }
+
+    public static void openCashDrawer(){
+        DocPrintJob printJob = PrintServiceLookup.lookupDefaultPrintService().createPrintJob();
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        Doc doc = new SimpleDoc(Commands.CD_KICK_5, flavor, null);
+        try {
+            printJob.print(doc, null);
+        } catch (PrintException e) {
+            throw new RuntimeException(e);
         }
     }
 }
