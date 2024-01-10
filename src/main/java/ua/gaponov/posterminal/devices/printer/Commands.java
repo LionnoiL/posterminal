@@ -25,6 +25,8 @@ public class Commands {
     // Cash Drawer
     public static final byte[] CD_KICK_2       = {0x1b,0x70,0x00};      // Sends a pulse to pin 2 []
     public static final byte[] CD_KICK_5       = {0x1b,0x70,0x01};      // Sends a pulse to pin 5 []
+    //public static final byte[] CD_KICK_XPRINTER       = {0x1b,0x70,0x00, (byte) 0x94, (byte) 0x31};
+    public static final byte[] CD_KICK_XPRINTER       = {0x1b, 0x70, 0x01, 0x32, (byte) 0xfa};
 
     // Paper
     public static final byte[]  PAPER_FULL_CUT = {0x1d,0x56,0x00}; // Full cut paper
