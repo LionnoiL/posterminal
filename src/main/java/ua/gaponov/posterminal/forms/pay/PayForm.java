@@ -422,6 +422,7 @@ public class PayForm extends javax.swing.JDialog {
         lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 
         lblPay.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblPay.setForeground(new java.awt.Color(255, 51, 51));
 
         lblRemainder.setFont(new java.awt.Font("Segoe UI", 1, 100)); // NOI18N
         lblRemainder.setForeground(new java.awt.Color(255, 51, 51));

@@ -187,7 +187,7 @@ public class Printer {
     public static void openCashDrawer(){
         DocPrintJob printJob = PrintServiceLookup.lookupDefaultPrintService().createPrintJob();
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        Doc doc = new SimpleDoc(Commands.CD_KICK_5, flavor, null);
+        Doc doc = new SimpleDoc(Commands.CD_KICK_XPRINTER, flavor, null);
         try {
             printJob.print(doc, null);
         } catch (PrintException e) {

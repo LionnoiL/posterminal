@@ -1053,6 +1053,10 @@ public class MainForm extends javax.swing.JFrame {
 
         try {
             double newQty = Double.valueOf(inputQty.getText());
+            if (newQty == 0){
+                btnDeleteProductRowActionPerformed(null);
+                return;
+            }
             setQtyInRow(selectedRow, newQty);
         } catch (NumberFormatException e) {
             //NOP
