@@ -132,16 +132,19 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     private void firstMerchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstMerchActionPerformed
         merchId = 1;
+        order.setMerchId(merchId);
         payOnTerminal();
     }//GEN-LAST:event_firstMerchActionPerformed
 
     private void secondMerchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondMerchActionPerformed
         merchId = 2;
+        order.setMerchId(merchId);
         payOnTerminal();
     }//GEN-LAST:event_secondMerchActionPerformed
 
     private void thirdMerchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thirdMerchActionPerformed
         merchId = 3;
+        order.setMerchId(merchId);
         payOnTerminal();
     }//GEN-LAST:event_thirdMerchActionPerformed
 
@@ -178,6 +181,9 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
     private void payOnTerminal(){
         Terminal terminal = new IngenicoTerminal();
         ok = terminal.pay(merchId, summa, order);
+        if (!ok){
+            order.setMerchId(0);
+        }
         dispose();
     }
 

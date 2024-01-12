@@ -35,6 +35,7 @@ public class Order implements Serializable, Cloneable {
     private double toPaySum;
     private double discountSum;
     private PayTypes payType = PayTypes.CASH;
+    private int merchId;
     private String prnCode;
     private String authCode;
     private boolean fiscal;

@@ -39,6 +39,7 @@ public class OrderDatabaseMapper implements Mapper<Order> {
             order.setPrnCode(rs.getString("prn"));
             order.setAuthCode(rs.getString("auth_code"));
             order.setDocumentType(DocumentTypes.valueOf(rs.getString("doc_type")));
+            order.setMerchId(rs.getInt("merch_id"));
 
             List<OrderDetail> details = OrderDetailService.getByOrder(order.getGuid());
             order.setDetails(details);
