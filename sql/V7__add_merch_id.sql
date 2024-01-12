@@ -1,0 +1,1 @@
+ALTER TABLE orders ADD COLUMN merch_id INTEGER DEFAULT (0);
