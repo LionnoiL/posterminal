@@ -22,8 +22,6 @@ public final class Database {
 
     static {
         dataSource = new BasicDataSource();
-        //dataSource.setDriverClassName("org.sqlite.JDBC");
-        //dataSource.setUrl("jdbc:sqlite:./pos.db");
         dataSource.setUrl("jdbc:h2:./pos;TRACE_LEVEL_FILE=0;DEFRAG_ALWAYS=TRUE");
         dataSource.setUsername("");
         dataSource.setPassword("");
@@ -52,7 +50,6 @@ public final class Database {
         Flyway flyway = Flyway
                 .configure()
                 .loggers("slf4j")
-                .locations("filesystem:./sql")
                 .dataSource(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword())
                 .load();
         flyway.migrate();
