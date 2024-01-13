@@ -34,11 +34,11 @@ public class LoggingConfiguration {
         consoleAppender.activateOptions();
 
         // creates file appender
-        DailyRollingFileAppender rollingFileAppender = new DailyRollingFileAppender();
+        RollingFileAppender rollingFileAppender = new RollingFileAppender();
         rollingFileAppender.setEncoding(PROPERTIES.getProperty(LOG_ENCODING));
         rollingFileAppender.setFile(PROPERTIES.getProperty(LOG_FILE));
         rollingFileAppender.setLayout(layout);
-        rollingFileAppender.setDatePattern("'.'yyyy-MM-dd");
+        rollingFileAppender.setMaxBackupIndex(10);
         rollingFileAppender.activateOptions();
 
         // configures the root logger
