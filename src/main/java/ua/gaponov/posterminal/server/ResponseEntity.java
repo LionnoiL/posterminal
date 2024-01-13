@@ -12,4 +12,5 @@ public class ResponseEntity {
 
     private final String content;
     private final Integer status;
+    private final String contentType;
 }

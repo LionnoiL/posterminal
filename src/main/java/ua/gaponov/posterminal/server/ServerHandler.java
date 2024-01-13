@@ -13,6 +13,7 @@ import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -21,11 +22,13 @@ import java.util.Objects;
 public class ServerHandler implements HttpHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerHandler.class);
+    private static final String CONTENT_TYPE_JSON = "application/json; charset=UTF-8";
 
     private static void sendResponse(HttpExchange exchange, ResponseEntity responseEntity) throws IOException {
-        exchange.sendResponseHeaders(responseEntity.getStatus(), responseEntity.getContent().length());
+        exchange.getResponseHeaders().set("Content-Type", responseEntity.getContentType());
+        exchange.sendResponseHeaders(responseEntity.getStatus(), 0);
         OutputStream os = exchange.getResponseBody();
-        os.write(responseEntity.getContent().getBytes());
+        os.write(responseEntity.getContent().getBytes(StandardCharsets.UTF_8));
         os.close();
     }
 
@@ -50,10 +53,10 @@ public class ServerHandler implements HttpHandler {
             if (e instanceof ServerInternalErrorException) {
                 int httpStatus = ((ServerInternalErrorException) e).getHttpCode();
                 String responseBody = e.getMessage();
-                responseEntity = ResponseEntity.of(responseBody, httpStatus);
+                responseEntity = ResponseEntity.of(responseBody, httpStatus, "");
             } else {
                 final int status = 500;
-                responseEntity = ResponseEntity.of("", status);
+                responseEntity = ResponseEntity.of("", status, "");
             }
         } finally {
             if (Objects.nonNull(responseEntity)) {
@@ -71,7 +74,7 @@ public class ServerHandler implements HttpHandler {
             case "/echo":
                 return getApplicationEcho();
             default:
-                return ResponseEntity.of("", 404);
+                return ResponseEntity.of("", 404, "");
         }
 
     }
@@ -79,7 +82,7 @@ public class ServerHandler implements HttpHandler {
     private ResponseEntity getLastUpdate() {
         final int status = 200;
         OptionsValue lastUpdate = OptionsValueService.getOptions("last_update");
-        return ResponseEntity.of(lastUpdate.getValue(), status);
+        return ResponseEntity.of(lastUpdate.getValue(), status, "");
     }
 
     private ResponseEntity getApplicationEcho() {
@@ -102,7 +105,7 @@ public class ServerHandler implements HttpHandler {
                         AppProperties.getArmId(),
                         lastUpdate.getValue()
                 )
-                , status);
+                , status, CONTENT_TYPE_JSON);
     }
 
     private ResponseEntity handlePOST(HttpExchange exchange, URI endpoint) {
@@ -114,9 +117,9 @@ public class ServerHandler implements HttpHandler {
             switch (path) {
                 case "/command":
                     handleCommand(new String(bytes));
-                    return ResponseEntity.of("", status);
+                    return ResponseEntity.of("", status, CONTENT_TYPE_JSON);
                 default:
-                    return ResponseEntity.of("", 404);
+                    return ResponseEntity.of("", 404, "");
             }
         } catch (Exception e) {
             throw new ServerInternalErrorException("can't read request");
