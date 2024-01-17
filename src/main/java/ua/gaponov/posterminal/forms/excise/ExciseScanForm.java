@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.forms.excise;
 
+import ua.gaponov.posterminal.utils.BarcodeConverter;
+
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -60,6 +62,7 @@ public class ExciseScanForm extends javax.swing.JDialog {
 
     private void barcodeHandle(String barcode) {
         barcode = barcode.replaceAll("[^A-Za-zА-Яа-я0-9]", "");
+        barcode = BarcodeConverter.convertToLatin(barcode);
         fieldBarcode.setText(barcode);
     }
 

@@ -128,7 +128,7 @@ public class ServerHandler implements HttpHandler {
 
     private void handleCommand(String command) {
         switch (command) {
-            case "upload documents":
+            case "EXPORT":
                 ExchangeUpload.upload();
                 break;
             default:
