@@ -17,6 +17,8 @@ public class Product implements Serializable {
 
     private String guid;
     private String name;
+    @JsonIgnore
+    private String fiscalName;
     private String code;
     @JsonIgnore
     private double price;

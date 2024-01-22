@@ -121,6 +121,7 @@ public final class ProductService {
                 product.getTaxGroup(),
                 product.getGuid(),
                 product.getName(),
+                product.getFiscalName(),
                 product.getPrice(),
                 product.isBanDisckount(),
                 product.isProstoPayProduct(),
@@ -136,11 +137,11 @@ public final class ProductService {
         }
 
         String sql = """
-                insert into products (unit_name, need_excise, tax_group, product_guid, product_name, price,
+                insert into products (unit_name, need_excise, tax_group, product_guid, product_name, product_fiscal_name, price,
                 no_discount, prostopay_product, product_code, sku, weight, org_guid
                 )
                 values
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
         SQL_HELPER.execSql(sql, parameters);
     }
@@ -148,6 +149,7 @@ public final class ProductService {
     private static void update(Product product) throws SQLException {
         StatementParameters<Object> parameters = StatementParameters.build(
                 product.getName(),
+                product.getFiscalName(),
                 product.getUnitName(),
                 product.getTaxGroup(),
                 product.getPrice(),
@@ -164,9 +166,9 @@ public final class ProductService {
             parameters.addNull();
         }
 
-        parameters.addAll(product.getGuid());
         String sql = """
                 update products set product_name= ?,
+                product_fiscal_name = ?,
                 unit_name = ?,
                 tax_group = ?,
                 price= ?,
@@ -179,6 +181,7 @@ public final class ProductService {
                 org_guid = ?
                 where product_guid = ?
                 """;
+        parameters.addAll(product.getGuid());
         SQL_HELPER.execSql(sql, parameters);
     }
 }
