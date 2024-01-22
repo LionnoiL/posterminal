@@ -22,6 +22,7 @@ public class ProductDatabaseMapper implements Mapper<Product> {
             Product product = new Product();
             product.setGuid(rs.getString("product_guid"));
             product.setName(rs.getString("product_name"));
+            product.setFiscalName(rs.getString("product_fiscal_name"));
             product.setCode(rs.getString("product_code"));
             product.setBanDisckount(rs.getBoolean("no_discount"));
             product.setPrice(rs.getDouble("price"));

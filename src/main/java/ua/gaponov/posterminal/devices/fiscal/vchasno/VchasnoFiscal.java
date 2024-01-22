@@ -44,8 +44,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
 
     private static final Logger LOG = LoggerFactory.getLogger(VchasnoFiscal.class);
     private static final String VCHASNO_DEVICE_HOST = "http://" + AppProperties.getFiscalIp() + ":3939/dm/execute";
-    private String deviceName;
-    private String token;
+    private String deviceName = AppProperties.getFiscalName();
+    private String token = AppProperties.getFiscalToken();
 
     public VchasnoFiscal(String deviceName, String token) {
         this.deviceName = deviceName;
@@ -150,7 +150,7 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         int line = 0;
         for (OrderDetail detail : order.getDetails()) {
             Row row = new Row();
-            row.setName(detail.getProduct().getName());
+            row.setName(detail.getProduct().getFiscalName());
             row.setCnt(detail.getQty());
             row.setPrice(detail.getPrice());
             row.setCost(detail.getSumma());
@@ -168,10 +168,8 @@ public class VchasnoFiscal implements DeviceFiscalPrinter {
         switch (taxGroup) {
             case 1:
                 return TaxGroup.VAT_20;
-            case 4:
+            case 6:
                 return TaxGroup.NO_VAT_5;
-            case 5:
-                return TaxGroup.VAT_14;
             default:
                 return TaxGroup.NO_VAT;
         }

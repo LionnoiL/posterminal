@@ -19,6 +19,7 @@ public class ProductXmlBuilder implements ExchangeBuilder<Product, XmlUtils> {
             product.setGuid(processor.getStringAttribute("guid_product"));
             product.setCode(processor.getStringAttribute("code"));
             product.setName(processor.getStringAttribute("name"));
+            product.setFiscalName(processor.getStringAttribute("name_fiscal"));
             product.setPrice(processor.getDoubleAttribute("price"));
             product.setBanDisckount(processor.getBooleanAttribute("no_discount"));
             product.setWeight(processor.getBooleanAttribute("weight"));
