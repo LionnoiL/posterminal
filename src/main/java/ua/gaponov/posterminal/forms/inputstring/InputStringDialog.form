@@ -38,94 +38,99 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="btnString2" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn301" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton24" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn302" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton25" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn303" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton26" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn304" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton27" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn305" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton28" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="btn306" min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jButton38" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton29" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="btn307" min="-2" pref="51" max="-2" attributes="0"/>
                                   <Component id="jButton51" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jButton37" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton36" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton35" min="-2" pref="51" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btn308" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btn309" min="-2" pref="51" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jButton34" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton33" min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButton30" min="-2" pref="51" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton31" min="-2" pref="51" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="changeLangButton" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnString1" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn101" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton13" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn102" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton14" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn103" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton15" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn104" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton16" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn105" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton17" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn106" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton18" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn107" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton19" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn108" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton20" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn109" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton21" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn110" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton22" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn111" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton23" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn112" min="-2" pref="51" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnString" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn201" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn202" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn203" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn204" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn205" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton6" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn206" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton7" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn207" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton8" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn208" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton9" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn209" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton10" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn210" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton11" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn211" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton12" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btn212" min="-2" pref="51" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
@@ -173,18 +178,18 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnString" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton7" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton8" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton10" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton11" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton12" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn101" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn102" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn103" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn104" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn105" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn106" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn107" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn108" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn109" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn110" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn111" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn112" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButton41" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
@@ -195,18 +200,18 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnString1" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton13" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton14" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton15" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton16" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton17" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton18" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton19" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton20" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton21" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton22" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton23" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn201" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn202" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn203" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn204" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn205" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn206" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn207" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn208" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn209" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn210" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn211" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn212" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButton44" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
@@ -215,23 +220,24 @@
                   <Component id="jButton42" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnString2" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton24" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton25" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton26" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton27" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton28" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton29" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton30" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton31" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn301" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn302" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn303" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn304" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn305" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn306" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn307" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn308" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btn309" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButton47" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="jButton46" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jButton45" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="jButton45" alignment="0" max="32767" attributes="0"/>
+                  <Component id="changeLangButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -278,7 +284,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cnclButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnString">
+    <Component class="javax.swing.JButton" name="btn101">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -286,10 +292,10 @@
         <Property name="text" type="java.lang.String" value="&#x419;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btn102">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -298,10 +304,10 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btn103">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -309,10 +315,10 @@
         <Property name="text" type="java.lang.String" value="&#x423;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="btn104">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -320,10 +326,10 @@
         <Property name="text" type="java.lang.String" value="&#x41a;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="btn105">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -331,10 +337,10 @@
         <Property name="text" type="java.lang.String" value="&#x415;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="btn106">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -342,10 +348,10 @@
         <Property name="text" type="java.lang.String" value="&#x41d;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="btn107">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -353,10 +359,10 @@
         <Property name="text" type="java.lang.String" value="&#x413;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="btn108">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -364,10 +370,10 @@
         <Property name="text" type="java.lang.String" value="&#x428;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton9">
+    <Component class="javax.swing.JButton" name="btn109">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -375,10 +381,10 @@
         <Property name="text" type="java.lang.String" value="&#x429;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton10">
+    <Component class="javax.swing.JButton" name="btn110">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -386,10 +392,10 @@
         <Property name="text" type="java.lang.String" value="&#x417;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton11">
+    <Component class="javax.swing.JButton" name="btn111">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -397,10 +403,10 @@
         <Property name="text" type="java.lang.String" value="&#x425;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton12">
+    <Component class="javax.swing.JButton" name="btn112">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -408,10 +414,10 @@
         <Property name="text" type="java.lang.String" value="&#x407;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnString1">
+    <Component class="javax.swing.JButton" name="btn201">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -419,10 +425,10 @@
         <Property name="text" type="java.lang.String" value="&#x424;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton13">
+    <Component class="javax.swing.JButton" name="btn202">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -430,10 +436,10 @@
         <Property name="text" type="java.lang.String" value="&#x406;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton14">
+    <Component class="javax.swing.JButton" name="btn203">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -441,10 +447,10 @@
         <Property name="text" type="java.lang.String" value="&#x412;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton15">
+    <Component class="javax.swing.JButton" name="btn204">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -452,10 +458,10 @@
         <Property name="text" type="java.lang.String" value="&#x410;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton16">
+    <Component class="javax.swing.JButton" name="btn205">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -463,10 +469,10 @@
         <Property name="text" type="java.lang.String" value="&#x41f;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton17">
+    <Component class="javax.swing.JButton" name="btn206">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -474,10 +480,10 @@
         <Property name="text" type="java.lang.String" value="&#x420;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton18">
+    <Component class="javax.swing.JButton" name="btn207">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -485,10 +491,10 @@
         <Property name="text" type="java.lang.String" value="&#x41e;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton19">
+    <Component class="javax.swing.JButton" name="btn208">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -496,10 +502,10 @@
         <Property name="text" type="java.lang.String" value="&#x41b;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton20">
+    <Component class="javax.swing.JButton" name="btn209">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -507,10 +513,10 @@
         <Property name="text" type="java.lang.String" value="&#x414;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton21">
+    <Component class="javax.swing.JButton" name="btn210">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -518,10 +524,10 @@
         <Property name="text" type="java.lang.String" value="&#x416;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton22">
+    <Component class="javax.swing.JButton" name="btn211">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -529,10 +535,10 @@
         <Property name="text" type="java.lang.String" value="&#x404;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnString2">
+    <Component class="javax.swing.JButton" name="btn301">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -540,10 +546,10 @@
         <Property name="text" type="java.lang.String" value="&#x42f;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton24">
+    <Component class="javax.swing.JButton" name="btn302">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -551,10 +557,10 @@
         <Property name="text" type="java.lang.String" value="&#x427;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton25">
+    <Component class="javax.swing.JButton" name="btn303">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -562,10 +568,10 @@
         <Property name="text" type="java.lang.String" value="&#x421;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton26">
+    <Component class="javax.swing.JButton" name="btn304">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -573,10 +579,10 @@
         <Property name="text" type="java.lang.String" value="&#x41c;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton27">
+    <Component class="javax.swing.JButton" name="btn305">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -584,10 +590,10 @@
         <Property name="text" type="java.lang.String" value="&#x418;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton28">
+    <Component class="javax.swing.JButton" name="btn306">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -595,10 +601,10 @@
         <Property name="text" type="java.lang.String" value="&#x422;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton29">
+    <Component class="javax.swing.JButton" name="btn307">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -606,10 +612,10 @@
         <Property name="text" type="java.lang.String" value="&#x42c;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton30">
+    <Component class="javax.swing.JButton" name="btn308">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -617,10 +623,10 @@
         <Property name="text" type="java.lang.String" value="&#x411;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton31">
+    <Component class="javax.swing.JButton" name="btn309">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -628,7 +634,7 @@
         <Property name="text" type="java.lang.String" value="&#x42e;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton33">
@@ -639,7 +645,7 @@
         <Property name="text" type="java.lang.String" value="%"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton34">
@@ -650,7 +656,7 @@
         <Property name="text" type="java.lang.String" value=":"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton35">
@@ -661,7 +667,7 @@
         <Property name="text" type="java.lang.String" value=";"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton36">
@@ -672,7 +678,7 @@
         <Property name="text" type="java.lang.String" value="+"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton37">
@@ -683,7 +689,7 @@
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton38">
@@ -700,7 +706,7 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton40">
@@ -711,7 +717,7 @@
         <Property name="text" type="java.lang.String" value="8"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton41">
@@ -722,7 +728,7 @@
         <Property name="text" type="java.lang.String" value="7"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton42">
@@ -733,7 +739,7 @@
         <Property name="text" type="java.lang.String" value="6"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton43">
@@ -744,7 +750,7 @@
         <Property name="text" type="java.lang.String" value="5"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton44">
@@ -755,7 +761,7 @@
         <Property name="text" type="java.lang.String" value="4"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton45">
@@ -766,7 +772,7 @@
         <Property name="text" type="java.lang.String" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton46">
@@ -777,7 +783,7 @@
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton47">
@@ -788,7 +794,7 @@
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton48">
@@ -810,7 +816,7 @@
         <Property name="text" type="java.lang.String" value=","/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton50">
@@ -821,7 +827,7 @@
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton51">
@@ -832,10 +838,10 @@
         <Property name="text" type="java.lang.String" value="."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton23">
+    <Component class="javax.swing.JButton" name="btn212">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="15" style="0"/>
@@ -843,7 +849,18 @@
         <Property name="text" type="java.lang.String" value="&apos;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStringAction"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11101Action"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="changeLangButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="15" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="ua/en"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeLangButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
