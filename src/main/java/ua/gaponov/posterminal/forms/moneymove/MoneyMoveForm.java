@@ -1,6 +1,7 @@
 package ua.gaponov.posterminal.forms.moneymove;
 
 import lombok.Getter;
+import ua.gaponov.posterminal.entity.Language;
 import ua.gaponov.posterminal.entity.MoveType;
 import ua.gaponov.posterminal.forms.inputnumbers.InputDecimalDialog;
 import ua.gaponov.posterminal.forms.inputstring.InputStringDialog;
@@ -259,7 +260,7 @@ public class MoneyMoveForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNumberFormActionPerformed
 
     private void btnStringFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStringFormActionPerformed
-        InputStringDialog dialog = InputStringDialog.getDialog(this, fldComment.getText());
+        InputStringDialog dialog = InputStringDialog.getDialog(this, fldComment.getText(), Language.UA);
         dialog.setVisible(true);
         if (dialog.isOk()) {
             fldComment.setText(dialog.getInputString());

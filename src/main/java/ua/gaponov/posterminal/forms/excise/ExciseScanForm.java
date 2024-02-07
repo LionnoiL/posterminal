@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.forms.excise;
 
+import ua.gaponov.posterminal.entity.Language;
+import ua.gaponov.posterminal.forms.inputstring.InputStringDialog;
 import ua.gaponov.posterminal.utils.BarcodeConverter;
 
 import java.awt.Component;
@@ -79,6 +81,7 @@ public class ExciseScanForm extends javax.swing.JDialog {
         fieldBarcode = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
+        manualTextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -103,6 +106,13 @@ public class ExciseScanForm extends javax.swing.JDialog {
             }
         });
 
+        manualTextButton.setText("Ввести вручну");
+        manualTextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manualTextButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,8 +124,9 @@ public class ExciseScanForm extends javax.swing.JDialog {
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(fieldBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(manualTextButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -128,10 +139,11 @@ public class ExciseScanForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(fieldBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manualTextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -152,6 +164,14 @@ public class ExciseScanForm extends javax.swing.JDialog {
         barcode = fieldBarcode.getText();
         dispose();
     }//GEN-LAST:event_okButtonMouseClicked
+
+    private void manualTextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualTextButtonActionPerformed
+        InputStringDialog dialog = InputStringDialog.getDialog(this, fieldBarcode.getText(), Language.EN);
+        dialog.setVisible(true);
+        if (dialog.isOk()) {
+            fieldBarcode.setText(dialog.getInputString());
+        }
+    }//GEN-LAST:event_manualTextButtonActionPerformed
 
     public boolean isOK() {
         return ok;
@@ -180,6 +200,7 @@ public class ExciseScanForm extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField fieldBarcode;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton manualTextButton;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 }
