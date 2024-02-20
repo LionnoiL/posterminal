@@ -38,6 +38,8 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         firstMerch.setIcon(getIcon("btn1.png"));
         secondMerch.setIcon(getIcon("btn2.png"));
         thirdMerch.setIcon(getIcon("btn3.png"));
+        fourthMerch.setIcon(getIcon("btn4.png"));
+        fifthMerch.setIcon(getIcon("btn5.png"));
     }
 
     /**
@@ -54,6 +56,8 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         secondMerch = new javax.swing.JButton();
         thirdMerch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        fourthMerch = new javax.swing.JButton();
+        fifthMerch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -86,6 +90,18 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         jLabel1.setText("Оберіть мерчанта");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        fourthMerch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fourthMerchActionPerformed(evt);
+            }
+        });
+
+        fifthMerch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fifthMerchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,6 +121,10 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
                                 .addComponent(secondMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(thirdMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fourthMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fifthMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -112,12 +132,16 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(thirdMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(secondMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(thirdMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(secondMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firstMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fourthMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(fifthMerch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(cnclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -147,6 +171,18 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         order.setMerchId(merchId);
         payOnTerminal();
     }//GEN-LAST:event_thirdMerchActionPerformed
+
+    private void fourthMerchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourthMerchActionPerformed
+        merchId = 4;
+        order.setMerchId(merchId);
+        payOnTerminal();
+    }//GEN-LAST:event_fourthMerchActionPerformed
+
+    private void fifthMerchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fifthMerchActionPerformed
+        merchId = 5;
+        order.setMerchId(merchId);
+        payOnTerminal();
+    }//GEN-LAST:event_fifthMerchActionPerformed
 
     public static ChoiseCardMerchForm getPay(Component parent, double summa, Order order) {
         Window window = SwingUtilities.windowForComponent(parent);
@@ -189,7 +225,9 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cnclButton;
+    private javax.swing.JButton fifthMerch;
     private javax.swing.JButton firstMerch;
+    private javax.swing.JButton fourthMerch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton secondMerch;
     private javax.swing.JButton thirdMerch;

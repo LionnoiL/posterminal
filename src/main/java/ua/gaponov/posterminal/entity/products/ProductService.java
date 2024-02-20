@@ -64,7 +64,7 @@ public final class ProductService {
     }
 
     private static String removeStartZero(String inputString) {
-        for (int i = 0; i < inputString.length() - 1; i++) {
+        for (int i = 0; i <= inputString.length() - 1; i++) {
             if (!"0".equals(inputString.substring(i, i + 1))) {
                 return inputString.substring(i, inputString.length());
             }
@@ -182,6 +182,19 @@ public final class ProductService {
                 where product_guid = ?
                 """;
         parameters.addAll(product.getGuid());
+        SQL_HELPER.execSql(sql, parameters);
+    }
+
+    public static void clearSkuCode(String sku) throws SQLException {
+        if (sku == null || sku.isBlank()){
+            return;
+        }
+        StatementParameters<Object> parameters = StatementParameters.build(sku);
+
+        String sql = """
+                update products set sku = '' 
+                where sku = ?
+                """;
         SQL_HELPER.execSql(sql, parameters);
     }
 }

@@ -9,6 +9,7 @@ import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.forms.additionally.AdditionallyForm;
+import ua.gaponov.posterminal.forms.additionally.BarCodeNotFoundInfoForm;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
@@ -1118,7 +1119,12 @@ public class MainForm extends javax.swing.JFrame {
             updateSumLabel();
         } else {
             Card findCard = CardService.getByCode(barcode);
-            updateByCard(findCard);
+            if (findCard != null){
+                updateByCard(findCard);
+            } else {
+                BarCodeNotFoundInfoForm barCodeNotFoundInfoForm = BarCodeNotFoundInfoForm.showDialog(frame);
+                barCodeNotFoundInfoForm.setVisible(true);
+            }
         }
     }
 

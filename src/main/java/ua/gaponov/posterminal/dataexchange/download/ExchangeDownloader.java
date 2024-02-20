@@ -82,6 +82,7 @@ public class ExchangeDownloader {
 
             while (processor.startElement("product", "products")) {
                 Product product = PRODUCT_BUILDER.create(processor);
+                ProductService.clearSkuCode(product.getSku());
                 ProductService.save(product);
             }
 
