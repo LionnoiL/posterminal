@@ -831,6 +831,7 @@ public class MainForm extends javax.swing.JFrame {
                 }
 
                 try {
+                    order.setUser(AppProperties.getCurrentUser());
                     OrderService.save(order);
                 } catch (Exception ex){
                     DialogUtils.error(this, "Помилка збереження чеку");

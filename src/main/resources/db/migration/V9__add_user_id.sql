@@ -1,0 +1,1 @@
+ALTER TABLE orders ADD COLUMN user_guid VARCHAR (36);

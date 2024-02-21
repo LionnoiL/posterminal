@@ -126,9 +126,9 @@ public final class OrderService {
         String sql = """
                     insert into orders
                     (order_guid, order_number, summa_doc, summa_to_pay, summa_discount, summa_round, summa_pay,
-                     doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid, prn, auth_code, merch_id)
+                     doc_type, pay_type, upload, fiscal, internet, fiscal_print, card_guid, prn, auth_code, merch_id, user_guid)
                     values
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(
                 order.getGuid(),
@@ -153,6 +153,12 @@ public final class OrderService {
         }
 
         parameters.addAll(order.getPrnCode(), order.getAuthCode(), order.getMerchId());
+
+        if (Objects.nonNull(order.getUser())) {
+            parameters.addAll(order.getUser().getGuid());
+        } else {
+            parameters.addNull();
+        }
 
         return new DatabaseRequest(sql, parameters);
     }

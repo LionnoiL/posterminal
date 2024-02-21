@@ -1,5 +1,6 @@
 package ua.gaponov.posterminal.entity.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +15,11 @@ public class User {
 
     private String guid;
     private String name;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private boolean active;
+    @JsonIgnore
     private UserRole role;
 
 

@@ -10,6 +10,7 @@ import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.organization.Organization;
 import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.users.User;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
 import java.beans.Transient;
@@ -41,11 +42,19 @@ public class Order implements Serializable, Cloneable {
     private boolean fiscal;
     private boolean internet;
     private boolean fiscalPrint;
+    private User user;
     private Card card;
     private DocumentTypes documentType = DocumentTypes.ORDER;
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "detail")
     private List<OrderDetail> details = new ArrayList<>();
+
+    public Order(User currentUser) {
+        this.user = currentUser;
+    }
+
+    public Order() {
+    }
 
     public boolean canBePrinted() {
         double maxDebt = 0;

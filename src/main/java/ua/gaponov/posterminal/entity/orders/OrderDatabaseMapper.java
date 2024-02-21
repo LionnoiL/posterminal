@@ -7,6 +7,7 @@ import ua.gaponov.posterminal.database.Mapper;
 import ua.gaponov.posterminal.database.MapperException;
 import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.PayTypes;
+import ua.gaponov.posterminal.entity.users.UserService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ public class OrderDatabaseMapper implements Mapper<Order> {
             order.setGuid(rs.getString("order_guid"));
             order.setDate(rs.getTimestamp("order_date").toLocalDateTime());
             order.setCard(CardService.getByGuid(rs.getString("card_guid")));
+            order.setUser(UserService.getByGuid(rs.getString("user_guid")));
             order.setDocumentSum(rs.getDouble("summa_doc"));
             order.setPaySum(rs.getDouble("summa_pay"));
             order.setToPaySum(rs.getDouble("summa_to_pay"));
