@@ -80,6 +80,8 @@ public class ExchangeUpload {
             LOG.error("Export filed", e);
         }
 
+        orders = null;
+        moneyMoves = null;
     }
 
     private static void downloadConfirmations() {
@@ -94,6 +96,7 @@ public class ExchangeUpload {
             while (processor.startElement("confirmation", "confirmations")) {
                 Confirmation confirmation = CONFIRMATION_BUILDER.create(processor);
                 ConfirmationService.save(confirmation);
+                confirmation = null;
             }
         } catch (Exception e) {
             LOG.error("Import confirmations filed", e);

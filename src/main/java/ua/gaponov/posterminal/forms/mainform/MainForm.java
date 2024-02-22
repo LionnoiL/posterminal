@@ -786,7 +786,7 @@ public class MainForm extends javax.swing.JFrame {
             ExchangeUpload.upload();
             saveColumnsWidth();
             saveAllApplicationProperties();
-            Sound.end();
+            //Sound.end();
             dispose();
             PosTerminal.closeApp();
         }
@@ -845,6 +845,7 @@ public class MainForm extends javax.swing.JFrame {
                 new PrintOrder(order);
                 ProstoPayService.printQrCodesByOrder(order);
 
+                order = null;
                 order = new Order();
 
                 AppProperties.getAutoSaveScheduler().setOrder(order);
@@ -1129,7 +1130,7 @@ public class MainForm extends javax.swing.JFrame {
             if (findCard != null){
                 updateByCard(findCard);
             } else {
-                Sound.error();
+               // Sound.error();
                 BarCodeNotFoundInfoForm barCodeNotFoundInfoForm = BarCodeNotFoundInfoForm.showDialog(frame);
                 barCodeNotFoundInfoForm.setVisible(true);
             }

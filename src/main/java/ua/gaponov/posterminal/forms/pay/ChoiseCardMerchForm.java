@@ -217,6 +217,7 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         if (!ok){
             order.setMerchId(0);
         }
+        terminal = null;
         dispose();
     }
 

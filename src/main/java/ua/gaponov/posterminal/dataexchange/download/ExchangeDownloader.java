@@ -78,6 +78,7 @@ public class ExchangeDownloader {
             while (processor.startElement("organization", "organizations")) {
                 Organization organization = ORGANIZATION_BUILDER.create(processor);
                 OrganizationService.save(organization);
+                organization = null;
             }
 
             while (processor.startElement("product", "products")) {
@@ -87,6 +88,7 @@ public class ExchangeDownloader {
                 //видаляємо штрикоди тому що нові будуть завантажені далі.
                 //якщо без цього, то як зробити видалення штрихкоду після його видалення з 1с
                 BarcodeService.clearBarcodes(product.getGuid());
+                product = null;
             }
 
             while (processor.startElement("ean", "eans")) {
@@ -94,11 +96,13 @@ public class ExchangeDownloader {
                 if (barcode.getProduct() != null){
                     BarcodeService.save(barcode);
                 }
+                barcode = null;
             }
 
             while (processor.startElement("discounts_card", "discounts_cards")) {
                 Card card = CARD_BUILDER.create(processor);
                 CardService.save(card);
+                card = null;
             }
 
             while (processor.startElement("quick_product", "quick_products")) {
@@ -106,6 +110,7 @@ public class ExchangeDownloader {
                 if (quickProduct.getProduct() != null){
                     QuickProductService.save(quickProduct);
                 }
+                quickProduct = null;
             }
 
             LocalDateTime now = LocalDateTime.now();

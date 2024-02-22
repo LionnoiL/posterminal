@@ -68,6 +68,7 @@ public class IngenicoTerminal implements Terminal {
     private void deleteDevice(){
         if (Objects.nonNull(device)){
             device.getObject().safeRelease();
+            device = null;
         }
     }
 
@@ -90,7 +91,7 @@ public class IngenicoTerminal implements Terminal {
         }
 
         Dispatch.call(device, "CommOpen", com, 11520);
-        return isOk(10);
+        return isOk(2);
     }
 
     private void close() {
@@ -106,18 +107,30 @@ public class IngenicoTerminal implements Terminal {
     private boolean isOk(int timeOut) {
         long start = System.currentTimeMillis();
         long end = start + timeOut * 1000;
+        Variant lastResult = null;
         while (System.currentTimeMillis() < end) {
-            Variant lastResult = Dispatch.call(device, "LastResult");
+            lastResult = Dispatch.call(device, "LastResult");
             int resultInt = Integer.parseInt(lastResult.toString());
             if (resultInt == 0) {
-                return resultInt == 0;
+                return true;
             } else if (resultInt == 1) {
                 Variant lastErrorDescription = Dispatch.call(device, "LastErrorDescription");
                 DialogUtils.error(null, lastErrorDescription.toString());
                 log.error("Error ingenico: {}", lastErrorDescription.toString());
+                lastErrorDescription.VariantClear();
+                lastErrorDescription.safeRelease();
+                return false;
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 return false;
             }
         }
+        lastResult.VariantClear();
+        lastResult.safeRelease();
         return false;
     }
+
 }
