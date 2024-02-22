@@ -84,6 +84,9 @@ public class ExchangeDownloader {
                 Product product = PRODUCT_BUILDER.create(processor);
                 ProductService.clearSkuCode(product.getSku());
                 ProductService.save(product);
+                //видаляємо штрикоди тому що нові будуть завантажені далі.
+                //якщо без цього, то як зробити видалення штрихкоду після його видалення з 1с
+                BarcodeService.clearBarcodes(product.getGuid());
             }
 
             while (processor.startElement("ean", "eans")) {

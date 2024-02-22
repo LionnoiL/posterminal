@@ -39,8 +39,13 @@ public class IngenicoTerminal implements Terminal {
                 if (isOk(20)) {
                     order.setPrnCode(prn);
                     order.setAuthCode(authCode);
+                    close();
                     deleteDevice();
                     return true;
+                } else {
+                    close();
+                    deleteDevice();
+                    return false;
                 }
             } else {
                 close();
@@ -48,10 +53,6 @@ public class IngenicoTerminal implements Terminal {
                 return false;
             }
 
-            close();
-
-            deleteDevice();
-            return true;
         } catch (Exception e) {
             if (isOpen()) {
                 close();

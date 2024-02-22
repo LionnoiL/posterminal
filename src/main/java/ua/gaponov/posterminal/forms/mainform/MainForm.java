@@ -78,6 +78,7 @@ public class MainForm extends javax.swing.JFrame {
         updateVisibleButtons();
 
         order = OrderService.loadOrderFromBackupDir();
+        order.setGuid(UUID.randomUUID().toString());
 
         AppProperties.getAutoSaveScheduler().setTimeReceived(order);
 

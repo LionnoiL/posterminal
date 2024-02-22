@@ -102,6 +102,12 @@ public class PrintOrder implements Printable {
         }
         printer.printTwoLines(documentType, RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
                 10);
+        printer.printTwoLines("СПЛАЧЕНО",
+                order.getPaySum() + " " + AppProperties.getCurrency(),
+                8);
+        printer.printTwoLines("РЕШТА",
+                order.getPaySum() - RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
+                8);
     }
 
     private void printCardInfo() {

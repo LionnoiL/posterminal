@@ -71,4 +71,17 @@ public final class BarcodeService {
             }
         }
     }
+
+    public static void clearBarcodes(String productGuid) throws SQLException {
+        if (productGuid == null || productGuid.isBlank()){
+            return;
+        }
+        StatementParameters<Object> parameters = StatementParameters.build(productGuid);
+
+        String sql = """
+                delete from eans 
+                where product_guid = ?
+                """;
+        SQL_HELPER.execSql(sql, parameters);
+    }
 }

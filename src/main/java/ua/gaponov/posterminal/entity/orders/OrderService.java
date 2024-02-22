@@ -214,11 +214,11 @@ public final class OrderService {
     }
 
     public static void saveOrderToBackupDir(Order order) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
-            oos.writeObject(order);
-        } catch (Exception ex) {
-            LOG.error("Error save order to backup dir", ex);
-        }
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
+//            oos.writeObject(order);
+//        } catch (Exception ex) {
+//            //LOG.error("Error save order to backup dir", ex);
+//        }
     }
 
     public static Order loadOrderFromBackupDir() {
