@@ -19,7 +19,7 @@ public class UserService {
 
     public static List<User> getAllActive() {
         StatementParameters<Boolean> parameters = StatementParameters.build(true);
-        return new SqlHelper<User>().getAll("SELECT * FROM users where active = ?",
+        return new SqlHelper<User>().getAll("SELECT * FROM users where active = ? order by user_name",
                 parameters,
                 new UserDatabaseMapper());
     }

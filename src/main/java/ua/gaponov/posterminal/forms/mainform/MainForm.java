@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.forms.mainform;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
@@ -77,7 +78,8 @@ public class MainForm extends javax.swing.JFrame {
         setImages();
         updateVisibleButtons();
 
-        order = OrderService.loadOrderFromBackupDir();
+        //поки немає збереження замовлення
+       // order = OrderService.loadOrderFromBackupDir();
         order.setGuid(UUID.randomUUID().toString());
 
         AppProperties.getAutoSaveScheduler().setTimeReceived(order);
@@ -783,6 +785,7 @@ public class MainForm extends javax.swing.JFrame {
     private void eixitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eixitButtonActionPerformed
         if (DialogUtils.okcancel(frame, "Вихід з програми", "Вийти з програми?") == 0) {
             infoTimer.cancel();
+            ExchangeUpload.upload();
             saveColumnsWidth();
             saveAllApplicationProperties();
             dispose();
