@@ -34,9 +34,7 @@ import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
 import ua.gaponov.posterminal.entity.orders.PrintOrder;
 import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.entity.products.ProductService;
-import ua.gaponov.posterminal.utils.DialogUtils;
-import ua.gaponov.posterminal.utils.PropertiesUtils;
-import ua.gaponov.posterminal.utils.RoundUtils;
+import ua.gaponov.posterminal.utils.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -699,11 +697,11 @@ public class MainForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Товар", "Одиниці", "Кількість", "Ціна", "Сума", "Акцизна марка"
+                "Товар", "Одиниці", "Кількість", "Ціна", "Сума"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -788,6 +786,7 @@ public class MainForm extends javax.swing.JFrame {
             ExchangeUpload.upload();
             saveColumnsWidth();
             saveAllApplicationProperties();
+            Sound.end();
             dispose();
             PosTerminal.closeApp();
         }
@@ -858,6 +857,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoneyActionPerformed
+        refresh();
         MoneyMoveForm moneyMoveForm = MoneyMoveForm.getMoneyMove(frame);
         moneyMoveForm.setVisible(true);
         if (moneyMoveForm.isOk()) {
@@ -1013,10 +1013,12 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOptionsActionPerformed
 
     private void btnFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiscalActionPerformed
+        refresh();
         FiscalForm.main(null);
     }//GEN-LAST:event_btnFiscalActionPerformed
 
     private void btnAdditionallyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdditionallyActionPerformed
+        refresh();
         AdditionallyForm.main(null);
     }//GEN-LAST:event_btnAdditionallyActionPerformed
 
@@ -1127,6 +1129,7 @@ public class MainForm extends javax.swing.JFrame {
             if (findCard != null){
                 updateByCard(findCard);
             } else {
+                Sound.error();
                 BarCodeNotFoundInfoForm barCodeNotFoundInfoForm = BarCodeNotFoundInfoForm.showDialog(frame);
                 barCodeNotFoundInfoForm.setVisible(true);
             }
@@ -1175,13 +1178,16 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private Object[] createRowTable(OrderDetail orderDetail) {
+        String excise = "";
         Object[] rowData = new Object[6];
-        rowData[0] = orderDetail.getProduct().getName();
+        if (orderDetail.getExcise() != null){
+            excise = " " + orderDetail.getExcise();
+        }
+        rowData[0] = orderDetail.getProduct().getName() + excise;
         rowData[1] = orderDetail.getProduct().getUnitName();
         rowData[2] = orderDetail.getQty();
         rowData[3] = orderDetail.getPrice();
         rowData[4] = RoundUtils.round(orderDetail.getSumma());
-        rowData[5] = orderDetail.getExcise();
         return rowData;
     }
 
@@ -1195,9 +1201,7 @@ public class MainForm extends javax.swing.JFrame {
         PropertiesUtils.saveApplicationTempValue("main_table_column_price",
                 String.valueOf(jTableProducts.getColumn("Ціна").getWidth()));
         PropertiesUtils.saveApplicationTempValue("main_table_column_sum",
-                String.valueOf(jTableProducts.getColumn("Сума").getWidth()));
-        PropertiesUtils.saveApplicationTempValue("main_table_column_akciz",
-                String.valueOf(jTableProducts.getColumn("Акцизна марка").getWidth()));
+                String.valueOf(jTableProducts.getColumn("Сума").getWidth()));;
     }
 
     private void loadColumnsWidth() {
@@ -1212,8 +1216,6 @@ public class MainForm extends javax.swing.JFrame {
                 .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_price")));
         jTableProducts.getColumn("Сума")
                 .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_sum")));
-        jTableProducts.getColumn("Акцизна марка")
-                .setPreferredWidth(Integer.parseInt(PropertiesUtils.getApplicationTempValue("main_table_column_akciz")));
         } catch (Exception e){
             //NOP
         }

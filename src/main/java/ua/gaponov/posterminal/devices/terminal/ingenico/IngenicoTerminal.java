@@ -36,18 +36,20 @@ public class IngenicoTerminal implements Terminal {
                 authCode = Dispatch.call(device, "AuthCode").toString();
 
                 Dispatch.call(device, "Confirm");
-                if (isOk(20)) {
+                if (isOk(30)) {
                     order.setPrnCode(prn);
                     order.setAuthCode(authCode);
                     close();
                     deleteDevice();
                     return true;
                 } else {
+                    log.error("ingenico Confirm timeout");
                     close();
                     deleteDevice();
                     return false;
                 }
             } else {
+                log.error("ingenico Purchase timeout");
                 close();
                 deleteDevice();
                 return false;
