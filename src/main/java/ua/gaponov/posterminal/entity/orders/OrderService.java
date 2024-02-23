@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
@@ -13,7 +12,6 @@ import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.cards.CardService;
 import ua.gaponov.posterminal.entity.organization.Organization;
-import ua.gaponov.posterminal.entity.shift.ShiftResultService;
 import ua.gaponov.posterminal.utils.FilesUtils;
 
 import java.io.FileInputStream;
@@ -108,7 +106,6 @@ public final class OrderService {
             requestList.add(OrderDetailService.getInsertRequest(order, detail, line));
             line = line + 1;
         }
-        requestList.add(getInsertShiftResultRequest(order));
 
         if (Objects.nonNull(order.getCard())) {
             double deltaSum = order.getDocumentSum() - order.getPaySum();
@@ -163,62 +160,12 @@ public final class OrderService {
         return new DatabaseRequest(sql, parameters);
     }
 
-    public static DatabaseRequest getInsertShiftResultRequest(Order order) {
-        String sql = """
-                    insert into shift_results (USER_GUID, SUMMA_ORDER_CASH, SUMMA_RETURN_CASH,
-                                SUMMA_SAFE, SUMMA_ORDER_CARD, SUMMA_SALE, SUMMA_RETURN)
-                    values
-                                (?, ?, ?, ?, ?, ?, ?)
-                """;
-        double summaCash = 0;
-        double summaCard = 0;
-        double summaOrderCash = 0;
-        double summaOrderCard = 0;
-        double summaReturnCash = 0;
-        double summaSale = 0;
-        double summaReturn = 0;
-        double summaSafe = 0;
-
-        double toPaySum = order.getPaySum();
-        if (toPaySum > order.getToPaySum()) {
-            toPaySum = order.getToPaySum();
-        }
-        if (Objects.equals(PayTypes.CASH, order.getPayType())) {
-            summaCash = toPaySum;
-        } else if (Objects.equals(PayTypes.CARD, order.getPayType())) {
-            summaCard = toPaySum;
-        }
-
-        if (Objects.equals(DocumentTypes.ORDER, order.getDocumentType())) {
-            summaSale = order.getDocumentSum();
-            summaOrderCash = summaCash;
-            summaOrderCard = summaCard;
-            summaSafe = ShiftResultService.getTotalSumSafe() + summaCash;
-        } else if (Objects.equals(DocumentTypes.RETURN, order.getDocumentType())) {
-            summaReturn = order.getDocumentSum();
-            summaReturnCash = summaCash;
-            summaSafe = ShiftResultService.getTotalSumSafe() - summaCash;
-        }
-
-        StatementParameters<Object> parameters = StatementParameters.build(
-                AppProperties.getCurrentUser().getGuid(),
-                summaOrderCash,
-                summaReturnCash,
-                summaSafe,
-                summaOrderCard,
-                summaSale,
-                summaReturn
-        );
-
-        return new DatabaseRequest(sql, parameters);
-    }
-
     public static void saveOrderToBackupDir(Order order) {
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
-//            oos.writeObject(order);
-//        } catch (Exception ex) {
-//            //LOG.error("Error save order to backup dir", ex);
-//        }
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
+            oos.writeObject(order);
+        } catch (Exception ex) {
+            LOG.error("Error save order to backup dir", ex);
+        }
     }
 
     public static Order loadOrderFromBackupDir() {

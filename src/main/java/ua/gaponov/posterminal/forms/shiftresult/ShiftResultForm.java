@@ -1,10 +1,8 @@
 package ua.gaponov.posterminal.forms.shiftresult;
 
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.entity.shift.ShiftResult1C;
 import ua.gaponov.posterminal.entity.shift.ShiftResultService;
-import ua.gaponov.posterminal.entity.shift.ShiftResultTotal;
-import ua.gaponov.posterminal.utils.DateUtils;
-import ua.gaponov.posterminal.utils.RoundUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -150,16 +148,6 @@ public class ShiftResultForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cnclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(lblMoneyEnd)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
@@ -179,8 +167,20 @@ public class ShiftResultForm extends javax.swing.JDialog {
                             .addComponent(lblMoneyOut)
                             .addComponent(lblCard)
                             .addComponent(lblMoneyIn)
-                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
-                    .addComponent(jLabel2))
+                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(82, 82, 82)
+                                        .addComponent(lblMoneyEnd))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(109, 109, 109)
+                                        .addComponent(cnclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -226,9 +226,7 @@ public class ShiftResultForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblMoneyEnd))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(cnclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -251,24 +249,19 @@ public class ShiftResultForm extends javax.swing.JDialog {
         }
         dialog.init();
 
-        dialog.lblDate.setText(ShiftResultService.getShiftStartDate());
-        dialog.lblUser.setText(ShiftResultService.getShiftStartUserName());
-        dialog.lblMoneyStart.setText(ShiftResultService.getStartSumSafe() + " " + AppProperties.getCurrency());
-        dialog.lblMoneyEnd.setText(ShiftResultService.getTotalSumSafe() + " " + AppProperties.getCurrency());
-
-        ShiftResultTotal shiftTotals = ShiftResultService.getShiftTotals(
-                DateUtils.getDateTimeNow("yyyy-MM-dd 00:00:00"),
-                DateUtils.getDateTimeNow("yyyy-MM-dd 23:59:59")
-        );
-
-        dialog.lblSales.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaSale())));
-        dialog.lblreturns.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaReturn())));
-        dialog.lblCash.setText(String.valueOf(
-                RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCash() - shiftTotals.getSummaReturnCash())
-        ));
-        dialog.lblCard.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaOrderCard())));
-        dialog.lblMoneyIn.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveIn())));
-        dialog.lblMoneyOut.setText(String.valueOf(RoundUtils.roundHalfUp(shiftTotals.getSummaMoneyMoveOut())));
+        ShiftResult1C currentShift = ShiftResultService.getCurrentShift();
+        if (currentShift != null){
+            dialog.lblDate.setText(currentShift.getDocDate());
+            dialog.lblUser.setText(AppProperties.getCurrentUser().getName());
+            dialog.lblMoneyStart.setText(currentShift.getCashStart() + " " + AppProperties.getCurrency());
+            dialog.lblMoneyEnd.setText(currentShift.getCashEnd() + " " + AppProperties.getCurrency());
+            dialog.lblSales.setText(currentShift.getSummaSale() + " " + AppProperties.getCurrency());
+            dialog.lblreturns.setText(currentShift.getSummaReturn() + " " + AppProperties.getCurrency());
+            dialog.lblCash.setText(currentShift.getSaleCash() + " " + AppProperties.getCurrency());
+            dialog.lblCard.setText(currentShift.getSaleCard() + " " + AppProperties.getCurrency());
+            dialog.lblMoneyIn.setText(currentShift.getMoneyIn() + " " + AppProperties.getCurrency());
+            dialog.lblMoneyOut.setText(currentShift.getMoneyOut() + " " + AppProperties.getCurrency());
+        }
 
         dialog.setLocationRelativeTo(null);
         dialog.applyComponentOrientation(parent.getComponentOrientation());

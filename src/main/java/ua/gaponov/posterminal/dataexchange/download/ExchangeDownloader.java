@@ -26,6 +26,9 @@ import ua.gaponov.posterminal.entity.products.ProductXmlBuilder;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProduct;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductService;
 import ua.gaponov.posterminal.entity.quickproduct.QuickProductXmlBuilder;
+import ua.gaponov.posterminal.entity.shift.ShiftResult1C;
+import ua.gaponov.posterminal.entity.shift.ShiftResultService;
+import ua.gaponov.posterminal.entity.shift.TotalsXmlBuilder;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
@@ -52,6 +55,7 @@ public class ExchangeDownloader {
     private static final ExchangeBuilder<Barcode, XmlUtils> BARCODE_BUILDER = new BarcodeXmlBuilder();
     private static final ExchangeBuilder<Card, XmlUtils> CARD_BUILDER = new CardXmlBuilder();
     private static final ExchangeBuilder<QuickProduct, XmlUtils> QUICK_PRODUCT_BUILDER = new QuickProductXmlBuilder();
+    private static final ExchangeBuilder<ShiftResult1C, XmlUtils> TOTALS_BUILDER = new TotalsXmlBuilder();
 
     public static void download() throws UpdateDownloadException {
         if (!FilesUtils.fileExist(IMPORT_FILE)) {
@@ -111,6 +115,12 @@ public class ExchangeDownloader {
                     QuickProductService.save(quickProduct);
                 }
                 quickProduct = null;
+            }
+
+            while (processor.startElement("total", "totals")) {
+                ShiftResult1C shiftResult1C = TOTALS_BUILDER.create(processor);
+                ShiftResultService.save1cResults(shiftResult1C);
+                shiftResult1C = null;
             }
 
             LocalDateTime now = LocalDateTime.now();

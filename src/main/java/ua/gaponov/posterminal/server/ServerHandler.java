@@ -102,7 +102,7 @@ public class ServerHandler implements HttpHandler {
                 "last_update": "%s",
                 "total_heap_size": "%d",
                 "free_heap_size": "%d",
-                "used_heap_size": "%d",
+                "used_heap_size": "%d"
                 }
                 """;
         return ResponseEntity.of(

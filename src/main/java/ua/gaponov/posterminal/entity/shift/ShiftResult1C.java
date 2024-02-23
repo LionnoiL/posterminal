@@ -12,14 +12,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
-public class ShiftResultTotal {
+public class ShiftResult1C {
 
-    private double summaOrderCash;
-    private double summaReturnCash;
-    private double summaOrderCard;
-    private double summaReturnCard;
-    private double summaMoneyMoveIn;
-    private double summaMoneyMoveOut;
+    private Long id;
+    private String docDate;
+    private double cashStart;
+    private double cashEnd;
     private double summaSale;
     private double summaReturn;
+    private double saleCash;
+    private double saleCard;
+    private double moneyIn;
+    private double moneyOut;
 }

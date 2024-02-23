@@ -31,7 +31,7 @@ public class IngenicoTerminal implements Terminal {
             }
 
             Dispatch.call(device, "Purchase", summa * 100, 0, merchId);
-            if (isOk(20)) {
+            if (isOk(40)) {
                 prn = Dispatch.call(device, "RRN").toString();
                 authCode = Dispatch.call(device, "AuthCode").toString();
 

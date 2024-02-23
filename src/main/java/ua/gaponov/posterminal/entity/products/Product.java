@@ -22,7 +22,6 @@ public class Product implements Serializable {
     private String code;
     @JsonIgnore
     private double price;
-    @JsonIgnore
     private String sku;
     @JsonIgnore
     private boolean banDisckount;

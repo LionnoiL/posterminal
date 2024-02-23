@@ -1,6 +1,8 @@
 package ua.gaponov.posterminal.utils;
 
 import org.junit.jupiter.api.Assertions;
+import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.products.ProductService;
 
 class BarcodeConverterTest {
 

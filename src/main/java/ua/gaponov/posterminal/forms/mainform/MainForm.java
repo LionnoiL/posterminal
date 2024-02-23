@@ -69,15 +69,12 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form mainForm
      */
     public MainForm() {
-        ShiftResultService.startShift();
-
         this.setUndecorated(true);
         initComponents();
         setImages();
         updateVisibleButtons();
 
-        //поки немає збереження замовлення
-       // order = OrderService.loadOrderFromBackupDir();
+        order = OrderService.loadOrderFromBackupDir();
         order.setGuid(UUID.randomUUID().toString());
 
         AppProperties.getAutoSaveScheduler().setTimeReceived(order);
