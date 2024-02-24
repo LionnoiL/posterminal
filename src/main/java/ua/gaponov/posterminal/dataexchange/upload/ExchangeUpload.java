@@ -43,7 +43,7 @@ import java.util.List;
 public class ExchangeUpload {
     public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getArmId() + ".xml";
     public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getArmId() + ".xml";
-    public static final String EXPORT_LOCAL_FILE = "export_" + AppProperties.getArmId() + ".xml";
+    public static final String EXPORT_LOCAL_FILE = "files/export_" + AppProperties.getArmId() + ".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
     private static final ExchangeBuilder<Confirmation, XmlUtils> CONFIRMATION_BUILDER = new ConfirmationXmlBuilder();
 
