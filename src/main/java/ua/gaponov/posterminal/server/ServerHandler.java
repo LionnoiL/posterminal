@@ -88,13 +88,21 @@ public class ServerHandler implements HttpHandler {
     private ResponseEntity getApplicationEcho() {
         final int status = 200;
         OptionsValue lastUpdate = OptionsValueService.getOptions("last_update");
+        Runtime runtime = Runtime.getRuntime();
+        long totalHeapSize = runtime.totalMemory()  / (1024 * 1024);
+        long freeHeapSize = runtime.freeMemory()  / (1024 * 1024);
+        long usedHeapSize = totalHeapSize - freeHeapSize;
+
         String res = """
                 {
                 "name":"posterminal",
                 "shop_name": "%s",
                 "cash_register_name": "%s",
                 "arm_id": %d,
-                "last_update": "%s"
+                "last_update": "%s",
+                "total_heap_size": "%d",
+                "free_heap_size": "%d",
+                "used_heap_size": "%d"
                 }
                 """;
         return ResponseEntity.of(
@@ -103,7 +111,10 @@ public class ServerHandler implements HttpHandler {
                         AppProperties.getShopName(),
                         AppProperties.getCashRegisterName(),
                         AppProperties.getArmId(),
-                        lastUpdate.getValue()
+                        lastUpdate.getValue(),
+                        totalHeapSize,
+                        freeHeapSize,
+                        usedHeapSize
                 )
                 , status, CONTENT_TYPE_JSON);
     }
@@ -130,6 +141,9 @@ public class ServerHandler implements HttpHandler {
         switch (command) {
             case "EXPORT":
                 ExchangeUpload.upload();
+                break;
+            case "LOG":
+                ExchangeUpload.uploadLog();
                 break;
             default:
                 //NOP

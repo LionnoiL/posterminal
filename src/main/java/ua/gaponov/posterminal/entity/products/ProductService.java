@@ -51,7 +51,7 @@ public final class ProductService {
         return weightItemPrefix.equals(barcode.substring(0, 2));
     }
 
-    private static Product getProductFromWeightBarcode(String barcode) {
+    public static Product getProductFromWeightBarcode(String barcode) {
         int codeLength = 5;
         String sku = removeStartZero(barcode.substring(2, 2 + codeLength));
         String qtyString = removeStartZero(barcode.substring(2 + codeLength, 12));

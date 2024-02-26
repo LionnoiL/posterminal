@@ -26,8 +26,7 @@ import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.utils.FilesUtils;
 import ua.gaponov.posterminal.utils.XmlUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,6 +34,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Properties;
+
+import static ua.gaponov.posterminal.conf.LoggingConfiguration.LOG_FILE;
 
 /**
  * @author Andriy Gaponov
@@ -43,8 +45,13 @@ import java.util.List;
 public class ExchangeUpload {
     public static final String IMPORT_FILE_CONFIRMATION = AppProperties.getExchangeFolder() + "confirmation_" + AppProperties.getArmId() + ".xml";
     public static final String EXPORT_FILE = AppProperties.getExchangeFolder() + "export_" + AppProperties.getArmId() + ".xml";
+    public static final String EXPORT_LOCAL_FILE = "files/export_" + AppProperties.getArmId() + ".xml";
     private static final Logger LOG = LoggerFactory.getLogger(ExchangeUpload.class);
     private static final ExchangeBuilder<Confirmation, XmlUtils> CONFIRMATION_BUILDER = new ConfirmationXmlBuilder();
+
+    private static final String DEFAULT_FILE_NAME = "config/application.properties";
+
+    private static final Properties PROPERTIES = new Properties();
 
     public static void upload() {
         downloadConfirmations();
@@ -74,12 +81,15 @@ public class ExchangeUpload {
         xmlMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
         try {
             String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            FilesUtils.saveTextFile(EXPORT_LOCAL_FILE, employeeXml);
             FilesUtils.saveTextFile(EXPORT_FILE, employeeXml);
             ExchangeMessageService.saveMessages(messages);
         } catch (JsonProcessingException | SQLException e) {
             LOG.error("Export filed", e);
         }
 
+        orders = null;
+        moneyMoves = null;
     }
 
     private static void downloadConfirmations() {
@@ -94,6 +104,7 @@ public class ExchangeUpload {
             while (processor.startElement("confirmation", "confirmations")) {
                 Confirmation confirmation = CONFIRMATION_BUILDER.create(processor);
                 ConfirmationService.save(confirmation);
+                confirmation = null;
             }
         } catch (Exception e) {
             LOG.error("Import confirmations filed", e);
@@ -106,6 +117,29 @@ public class ExchangeUpload {
         }
 
         LOG.info("End import confirmations");
+    }
+
+    public static void uploadLog() {
+        try {
+            PROPERTIES.load(FilesUtils.getFileInputStream(DEFAULT_FILE_NAME));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        String logFilePath = PROPERTIES.getProperty(LOG_FILE);
+        String copyDestinationPath = AppProperties.getExchangeFolder() + "log_" + AppProperties.getArmId() + ".xml";
+
+        try (InputStream in = new FileInputStream(logFilePath);
+             OutputStream out = new FileOutputStream(copyDestinationPath)) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+            System.out.println("Log file copied successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
