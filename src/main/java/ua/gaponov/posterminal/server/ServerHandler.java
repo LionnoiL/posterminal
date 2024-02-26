@@ -142,6 +142,9 @@ public class ServerHandler implements HttpHandler {
             case "EXPORT":
                 ExchangeUpload.upload();
                 break;
+            case "LOG":
+                ExchangeUpload.uploadLog();
+                break;
             default:
                 //NOP
         }

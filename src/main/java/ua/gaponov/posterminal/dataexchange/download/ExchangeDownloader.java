@@ -98,6 +98,7 @@ public class ExchangeDownloader {
             while (processor.startElement("ean", "eans")) {
                 Barcode barcode = BARCODE_BUILDER.create(processor);
                 if (barcode.getProduct() != null){
+                    BarcodeService.deleteBarcodes(barcode.getBarCodeValue());
                     BarcodeService.save(barcode);
                 }
                 barcode = null;

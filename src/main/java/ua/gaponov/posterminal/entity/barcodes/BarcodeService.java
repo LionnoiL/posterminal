@@ -26,13 +26,8 @@ public final class BarcodeService {
                 new BarcodeDatabaseMapper());
     }
 
-    public static void save(Barcode barcode) {
-        Barcode barcodeFound = getByBarcode(barcode.getBarCodeValue());
-        if (barcodeFound == null) {
-            insert(barcode);
-        } else {
-            update(barcode);
-        }
+    public static void save(Barcode barcode) throws SQLException {
+        insert(barcode);
     }
 
     private static void insert(Barcode barcode) {
@@ -81,6 +76,18 @@ public final class BarcodeService {
         String sql = """
                 delete from eans 
                 where product_guid = ?
+                """;
+        SQL_HELPER.execSql(sql, parameters);
+    }
+
+    public static void deleteBarcodes(String barcode) throws SQLException {
+        if (barcode == null || barcode.isBlank()){
+            return;
+        }
+        StatementParameters<Object> parameters = StatementParameters.build(barcode);
+
+        String sql = """
+                delete from eans where ean_code = ?
                 """;
         SQL_HELPER.execSql(sql, parameters);
     }

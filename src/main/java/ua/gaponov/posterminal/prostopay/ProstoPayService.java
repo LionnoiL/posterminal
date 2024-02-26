@@ -1,5 +1,7 @@
 package ua.gaponov.posterminal.prostopay;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.products.Product;
@@ -21,6 +23,7 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
  */
 public final class ProstoPayService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ProstoPayService.class);
     private static final String PROSTOPAY_HOST = "https://dashboard.prostopay.net/api/v1/qreceipt/generate";
     private static final String PROSTOPAY_API_KEY = AppProperties.getProstoPayToken();
     private static final String PROSTOPAY_PRODUCTS_FILE_NAME = "config/prostopay-products.properties";
@@ -48,7 +51,7 @@ public final class ProstoPayService {
             if (detail.getProduct().isProstoPayProduct()) {
                 int qty = (int) detail.getQty();
                 for (int i = 0; i < qty; i++) {
-                    ProstoPayRequest prostoPayRequest = getProstoPayRequest(detail.getProduct());
+                    ProstoPayRequest prostoPayRequest = getProstoPayRequest(detail.getProduct(), i + 1);
                     String qrCode = getQrCode(prostoPayRequest);
                     if (!qrCode.isEmpty()) {
                         new PrintCoffeeBarCode(detail.getProduct(), qrCode);
@@ -58,11 +61,11 @@ public final class ProstoPayService {
         });
     }
 
-    private static ProstoPayRequest getProstoPayRequest(Product product) {
+    private static ProstoPayRequest getProstoPayRequest(Product product, int number) {
         ProstoPayRequest prostoPayRequest = new ProstoPayRequest();
         prostoPayRequest.setPos(AppProperties.getArmId());
-        prostoPayRequest.setTill(1);
-        prostoPayRequest.setNumber(1);
+        prostoPayRequest.setTill(AppProperties.getArmId());
+        prostoPayRequest.setNumber(number);
         prostoPayRequest.setAmount((int) (product.getPrice() * 100));
         prostoPayRequest.setPluFrom(AppProperties.getProstoPayProducts().get(product));
         return prostoPayRequest;
@@ -81,10 +84,13 @@ public final class ProstoPayService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 return response.body();
+            }else{
+                LOG.error("ProstoPay request failed. Status code: {}", response.statusCode());
+                return "";
             }
         } catch (IOException | InterruptedException e) {
+            LOG.error("ProstoPay request failed", e);
             return "";
         }
-        return "";
     }
 }
