@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
+import ua.gaponov.posterminal.database.SqlHelper;
+import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.forms.login.LoginForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.server.PosHttpServer;
@@ -27,14 +29,17 @@ public class PosTerminal {
 
         setTheme();
         PropertiesUtils.loadProperties();
+
         ProstoPayService.loadProstoPayProducts();
 
-
-        LoginForm.main(null);
+        if (AppProperties.isExchangeEnable()) {
+            ExchangeUpload.uploadDownload();
+        }
 
         AppProperties.getScheduler().setTimeReceived();
-
         startHttpServer();
+
+        LoginForm.main(null);
     }
 
     private static void startHttpServer() {
