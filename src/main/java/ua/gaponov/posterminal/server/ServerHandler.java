@@ -8,13 +8,19 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.entity.options.OptionsValue;
 import ua.gaponov.posterminal.entity.options.OptionsValueService;
+import ua.gaponov.posterminal.server.commands.CommandResponse;
+import ua.gaponov.posterminal.server.commands.PropertyCommand;
+import ua.gaponov.posterminal.server.commands.TerminalCommandRequest;
 import ua.gaponov.posterminal.server.exception.ServerInternalErrorException;
+import ua.gaponov.posterminal.utils.PropertiesUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+
+import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
 /**
  * @author Andriy Gaponov
@@ -127,8 +133,8 @@ public class ServerHandler implements HttpHandler {
             String path = endpoint.getPath();
             switch (path) {
                 case "/command":
-                    handleCommand(new String(bytes));
-                    return ResponseEntity.of("", status, CONTENT_TYPE_JSON);
+                    String result = handleCommand(new String(bytes));
+                    return ResponseEntity.of(result, status, CONTENT_TYPE_JSON);
                 default:
                     return ResponseEntity.of("", 404, "");
             }
@@ -137,17 +143,26 @@ public class ServerHandler implements HttpHandler {
         }
     }
 
-    private void handleCommand(String command) {
-        switch (command) {
-            case "EXPORT":
+    private String handleCommand(String command) {
+        TerminalCommandRequest terminalCommandRequest = GSON.fromJson(command, TerminalCommandRequest.class);
+        LOG.debug(command);
+
+        switch (terminalCommandRequest.getCommand()) {
+            case EXPORT:
                 ExchangeUpload.upload();
-                break;
-            case "LOG":
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", ""));
+            case LOG:
                 ExchangeUpload.uploadLog();
-                break;
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", ""));
+            case SET_PROPERTY:
+                PropertiesUtils.setPropertiesValues(terminalCommandRequest.getRequestString());
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", ""));
+            case GET_PROPERTY:
+                PropertyCommand propertiesValues = PropertiesUtils.getPropertiesValues();
+                String json = GSON.toJson(propertiesValues);
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), json, ""));
             default:
-                //NOP
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", "command not found"));
         }
-        LOG.info(command);
     }
 }

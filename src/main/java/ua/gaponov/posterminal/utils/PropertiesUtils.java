@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.server.commands.PropertyCommand;
 
 import java.io.*;
 import java.util.Objects;
 import java.util.Properties;
 
 import static ua.gaponov.posterminal.utils.FilesUtils.getFileInputStream;
+import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 
 /**
  * @author Andriy Gaponov
@@ -125,5 +127,37 @@ public class PropertiesUtils {
         AppProperties.setFiscalIp(getApplicationProperties("fiscal.ip"));
         AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum")));
         AppProperties.setProstoPayToken(getApplicationProperties("prostopay.token"));
+    }
+
+    public static void setPropertiesValues(String requestString){
+        PropertyCommand command = GSON.fromJson(requestString, PropertyCommand.class);
+        AppProperties.setShopName(command.getShopName());
+        AppProperties.setShopAddress(command.getShopAddress());
+        AppProperties.setCashRegisterName(command.getCashRegisterName());
+        AppProperties.setFiscalName(command.getFiscalName());
+        AppProperties.setFiscalIp(command.getFiscalIp());
+        AppProperties.setFiscalToken(command.getFiscalToken());
+        AppProperties.setFiscalAutoPlusMoneySum(command.getFiscalAutoPlusSum());
+        AppProperties.setProstoPayToken(command.getProstopayToken());
+        AppProperties.setExchangeEnable(command.isExchangeEnable());
+        AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
+        saveAllApplicationProperties();
+    }
+
+    public static PropertyCommand getPropertiesValues(){
+        PropertyCommand command = new PropertyCommand();
+        command.setShopName(AppProperties.getShopName());
+        command.setShopAddress(AppProperties.getShopAddress());
+        command.setCashRegisterName(AppProperties.getCashRegisterName());
+        command.setFiscalName(AppProperties.getFiscalName());
+        command.setFiscalIp(AppProperties.getFiscalIp());
+        command.setFiscalToken(AppProperties.getFiscalToken());
+        command.setFiscalAutoPlusSum(AppProperties.getFiscalAutoPlusMoneySum());
+        command.setProstopayToken(AppProperties.getProstoPayToken());
+        command.setTerminalId(AppProperties.getArmId());
+        command.setExchangeEnable(AppProperties.isExchangeEnable());
+        command.setExchangeIntervalMin(AppProperties.getExchangeInterval() / 60000);
+
+        return command;
     }
 }
