@@ -38,10 +38,14 @@ public class ExchangeScheduler {
             }
         };
 
+        int exchangeInterval = AppProperties.getExchangeInterval();
+        if (exchangeInterval <= 0){
+            exchangeInterval = 10 * 60000;
+        }
         EXCHANGE_TIMER.schedule(
                 timerTask,
                 calendar.getTime(),
-                AppProperties.getExchangeInterval()
+                exchangeInterval
         );
     }
 

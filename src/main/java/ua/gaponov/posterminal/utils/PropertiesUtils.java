@@ -139,6 +139,8 @@ public class PropertiesUtils {
         AppProperties.setFiscalToken(command.getFiscalToken());
         AppProperties.setFiscalAutoPlusMoneySum(command.getFiscalAutoPlusSum());
         AppProperties.setProstoPayToken(command.getProstopayToken());
+        AppProperties.setExchangeEnable(command.isExchangeEnable());
+        AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
         saveAllApplicationProperties();
     }
 
@@ -152,6 +154,9 @@ public class PropertiesUtils {
         command.setFiscalToken(AppProperties.getFiscalToken());
         command.setFiscalAutoPlusSum(AppProperties.getFiscalAutoPlusMoneySum());
         command.setProstopayToken(AppProperties.getProstoPayToken());
+        command.setTerminalId(AppProperties.getArmId());
+        command.setExchangeEnable(AppProperties.isExchangeEnable());
+        command.setExchangeIntervalMin(AppProperties.getExchangeInterval() / 60000);
 
         return command;
     }
