@@ -3,12 +3,10 @@ package ua.gaponov.posterminal.database;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +18,11 @@ import java.util.Objects;
 public class SqlHelper<T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(SqlHelper.class);
+    public static final String DB_BACKUP_FILE = "files/db_backup.zip";
+
+    public static void backupDB(){
+        execSql("BACKUP TO '" + DB_BACKUP_FILE + "'");
+    }
 
     public static void execSql(String sql) {
         try (Connection connection = Database.getConnection();

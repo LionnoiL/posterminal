@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.dataexchange.ExchangeBuilder;
+import ua.gaponov.posterminal.dataexchange.download.ExchangeDownloader;
+import ua.gaponov.posterminal.dataexchange.download.UpdateDownloadException;
 import ua.gaponov.posterminal.entity.confirmation.Confirmation;
 import ua.gaponov.posterminal.entity.confirmation.ConfirmationService;
 import ua.gaponov.posterminal.entity.confirmation.ConfirmationXmlBuilder;
@@ -52,6 +54,15 @@ public class ExchangeUpload {
     private static final String DEFAULT_FILE_NAME = "config/application.properties";
 
     private static final Properties PROPERTIES = new Properties();
+
+    public static void uploadDownload() {
+        ExchangeUpload.upload();
+        try {
+            ExchangeDownloader.download();
+        } catch (UpdateDownloadException ex) {
+            LOG.error("Import filed", ex);
+        }
+    }
 
     public static void upload() {
         downloadConfirmations();

@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.forms.mainform;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
@@ -781,6 +782,7 @@ public class MainForm extends javax.swing.JFrame {
         if (DialogUtils.okcancel(frame, "Вихід з програми", "Вийти з програми?") == 0) {
             infoTimer.cancel();
             ExchangeUpload.upload();
+            SqlHelper.backupDB();
             saveColumnsWidth();
             saveAllApplicationProperties();
             Sound.end();

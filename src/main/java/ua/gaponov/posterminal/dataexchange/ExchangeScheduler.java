@@ -28,12 +28,7 @@ public class ExchangeScheduler {
             @Override
             public void run() {
                 if (AppProperties.isExchangeEnable()) {
-                    ExchangeUpload.upload();
-                    try {
-                        ExchangeDownloader.download();
-                    } catch (UpdateDownloadException ex) {
-                        LOG.error("Import filed", ex);
-                    }
+                    ExchangeUpload.uploadDownload();
                 }
             }
         };
