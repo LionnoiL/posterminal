@@ -216,9 +216,11 @@ public class ChoiseCardMerchForm extends javax.swing.JDialog {
         ok = terminal.pay(merchId, summa, order);
         if (!ok){
             order.setMerchId(0);
+            terminal = null;
+        } else {
+            terminal = null;
+            dispose();
         }
-        terminal = null;
-        dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

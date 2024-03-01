@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.server.commands.PropertyCommand;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -20,9 +23,9 @@ import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertiesUtils {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PropertiesUtils.class);
     public static final String CONFIG_FILE_NAME = "config/application.properties";
     public static final String TEMP_FILE_NAME = "tmp/application.tmp";
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesUtils.class);
 
     private static String getPropertyValue(FileInputStream fileInputStream, String propertyName)
             throws IOException {
@@ -35,13 +38,7 @@ public class PropertiesUtils {
     }
 
     public static String getApplicationTempValue(String propertyName) {
-        String propertyValue = "";
-        try (FileInputStream fileInputStream = getFileInputStream(TEMP_FILE_NAME)) {
-            propertyValue = getPropertyValue(fileInputStream, propertyName);
-        } catch (IOException e) {
-            LOG.error("Error read temp file");
-        }
-        return propertyValue;
+        return getPropertyFromFile(TEMP_FILE_NAME, propertyName, "Error read temp file");
     }
 
     public static void saveApplicationTempValue(String propertyName, String propertyValue) {
@@ -59,12 +56,24 @@ public class PropertiesUtils {
         }
     }
 
+    public static String getApplicationProperties(String propertyName, boolean isIntegerValue) {
+        String propertyValue = getPropertyFromFile(CONFIG_FILE_NAME, propertyName, "Error read properties file");
+        if (propertyValue.isEmpty() && isIntegerValue) {
+            propertyValue = "0";
+        }
+        return propertyValue;
+    }
+
     public static String getApplicationProperties(String propertyName) {
+        return getPropertyFromFile(CONFIG_FILE_NAME, propertyName, "Error read properties file");
+    }
+
+    private static String getPropertyFromFile(String configFileName, String propertyName, String Error_read_properties_file) {
         String propertyValue = "";
-        try (FileInputStream fileInputStream = getFileInputStream(CONFIG_FILE_NAME)) {
+        try (FileInputStream fileInputStream = getFileInputStream(configFileName)) {
             propertyValue = getPropertyValue(fileInputStream, propertyName);
         } catch (IOException e) {
-            LOG.error("Error read properties file");
+            LOG.error(Error_read_properties_file);
         }
         return propertyValue;
     }
@@ -106,18 +115,19 @@ public class PropertiesUtils {
         saveApplicationProperties("fiscal.ip", AppProperties.getFiscalIp());
         saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
         saveApplicationProperties("prostopay.token", AppProperties.getProstoPayToken());
+        saveApplicationProperties("default_merchant_id", String.valueOf(AppProperties.getDefaultMerchantId()));
     }
 
     public static void loadProperties() {
         AppProperties.setServerIpAddress(getApplicationProperties("server_ip"));
-        AppProperties.setExchangeInterval(Integer.parseInt(getApplicationProperties("exchange.interval.min")) * 60 * 1000);
+        AppProperties.setExchangeInterval(Integer.parseInt(getApplicationProperties("exchange.interval.min", true)) * 60 * 1000);
         AppProperties.setExchangeEnable(Boolean.parseBoolean(getApplicationProperties("exchange.enable")));
         AppProperties.setExchangeFolder(getApplicationProperties("exchange.folder"));
         AppProperties.setWeightItemPrefix(getApplicationProperties("weight_item_prefix"));
         AppProperties.setCurrency(getApplicationProperties("currency"));
         AppProperties.setShopName(getApplicationProperties("shop_name"));
         AppProperties.setShopAddress(getApplicationProperties("shop_address"));
-        AppProperties.setArmId(Integer.parseInt(getApplicationProperties("shop_id")));
+        AppProperties.setArmId(Integer.parseInt(getApplicationProperties("shop_id", true)));
         AppProperties.setShopGuid(getApplicationProperties("shop_guid"));
         AppProperties.setTerminalPort(getApplicationProperties("terminal_port"));
         AppProperties.setCashRegisterName(getApplicationProperties("cash_register_name"));
@@ -127,24 +137,10 @@ public class PropertiesUtils {
         AppProperties.setFiscalIp(getApplicationProperties("fiscal.ip"));
         AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum")));
         AppProperties.setProstoPayToken(getApplicationProperties("prostopay.token"));
+        AppProperties.setDefaultMerchantId(Integer.parseInt(getApplicationProperties("default_merchant_id", true)));
     }
 
-    public static void setPropertiesValues(String requestString){
-        PropertyCommand command = GSON.fromJson(requestString, PropertyCommand.class);
-        AppProperties.setShopName(command.getShopName());
-        AppProperties.setShopAddress(command.getShopAddress());
-        AppProperties.setCashRegisterName(command.getCashRegisterName());
-        AppProperties.setFiscalName(command.getFiscalName());
-        AppProperties.setFiscalIp(command.getFiscalIp());
-        AppProperties.setFiscalToken(command.getFiscalToken());
-        AppProperties.setFiscalAutoPlusMoneySum(command.getFiscalAutoPlusSum());
-        AppProperties.setProstoPayToken(command.getProstopayToken());
-        AppProperties.setExchangeEnable(command.isExchangeEnable());
-        AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
-        saveAllApplicationProperties();
-    }
-
-    public static PropertyCommand getPropertiesValues(){
+    public static PropertyCommand getPropertiesValues() {
         PropertyCommand command = new PropertyCommand();
         command.setShopName(AppProperties.getShopName());
         command.setShopAddress(AppProperties.getShopAddress());
@@ -157,7 +153,24 @@ public class PropertiesUtils {
         command.setTerminalId(AppProperties.getArmId());
         command.setExchangeEnable(AppProperties.isExchangeEnable());
         command.setExchangeIntervalMin(AppProperties.getExchangeInterval() / 60000);
+        command.setDefaultMerchantId(AppProperties.getDefaultMerchantId());
 
         return command;
+    }
+
+    public static void setPropertiesValues(String requestString) {
+        PropertyCommand command = GSON.fromJson(requestString, PropertyCommand.class);
+        AppProperties.setShopName(command.getShopName());
+        AppProperties.setShopAddress(command.getShopAddress());
+        AppProperties.setCashRegisterName(command.getCashRegisterName());
+        AppProperties.setFiscalName(command.getFiscalName());
+        AppProperties.setFiscalIp(command.getFiscalIp());
+        AppProperties.setFiscalToken(command.getFiscalToken());
+        AppProperties.setFiscalAutoPlusMoneySum(command.getFiscalAutoPlusSum());
+        AppProperties.setProstoPayToken(command.getProstopayToken());
+        AppProperties.setExchangeEnable(command.isExchangeEnable());
+        AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
+        AppProperties.setDefaultMerchantId(command.getDefaultMerchantId());
+        saveAllApplicationProperties();
     }
 }
