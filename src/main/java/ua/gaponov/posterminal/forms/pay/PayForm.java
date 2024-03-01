@@ -1,5 +1,8 @@
 package ua.gaponov.posterminal.forms.pay;
 
+import ua.gaponov.posterminal.conf.AppProperties;
+import ua.gaponov.posterminal.devices.terminal.Terminal;
+import ua.gaponov.posterminal.devices.terminal.ingenico.IngenicoTerminal;
 import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.utils.RoundUtils;
@@ -500,14 +503,26 @@ public class PayForm extends javax.swing.JDialog {
     }
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
-        ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this, RoundUtils.roundHalfUp(order.getDocumentSum()), order);
-        payCard.setVisible(true);
-        if (payCard.isOK()) {
-            ok = true;
-            summaPay = Double.parseDouble(lblTotal.getText());
-            printFiscal = chkFiscalPrint.isSelected();
-            setPayType(PayTypes.CARD);
-            dispose();
+        if (AppProperties.getDefaultMerchantId() > 0){
+            Terminal terminal = new IngenicoTerminal();
+            ok = terminal.pay(AppProperties.getDefaultMerchantId(), RoundUtils.roundHalfUp(order.getDocumentSum()), order);
+            if (ok){
+                order.setMerchId(0);
+                summaPay = Double.parseDouble(lblTotal.getText());
+                printFiscal = chkFiscalPrint.isSelected();
+                setPayType(PayTypes.CARD);
+                dispose();
+            }
+        } else {
+            ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this, RoundUtils.roundHalfUp(order.getDocumentSum()), order);
+            payCard.setVisible(true);
+            if (payCard.isOK()) {
+                ok = true;
+                summaPay = Double.parseDouble(lblTotal.getText());
+                printFiscal = chkFiscalPrint.isSelected();
+                setPayType(PayTypes.CARD);
+                dispose();
+            }
         }
     }//GEN-LAST:event_cardButtonActionPerformed
 

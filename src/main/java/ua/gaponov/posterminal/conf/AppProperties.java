@@ -93,6 +93,9 @@ public final class AppProperties {
     private static String prostoPayToken;
     @Setter
     private static String exchangeFolder;
+    @Getter
+    @Setter
+    private static int defaultMerchantId;
 
     public static String getExchangeFolder() {
         if (!exchangeFolder.isEmpty()){
