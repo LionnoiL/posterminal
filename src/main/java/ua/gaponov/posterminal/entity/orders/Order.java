@@ -110,6 +110,9 @@ public class Order implements Serializable, Cloneable {
         if (row < 0 || row > details.size()) {
             return;
         }
+        if (DocumentTypes.ORDER.equals(documentType)){
+            OrderService.saveDeletedProduct(details.get(row));
+        }
         details.remove(row);
     }
 

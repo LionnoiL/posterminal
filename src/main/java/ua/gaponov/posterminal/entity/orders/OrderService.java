@@ -4,9 +4,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.DatabaseRequest;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.database.StatementParameters;
+import ua.gaponov.posterminal.entity.DatePeriod;
 import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.cards.Card;
@@ -31,19 +33,20 @@ import java.util.UUID;
 public final class OrderService {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
-    private static final SqlHelper<Order> SQL_HELPER = new SqlHelper<>();
+    private static final SqlHelper<Order> ORDER_SQL_HELPER = new SqlHelper<>();
+    private static final SqlHelper<DeletedOrderItem> DELETED_ORDER_ITEM_SQL_HELPER = new SqlHelper<>();
     private static final String TEMP_FILE_ORDER_BACKUP = "tmp/temp-order.dat";
 
     public static Order getByGuid(String guid) {
         StatementParameters<String> parameters = StatementParameters.build(guid);
-        return SQL_HELPER.getOne("select * from orders where order_guid = ?",
+        return ORDER_SQL_HELPER.getOne("select * from orders where order_guid = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
 
     public static Order getByNumber(String number) {
         StatementParameters<String> parameters = StatementParameters.build(number);
-        return SQL_HELPER.getOne("select * from orders where order_number = ?",
+        return ORDER_SQL_HELPER.getOne("select * from orders where order_number = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
@@ -53,22 +56,22 @@ public final class OrderService {
             return getByNumber(number);
         }
         StatementParameters<String> parameters = StatementParameters.build(number);
-        return SQL_HELPER.getOne("select * from orders where order_number = ? and doc_type ='ORDER'",
+        return ORDER_SQL_HELPER.getOne("select * from orders where order_number = ? and doc_type ='ORDER'",
                 parameters,
                 new OrderDatabaseMapper());
     }
 
     public static long getCount() {
-        return SQL_HELPER.getCount("select count(order_guid) from orders");
+        return ORDER_SQL_HELPER.getCount("select count(order_guid) from orders");
     }
 
     public static List<Order> getAll() {
-        return SQL_HELPER.getAll("SELECT * FROM orders", new OrderDatabaseMapper());
+        return ORDER_SQL_HELPER.getAll("SELECT * FROM orders", new OrderDatabaseMapper());
     }
 
     public static List<Order> getAllNoUpload() {
         StatementParameters<Boolean> parameters = StatementParameters.build(false);
-        return SQL_HELPER.getAll("SELECT * FROM orders where upload = ?",
+        return ORDER_SQL_HELPER.getAll("SELECT * FROM orders where upload = ?",
                 parameters,
                 new OrderDatabaseMapper());
     }
@@ -115,7 +118,7 @@ public final class OrderService {
                 requestList.add(CardService.getUpdateRequest(card));
             }
         }
-        SQL_HELPER.execSql(requestList);
+        ORDER_SQL_HELPER.execSql(requestList);
     }
 
     public static DatabaseRequest getInsertRequest(Order order) {
@@ -229,6 +232,37 @@ public final class OrderService {
                     UPDATE orders set upload = true WHERE order_guid = ?;
                 """;
         StatementParameters<Object> parameters = StatementParameters.build(guid);
-        SQL_HELPER.execSql(sql, parameters);
+        ORDER_SQL_HELPER.execSql(sql, parameters);
+    }
+
+    public static void saveDeletedProduct(OrderDetail orderDetail) {
+        String sql = """
+                    insert into deleted_products
+                    (user_name, product_name, qty, summa)
+                    values
+                    (?, ?, ?, ?);
+                """;
+        StatementParameters<Object> parameters = StatementParameters.build(
+                AppProperties.getCurrentUser().getName(),
+                orderDetail.getProduct().getName(),
+                orderDetail.getQty(),
+                orderDetail.getSumma()
+        );
+
+        try {
+            ORDER_SQL_HELPER.execSql(sql, parameters);
+            LOG.info("Deleted product " + orderDetail.getProduct().getName() + " " + orderDetail.getQty());
+        } catch (Exception ex) {
+            LOG.error("Failed save deleted products");
+        }
+    }
+
+    public static List<DeletedOrderItem> getDeletedProducts(DatePeriod datePeriod) {
+        StatementParameters<Object> parameters = StatementParameters.build(
+                datePeriod.getStartDate(), datePeriod.getEndDate()
+        );
+        return DELETED_ORDER_ITEM_SQL_HELPER.getAll("SELECT * FROM DELETED_PRODUCTS where DELETE_DATE_TIME >= ? and DELETE_DATE_TIME <= ?",
+                parameters,
+                new DeletedOrderItemDatabaseMapper());
     }
 }

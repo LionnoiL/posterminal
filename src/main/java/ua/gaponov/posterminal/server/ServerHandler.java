@@ -6,8 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
+import ua.gaponov.posterminal.entity.DatePeriod;
 import ua.gaponov.posterminal.entity.options.OptionsValue;
 import ua.gaponov.posterminal.entity.options.OptionsValueService;
+import ua.gaponov.posterminal.entity.orders.DeletedOrderItem;
+import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.server.commands.CommandResponse;
 import ua.gaponov.posterminal.server.commands.PropertyCommand;
 import ua.gaponov.posterminal.server.commands.TerminalCommandRequest;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 
 import static ua.gaponov.posterminal.utils.JsonUtils.GSON;
@@ -159,8 +163,15 @@ public class ServerHandler implements HttpHandler {
                 return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", ""));
             case GET_PROPERTY:
                 PropertyCommand propertiesValues = PropertiesUtils.getPropertiesValues();
-                String json = GSON.toJson(propertiesValues);
-                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), json, ""));
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(),
+                        GSON.toJson(propertiesValues), "")
+                );
+            case GET_DELETED_ITEMS:
+                DatePeriod datePeriod = GSON.fromJson(terminalCommandRequest.getRequestString(), DatePeriod.class);
+                List<DeletedOrderItem> deletedProducts = OrderService.getDeletedProducts(datePeriod);
+                return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(),
+                        GSON.toJson(deletedProducts), "")
+                );
             default:
                 return GSON.toJson(CommandResponse.of(terminalCommandRequest.getCommand(), "", "command not found"));
         }
