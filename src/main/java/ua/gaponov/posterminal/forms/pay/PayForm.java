@@ -507,11 +507,13 @@ public class PayForm extends javax.swing.JDialog {
             Terminal terminal = new IngenicoTerminal();
             ok = terminal.pay(AppProperties.getDefaultMerchantId(), RoundUtils.roundHalfUp(order.getDocumentSum()), order);
             if (ok){
-                order.setMerchId(0);
+                order.setMerchId(AppProperties.getDefaultMerchantId());
                 summaPay = Double.parseDouble(lblTotal.getText());
                 printFiscal = chkFiscalPrint.isSelected();
                 setPayType(PayTypes.CARD);
                 dispose();
+            } else {
+                order.setMerchId(0);
             }
         } else {
             ChoiseCardMerchForm payCard = ChoiseCardMerchForm.getPay(this, RoundUtils.roundHalfUp(order.getDocumentSum()), order);

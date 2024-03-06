@@ -20,7 +20,7 @@ public class Sound implements AutoCloseable {
             clip.addLineListener(new Listener());
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             released = true;
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException exc) {
+        } catch (Exception exc) {
             exc.printStackTrace();
             released = false;
             close();
@@ -114,9 +114,7 @@ public class Sound implements AutoCloseable {
     }
 
     public static Sound playSound(String path) {
-        URL resourceUrl = Sound.class.getClassLoader().getResource(path);
-        String filePath = resourceUrl.getFile();
-        File f = new File(filePath);
+        File f = new File("files/" + path);
         Sound snd = new Sound(f);
         snd.play();
         return snd;

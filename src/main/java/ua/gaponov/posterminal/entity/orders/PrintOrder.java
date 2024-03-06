@@ -58,7 +58,7 @@ public class PrintOrder implements Printable {
             documentType = "Повернення";
         }
         printer.printCenter(AppProperties.getShopName(), 10, true, false);
-        printer.printCenter(AppProperties.getShopAddress(), 8, true, true);
+        printer.printCenter(AppProperties.getShopAddress(), 7, true, true);
         printer.printTwoLines(DateUtils.getDateTimeNow(), documentType, 6, false);
         printer.printCenter("Товарний чек №" + order.getOrderNumber(), 8);
         printer.printCenter(AppProperties.getCashRegisterName(), 8);
