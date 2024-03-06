@@ -21,10 +21,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Andriy Gaponov
@@ -163,29 +160,36 @@ public final class OrderService {
         return new DatabaseRequest(sql, parameters);
     }
 
-    public static void saveOrderToBackupDir(Order order) {
+    public static void saveOrderToBackupDir(Map<Integer, Order> orders) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEMP_FILE_ORDER_BACKUP))) {
-            oos.writeObject(order);
+            oos.writeObject(orders);
         } catch (Exception ex) {
-            LOG.error("Error save order to backup dir", ex);
+            LOG.error("Error save orders to backup dir", ex);
         }
     }
 
-    public static Order loadOrderFromBackupDir() {
-        Order order = new Order();
+    public static Map<Integer, Order> loadOrderFromBackupDir() {
+        Map<Integer, Order> orders = new HashMap<>();
 
         if (!FilesUtils.fileExist(TEMP_FILE_ORDER_BACKUP)) {
-            return order;
+            return orders;
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(TEMP_FILE_ORDER_BACKUP))) {
-            order = (Order) ois.readObject();
-            return order;
+            orders = (Map<Integer, Order>) ois.readObject();
+            if (orders == null){
+                orders = new HashMap<>();
+            }
+            for (Map.Entry<Integer, Order> entry : orders.entrySet()) {
+                Order order = entry.getValue();
+                order.setGuid(UUID.randomUUID().toString());
+            }
+            return orders;
         } catch (Exception ex) {
-            LOG.error("Error load order from backup dir", ex);
+            LOG.error("Error load orders from backup dir", ex);
         }
 
-        return order;
+        return orders;
     }
 
     public static Order createOrderByOrganization(Order order, Organization organization) {

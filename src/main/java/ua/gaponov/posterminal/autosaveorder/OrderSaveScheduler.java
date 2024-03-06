@@ -7,6 +7,7 @@ import ua.gaponov.posterminal.entity.orders.Order;
 import ua.gaponov.posterminal.entity.orders.OrderService;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,17 +18,17 @@ import java.util.TimerTask;
 @Getter
 public class OrderSaveScheduler {
     public Timer timer = new Timer();
-    private Order order;
+    private Map<Integer, Order> orders;
 
-    public void setTimeReceived(Order order) {
-        this.order = order;
+    public void setTimeReceived(Map<Integer, Order> orders) {
+        this.orders = orders;
 
         Calendar calendar = Calendar.getInstance();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 if (AppProperties.isAutoSaveEnable()) {
-                    OrderService.saveOrderToBackupDir(getOrder());
+                    OrderService.saveOrderToBackupDir(getOrders());
                 }
             }
         };
