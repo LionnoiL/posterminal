@@ -1045,6 +1045,8 @@ public class MainForm extends javax.swing.JFrame {
 
                 createNewOrder();
 
+                jButtonClearCard.setVisible(false);
+
                 loadOrder();
                 sumLabel.setText(payForm.getRemainder() + " " + AppProperties.getCurrency());
             }
