@@ -57,11 +57,19 @@ public class Order implements Serializable, Cloneable {
     }
 
     public boolean canBePrinted() {
+        double payInDebt = RoundUtils.roundHalfUp(getDocumentSum()) - getPaySum();
+        if (payInDebt <= 0) {
+            return true;
+        }
+
         double maxDebt = 0;
         if (Objects.nonNull(getCard()) && getCard().isDebtAllowed()) {
-            maxDebt = getCard().getMaxDebt();
+            maxDebt = getCard().getMaxDebt() - getCard().getDebt();
         }
-        return (RoundUtils.roundHalfUp(getDocumentSum()) - getPaySum()) <= maxDebt;
+        if (maxDebt <= 0) {
+            return false;
+        }
+        return payInDebt <= maxDebt;
     }
 
     public int addDetailRow(Product product, double qty) {
