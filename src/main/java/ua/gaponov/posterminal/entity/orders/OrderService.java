@@ -23,6 +23,8 @@ import java.io.ObjectOutputStream;
 import java.sql.SQLException;
 import java.util.*;
 
+import static ua.gaponov.posterminal.utils.Constants.ORDER_NUMBER_NAME;
+
 /**
  * @author Andriy Gaponov
  */
@@ -60,6 +62,10 @@ public final class OrderService {
 
     public static long getCount() {
         return ORDER_SQL_HELPER.getCount("select count(order_guid) from orders");
+    }
+
+    public static long getNewOrderNumber() {
+        return NumbersService.loadNumber(ORDER_NUMBER_NAME);
     }
 
     public static List<Order> getAll() {
@@ -119,7 +125,7 @@ public final class OrderService {
     }
 
     public static DatabaseRequest getInsertRequest(Order order) {
-        order.setOrderNumber(getCount() + 1);
+        order.setOrderNumber(getNewOrderNumber());
         String sql = """
                     insert into orders
                     (order_guid, order_number, summa_doc, summa_to_pay, summa_discount, summa_round, summa_pay,

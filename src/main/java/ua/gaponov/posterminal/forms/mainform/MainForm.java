@@ -9,6 +9,7 @@ import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
+import ua.gaponov.posterminal.entity.orders.*;
 import ua.gaponov.posterminal.forms.additionally.AdditionallyForm;
 import ua.gaponov.posterminal.forms.additionally.BarCodeNotFoundInfoForm;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
@@ -22,16 +23,12 @@ import ua.gaponov.posterminal.entity.cards.Card;
 import ua.gaponov.posterminal.entity.cards.CardService;
 import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
 import ua.gaponov.posterminal.devices.customerdisplay.lpos.LposDisplay;
-import ua.gaponov.posterminal.entity.orders.Order;
-import ua.gaponov.posterminal.entity.orders.OrderDetail;
-import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
 import ua.gaponov.posterminal.forms.options.OptionsForm;
 import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
 import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
-import ua.gaponov.posterminal.entity.orders.PrintOrder;
 import ua.gaponov.posterminal.entity.products.Product;
 import ua.gaponov.posterminal.entity.products.ProductService;
 import ua.gaponov.posterminal.utils.*;
@@ -45,6 +42,7 @@ import java.util.*;
 import java.util.List;
 import java.util.Timer;
 
+import static ua.gaponov.posterminal.utils.Constants.ORDER_NUMBER_NAME;
 import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
 import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
 import static ua.gaponov.posterminal.utils.PropertiesUtils.saveAllApplicationProperties;
@@ -1034,6 +1032,7 @@ public class MainForm extends javax.swing.JFrame {
                 try {
                     order.setUser(AppProperties.getCurrentUser());
                     OrderService.save(order);
+                    NumbersService.saveNumber(ORDER_NUMBER_NAME, order.getOrderNumber());
                 } catch (Exception ex){
                     DialogUtils.error(this, "Помилка збереження чеку");
                     LOG.error("Error save order", ex);
