@@ -16,6 +16,7 @@ import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
 import ua.gaponov.posterminal.forms.shiftresult.ShiftResultForm;
+import ua.gaponov.posterminal.prostopay.ProstoPayProductNotFoundException;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.PosTerminal;
@@ -1031,17 +1032,20 @@ public class MainForm extends javax.swing.JFrame {
 
                 try {
                     order.setUser(AppProperties.getCurrentUser());
+                    ProstoPayService.printQrCodesByOrder(order);
                     OrderService.save(order);
                     NumbersService.saveNumber(ORDER_NUMBER_NAME, order.getOrderNumber());
-                } catch (Exception ex){
+                } catch (ProstoPayProductNotFoundException ex) {
+                    DialogUtils.error(this, "Продукт не знайдено в таблиці ProstoPay");
+                    LOG.error("Error printing QR codes for order", ex);
+                    return;
+                }  catch (SQLException ex){
                     DialogUtils.error(this, "Помилка збереження чеку");
                     LOG.error("Error save order", ex);
                     return;
                 }
 
                 new PrintOrder(order);
-                ProstoPayService.printQrCodesByOrder(order);
-
                 createNewOrder();
 
                 jButtonClearCard.setVisible(false);

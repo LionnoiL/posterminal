@@ -46,7 +46,7 @@ public final class ProstoPayService {
         }
     }
 
-    public static void printQrCodesByOrder(Order order) {
+    public static void printQrCodesByOrder(Order order) throws ProstoPayProductNotFoundException{
         order.getDetails().forEach(detail -> {
             if (detail.getProduct().isProstoPayProduct()) {
                 int qty = (int) detail.getQty();
@@ -66,13 +66,18 @@ public final class ProstoPayService {
         });
     }
 
-    private static ProstoPayRequest getProstoPayRequest(Product product, int number) {
+    private static ProstoPayRequest getProstoPayRequest(Product product, int number) throws ProstoPayProductNotFoundException{
         ProstoPayRequest prostoPayRequest = new ProstoPayRequest();
         prostoPayRequest.setPos(AppProperties.getArmId());
         prostoPayRequest.setTill(AppProperties.getArmId());
         prostoPayRequest.setNumber(number);
         prostoPayRequest.setAmount((int) (product.getPrice() * 100));
-        prostoPayRequest.setPluFrom(AppProperties.getProstoPayProducts().get(product));
+        Integer plu = AppProperties.getProstoPayProducts().get(product);
+        if (plu == null) {
+            throw new ProstoPayProductNotFoundException("Product " + product.getCode() +
+                    " not found in prostopay-products.properties");
+        }
+        prostoPayRequest.setPluFrom(plu);
         return prostoPayRequest;
     }
 
