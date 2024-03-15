@@ -115,8 +115,12 @@ public class IngenicoTerminal implements Terminal {
                 return true;
             } else if (resultInt == 1) {
                 Variant lastErrorDescription = Dispatch.call(device, "LastErrorDescription");
-                DialogUtils.error(null, lastErrorDescription.toString());
-                log.error("Error ingenico: {}", lastErrorDescription.toString());
+                String errorString = lastErrorDescription.toString();
+                if (errorString != null && errorString.length() > 50) {
+                    errorString = "Невідома помилка терміналу";
+                }
+                DialogUtils.error(null, errorString);
+                log.error("Error ingenico: {}", errorString);
                 lastErrorDescription.VariantClear();
                 lastErrorDescription.safeRelease();
                 return false;
