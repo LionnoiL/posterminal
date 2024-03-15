@@ -6,6 +6,8 @@ import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
+import ua.gaponov.posterminal.devices.printer.Printer;
+import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
@@ -1043,6 +1045,10 @@ public class MainForm extends javax.swing.JFrame {
                     DialogUtils.error(this, "Помилка збереження чеку");
                     LOG.error("Error save order", ex);
                     return;
+                }
+
+                if (PayTypes.CASH.equals(order.getPayType())) {
+                    Printer.openCashDrawer();
                 }
 
                 new PrintOrder(order);
