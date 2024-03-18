@@ -108,6 +108,7 @@ public class AdditionallyForm extends javax.swing.JDialog {
 
     private void skuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skuButtonActionPerformed
         Printer.openCashDrawer();
+        dispose();
     }//GEN-LAST:event_skuButtonActionPerformed
 
     /**
