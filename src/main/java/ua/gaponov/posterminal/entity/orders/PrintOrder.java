@@ -106,7 +106,7 @@ public class PrintOrder implements Printable {
                 order.getPaySum() + " " + AppProperties.getCurrency(),
                 8);
         printer.printTwoLines("РЕШТА",
-                order.getPaySum() - RoundUtils.round(order.getToPaySum()) + " " + AppProperties.getCurrency(),
+                RoundUtils.round(order.getPaySum() - order.getToPaySum()) + " " + AppProperties.getCurrency(),
                 8);
     }
 
