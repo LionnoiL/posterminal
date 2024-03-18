@@ -30,8 +30,12 @@ public final class CardService {
     }
 
     public static Card getByCode(String code) {
-        StatementParameters<String> parameters = StatementParameters.build(code);
-        return new SqlHelper<Card>().getOne("select * from cards where code = ?",
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
+        String phone = "%" + code.replaceAll("[\\s-]", "");
+        StatementParameters<String> parameters = StatementParameters.build(code, phone);
+        return new SqlHelper<Card>().getOne("select * from cards where card_type = 'DISCOUNT' and  (code = ? or CLIENT_PHONE like ?)",
                 parameters,
                 new CardDatabaseMapper());
     }
