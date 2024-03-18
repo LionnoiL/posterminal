@@ -13,6 +13,7 @@ import ua.gaponov.posterminal.server.PosHttpServer;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * @author Andriy Gaponov
@@ -61,6 +62,9 @@ public final class AppProperties {
     @Getter
     @Setter
     private static OrderSaveScheduler autoSaveScheduler = new OrderSaveScheduler();
+    @Getter
+    @Setter
+    private static ScheduledExecutorService clockScheduler;
     @Getter
     @Setter
     private static PosHttpServer httpServer;

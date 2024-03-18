@@ -13,6 +13,7 @@ import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.entity.orders.*;
 import ua.gaponov.posterminal.forms.additionally.AdditionallyForm;
+import ua.gaponov.posterminal.forms.additionally.ApplicationInfoForm;
 import ua.gaponov.posterminal.forms.additionally.BarCodeNotFoundInfoForm;
 import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
@@ -39,11 +40,16 @@ import ua.gaponov.posterminal.utils.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static ua.gaponov.posterminal.utils.Constants.ORDER_NUMBER_NAME;
 import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
@@ -68,13 +74,13 @@ public class MainForm extends javax.swing.JFrame {
 
     private DeviceFiscalPrinter fiscal = new VchasnoFiscal();
 
-
     /**
      * Creates new form mainForm
      */
     public MainForm() {
         this.setUndecorated(true);
         initComponents();
+        jLabelUserName.setText(AppProperties.getCurrentUser().getName());
         setImages();
         updateVisibleButtons();
         setTopButtons();
@@ -85,6 +91,17 @@ public class MainForm extends javax.swing.JFrame {
         updateTopButtons();
 
         setInfoTimer();
+        setClockTimer();
+    }
+
+    private void setClockTimer() {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::updateClockLabel, 0, 100, TimeUnit.MILLISECONDS);
+        AppProperties.setClockScheduler(scheduler);
+    }
+
+    public void updateClockLabel() {
+        jLabelTime.setText(DateUtils.getDateTimeNow());
     }
 
     private void setTopButtons() {
@@ -335,6 +352,7 @@ public class MainForm extends javax.swing.JFrame {
         jTextFieldBarCodeInput = new javax.swing.JTextField();
         btnOptions = new javax.swing.JButton();
         lblInfo = new javax.swing.JLabel();
+        jButtonAppInfo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         sumLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -353,6 +371,8 @@ public class MainForm extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabelTime = new javax.swing.JLabel();
+        jLabelUserName = new javax.swing.JLabel();
         btnPay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -715,6 +735,13 @@ public class MainForm extends javax.swing.JFrame {
 
         lblInfo.setToolTipText("");
 
+        jButtonAppInfo.setText("?");
+        jButtonAppInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAppInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -725,20 +752,25 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(btnOptions)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAppInfo)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eixitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(eixitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldBarCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAppInfo)))
                 .addContainerGap())
         );
 
@@ -885,6 +917,13 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jLabelTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTime.setText("00:00:00");
+
+        jLabelUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelUserName.setText("Користувач");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -900,13 +939,21 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTime, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabelTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUserName))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1271,6 +1318,12 @@ public class MainForm extends javax.swing.JFrame {
         updateByCard(null);
     }//GEN-LAST:event_jButtonClearCardActionPerformed
 
+    private void jButtonAppInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppInfoActionPerformed
+        refresh();
+        ApplicationInfoForm infoForm = ApplicationInfoForm.showDialog(frame);
+        infoForm.setVisible(true);
+    }//GEN-LAST:event_jButtonAppInfoActionPerformed
+
     private void addDigitToQtyField(String digit) {
         inputQty.setText(inputQty.getText() + digit);
     }
@@ -1495,10 +1548,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonAppInfo;
     private javax.swing.JButton jButtonClearCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelTime;
+    private javax.swing.JLabel jLabelUserName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
