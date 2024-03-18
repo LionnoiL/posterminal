@@ -66,6 +66,7 @@ public class PosTerminal {
         AppProperties.getScheduler().getExchangeTimer().cancel();
         AppProperties.getAutoSaveScheduler().getTimer().cancel();
         AppProperties.getHttpServer().stop();
+        AppProperties.getClockScheduler().shutdown();
         LOG.info("End application");
     }
 }
