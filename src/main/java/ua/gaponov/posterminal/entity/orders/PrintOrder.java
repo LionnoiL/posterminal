@@ -3,7 +3,9 @@ package ua.gaponov.posterminal.entity.orders;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.devices.printer.Printer;
 import ua.gaponov.posterminal.entity.DocumentTypes;
+import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.organization.Organization;
+import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
 
@@ -92,6 +94,13 @@ public class PrintOrder implements Printable {
         if (order.getRoundSum() > 0) {
             sign = "-";
         }
+        String payType = "готівка";
+        if (PayTypes.CARD.equals(order.getPayType())) {
+            payType = "картка";
+        } else if (PayTypes.ONLINE.equals(order.getPayType())) {
+            payType = "онлайн";
+        }
+
         printer.printTwoLines("ОКРУГЛЕННЯ",
                 sign + Math.abs(RoundUtils.round(order.getRoundSum())) + " " + AppProperties.getCurrency(),
                 8);
@@ -105,6 +114,7 @@ public class PrintOrder implements Printable {
         printer.printTwoLines("СПЛАЧЕНО",
                 order.getPaySum() + " " + AppProperties.getCurrency(),
                 8);
+        printer.printTwoLines("ВИД ОПЛАТИ", payType, 8);
         printer.printTwoLines("РЕШТА",
                 RoundUtils.round(order.getPaySum() - order.getToPaySum()) + " " + AppProperties.getCurrency(),
                 8);
