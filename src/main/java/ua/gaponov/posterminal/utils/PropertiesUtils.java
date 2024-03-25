@@ -116,6 +116,10 @@ public class PropertiesUtils {
         saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
         saveApplicationProperties("prostopay.token", AppProperties.getProstoPayToken());
         saveApplicationProperties("default_merchant_id", String.valueOf(AppProperties.getDefaultMerchantId()));
+        saveApplicationProperties("exchange.http.enable", String.valueOf(AppProperties.isSendDocsOnHttpAfterApprove()));
+        saveApplicationProperties("exchange.http.user", AppProperties.getHttpServerLogin());
+        saveApplicationProperties("exchange.http.password", AppProperties.getHttpServerPassword());
+        saveApplicationProperties("exchange.http.address", AppProperties.getHttpServerIp());
     }
 
     public static void loadProperties() {
@@ -138,6 +142,10 @@ public class PropertiesUtils {
         AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum")));
         AppProperties.setProstoPayToken(getApplicationProperties("prostopay.token"));
         AppProperties.setDefaultMerchantId(Integer.parseInt(getApplicationProperties("default_merchant_id", true)));
+        AppProperties.setSendDocsOnHttpAfterApprove(Boolean.parseBoolean(getApplicationProperties("exchange.http.enable")));
+        AppProperties.setHttpServerLogin(getApplicationProperties("exchange.http.user"));
+        AppProperties.setHttpServerPassword(getApplicationProperties("exchange.http.password"));
+        AppProperties.setHttpServerIp(getApplicationProperties("exchange.http.address"));
     }
 
     public static PropertyCommand getPropertiesValues() {
