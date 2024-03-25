@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -162,6 +163,10 @@ public class PropertiesUtils {
         command.setExchangeEnable(AppProperties.isExchangeEnable());
         command.setExchangeIntervalMin(AppProperties.getExchangeInterval() / 60000);
         command.setDefaultMerchantId(AppProperties.getDefaultMerchantId());
+        command.setHttpServerIp(AppProperties.getHttpServerIp());
+        command.setHttpServerLogin(AppProperties.getHttpServerLogin());
+        command.setHttpServerPassword(AppProperties.getHttpServerPassword());
+        command.setSendDocsOnHttpAfterApprove(AppProperties.isSendDocsOnHttpAfterApprove());
 
         return command;
     }
@@ -179,6 +184,10 @@ public class PropertiesUtils {
         AppProperties.setExchangeEnable(command.isExchangeEnable());
         AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
         AppProperties.setDefaultMerchantId(command.getDefaultMerchantId());
+        AppProperties.setHttpServerIp(command.getHttpServerIp());
+        AppProperties.setHttpServerLogin(command.getHttpServerLogin());
+        AppProperties.setHttpServerPassword(command.getHttpServerPassword());
+        AppProperties.setSendDocsOnHttpAfterApprove(command.isSendDocsOnHttpAfterApprove());
         saveAllApplicationProperties();
     }
 }
