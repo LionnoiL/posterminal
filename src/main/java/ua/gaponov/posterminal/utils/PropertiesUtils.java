@@ -119,7 +119,6 @@ public class PropertiesUtils {
         saveApplicationProperties("default_merchant_id", String.valueOf(AppProperties.getDefaultMerchantId()));
         saveApplicationProperties("exchange.http.enable", String.valueOf(AppProperties.isSendDocsOnHttpAfterApprove()));
         saveApplicationProperties("exchange.http.user", AppProperties.getHttpServerLogin());
-        saveApplicationProperties("exchange.http.password", AppProperties.getHttpServerPassword());
         saveApplicationProperties("exchange.http.address", AppProperties.getHttpServerIp());
     }
 
@@ -145,7 +144,6 @@ public class PropertiesUtils {
         AppProperties.setDefaultMerchantId(Integer.parseInt(getApplicationProperties("default_merchant_id", true)));
         AppProperties.setSendDocsOnHttpAfterApprove(Boolean.parseBoolean(getApplicationProperties("exchange.http.enable")));
         AppProperties.setHttpServerLogin(getApplicationProperties("exchange.http.user"));
-        AppProperties.setHttpServerPassword(getApplicationProperties("exchange.http.password"));
         AppProperties.setHttpServerIp(getApplicationProperties("exchange.http.address"));
     }
 
@@ -165,7 +163,6 @@ public class PropertiesUtils {
         command.setDefaultMerchantId(AppProperties.getDefaultMerchantId());
         command.setHttpServerIp(AppProperties.getHttpServerIp());
         command.setHttpServerLogin(AppProperties.getHttpServerLogin());
-        command.setHttpServerPassword(AppProperties.getHttpServerPassword());
         command.setSendDocsOnHttpAfterApprove(AppProperties.isSendDocsOnHttpAfterApprove());
 
         return command;
@@ -186,10 +183,6 @@ public class PropertiesUtils {
         AppProperties.setDefaultMerchantId(command.getDefaultMerchantId());
         AppProperties.setHttpServerIp(command.getHttpServerIp());
         AppProperties.setHttpServerLogin(command.getHttpServerLogin());
-        String httpServerPassword = command.getHttpServerPassword();
-        if (httpServerPassword != null && !httpServerPassword.isEmpty()) {
-            AppProperties.setHttpServerPassword(httpServerPassword);
-        }
         AppProperties.setSendDocsOnHttpAfterApprove(command.isSendDocsOnHttpAfterApprove());
         saveAllApplicationProperties();
     }

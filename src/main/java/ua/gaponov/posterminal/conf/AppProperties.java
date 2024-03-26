@@ -108,9 +108,6 @@ public final class AppProperties {
     private static String httpServerLogin;
     @Getter
     @Setter
-    private static String httpServerPassword;
-    @Getter
-    @Setter
     private static boolean sendDocsOnHttpAfterApprove = true;
 
     public static String getExchangeFolder() {

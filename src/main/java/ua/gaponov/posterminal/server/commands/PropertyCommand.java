@@ -25,6 +25,5 @@ public class PropertyCommand {
     private int defaultMerchantId;
     private String httpServerIp;
     private String httpServerLogin;
-    private String httpServerPassword;
     private boolean sendDocsOnHttpAfterApprove;
 }

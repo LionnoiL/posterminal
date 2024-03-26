@@ -68,7 +68,6 @@ public class OptionsForm extends javax.swing.JFrame {
 
         fieldHttpAddress.setText(AppProperties.getHttpServerIp());
         fieldHttpUser.setText(AppProperties.getHttpServerLogin());
-        fieldHttpPassword.setText(AppProperties.getHttpServerPassword());
         chkExchangeHttpEnable.setSelected(AppProperties.isSendDocsOnHttpAfterApprove());
     }
 
@@ -107,8 +106,6 @@ public class OptionsForm extends javax.swing.JFrame {
         fieldHttpAddress = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         fieldHttpUser = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        fieldHttpPassword = new javax.swing.JPasswordField();
         chkExchangeHttpEnable = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -234,11 +231,7 @@ public class OptionsForm extends javax.swing.JFrame {
 
         fieldHttpAddress.setToolTipText("");
 
-        jLabel18.setText("Користувач");
-
-        jLabel19.setText("Пароль");
-
-        fieldHttpPassword.setText("jPasswordField1");
+        jLabel18.setText("Basic auth");
 
         chkExchangeHttpEnable.setText("Відправляти документи на HTTP");
 
@@ -262,18 +255,14 @@ public class OptionsForm extends javax.swing.JFrame {
                         .addComponent(fldExchangeFolder))
                     .addComponent(fieldHttpAddress)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldHttpUser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldHttpPassword))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(chkExchangeHttpEnable))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldHttpUser)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -297,10 +286,7 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fieldHttpUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19)
-                        .addComponent(fieldHttpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(fieldHttpUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
 
@@ -493,10 +479,6 @@ public class OptionsForm extends javax.swing.JFrame {
             AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(fldFiscalAutoSum.getText()));
             AppProperties.setProstoPayToken(fldProstoPayToken.getText());
             AppProperties.setExchangeFolder(fldExchangeFolder.getText());
-
-            char[] passwordChars = fieldHttpPassword.getPassword();
-            String password = new String(passwordChars);
-            AppProperties.setHttpServerPassword(password);
             AppProperties.setHttpServerIp(fieldHttpAddress.getText());
             AppProperties.setHttpServerLogin(fieldHttpUser.getText());
             AppProperties.setSendDocsOnHttpAfterApprove(chkExchangeHttpEnable.isSelected());
@@ -517,7 +499,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JTextField fieldCashRegister;
     private javax.swing.JTextField fieldCurrency;
     private javax.swing.JTextField fieldHttpAddress;
-    private javax.swing.JPasswordField fieldHttpPassword;
     private javax.swing.JTextField fieldHttpUser;
     private javax.swing.JTextField fieldIntervalExchange;
     private javax.swing.JTextField fieldMerchId;
@@ -541,7 +522,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -18,7 +18,6 @@ import ua.gaponov.posterminal.entity.orders.Order;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,11 +25,6 @@ import java.util.concurrent.CompletableFuture;
 public class HttpDocumentUploadService {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpDocumentUploadService.class);
-
-    private static String getBasicAuthString() {
-        String login = AppProperties.getHttpServerLogin() + ":" + AppProperties.getHttpServerPassword();
-        return "Basic " + Base64.getEncoder().encodeToString(login.getBytes());
-    }
 
     public static void sendOrder(Order order) {
         if (AppProperties.isSendDocsOnHttpAfterApprove()) {
@@ -57,6 +51,7 @@ public class HttpDocumentUploadService {
     }
 
     private static void sendDoc(Object doc) {
+        LOG.debug("start send doc");
         Order order;
         MoneyMove moneyMove;
         List<Order> orders = new ArrayList<>();
@@ -94,8 +89,8 @@ public class HttpDocumentUploadService {
         try {
             String employeeXml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
             Connection.Response response = Jsoup.connect(AppProperties.getHttpServerIp() + "?id=" + AppProperties.getArmId())
-                    .header("Authorization", getBasicAuthString())
-                    .timeout(30000)
+                    .header("Authorization", AppProperties.getHttpServerLogin())
+                    .timeout(3000)
                     .ignoreContentType(true)
                     .method(Connection.Method.POST)
                     .requestBody(employeeXml)
