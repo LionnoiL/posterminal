@@ -152,13 +152,4 @@ public class ExchangeUpload {
             e.printStackTrace();
         }
     }
-
-    private static class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
-        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-
-        @Override
-        public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-            gen.writeString(value.format(FORMATTER));
-        }
-    }
 }

@@ -5,7 +5,6 @@ import ua.gaponov.posterminal.devices.printer.Printer;
 import ua.gaponov.posterminal.entity.DocumentTypes;
 import ua.gaponov.posterminal.entity.PayTypes;
 import ua.gaponov.posterminal.entity.organization.Organization;
-import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.utils.DateUtils;
 import ua.gaponov.posterminal.utils.RoundUtils;
 

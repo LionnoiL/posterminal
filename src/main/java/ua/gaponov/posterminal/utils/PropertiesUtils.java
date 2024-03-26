@@ -186,7 +186,9 @@ public class PropertiesUtils {
         AppProperties.setDefaultMerchantId(command.getDefaultMerchantId());
         AppProperties.setHttpServerIp(command.getHttpServerIp());
         AppProperties.setHttpServerLogin(command.getHttpServerLogin());
-        AppProperties.setHttpServerPassword(command.getHttpServerPassword());
+        if (command.getHttpServerPassword() != null) {
+            AppProperties.setHttpServerPassword(command.getHttpServerPassword());
+        }
         AppProperties.setSendDocsOnHttpAfterApprove(command.isSendDocsOnHttpAfterApprove());
         saveAllApplicationProperties();
     }

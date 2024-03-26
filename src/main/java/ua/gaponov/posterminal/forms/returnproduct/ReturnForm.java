@@ -1,9 +1,9 @@
 package ua.gaponov.posterminal.forms.returnproduct;
 
-import java.util.Objects;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.dataexchange.upload.HttpDocumentUploadService;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.entity.DocumentTypes;
@@ -21,6 +21,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
 
 import static ua.gaponov.posterminal.utils.ImagesUtils.getIcon;
 import static ua.gaponov.posterminal.utils.ImagesUtils.getImage;
@@ -457,6 +458,8 @@ public class ReturnForm extends javax.swing.JDialog {
                 }
 
                 OrderService.save(order);
+                HttpDocumentUploadService.sendOrder(order);
+
                 new PrintOrder(order);
                 ok = true;
                 saveColumnsWidth();
