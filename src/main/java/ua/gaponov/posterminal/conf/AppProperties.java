@@ -100,6 +100,15 @@ public final class AppProperties {
     @Getter
     @Setter
     private static int defaultMerchantId;
+    @Getter
+    @Setter
+    private static String httpServerIp;
+    @Getter
+    @Setter
+    private static String httpServerLogin;
+    @Getter
+    @Setter
+    private static boolean sendDocsOnHttpAfterApprove = true;
 
     public static String getExchangeFolder() {
         if (!exchangeFolder.isEmpty()){

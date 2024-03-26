@@ -2,51 +2,50 @@ package ua.gaponov.posterminal.forms.mainform;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.gaponov.posterminal.PosTerminal;
+import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
+import ua.gaponov.posterminal.dataexchange.upload.HttpDocumentUploadService;
+import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
+import ua.gaponov.posterminal.devices.customerdisplay.lpos.LposDisplay;
 import ua.gaponov.posterminal.devices.fiscal.DeviceFiscalPrinter;
 import ua.gaponov.posterminal.devices.fiscal.vchasno.VchasnoFiscal;
 import ua.gaponov.posterminal.devices.printer.Printer;
 import ua.gaponov.posterminal.entity.PayTypes;
+import ua.gaponov.posterminal.entity.cards.Card;
+import ua.gaponov.posterminal.entity.cards.CardService;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMove;
 import ua.gaponov.posterminal.entity.moneymove.MoneyMoveService;
 import ua.gaponov.posterminal.entity.moneymove.PrintMoneyMove;
 import ua.gaponov.posterminal.entity.orders.*;
+import ua.gaponov.posterminal.entity.products.Product;
+import ua.gaponov.posterminal.entity.products.ProductService;
 import ua.gaponov.posterminal.forms.additionally.AdditionallyForm;
 import ua.gaponov.posterminal.forms.additionally.ApplicationInfoForm;
 import ua.gaponov.posterminal.forms.additionally.BarCodeNotFoundInfoForm;
-import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
-import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
-import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
-import ua.gaponov.posterminal.forms.shiftresult.ShiftResultForm;
-import ua.gaponov.posterminal.prostopay.ProstoPayProductNotFoundException;
-import ua.gaponov.posterminal.prostopay.ProstoPayService;
-import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.PosTerminal;
-import ua.gaponov.posterminal.entity.cards.Card;
-import ua.gaponov.posterminal.entity.cards.CardService;
-import ua.gaponov.posterminal.devices.customerdisplay.CustomerDisplay;
-import ua.gaponov.posterminal.devices.customerdisplay.lpos.LposDisplay;
 import ua.gaponov.posterminal.forms.excise.ExciseScanForm;
+import ua.gaponov.posterminal.forms.fiscal.FiscalForm;
 import ua.gaponov.posterminal.forms.inputnumbers.NumberDialog;
+import ua.gaponov.posterminal.forms.moneymove.MoneyMoveForm;
 import ua.gaponov.posterminal.forms.options.OptionsForm;
 import ua.gaponov.posterminal.forms.pay.PayForm;
 import ua.gaponov.posterminal.forms.productinfo.ProductInfoForm;
 import ua.gaponov.posterminal.forms.quickproducts.QuickProductDialog;
-import ua.gaponov.posterminal.entity.products.Product;
-import ua.gaponov.posterminal.entity.products.ProductService;
+import ua.gaponov.posterminal.forms.returnproduct.ReturnForm;
+import ua.gaponov.posterminal.forms.shiftresult.ShiftResultForm;
+import ua.gaponov.posterminal.prostopay.ProstoPayProductNotFoundException;
+import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.utils.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
-import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -1083,6 +1082,7 @@ public class MainForm extends javax.swing.JFrame {
                     order.setUser(AppProperties.getCurrentUser());
                     ProstoPayService.printQrCodesByOrder(order);
                     OrderService.save(order);
+                    HttpDocumentUploadService.sendOrder(order);
                     NumbersService.saveNumber(ORDER_NUMBER_NAME, order.getOrderNumber());
                 } catch (ProstoPayProductNotFoundException ex) {
                     DialogUtils.error(this, "Продукт не знайдено в таблиці ProstoPay");
@@ -1120,6 +1120,8 @@ public class MainForm extends javax.swing.JFrame {
             moneyMoveDoc.setComment(moneyMoveForm.getComment());
             try {
                 MoneyMoveService.save(moneyMoveDoc);
+                HttpDocumentUploadService.sendMoneyMove(moneyMoveDoc);
+
                 new PrintMoneyMove(moneyMoveDoc);
             } catch (SQLException ex) {
                 DialogUtils.error(this, "Помилка збереження оплати");

@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
-public class MoneyMove {
+public class MoneyMove implements Cloneable {
 
     private String guid = UUID.randomUUID().toString();
     private long moneyMoveNumber;
@@ -27,4 +27,9 @@ public class MoneyMove {
     private double documentSum;
     private MoveType moveType;
     private String comment;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

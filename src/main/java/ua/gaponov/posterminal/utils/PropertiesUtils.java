@@ -2,6 +2,7 @@ package ua.gaponov.posterminal.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
@@ -116,6 +117,9 @@ public class PropertiesUtils {
         saveApplicationProperties("fiscal.auto_plus_sum", String.valueOf(AppProperties.getFiscalAutoPlusMoneySum()));
         saveApplicationProperties("prostopay.token", AppProperties.getProstoPayToken());
         saveApplicationProperties("default_merchant_id", String.valueOf(AppProperties.getDefaultMerchantId()));
+        saveApplicationProperties("exchange.http.enable", String.valueOf(AppProperties.isSendDocsOnHttpAfterApprove()));
+        saveApplicationProperties("exchange.http.user", AppProperties.getHttpServerLogin());
+        saveApplicationProperties("exchange.http.address", AppProperties.getHttpServerIp());
     }
 
     public static void loadProperties() {
@@ -138,6 +142,9 @@ public class PropertiesUtils {
         AppProperties.setFiscalAutoPlusMoneySum(Double.parseDouble(getApplicationProperties("fiscal.auto_plus_sum")));
         AppProperties.setProstoPayToken(getApplicationProperties("prostopay.token"));
         AppProperties.setDefaultMerchantId(Integer.parseInt(getApplicationProperties("default_merchant_id", true)));
+        AppProperties.setSendDocsOnHttpAfterApprove(Boolean.parseBoolean(getApplicationProperties("exchange.http.enable")));
+        AppProperties.setHttpServerLogin(getApplicationProperties("exchange.http.user"));
+        AppProperties.setHttpServerIp(getApplicationProperties("exchange.http.address"));
     }
 
     public static PropertyCommand getPropertiesValues() {
@@ -154,6 +161,9 @@ public class PropertiesUtils {
         command.setExchangeEnable(AppProperties.isExchangeEnable());
         command.setExchangeIntervalMin(AppProperties.getExchangeInterval() / 60000);
         command.setDefaultMerchantId(AppProperties.getDefaultMerchantId());
+        command.setHttpServerIp(AppProperties.getHttpServerIp());
+        command.setHttpServerLogin(AppProperties.getHttpServerLogin());
+        command.setSendDocsOnHttpAfterApprove(AppProperties.isSendDocsOnHttpAfterApprove());
 
         return command;
     }
@@ -171,6 +181,9 @@ public class PropertiesUtils {
         AppProperties.setExchangeEnable(command.isExchangeEnable());
         AppProperties.setExchangeInterval(command.getExchangeIntervalMin() * 60000);
         AppProperties.setDefaultMerchantId(command.getDefaultMerchantId());
+        AppProperties.setHttpServerIp(command.getHttpServerIp());
+        AppProperties.setHttpServerLogin(command.getHttpServerLogin());
+        AppProperties.setSendDocsOnHttpAfterApprove(command.isSendDocsOnHttpAfterApprove());
         saveAllApplicationProperties();
     }
 }
