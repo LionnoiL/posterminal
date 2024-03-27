@@ -99,6 +99,19 @@ public final class OrderService {
         SqlHelper.execSql(sql);
     }
 
+    public static void deleteOldDocs() {
+        String sql = """
+                    BEGIN TRANSACTION;
+                    DELETE FROM orders_detail WHERE order_guid IN (
+                        SELECT order_guid FROM orders WHERE order_date < DATEADD('DAY', -15, CURRENT_TIMESTAMP())
+                    );
+                    DELETE FROM orders WHERE order_date < DATEADD('DAY', -15, CURRENT_TIMESTAMP());
+                    DELETE FROM MONEY_MOVE WHERE MONEY_MOVE_DATE < DATEADD('DAY', -15, CURRENT_TIMESTAMP());
+                    COMMIT;
+                """;
+        SqlHelper.execSql(sql);
+    }
+
     public static void save(Order order) throws SQLException {
         insert(order);
     }

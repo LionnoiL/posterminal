@@ -6,6 +6,7 @@ import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
 import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
+import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.forms.login.LoginForm;
 import ua.gaponov.posterminal.prostopay.ProstoPayService;
 import ua.gaponov.posterminal.server.PosHttpServer;
@@ -67,6 +68,7 @@ public class PosTerminal {
         AppProperties.getAutoSaveScheduler().getTimer().cancel();
         AppProperties.getHttpServer().stop();
         AppProperties.getClockScheduler().shutdown();
+        OrderService.deleteOldDocs();
         LOG.info("End application");
     }
 }
