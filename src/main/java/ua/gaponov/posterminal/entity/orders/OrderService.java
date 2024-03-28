@@ -99,6 +99,26 @@ public final class OrderService {
         SqlHelper.execSql(sql);
     }
 
+    public static void deleteOldDocs() {
+        String sql = """
+                   BEGIN TRANSACTION;
+
+                    DELETE FROM orders_detail od
+                      WHERE EXISTS (
+                        SELECT 1 FROM orders o
+                          WHERE o.order_guid = od.order_guid
+                          AND o.order_date < DATEADD('DAY', -15, CURRENT_TIMESTAMP())
+                      );
+
+                    DELETE FROM orders WHERE order_date < DATEADD('DAY', -15, CURRENT_TIMESTAMP());
+                           
+                    DELETE FROM MONEY_MOVE WHERE MONEY_MOVE_DATE < DATEADD('DAY', -15, CURRENT_TIMESTAMP());
+
+                    COMMIT;
+                """;
+        SqlHelper.execSql(sql);
+    }
+
     public static void save(Order order) throws SQLException {
         insert(order);
     }
@@ -183,7 +203,7 @@ public final class OrderService {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(TEMP_FILE_ORDER_BACKUP))) {
             orders = (Map<Integer, Order>) ois.readObject();
-            if (orders == null){
+            if (orders == null) {
                 orders = new HashMap<>();
             }
             for (Map.Entry<Integer, Order> entry : orders.entrySet()) {
