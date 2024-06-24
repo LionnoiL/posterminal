@@ -23,7 +23,7 @@ import java.util.Objects;
 public class PrintOrder implements Printable {
 
     private final Order order;
-    private Printer printer = new Printer(130, 1000, 0, 0, this);
+    private Printer printer = new Printer(130, 1500, 0, 0, this);
 
     public PrintOrder(Order order) {
         this.order = order;

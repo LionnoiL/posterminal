@@ -95,10 +95,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jacob</groupId>
+            <groupId>xyz.cofe</groupId>
             <artifactId>jacob</artifactId>
-            <version>1.2</version>
+            <version>1.20</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
