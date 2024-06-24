@@ -95,7 +95,7 @@
         </dependency>
 
         <dependency>
-            <groupId>xyz.cofe</groupId>
+            <groupId>io.github.osobolev</groupId>
             <artifactId>jacob</artifactId>
             <version>1.20</version>
         </dependency>
