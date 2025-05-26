@@ -24,7 +24,7 @@ public class ApplicationInfoForm extends javax.swing.JDialog {
     private void init() {
         initComponents();
         setImages();
-        jLabelVersion.setText("1.0");
+        jLabelVersion.setText("1.1");
     }
 
     private void setImages() {

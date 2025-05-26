@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
 import ua.gaponov.posterminal.conf.LoggingConfiguration;
-import ua.gaponov.posterminal.database.SqlHelper;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 import ua.gaponov.posterminal.entity.orders.OrderService;
 import ua.gaponov.posterminal.forms.login.LoginForm;
@@ -57,7 +56,7 @@ public class PosTerminal {
 
     private static void setTheme() {
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

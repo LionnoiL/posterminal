@@ -455,6 +455,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
             buttons.get(index).setProduct(prod);
             JButton jButton = buttons.get(index).getButton();
             jButton.setBackground(Color.decode("#"+quickProduct.getColor()));
+            jButton.setBorderPainted(false);
             jButton.setText(getButtonStringWithWrap(quickProduct.getProduct().getName()));
             jButton.setActionCommand(String.valueOf(index));
             jButton.addActionListener(new ActionListener() {
@@ -473,6 +474,7 @@ public class QuickProductDialog extends javax.swing.JDialog {
             buttons.get(i).setProduct(null);
             JButton jButton = buttons.get(i).getButton();
             jButton.setBackground(null);
+            jButton.setBorderPainted(true);
             jButton.setText(null);
         }
     }

@@ -79,6 +79,9 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         this.setUndecorated(true);
         initComponents();
+        btnPay.setBorderPainted(false);
+        btnPay.setBackground(new java.awt.Color(141, 208, 211));
+
         jLabelUserName.setText(AppProperties.getCurrentUser().getName());
         setImages();
         updateVisibleButtons();
@@ -151,6 +154,12 @@ public class MainForm extends javax.swing.JFrame {
         jButton3.setBackground(null);
         jButton4.setBackground(null);
         jButton5.setBackground(null);
+
+        jButton1.setBorderPainted(true);
+        jButton2.setBorderPainted(true);
+        jButton3.setBorderPainted(true);
+        jButton4.setBorderPainted(true);
+        jButton5.setBorderPainted(true);
     }
 
     private JButton getButtonByIndex(int index) {
@@ -177,6 +186,7 @@ public class MainForm extends javax.swing.JFrame {
     private void setBackgroundInCurrentTopButton() {
         JButton currentButton = getButtonByIndex(currentOrderIndex);
         currentButton.setBackground(new java.awt.Color(141, 208, 211));
+        currentButton.setBorderPainted(false);
     }
 
     private void setSumInTopButtons() {
@@ -980,6 +990,7 @@ public class MainForm extends javax.swing.JFrame {
         btnPay.setBackground(new java.awt.Color(0, 204, 0));
         btnPay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPay.setText("Оплата");
+        btnPay.setOpaque(true);
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayActionPerformed(evt);

@@ -483,6 +483,7 @@ public class PayForm extends javax.swing.JDialog {
         setPayType(PayTypes.CASH);
         clearPayTypesButtonsColor();
         cashButton.setBackground(new java.awt.Color(255, 51, 51));
+        cashButton.setBorderPainted(false);
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cnclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnclButtonActionPerformed
@@ -500,6 +501,10 @@ public class PayForm extends javax.swing.JDialog {
         cashButton.setBackground(null);
         cardButton.setBackground(null);
         onlineButton.setBackground(null);
+
+        cashButton.setBorderPainted(true);
+        cardButton.setBorderPainted(true);
+        onlineButton.setBorderPainted(true);
     }
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
@@ -532,6 +537,7 @@ public class PayForm extends javax.swing.JDialog {
         setPayType(PayTypes.ONLINE);
         clearPayTypesButtonsColor();
         onlineButton.setBackground(new java.awt.Color(255, 51, 51));
+        onlineButton.setBorderPainted(false);
     }//GEN-LAST:event_onlineButtonActionPerformed
 
     private void btnNumpad7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumpad7ActionPerformed
@@ -682,6 +688,7 @@ public class PayForm extends javax.swing.JDialog {
 
     private void init() {
         initComponents();
+        cashButton.setBorderPainted(false);
         setImages();
         getRootPane().setDefaultButton(okButton);
         ok = false;

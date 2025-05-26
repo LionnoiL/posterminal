@@ -3,8 +3,6 @@ package ua.gaponov.posterminal.dataexchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.gaponov.posterminal.conf.AppProperties;
-import ua.gaponov.posterminal.dataexchange.download.ExchangeDownloader;
-import ua.gaponov.posterminal.dataexchange.download.UpdateDownloadException;
 import ua.gaponov.posterminal.dataexchange.upload.ExchangeUpload;
 
 import java.util.Calendar;
@@ -34,7 +32,7 @@ public class ExchangeScheduler {
         };
 
         int exchangeInterval = AppProperties.getExchangeInterval();
-        if (exchangeInterval <= 0){
+        if (exchangeInterval <= 0) {
             exchangeInterval = 10 * 60000;
         }
         EXCHANGE_TIMER.schedule(
