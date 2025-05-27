@@ -1,51 +1,20 @@
 package ua.gaponov.posterminal.conf;
 
-import org.apache.log4j.*;
-import ua.gaponov.posterminal.utils.FilesUtils;
-
-import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * @author Andriy Gaponov
+ * Ініціалізація логування через SLF4J + log4j.properties
  */
 public class LoggingConfiguration {
-    public static final String LOG_PATTERN = "log4j.conversion.pattern";
-    public static final String LOG_FILE = "log4j.appender.file";
-    public static final String LOG_LEVEL = "log4j.logger.level";
-    public static final String LOG_ENCODING = "log4j.logger.encoding";
-    private static final String DEFAULT_FILE_NAME = "config/application.properties";
 
-    private static final Properties PROPERTIES = new Properties();
+    private static final Logger log = LoggerFactory.getLogger(LoggingConfiguration.class);
+    private static boolean initialized = false;
 
-    static {
-        try {
-            PROPERTIES.load(FilesUtils.getFileInputStream(DEFAULT_FILE_NAME));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        // creates pattern layout
-        PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern(PROPERTIES.getProperty(LOG_PATTERN));
+    public static void init() {
+        if (initialized) return;
+        initialized = true;
 
-        // creates console appender
-        ConsoleAppender consoleAppender = new ConsoleAppender();
-        consoleAppender.setLayout(layout);
-        consoleAppender.setEncoding(PROPERTIES.getProperty(LOG_ENCODING));
-        consoleAppender.activateOptions();
-
-        // creates file appender
-        RollingFileAppender rollingFileAppender = new RollingFileAppender();
-        rollingFileAppender.setEncoding(PROPERTIES.getProperty(LOG_ENCODING));
-        rollingFileAppender.setFile(PROPERTIES.getProperty(LOG_FILE));
-        rollingFileAppender.setLayout(layout);
-        rollingFileAppender.setMaxBackupIndex(10);
-        rollingFileAppender.activateOptions();
-
-        // configures the root logger
-        Logger rootLogger = Logger.getRootLogger();
-        rootLogger.setLevel(Level.toLevel(PROPERTIES.getProperty(LOG_LEVEL)));
-        rootLogger.removeAllAppenders();
-        rootLogger.addAppender(consoleAppender);
-        rootLogger.addAppender(rollingFileAppender);
+        log.info("Logging initialized via SLF4J and log4j.properties");
     }
 }

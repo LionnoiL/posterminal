@@ -158,7 +158,7 @@ public class SqlHelper<T> {
     }
 
     public T getFirst(String tableName, String resultFieldName, String idFieldName, String where) {
-        String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " limit 1;";
+        String sql = "select " + resultFieldName + " from " + tableName + " " + where + " order by " + idFieldName + " fetch first 1 rows only";
         T result = null;
         try (Connection connection = Database.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {

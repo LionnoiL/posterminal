@@ -23,7 +23,7 @@ public class PosTerminal {
 
     public static void main(String[] args) {
 
-        new LoggingConfiguration();
+        LoggingConfiguration.init();
 
         LOG.info("Start application");
 

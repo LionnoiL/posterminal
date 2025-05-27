@@ -1,11 +1,8 @@
 package ua.gaponov.posterminal.dataexchange.upload;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.AccessLevel;
@@ -34,11 +31,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
-
-import static ua.gaponov.posterminal.conf.LoggingConfiguration.LOG_FILE;
 
 /**
  * @author Andriy Gaponov
@@ -137,7 +131,7 @@ public class ExchangeUpload {
             throw new RuntimeException(e);
         }
 
-        String logFilePath = PROPERTIES.getProperty(LOG_FILE);
+        String logFilePath = PROPERTIES.getProperty("log4j.appender.file.File");
         String copyDestinationPath = AppProperties.getExchangeFolder() + "log_" + AppProperties.getArmId() + ".xml";
 
         try (InputStream in = new FileInputStream(logFilePath);

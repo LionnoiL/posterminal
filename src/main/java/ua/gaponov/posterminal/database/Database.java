@@ -22,7 +22,8 @@ public final class Database {
 
     static {
         dataSource = new BasicDataSource();
-        dataSource.setUrl("jdbc:h2:./pos;TRACE_LEVEL_FILE=0;DEFRAG_ALWAYS=TRUE");
+        //dataSource.setUrl("jdbc:h2:./pos;TRACE_LEVEL_FILE=0;DEFRAG_ALWAYS=TRUE");
+        dataSource.setUrl("jdbc:derby:./posDB;create=true");
         dataSource.setUsername("");
         dataSource.setPassword("");
 
