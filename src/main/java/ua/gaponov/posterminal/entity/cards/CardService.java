@@ -114,7 +114,7 @@ public final class CardService {
                                  DISCOUNT,
                                  MAX_DEBT,
                                  MAX_DEBT_DAY)
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
 
         StatementParameters<Object> parameters = StatementParameters.build(
